@@ -12,9 +12,8 @@
  */
 /** Ruta index */
 Route::get('/', function () {
-    return view('index');
+    return View::make('index');
 });
-
 
 
 /*
