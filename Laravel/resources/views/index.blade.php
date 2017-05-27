@@ -12,15 +12,15 @@
 
 <!-- CSS -->
 <!-- Bootstrap Core CSS -->
-<link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet" media="all" type="text/css">
+<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" media="all" type="text/css">
 
 <!-- Custom CSS -->
-<link href="{{ URL::asset('css/sb-admin.css') }}" rel="stylesheet" media="all" type="text/css">
+<link href="{{ URL::asset('assets/css/sb-admin.css') }}" rel="stylesheet" media="all" type="text/css">
 <!-- Morris Charts CSS -->
-<link href="{{ URL::asset('css/plugins/morris.css') }}" rel="stylesheet" media="all" type="text/css">
+<link href="{{ URL::asset('assets/css/plugins/morris.css') }}" rel="stylesheet" media="all" type="text/css">
 
 <!-- Custom Fonts -->
-<link href="{{ URL::asset('font-awesome/css/font-awesome.min.css') }}"
+<link href="{{ URL::asset('assets/font-awesome/css/font-awesome.min.css') }}"
 	rel="stylesheet" media="all" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -508,15 +508,15 @@
 
 	<!-- Javascript -->
 	<!-- jQuery -->
-	<script src="{{ URL::asset('js/jquery.js') }}"></script>
+	<script src="{{ URL::asset('assets/js/jquery.js') }}"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+	<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
 
 	<!-- Morris Charts JavaScript -->
-	<script src="{{ URL::asset('js/plugins/morris/raphael.min.js') }}"></script>
-	<script src="{{ URL::asset('js/plugins/morris/morris.min.js') }}"></script>
-	<script src="{{ URL::asset('js/plugins/morris/morris-data.js') }}"></script>
+	<script src="{{ URL::asset('assets/js/plugins/morris/raphael.min.js') }}"></script>
+	<script src="{{ URL::asset('assets/js/plugins/morris/morris.min.js') }}"></script>
+	<script src="{{ URL::asset('assets/js/plugins/morris/morris-data.js') }}"></script>
 </body>
 
 </html>
