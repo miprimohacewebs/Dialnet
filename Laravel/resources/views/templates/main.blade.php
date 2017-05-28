@@ -47,7 +47,14 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.html">SB Admin</a>
+			<div class="container-fluid">
+				<div class="navbar-header">
+					
+					<a class="navbar-brand" href="#">DIALNET</a>
+					</a>
+				</div>
+			</div>
+			
 		</div>
 		@include('templates.partials.menuTop')
 		@include('templates.partials.menuSidebar')

@@ -3281,5 +3281,50 @@
         "keywords": [
             "diff"
         ]
+    },
+    {
+        "name": "ignasbernotas/laravel-model-generator",
+        "version": "1.2.3",
+        "version_normalized": "1.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ignasbernotas/laravel-model-generator.git",
+            "reference": "d92d0181c763868e378b9dcd75bf8a746d45b3d9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ignasbernotas/laravel-model-generator/zipball/d92d0181c763868e378b9dcd75bf8a746d45b3d9",
+            "reference": "d92d0181c763868e378b9dcd75bf8a746d45b3d9",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "~5.0",
+            "php": ">=5.4.0"
+        },
+        "time": "2017-04-06T09:29:06+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Iber\\Generator\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ignas Bernotas",
+                "email": "ignas@iber.lt"
+            }
+        ],
+        "description": "Laravel 5 model generator from existing schema",
+        "keywords": [
+            "generator",
+            "laravel",
+            "model",
+            "schema"
+        ]
     }
 ]
