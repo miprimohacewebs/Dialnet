@@ -47,11 +47,12 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
+			
 			<div class="container-fluid">
 				<div class="navbar-header">
 					
-					<a class="navbar-brand" href="#">DIALNET</a>
-					</a>
+					<a class="navbar-brand" href="#"><img src="assets/images/logo-nuevo3.png" class="img-responsive" /></a>
+					
 				</div>
 			</div>
 			
@@ -75,6 +76,8 @@
 		src="{{ URL::asset('assets/js/plugins/morris/morris.min.js') }}"></script>
 	<script
 		src="{{ URL::asset('assets/js/plugins/morris/morris-data.js') }}"></script>
+		<script
+		src="{{ URL::asset('assets/js/zonapublica.js') }}"></script>
 </body>
 
 </html>
