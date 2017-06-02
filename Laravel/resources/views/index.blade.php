@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">
-						Página de inicio <small>Resultado de búsqueda de documentos</small> prueba
+						Página de inicio <small>Resultado de búsqueda de documentos</small>
 					</h1>
 					<!--                         <ol class="breadcrumb"> -->
 					<!--                             <li class="active"> -->
