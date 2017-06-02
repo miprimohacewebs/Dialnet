@@ -7,12 +7,12 @@
 	<div id="page-wrapper">
 
 		<div class="container-fluid">
-
+			
 			<!-- Page Heading -->
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">
-						Página de inicio <small>Resultado de búsqueda de documentos</small>
+						Página de inicio <small>Resultado de búsqueda de documentos</small> prueba
 					</h1>
 					<!--                         <ol class="breadcrumb"> -->
 					<!--                             <li class="active"> -->
