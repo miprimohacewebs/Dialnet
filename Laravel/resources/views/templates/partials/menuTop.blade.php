@@ -9,24 +9,27 @@
                     <a href="#"><i class="fa fa-question"></i> FAQS </a>
                 </li>
                 <!-- Usuario -->
-                <li>
-                	<a href="#"  data-toggle="modal" data-target="#login-modal"><i class="fa fa-user"></i> Login </a>
-                </li>
-                <li class="dropdown" style="display: none;">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> José Manuel <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Administración</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i>Salir</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                @if (Auth::guest())
+                    <li>
+                    	<a href="#"  data-toggle="modal" data-target="#login-modal"><i class="fa fa-user"></i> Login </a>
+                    </li>
+                </ul>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-gear"></i> Administración</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-power-off"></i>Salir</a>
+                            </li>
+                        </ul>
+                    </li>
+            	</ul>
             
             <!-- Filtros -->
             <ul class="nav navbar-left top-nav">
@@ -43,5 +46,5 @@
                     <a href="#"><i class="fa fa-filter"></i> A-Z </a>
                 </li>
             </ul>
-           
+           @endif
            

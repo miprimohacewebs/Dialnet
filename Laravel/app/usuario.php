@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $tx_email
  * @property Perfil $perfil
  */
+
 class usuario extends Model
 {
     /**

@@ -7,7 +7,7 @@
 	<div id="page-wrapper">
 
 		<div class="container-fluid">
-			
+			@if (Auth::check())
 			<!-- Page Heading -->
 			<div class="row">
 				<div class="col-lg-12">
@@ -135,7 +135,7 @@
 			<!-- /.row -->
 
 
-
+		@endif
 		</div>
 		<!-- /.container-fluid -->
 
