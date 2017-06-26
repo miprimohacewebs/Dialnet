@@ -3,7 +3,24 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+/* Estilos @zambranosoft */
+.textoInferiorIconosAwasome{
+	margin-top:-15px; 
+	font-size: 1.2rem
+}
+.parrafoResultadoDocumentosEncontrados{
+	color: #ba0600;
+	font-weight: bold;
+	margin-top: 10px;
+}
 
+a {
+    color: #ba0600;
+}
+
+a:HOVER{
+	color: #8d0500;
+}
 /* Global Styles */
 
 body {

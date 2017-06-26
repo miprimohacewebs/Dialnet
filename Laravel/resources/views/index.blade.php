@@ -7,55 +7,83 @@
 	<div id="page-wrapper">
 
 		<div class="container-fluid">
-			@if (Auth::check())
+			{{-- @if (Auth::check()) --}}
 			<!-- Page Heading -->
 			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">
-						Página de inicio <small>Resultado de búsqueda de documentos</small>
-					</h1>
-					<!--                         <ol class="breadcrumb"> -->
-					<!--                             <li class="active"> -->
-					<!--                                 <i class="fa fa-dashboard"></i> Dashboard -->
-					<!--                             </li> -->
-					<!--                         </ol> -->
+				<div class="col-lg-1 text-center">
+					<a href="#"> <span class="fa-stack fa-2x"> <i
+							class="fa fa-folder-open" aria-hidden="true"></i>
+							<p class="textoInferiorIconosAwasome">Categorías</p>
+					</span>
+					</a>
 				</div>
+				<div class="col-lg-1 text-center">
+					<a href="#"> <span class="fa-stack fa-2x"> <i class="fa fa-users"
+							aria-hidden="true"></i>
+							<p class="textoInferiorIconosAwasome">Autores</p>
+					</span>
+					</a>
+				</div>
+				<div class="col-lg-1 text-center">
+					<a href="#"> <span class="fa-stack fa-2x"> <i class="fa fa-filter"
+							aria-hidden="true"></i>
+							<p class="textoInferiorIconosAwasome">A-Z</p>
+					</span>
+					</a>
+				</div>
+				<div class="col-lg-6 text-center">
+					<p class="parrafoResultadoDocumentosEncontrados">350 documentos encontrados</p>
+				</div>
+				<div class="col-lg-3"></div>
+
+
+
+
+				<!-- 					<h1 class="page-header"> -->
+				<!-- 						Página de inicio <small>Resultado de búsqueda de documentos</small> -->
+				<!-- 					</h1> -->
+				<!-- 					<ol class="breadcrumb">  -->
+				<!-- 					<li class="active">  -->
+				<!-- 					<i class="fa fa-dashboard"></i> Dashboard  -->
+				<!-- 					</li>  -->
+				<!-- 					</ol>  -->
+
 			</div>
+			<!-- /.row -->
+
+			<!-- Mensajes de error -->
+			<!-- 			<div class="row"> -->
+			<!-- 				<div class="col-lg-12"> -->
+			<!-- 					<div class="alert alert-info alert-dismissable"> -->
+			<!-- 						<button type="button" class="close" data-dismiss="alert" -->
+			<!-- 							aria-hidden="true">&times;</button> -->
+			<!-- 						<i class="fa fa-info-circle"></i> <strong>Información: </strong> -->
+			<!-- 						Mensaje de información. -->
+			<!-- 					</div> -->
+			<!-- 					<div class="alert alert-success alert-dismissable"> -->
+			<!-- 						<button type="button" class="close" data-dismiss="alert" -->
+			<!-- 							aria-hidden="true">&times;</button> -->
+			<!-- 						<i class="fa fa-thumbs-o-up"></i> <strong>Operación realizada con -->
+			<!-- 							éxito.</strong> -->
+			<!-- 					</div> -->
+			<!-- 					<div class="alert alert-warning alert-dismissable"> -->
+			<!-- 						<button type="button" class="close" data-dismiss="alert" -->
+			<!-- 							aria-hidden="true">&times;</button> -->
+			<!-- 						<i class="fa fa-exclamation-triangle"> </i><strong> Alerta:</strong> -->
+			<!-- 						Falta algún parámetro para realizar la búsqueda. -->
+			<!-- 					</div> -->
+			<!-- 					<div class="alert alert-danger alert-dismissable"> -->
+			<!-- 						<button type="button" class="close" data-dismiss="alert" -->
+			<!-- 							aria-hidden="true">&times;</button> -->
+			<!-- 						<i class="fa fa-thumbs-o-down"></i><strong> Error: </strong>No se -->
+			<!-- 						puede conectar con la base de datos. -->
+			<!-- 					</div> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
 			<!-- /.row -->
 
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="alert alert-info alert-dismissable">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-hidden="true">&times;</button>
-						<i class="fa fa-info-circle"></i> <strong>Información: </strong>
-						Mensaje de información.
-					</div>
-					<div class="alert alert-success alert-dismissable">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-hidden="true">&times;</button>
-						<i class="fa fa-thumbs-o-up"></i> <strong>Operación realizada con
-							éxito.</strong>
-					</div>
-					<div class="alert alert-warning alert-dismissable">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-hidden="true">&times;</button>
-						<i class="fa fa-exclamation-triangle"> </i><strong> Alerta:</strong>
-						Falta algún parámetro para realizar la búsqueda.
-					</div>
-					<div class="alert alert-danger alert-dismissable">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-hidden="true">&times;</button>
-						<i class="fa fa-thumbs-o-down"></i><strong> Error: </strong>No se
-						puede conectar con la base de datos.
-					</div>
-				</div>
-			</div>
-			<!-- /.row -->
-
-			<div class="row">
-				<div class="col-lg-12">
-					<h2>Documentos</h2>
 					<div class="table-responsive">
 						<table class="table table-bordered table-hover">
 							<thead>
@@ -135,7 +163,7 @@
 			<!-- /.row -->
 
 
-		@endif
+			{{-- @endif --}}
 		</div>
 		<!-- /.container-fluid -->
 
