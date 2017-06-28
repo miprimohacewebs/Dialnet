@@ -10,31 +10,31 @@
 			{{-- @if (Auth::check()) --}}
 			<!-- Page Heading -->
 			<div class="row">
-				<div class="col-lg-1 text-center">
+				<div class="col-md-1 text-center">
 					<a href="#"> <span class="fa-stack fa-2x"> <i
 							class="fa fa-folder-open" aria-hidden="true"></i>
 							<p class="textoInferiorIconosAwasome">Categorías</p>
 					</span>
 					</a>
 				</div>
-				<div class="col-lg-1 text-center">
+				<div class="col-md-1 text-center">
 					<a href="#"> <span class="fa-stack fa-2x"> <i class="fa fa-users"
 							aria-hidden="true"></i>
 							<p class="textoInferiorIconosAwasome">Autores</p>
 					</span>
 					</a>
 				</div>
-				<div class="col-lg-1 text-center">
+				<div class="col-md-1 text-center">
 					<a href="#"> <span class="fa-stack fa-2x"> <i class="fa fa-filter"
 							aria-hidden="true"></i>
 							<p class="textoInferiorIconosAwasome">A-Z</p>
 					</span>
 					</a>
 				</div>
-				<div class="col-lg-6 text-center">
+				<div class="col-md-6 text-center">
 					<p class="parrafoResultadoDocumentosEncontrados">350 documentos encontrados</p>
 				</div>
-				<div class="col-lg-3"></div>
+				<div class="col-md-3"></div>
 
 
 
