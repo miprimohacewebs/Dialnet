@@ -15,6 +15,9 @@
 <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}"
 	rel="stylesheet" media="all" type="text/css">
 
+<!-- Datatables -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+
 <!-- Custom CSS -->
 <link href="{{ URL::asset('assets/css/sb-admin.css') }}"
 	rel="stylesheet" media="all" type="text/css">
@@ -71,9 +74,14 @@
 	<!-- Javascript -->
 	<!-- jQuery -->
 	<script src="{{ URL::asset('assets/js/jquery.js') }}"></script>
+	
+	<!-- Datatables -->
+	<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"/>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
+	
+	
 
 	<!-- Morris Charts JavaScript -->
 	<script
@@ -82,7 +90,7 @@
 		src="{{ URL::asset('assets/js/plugins/morris/morris.min.js') }}"></script>
 	<script
 		src="{{ URL::asset('assets/js/plugins/morris/morris-data.js') }}"></script>
-		<script
+	<script
 		src="{{ URL::asset('assets/js/zonapublica.js') }}"></script>
 </body>
 

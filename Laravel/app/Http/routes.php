@@ -35,3 +35,6 @@ Route::group(['middleware' => ['web']], function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('datatables',['publicaciones'=>'DatatablesController@getIndex', 'as' => 'datatables']);
+Route::get('datatables/{data}',['publicaciones'=>'DatatablesController@anyData', 'as' => 'datatables.data']);
