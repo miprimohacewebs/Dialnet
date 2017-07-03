@@ -16,7 +16,9 @@
 	rel="stylesheet" media="all" type="text/css">
 
 <!-- Datatables -->
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet"
+	href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"
+	media="all" type="text/css" />
 
 <!-- Custom CSS -->
 <link href="{{ URL::asset('assets/css/sb-admin.css') }}"
@@ -34,7 +36,7 @@
 	rel="stylesheet" type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans"
-	rel="stylesheet">	
+	rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -56,15 +58,16 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			
+
 			<div class="container-fluid">
 				<div class="navbar-header">
-					
-					<a class="navbar-brand" href="#"><img src="assets/images/logo-nuevo3.png" class="img-responsive" /></a>
-					
+
+					<a class="navbar-brand" href="#"><img
+						src="assets/images/logo-nuevo3.png" class="img-responsive" /></a>
+
 				</div>
 			</div>
-			
+
 		</div>
 		@include('templates.partials.menuTop')
 		@include('templates.partials.menuSidebar')
@@ -74,15 +77,17 @@
 	<!-- Javascript -->
 	<!-- jQuery -->
 	<script src="{{ URL::asset('assets/js/jquery.js') }}"></script>
-	
+
 	<!-- Datatables -->
-	<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"/>
+	<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
-	
-	
 
+
+
+
+	<script src="{{ URL::asset('assets/js/zonapublica.js') }}"></script>
 	<!-- Morris Charts JavaScript -->
 	<script
 		src="{{ URL::asset('assets/js/plugins/morris/raphael.min.js') }}"></script>
@@ -90,8 +95,6 @@
 		src="{{ URL::asset('assets/js/plugins/morris/morris.min.js') }}"></script>
 	<script
 		src="{{ URL::asset('assets/js/plugins/morris/morris-data.js') }}"></script>
-	<script
-		src="{{ URL::asset('assets/js/zonapublica.js') }}"></script>
 </body>
 
 </html>
