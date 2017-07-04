@@ -78,23 +78,20 @@
 	<!-- jQuery -->
 	<script src="{{ URL::asset('assets/js/jquery.js') }}"></script>
 
-	<!-- Datatables -->
-	<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-
 	<!-- Bootstrap Core JavaScript -->
 	<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
 
-
-
+	<!-- Datatables -->
+	<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
 	<script src="{{ URL::asset('assets/js/zonapublica.js') }}"></script>
 	<!-- Morris Charts JavaScript -->
-	<script
-		src="{{ URL::asset('assets/js/plugins/morris/raphael.min.js') }}"></script>
-	<script
-		src="{{ URL::asset('assets/js/plugins/morris/morris.min.js') }}"></script>
-	<script
-		src="{{ URL::asset('assets/js/plugins/morris/morris-data.js') }}"></script>
+<!-- 	<script -->
+<!-- 		src="{{ URL::asset('assets/js/plugins/morris/raphael.min.js') }}"></script> -->
+<!-- 	<script -->
+<!-- 		src="{{ URL::asset('assets/js/plugins/morris/morris.min.js') }}"></script> -->
+<!-- 	<script -->
+<!-- 		src="{{ URL::asset('assets/js/plugins/morris/morris-data.js') }}"></script> -->
 </body>
 
 </html>

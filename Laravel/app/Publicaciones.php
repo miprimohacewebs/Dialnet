@@ -1,7 +1,6 @@
 <?php
 
-namespace App;
-
+namespace App; // change to this namespace
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -29,8 +28,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property Categoria $categoria
  * @property EditorGrupoeditor $editorGrupoeditor
  */
-class publicaciones extends Model
+class Publicaciones extends Model
 {
+    protected $table = 'publicaciones';
+    
     /**
      * @var array
      */

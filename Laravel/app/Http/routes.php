@@ -1,5 +1,4 @@
 <?php
-
 /*
  * |--------------------------------------------------------------------------
  * | Routes File
@@ -12,8 +11,19 @@
  */
 /** Ruta index */
 Route::get('/', function () {
-    return View::make('index');
+    
+    $publicaciones = \App\Publicaciones::all();
+    
+    return View::make('index', compact('publicaciones'));
 });
+
+// Route::get('api/publicaciones', function () {
+//     return Datatables::eloquent(\App\Publicaciones::query())->make(true);
+// });
+
+
+// Route::get('/', 'PublicacionesController@index');
+// Route::get('/Publicaciones', 'PublicacionesController@getPublicaciones')->name('datatable.publicaciones');
 
 
 /*
@@ -36,5 +46,4 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('datatables',['publicaciones'=>'DatatablesController@getIndex', 'as' => 'datatables']);
-Route::get('datatables/{data}',['publicaciones'=>'DatatablesController@anyData', 'as' => 'datatables.data']);
+

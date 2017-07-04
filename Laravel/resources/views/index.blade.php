@@ -1,5 +1,4 @@
-
-@extends('templates.main') @section('title') Página de inicio
+ @extends('templates.main') @section('title') Página de inicio
 @endsection
 <div id="wrapper">
 
@@ -33,25 +32,34 @@
 					</a>
 				</div>
 				<div class="col-md-6 text-center">
-					<p class="parrafoResultadoDocumentosEncontrados">350 documentos encontrados</p>
+					<p class="parrafoResultadoDocumentosEncontrados">350 publicaciones
+						encontrados</p>
 				</div>
 				<div class="col-md-3"></div>
 			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="table-responsive">
-						<table id="tablaPublicaciones" class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>Titulo</th>
-									<th>Resumen</th>
-									<th>Enlaces</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
-				</div>
+			<div class="container">
+				<table id="tablaPublicaciones" class="table table-hover table-condensed">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>titulo</th>
+							<th>resumen</th>
+							<th>fecha</th>
+						</tr>
+					</thead>
+					<tbody>
+					@foreach ($publicaciones as $publicacion)
+					<tr>
+    					<td>{{$publicacion->x_idpublicacion }}</td>
+    					<td>{{$publicacion->tx_titulo }}</td>
+    					<td>{{$publicacion->tx_resumen }}</td>
+    					<td>{{$publicacion->fh_fechapublicacions }}</td>
+					</tr>
+					@endforeach
+					</tbody>
+				</table>
 			</div>
+
 			<!-- /.row -->
 			{{-- @endif --}}
 		</div>
