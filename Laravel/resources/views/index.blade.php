@@ -47,16 +47,7 @@
 							<th>fecha</th>
 						</tr>
 					</thead>
-					<tbody>
-					@foreach ($publicaciones as $publicacion)
-					<tr>
-    					<td>{{$publicacion->x_idpublicacion }}</td>
-    					<td>{{$publicacion->tx_titulo }}</td>
-    					<td>{{$publicacion->tx_resumen }}</td>
-    					<td>{{$publicacion->fh_fechapublicacions }}</td>
-					</tr>
-					@endforeach
-					</tbody>
+					
 				</table>
 			</div>
 

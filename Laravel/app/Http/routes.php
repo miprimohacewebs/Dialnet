@@ -12,14 +12,16 @@
 /** Ruta index */
 Route::get('/', function () {
     
-    $publicaciones = \App\Publicaciones::all();
-    
-    return View::make('index', compact('publicaciones'));
+//     $publicaciones = \App\Publicaciones::all();
+//     return View::make('index', compact('publicaciones'));
+    return View::make('index');
 });
 
-// Route::get('api/publicaciones', function () {
-//     return Datatables::eloquent(\App\Publicaciones::query())->make(true);
-// });
+Route::get('/api/publicaciones', function () {
+    return Datatables::eloquent(\App\Publicaciones::query())->make(true);
+});
+
+
 
 
 // Route::get('/', 'PublicacionesController@index');
@@ -38,7 +40,9 @@ Route::get('/', function () {
  */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('publicaciones','PublicacionesController@index');
+    Route::get('publicaciones/consiguePublicaciones','PublicacionesController@getTablaPublicaciones');
+    
 });
 
 
