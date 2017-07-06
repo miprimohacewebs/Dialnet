@@ -1,6 +1,6 @@
 <?php
 
-namespace App; // change to this namespace
+namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -30,13 +30,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Publicaciones extends Model
 {
+    /** Tabla asociada con el modelo. */
     protected $table = 'publicaciones';
+
+    /** Primary key de la tabla. */
+    protected $primaryKey = 'x_idpublicacion';
     
     /**
      * @var array
      */
     protected $fillable = ['aga_x_idgrupoautor', 'cat_x_idcategoria', 'ge_x_idgrupoeditor', 'tx_titulo', 'tx_isbn', 'nu_anno', 'tx_paginas', 'tx_edicion', 'tx_obra', 'tx_resumen', 'tx_descriptores', 'tx_imagen', 'tx_subtitulo', 'tx_genero', 'tx_asunto', 'fh_fechapublicacion', 'tx_pais', 'tx_idioma', 'nu_numPaginas'];
-
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -44,7 +48,7 @@ class Publicaciones extends Model
     {
         return $this->belongsTo('App\autorGrupoautor', 'aga_x_idgrupoautor', 'ga_x_idgrupoautor');
     }
-
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -52,7 +56,7 @@ class Publicaciones extends Model
     {
         return $this->belongsTo('App\categorias', 'cat_x_idcategoria', 'x_idcategoria');
     }
-
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -1,4 +1,6 @@
- @extends('templates.main') @section('title') Página de inicio
+@extends('templates.main') 
+@section('title') 
+	Página de inicio
 @endsection
 <div id="wrapper">
 
@@ -37,7 +39,8 @@
 				</div>
 				<div class="col-md-3"></div>
 			</div>
-			<div class="container">
+			<div class="row">
+			<div class="col-md-12 text-center">
 				<table id="tablaPublicaciones" class="table table-hover table-condensed">
 					<thead>
 						<tr>
@@ -49,8 +52,8 @@
 					</thead>
 					
 				</table>
+				</div>
 			</div>
-
 			<!-- /.row -->
 			{{-- @endif --}}
 		</div>

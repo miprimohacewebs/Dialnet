@@ -20,12 +20,13 @@ class PublicacionesController extends Controller
     
     /**
      * Muestra los campos de la tablaPublicaciones
+     * @return publicaciones para rellenar el datatable
      */
     public function getTablaPublicaciones()
     {
-        $publicaciones = Publicaciones::select('x_idpublicacion','tx_titulo','tx_resumen','fh_fechapublicacions')->get();
-    
+        $publicaciones = Publicaciones::all()->take(10);
         return Datatables::of($publicaciones)->make(true);
+        
     }
     
     /**

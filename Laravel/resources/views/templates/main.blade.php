@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Gestor de base de datos DIANET">
 <meta name="author" content="www.miprimohacewebs.com">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>Dialnet - @yield('title')</title>
 
@@ -83,7 +84,6 @@
 
 	<!-- Datatables -->
 	<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-
 	<script src="{{ URL::asset('assets/js/zonapublica.js') }}"></script>
 	<!-- Morris Charts JavaScript -->
 <!-- 	<script -->
