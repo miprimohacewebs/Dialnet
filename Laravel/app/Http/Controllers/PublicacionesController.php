@@ -29,6 +29,11 @@ class PublicacionesController extends Controller
         
     }
     
+    public function obtenerLetras() {
+        $letras = Publicaciones::obtenerLetrasSeccion();
+        return Datatables::of($letras)->make(true);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

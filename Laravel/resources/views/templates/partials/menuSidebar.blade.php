@@ -23,5 +23,17 @@
     		
     	</table>
 	</div>
+	
+	<div id="atozMenu" class="nav navbar-nav side-nav" style="display: none;">
+    	<h2>T&iacute;tulo A-Z</h2>
+    	<table id="tablaAtoz" class="table table-hover table-condensed">
+    		<thead style="display:none;">
+    			<tr>
+    				<th>A-Z</th>
+    			</tr>
+    		</thead>
+    		
+    	</table>
+	</div>
 </div>
 <!-- /.navbar-collapse -->

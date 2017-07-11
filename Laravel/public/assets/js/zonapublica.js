@@ -19,8 +19,8 @@ $(function() {
 			data : 'tx_resumen',
 			name : 'tx_resumen'
 		}, {
-			data : 'fh_fechapublicaciones',
-			name : 'fh_fechapublicaciones'
+			data : 'fh_fechapublicacion',
+			name : 'fh_fechapublicacion'
 		} ]
 	});
 	
@@ -29,7 +29,7 @@ $(function() {
 		"lengthChange": false,
 		"info": false,
 		"searching": false,
-		"pageLength": 1,
+		"pageLength": 10,
 		"pagingType": "simple",
 		"ajax" : "/api/categorias",
 		"columns" : [ {
@@ -45,7 +45,7 @@ $(function() {
 		"lengthChange": false,
 		"info": false,
 		"searching": false,
-		"pageLength": 1,
+		"pageLength": 10,
 		"pagingType": "simple",
 		"ajax" : "/api/autores",
 		"columns" : [ {
@@ -56,14 +56,37 @@ $(function() {
 		} ]
 	});
 	
+	$("#tablaAtoz").DataTable({
+		"serverSide" : false,
+		"lengthChange": false,
+		"info": false,
+		"searching": false,
+		"pageLength": 27,
+		"pagingType": "simple",
+		"ajax" : "/api/letras",
+		"columns" : [ {
+			data : 'letras',
+			"fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+	            $(nTd).html("<a href='txTitulo:"+oData.letras+"'>"+oData.letras+"</a>");
+			}
+		} ]
+	});
+	
 	$('#categorias').click(function(){
 	    $('#categoriasMenu').show();
 	    $('#autoresMenu').hide();
+	    $('#atozMenu').hide();
 	});
 
 	$('#autores').click(function(){
 	    $('#categoriasMenu').hide();
 	    $('#autoresMenu').show();
+	    $('#atozMenu').hide();
+	});
+	$('#atoz').click(function(){
+	    $('#categoriasMenu').hide();
+	    $('#autoresMenu').hide();
+	    $('#atozMenu').show();
 	});
 });
 
