@@ -3,6 +3,8 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\DB;
+
 /**
  * @property integer $x_idpublicacion
  * @property integer $aga_x_idgrupoautor
@@ -63,5 +65,15 @@ class Publicaciones extends Model
     public function editorGrupoeditor()
     {
         return $this->belongsTo('App\editorGrupoeditor', 'ge_x_idgrupoeditor', 'ge_x_idgrupoeditor');
+    }
+    
+    public static function obtenerLetrasSeccion(){
+        $vuelta = DB::table('publicaciones')
+        ->select(DB::raw('substring(upper(tx_titulo),1,1) as letras'))
+        ->orderBy('letras')
+        ->distinct()
+        ->get();
+        
+        return collect($vuelta);
     }
 }

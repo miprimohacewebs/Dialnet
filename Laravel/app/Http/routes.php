@@ -20,7 +20,9 @@ Route::get('/', function () {
 
     Route::get('publicaciones','PublicacionesController@index');
     Route::get('api/publicaciones','PublicacionesController@getTablaPublicaciones');
-
+    Route::get('api/categorias', 'CategoriasController@show');
+    Route::get('api/autores', 'AutoresController@show');
+    Route::get('api/letras', 'PublicacionesController@obtenerLetras');
 /*
  * |--------------------------------------------------------------------------
  * | Application Routes
@@ -41,5 +43,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+
 
 

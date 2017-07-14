@@ -24,9 +24,14 @@ class PublicacionesController extends Controller
      */
     public function getTablaPublicaciones()
     {
-        $publicaciones = Publicaciones::all()->take(10);
+        $publicaciones = Publicaciones::all();
         return Datatables::of($publicaciones)->make(true);
         
+    }
+    
+    public function obtenerLetras() {
+        $letras = Publicaciones::obtenerLetrasSeccion();
+        return Datatables::of($letras)->make(true);
     }
     
     /**
