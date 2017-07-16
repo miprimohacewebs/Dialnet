@@ -378,6 +378,9 @@ ul.alert-dropdown {
 	border-radius: 1px;
 }
 
+.btn-sm {
+  border-radius: 1px;
+}
 .alert {
 	border-radius: 1px;
 }

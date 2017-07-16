@@ -44,10 +44,9 @@
 				<table id="tablaPublicaciones" class="table table-hover table-condensed">
 					<thead>
 						<tr>
-							<th>Id</th>
-							<th>titulo</th>
-							<th>resumen</th>
-							<th>fecha</th>
+							<th>Título</th>
+							<th>Resumen</th>
+							<th>Ver Detalle</th>
 						</tr>
 					</thead>
 					
@@ -68,7 +67,7 @@
 <!-- MODALES -->
 <!-- BEGIN # MODAL LOGIN -->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true"
+	aria-labelledby="login" aria-hidden="true"
 	style="display: none;">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -101,10 +100,10 @@
 							<div class="col-md-2"></div>
 							<div class="col-md-4">
 								<button id="login-button" type="button"
-									class="btn btn-primary btn-lg btn-block">Autenticarse</button>
+									class="btn btn-primary btn-sm btn-block">Autenticarse</button>
 							</div>
 							<div class="col-md-4">
-								<button class="btn btn-primary btn-lg btn-block"
+								<button class="btn btn-primary btn-sm btn-block"
 									data-dismiss="modal">Cerrar</button>
 							</div>
 							<div class="col-md-2"></div>
@@ -119,3 +118,26 @@
 	</div>
 </div>
 <!-- END # MODAL LOGIN -->
+
+<!-- BEGIN # VER DETALLE -->
+<div class="modal fade" id="verDetalle" tabindex="-1" role="dialog"
+	aria-labelledby="verDetalle" aria-hidden="true"
+	style="display: none;">
+<!-- <div id="verDetalle" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="labelVerDetalle" aria-hidden="true" style="display:none;"> -->
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" align="center">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Detalles de publicación</h4>
+			</div>
+			<div class="modal-body edit-content">
+            <!-- Contenido llegado de base de datos -->
+
+            </div>
+		</div>
+	</div>
+</div>
+<!-- END # VER DETALLE -->

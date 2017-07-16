@@ -1,29 +1,65 @@
 $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
+	headers : {
+		'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+	}
 });
 
 $(function() {
-	$("#tablaPublicaciones").DataTable({
-		"processing" : true,
-		"serverSide" : true,
-		"ajax" : "/api/publicaciones",
-		"columns" : [ {
-			data : 'x_idpublicacion',
-			name : 'x_idpublicacion'
-		}, {
-			data : 'tx_titulo',
-			name : 'tx_titulo'
-		}, {
-			data : 'tx_resumen',
-			name : 'tx_resumen'
-		}, {
-			data : 'fh_fechapublicacion',
-			name : 'fh_fechapublicacion'
-		} ]
-	});
-	
+	$("#tablaPublicaciones")
+			.DataTable(
+					{
+						"processing" : true,
+						"serverSide" : true,
+						"ajax" : "/api/publicaciones",
+						"columns" : [
+								{
+									data : 'tx_titulo',
+									name : 'tx_titulo',
+									sWidth : '50%'
+								},
+								{
+									data : 'tx_resumen',
+									name : 'tx_resumen',
+									sWidth : '40%'
+								},
+								{
+									data : 'x_idpublicacion',
+									sWidth : '10%',
+									mRender : function(data, type, full) {
+										return "<a href='detallePublicacion' id='"
+												+ data
+												+ "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
+									}
+
+								} ]
+					});
+
+	/** Modal de detalle */
+	$('#verDetalle')
+			.on(
+					'show.bs.modal',
+					function(e) {
+						var $modal = $(this), idPublicacion = e.relatedTarget.id;
+
+                        // $.ajax({
+                        // cache: false,
+                        // type: 'POST',
+                        // url: '/api/verDetalle',
+                        // data: 'idPublicacion=' + idPublicacion,
+                        // success: function(data) {
+                        // $modal.find('.edit-content').html(data);
+                        // });
+                        $modal
+                            .find('.edit-content')
+                            .html(
+                                "<div class='row'><div class='col-md-3'>Título:</div><div class='col-md-9'>Prueba de título</div></div>" +
+                                "<div class='row'><div class='col-md-3'>Resumen:</div><div class='col-md-9'>Prueba de resumen</div></div>" +
+                                "<div class='row'><div class='col-md-3'>Prueba:</div><div class='col-md-9'>bla bla bla bla bla</div></div>" +
+                                "<div class='row'><div class='col-md-3'>Prueba:</div><div class='col-md-9'>bla bla bla bla bla</div></div>" +
+                                "<div class='row'><div class='col-md-3'>Prueba:</div><div class='col-md-9'>bla bla bla bla bla</div></div>" +
+                                "<div class='row'><div class='col-md-3'>Prueba:</div><div class='col-md-9'>bla bla bla bla bla</div></div>");
+                    });
+
 	$("#tablaCategorias").DataTable({
 		"serverSide" : false,
 		"lengthChange": false,
@@ -39,7 +75,7 @@ $(function() {
 			}
 		} ]
 	});
-	
+
 	$("#tablaAutores").DataTable({
 		"serverSide" : false,
 		"lengthChange": false,
@@ -55,7 +91,7 @@ $(function() {
 			}
 		} ]
 	});
-	
+
 	$("#tablaAtoz").DataTable({
 		"serverSide" : false,
 		"lengthChange": false,
@@ -71,7 +107,7 @@ $(function() {
 			}
 		} ]
 	});
-	
+
 	$('#categorias').click(function(){
 	    $('#categoriasMenu').show();
 	    $('#autoresMenu').hide();

@@ -83,7 +83,8 @@ class PublicacionesController extends Controller
      */
     public function show($id)
     {
-        //
+        $publicacion = Publicaciones::where('x_idpublicacion', $id)->get(['tx_titulo', 'tx_isbn', 'tx_paginas', 'tx_edicion', 'tx_resumen']);
+        return $publicacion;
     }
 
     /**
