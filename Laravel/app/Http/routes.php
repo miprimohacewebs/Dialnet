@@ -14,15 +14,17 @@ Route::get('/', function () {
     return View::make('index');
 });
 
-// Route::get('api/publicaciones', function () {
-//     return Datatables::eloquent(App\Publicaciones::query())->make(true);
-// });
-
-    Route::get('publicaciones','PublicacionesController@index');
-    Route::get('api/publicaciones','PublicacionesController@getTablaPublicaciones');
-    Route::get('api/categorias', 'CategoriasController@show');
-    Route::get('api/autores', 'AutoresController@show');
-    Route::get('api/letras', 'PublicacionesController@obtenerLetras');
+Route::get('publicaciones','PublicacionesController@index');
+/** Ruta para rellenar la tabla de publicaciones */
+Route::get('api/publicaciones','PublicacionesController@getTablaPublicaciones');
+/** Ruta para rellenar la tabla de categorías */
+Route::get('api/categorias', 'CategoriasController@show');
+/** Ruta para rellenar la tabla de autores */
+Route::get('api/autores', 'AutoresController@show');
+/** Ruta para rellenar la tabla de letras de publicaciones */
+Route::get('api/letras', 'PublicacionesController@obtenerLetras');
+/** Ruta para rellenar el detalle de una publicación */
+Route::get('api/verDetallePublicacion', 'PublicacionesController@verDetallePublicacion');
 /*
  * |--------------------------------------------------------------------------
  * | Application Routes
