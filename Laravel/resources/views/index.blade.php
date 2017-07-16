@@ -42,14 +42,6 @@
 			<div class="row">
 			<div class="col-md-12 text-center">
 				<table id="tablaPublicaciones" class="table table-hover table-condensed">
-					<thead>
-						<tr>
-							<th>Título</th>
-							<th>Resumen</th>
-							<th>Ver Detalle</th>
-						</tr>
-					</thead>
-					
 				</table>
 				</div>
 			</div>

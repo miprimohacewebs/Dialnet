@@ -12,26 +12,29 @@ $(function() {
 						"serverSide" : true,
 						"ajax" : "/api/publicaciones",
 						"columns" : [
-								{
-									data : 'tx_titulo',
-									name : 'tx_titulo',
-									sWidth : '50%'
-								},
-								{
-									data : 'tx_resumen',
-									name : 'tx_resumen',
-									sWidth : '40%'
-								},
-								{
-									data : 'x_idpublicacion',
-									sWidth : '10%',
-									mRender : function(data, type, full) {
-										return "<a href='detallePublicacion' id='"
-												+ data
-												+ "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
-									}
+                                {
+                                    title: 'Título',
+                                    data : 'tx_titulo',
+                                    name : 'tx_titulo',
+                                    sWidth : '50%'
+                                },
+                                {
+                                    title: 'Resumen',
+                                    data : 'tx_resumen',
+                                    name : 'tx_resumen',
+                                    sWidth : '40%'
+                                },
+                                {
+                                    title: 'Ver detalle',
+                                    data : 'x_idpublicacion',
+                                    sWidth : '10%',
+                                    mRender : function(data, type, full) {
+                                        return "<a href='detallePublicacion' id='"
+                                            + data
+                                            + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
+                                    }
 
-								} ]
+                                } ]
 					});
 
 	/** Modal de detalle */
@@ -152,19 +155,31 @@ function actualizarListado (tipo, valor){
             	"tipo": tipo
             }
         },
-		"columns" : [ {
-			data : 'x_idpublicacion',
-			name : 'x_idpublicacion'
-		}, {
-			data : 'tx_titulo',
-			name : 'tx_titulo'
-		}, {
-			data : 'tx_resumen',
-			name : 'tx_resumen'
-		}, {
-			data : 'fh_fechapublicacion',
-			name : 'fh_fechapublicacion'
-		} ]
+		"columns" : [
+            {
+                title: 'Título',
+                data : 'tx_titulo',
+                name : 'tx_titulo',
+                sWidth : '50%'
+            },
+            {
+                title: 'Resumen',
+                data : 'tx_resumen',
+                name : 'tx_resumen',
+                sWidth : '40%'
+            },
+            {
+                title: 'Ver detalle',
+                data : 'x_idpublicacion',
+                sWidth : '10%',
+                mRender : function(data, type, full) {
+                    return "<a href='detallePublicacion' id='"
+                        + data
+                        + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
+                }
+
+            }
+        ]
 	});
 }
 
