@@ -76,4 +76,34 @@ class Publicaciones extends Model
         
         return collect($vuelta);
     }
+    
+    public static function obtenerPublicaciones($valor, $tipo){
+        $tipoValor = '';
+        $operador = '=';
+        $valorBuscar = $valor;
+        
+        
+        switch($tipo){
+            case 'cat':
+                $tipoValor = "cat_x_idcategoria";
+                break;
+            case 'aut':
+                $tipoValor = "autor_grupoautor.aut_x_idautor";
+                break;
+            case 'tit':
+                $tipoValor = "tx_titulo";
+                $operador = 'like';
+                $valorBuscar= $valorBuscar.'%';
+                break;
+            
+        }
+        
+        $vuelta = DB::table('publicaciones')
+                      ->select('publicaciones.*')
+                      ->leftjoin('autor_grupoautor', 'publicaciones.aga_x_idgrupoautor', '=', 'autor_grupoautor.ga_x_idgrupoautor')
+                      ->where($tipoValor, $operador, $valorBuscar)
+                      ->distinct()
+                      ->get();
+        return collect($vuelta);
+    }
 }

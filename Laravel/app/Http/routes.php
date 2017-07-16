@@ -23,6 +23,7 @@ Route::get('/', function () {
     Route::get('api/categorias', 'CategoriasController@show');
     Route::get('api/autores', 'AutoresController@show');
     Route::get('api/letras', 'PublicacionesController@obtenerLetras');
+    Route::get('api/publicacionesFiltro', 'PublicacionesController@getTablaPublicacionesFiltro');
 /*
  * |--------------------------------------------------------------------------
  * | Application Routes

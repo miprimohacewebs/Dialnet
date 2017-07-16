@@ -35,7 +35,7 @@ $(function() {
 		"columns" : [ {
 			data : 'tx_categoria',
 			"fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-	            $(nTd).html("<a href='idCategoria:"+oData.x_idcategoria+"'>"+oData.tx_categoria+"</a>");
+	            $(nTd).html("<a href='#' onClick='actualizarListado(\"cat\","+oData.x_idcategoria+");' >"+oData.tx_categoria+"</a>");
 			}
 		} ]
 	});
@@ -51,7 +51,7 @@ $(function() {
 		"columns" : [ {
 			data : 'tx_autor',
 			"fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-	            $(nTd).html("<a href='idAutor:"+oData.x_idautor+"'>"+oData.tx_autor+"</a>");
+	            $(nTd).html("<a href='#' onClick='actualizarListado(\"aut\","+oData.idAutor+");'>"+oData.tx_autor+"</a>");
 			}
 		} ]
 	});
@@ -67,7 +67,7 @@ $(function() {
 		"columns" : [ {
 			data : 'letras',
 			"fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-	            $(nTd).html("<a href='txTitulo:"+oData.letras+"'>"+oData.letras+"</a>");
+	            $(nTd).html("<a href='#' onClick='actualizarListado(\"tit\",\""+oData.letras+"\");'>"+oData.letras+"</a>");
 			}
 		} ]
 	});
@@ -88,9 +88,48 @@ $(function() {
 	    $('#autoresMenu').hide();
 	    $('#atozMenu').show();
 	});
+	
 });
 
+/**
+ * 
+ * Función que actualiza la tabla de publicaciones filtrando por el valor seleccionado.
+ * Tipo: indica el tipo de filtro a realizar opciones posibles:
+ * 		- cat: filtra por categorias.
+ * 		- tit: filtra por primera letra del título.
+ * 		- aut: filtra por el autor.
+*/
+function actualizarListado (tipo, valor){
 
-
+	
+	$("#tablaPublicaciones").DataTable().destroy();
+	$("#tablaPublicaciones").empty();
+	
+	$("#tablaPublicaciones").DataTable({
+		"processing" : true,
+		"serverSide" : true,
+		"ajax": {
+            "url" : "/api/publicacionesFiltro",
+            "type": "GET",
+            "data" : {
+            	"valor": valor,
+            	"tipo": tipo
+            }
+        },
+		"columns" : [ {
+			data : 'x_idpublicacion',
+			name : 'x_idpublicacion'
+		}, {
+			data : 'tx_titulo',
+			name : 'tx_titulo'
+		}, {
+			data : 'tx_resumen',
+			name : 'tx_resumen'
+		}, {
+			data : 'fh_fechapublicacion',
+			name : 'fh_fechapublicacion'
+		} ]
+	});
+}
 
 
