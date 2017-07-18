@@ -29,6 +29,26 @@ class PublicacionesController extends Controller
         
     }
     
+    
+    /**
+     * Muestra los campos de la tablaPublicaciones
+     * @param int $valor
+     * @param String $tipo tipo de valor, 'cat' categoria, 'aut' autor, 'tit' titulo. 
+     * @return publicaciones para rellenar el datatable.
+     */
+    public function getTablaPublicacionesFiltro(Request $request)
+    {
+        $valor = $request->get('valor');
+        $tipo = $request->get('tipo');
+        $publicaciones = Publicaciones::obtenerPublicaciones($valor, $tipo);
+        return Datatables::of($publicaciones)->make(true);
+        
+    }
+    
+    /**
+     * Obtiene la primera letra de los titulos de publicaciones, las ordena y no mete repetidas.
+     * @return Tabla de primeras letras de publicaciones
+     */
     public function obtenerLetras() {
         $letras = Publicaciones::obtenerLetrasSeccion();
         return Datatables::of($letras)->make(true);
