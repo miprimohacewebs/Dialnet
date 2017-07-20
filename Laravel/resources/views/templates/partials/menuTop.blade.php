@@ -11,7 +11,7 @@
                 <!-- Usuario -->
                 @if (Auth::guest())
                     <li>
-                    	<a href="#"  data-toggle="modal" data-target="#login-modal"><i class="fa fa-user"></i> Login </a>
+                    	<a href="{{url('login')}}" ><i class="fa fa-user"></i> Login </a>
                     </li>
                 </ul>
                 @else
@@ -30,7 +30,7 @@
                         </ul>
                     </li>
             	</ul>
-            
+
             <!-- Filtros -->
             <ul class="nav navbar-left top-nav">
             	 <!-- Categorías -->
