@@ -1,5 +1,5 @@
-@extends('templates.main') 
-@section('title') 
+@extends('templates.main')
+@section('title')
 	Página de inicio
 @endsection
 <div id="wrapper">
@@ -13,27 +13,34 @@
 			<!-- Page Heading -->
 			<div class="row">
 				<div class="col-md-1 text-center">
-					<a href="#"> <span class="fa-stack fa-2x"> <i
+					<a href="#"  id="categorias"> <span class="fa-stack fa-2x"> <i
 							class="fa fa-folder-open" aria-hidden="true"></i>
-							<p class="textoInferiorIconosAwasome" id="categorias">Categorías</p>
+							<p class="textoInferiorIconosAwasome">Categorías</p>
 					</span>
 					</a>
 				</div>
 				<div class="col-md-1 text-center">
-					<a href="#"> <span class="fa-stack fa-2x"> <i class="fa fa-users"
+					<a href="#" id="autores" > <span class="fa-stack fa-2x"> <i class="fa fa-users"
 							aria-hidden="true"></i>
-							<p class="textoInferiorIconosAwasome" id="autores">Autores</p>
+							<p class="textoInferiorIconosAwasome">Autores</p>
 					</span>
 					</a>
 				</div>
 				<div class="col-md-1 text-center">
-					<a href="#"> <span class="fa-stack fa-2x"> <i class="fa fa-filter"
+					<a href="#" id="atoz"> <span class="fa-stack fa-2x"> <i class="fa fa-filter"
 							aria-hidden="true"></i>
-							<p class="textoInferiorIconosAwasome" id="atoz">A-Z</p>
+							<p class="textoInferiorIconosAwasome">A-Z</p>
 					</span>
 					</a>
 				</div>
-				<div class="col-md-6 text-center">
+				<div class="col-md-1 text-center">
+					<a href="#" id="atoz"> <span class="fa-stack fa-2x"> <i class="fa fa-eraser"
+																			aria-hidden="true"></i>
+							<p class="textoInferiorIconosAwasome">Limpiar</p>
+					</span>
+					</a>
+				</div>
+				<div class="col-md-5 text-center">
 					<p class="parrafoResultadoDocumentosEncontrados">350 publicaciones
 						encontrados</p>
 				</div>
@@ -46,10 +53,10 @@
 						<tr>
 							<th>Título</th>
 							<th>Resumen</th>
-							<th>Ver Detalle</th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
-					
+
 				</table>
 				</div>
 			</div>
@@ -134,8 +141,8 @@
 				<h4 class="modal-title" id="myModalLabel">Detalles de publicación</h4>
 			</div>
 			<div class="modal-body edit-content">
-            <!-- Contenido llegado de base de datos -->    
-				
+            <!-- Contenido llegado de base de datos -->
+
             </div>
 		</div>
 	</div>
