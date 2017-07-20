@@ -26,7 +26,7 @@ Route::get('api/letras', 'PublicacionesController@obtenerLetras');
 /** Ruta para rellenar el detalle de una publicación */
 Route::get('api/verDetallePublicacion', 'PublicacionesController@verDetallePublicacion');
 /** Ruta para cargar la tabla de publicaciones filtrada */
-Route::post('api/publicacionesFiltro', 'PublicacionesController@getTablaPublicacionesFiltro');
+Route::get('api/publicacionesFiltro', 'PublicacionesController@getTablaPublicacionesFiltro');
 /*
  * |--------------------------------------------------------------------------
  * | Application Routes
