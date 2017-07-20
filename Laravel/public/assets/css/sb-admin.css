@@ -40,7 +40,7 @@ a:HOVER {
 }
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus,
-  .navbar-inverse .navbar-nav>.active>a:hover {
+.navbar-inverse .navbar-nav>.active>a:hover {
   color: #fff;
   background-color: #ba0600;
 }
@@ -59,25 +59,25 @@ a:HOVER {
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
- color: #ffffff;
- background-color: #ba0600;
- border-color: #ba0600;
- font-family: 'Josefin Sans', sans-serif;
- text-transform: uppercase;
- font-weight: 700;
- border-radius: 0;
+  color: #ffffff;
+  background-color: #ba0600;
+  border-color: #ba0600;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 0;
 }
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
- background-image: none;
- color: #ffffff;
- background-color: #ba0600;
- border-color: #ba0600;
- font-family: 'Josefin Sans', sans-serif;
- text-transform: uppercase;
- font-weight: 700;
- border-radius: 0;  
+  background-image: none;
+  color: #ffffff;
+  background-color: #ba0600;
+  border-color: #ba0600;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 0;
 }
 .btn-primary.disabled,
 .btn-primary[disabled],
@@ -111,11 +111,11 @@ fieldset[disabled] .btn-primary.active {
   border-radius: 0px;
   font-size: 14px;
   padding: 12px 30px;
-/*   padding: 20px 40px; */
+  /*   padding: 20px 40px; */
   letter-spacing: 4px;
   transition: all 0.3s;
   text-transform: uppercase;
-    
+
 }
 .btn-xl:hover,
 .btn-xl:focus,
@@ -215,7 +215,7 @@ body {
 }
 
 .top-nav>li>a:hover, .top-nav>li>a:focus, .top-nav>.open>a, .top-nav>.open>a:hover,
-  .top-nav>.open>a:focus {
+.top-nav>.open>a:focus {
   color: #fff;
   background-color: #000;
 }
@@ -399,7 +399,7 @@ body {
 }
 
 .top-nav>li>a:hover, .top-nav>li>a:focus, .top-nav>.open>a, .top-nav>.open>a:hover,
-  .top-nav>.open>a:focus {
+.top-nav>.open>a:focus {
   color: #fff;
   background-color: #ba0600;
 }
@@ -414,13 +414,13 @@ body {
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  
+
 }
 
 .loginmodal-container h1 {
   text-align: center;
   font-size: 1.8em;
-  
+
 }
 
 .loginmodal-container input[type=submit] {
@@ -446,7 +446,7 @@ body {
 }
 
 .loginmodal-container input[type=text]:hover, input[type=password]:hover
-  {
+{
   border: 1px solid #b9b9b9;
   border-top: 1px solid #a0a0a0;
   -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -462,12 +462,12 @@ body {
   padding: 0 8px;
   /* border-radius: 3px; */
   /* -webkit-user-select: none;
-  user-select: none; */
+user-select: none; */
 }
 
 .loginmodal-submit {
   /* border: 1px solid #3079ed; */
-  border: 0px;
+  border: none;
   color: #fff;
   text-shadow: 0 1px rgba(0, 0, 0, 0.1);
   background-color: #4d90fe;
@@ -498,15 +498,46 @@ body {
   font-size: 12px;
 }
 
-/*   Estilos para los datatables menús*/
-#tablaCategorias td, #tablaAtoz td, #tablaAutores  td{ 
+/*   Estilos para los datatables menÃºs*/
+#tablaCategorias td, #tablaAtoz td, #tablaAutores  td{
   display: block;
-  border-top : none; 
+  border-top : none;
 }
 #categoriasMenu .no-footer, #autoresMenu  .no-footer, #atozMenu .no-footer{
-  border-bottom: 0px!Important;
+  border-bottom: none!Important;
 }
 #categoriasMenu h4, #autoresMenu h4, #atozMenu h4{
   display: block;
   margin-left: 10px;
+}
+/*  Estilos para el datatable principal */
+#tablaPublicaciones{
+  font-size: 1.2rem;
+}
+#tablaPublicaciones thead{
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1.3rem;
+}
+table.dataTable thead .sorting_asc {
+  background-image: url("../images/sort_asc.png");
+}
+table.dataTable thead .sorting_desc {
+  background-image: url("../images/sort_desc.png");
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  color: #8d0500 !important;
+  border: 1px solid #8d0500;
+  background-color: #fff;
+  background: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  color: #8d0500 !important;
+  font-weight: bold;
+  border: none;
+  background-color: trasparent;
+  background: none;
 }
