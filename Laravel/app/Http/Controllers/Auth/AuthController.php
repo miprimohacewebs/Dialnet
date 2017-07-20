@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -43,7 +44,7 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -58,7 +59,7 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
@@ -69,4 +70,45 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /**
+     * Método para autenticar al usuario desde el controlador
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postLogin(Request $request)
+    {
+
+        if (Auth::attempt(
+            [
+                'email' => $request->email,
+                'password' => $request->password,
+                'active' => 1
+            ]
+            , $request->has('remember')
+        )
+        ) {
+            return redirect()->intended($this->redirectPath());
+        } else {
+            $rules = [
+                'email' => 'required|email',
+                'password' => 'required',
+            ];
+
+            $messages = [
+                'email.required' => 'El campo email es requerido',
+                'email.email' => 'El formato de email es incorrecto',
+                'password.required' => 'El campo password es requerido',
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            return redirect('auth/login')
+                ->withErrors($validator)
+                ->withInput()
+                ->with('message', 'Error al iniciar sesión');
+        }
+    }
+
 }

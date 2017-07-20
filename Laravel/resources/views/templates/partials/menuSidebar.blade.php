@@ -2,7 +2,7 @@
 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 <div class="collapse navbar-collapse navbar-ex1-collapse">
 	<div id="categoriasMenu" class="nav navbar-nav side-nav">
-    	<h2>Categor&iacute;as</h2>
+    	<h4>Categor&iacute;as</h4>
     	<table id="tablaCategorias" class="table table-hover table-condensed">
     		<thead style="display:none;">
     			<tr>
@@ -13,7 +13,7 @@
     	</table>
 	</div>
 	<div id="autoresMenu" class="nav navbar-nav side-nav" style="display: none;">
-    	<h2>Autores</h2>
+    	<h4>Autores</h4>
     	<table id="tablaAutores" class="table table-hover table-condensed">
     		<thead style="display:none;">
     			<tr>
@@ -25,7 +25,7 @@
 	</div>
 	
 	<div id="atozMenu" class="nav navbar-nav side-nav" style="display: none;">
-    	<h2>T&iacute;tulo A-Z</h2>
+    	<h4>T&iacute;tulo A-Z</h4>
     	<table id="tablaAtoz" class="table table-hover table-condensed">
     		<thead style="display:none;">
     			<tr>

@@ -24,7 +24,7 @@ class PublicacionesController extends Controller
      */
     public function getTablaPublicaciones()
     {
-        $publicaciones = Publicaciones::all()->take(10);
+        $publicaciones = Publicaciones::all();
         return Datatables::of($publicaciones)->make(true);
         
     }
@@ -87,6 +87,16 @@ class PublicacionesController extends Controller
         return $publicacion;
     }
 
+    /**
+     * Reenvía los detalles de la publicación indcada por idPublicación por petición JQuery
+     * @param Request $request
+     */
+    public function verDetallePublicacion(Request $request) {
+        $idPublicacion= $request->idPublicacion;
+        $publicacion = Publicaciones::where('x_idpublicacion','=',$idPublicacion)->get();
+        return response()->json(array('success' => true, 'publicacion' => $publicacion, 'msg' => 'Se han generado los detalles de la publicacion'));
+
+    }
     /**
      * Show the form for editing the specified resource.
      *
