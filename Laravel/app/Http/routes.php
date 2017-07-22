@@ -27,6 +27,11 @@ Route::get('api/letras', 'PublicacionesController@obtenerLetras');
 Route::get('api/verDetallePublicacion', 'PublicacionesController@verDetallePublicacion');
 /** Ruta para cargar la tabla de publicaciones filtrada */
 Route::get('api/publicacionesFiltro', 'PublicacionesController@getTablaPublicacionesFiltro');
+/** Ruta para la autenticación de administradores */
+Route::get('login', function () {
+    return View::make('login');
+});
+
 /*
  * |--------------------------------------------------------------------------
  * | Application Routes
@@ -39,14 +44,8 @@ Route::get('api/publicacionesFiltro', 'PublicacionesController@getTablaPublicaci
  */
 
 Route::group(['middleware' => ['web']], function () {
-   
-   
+    Route::auth();
 });
-
-
-Route::auth();
-
-Route::get('/home', 'HomeController@index');
 
 
 

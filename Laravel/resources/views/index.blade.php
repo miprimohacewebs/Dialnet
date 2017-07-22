@@ -47,6 +47,21 @@
 				<div class="col-md-3"></div>
 			</div>
 			<div class="row">
+				<div class="col-md-12 text-center">
+					<!-- Muestra errores de sesión -->
+					@if (Session::has('errors'))
+						<div class="alert alert-warning" role="alert">
+							<ul>
+								<strong>Errores: </strong>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
+				</div>
+			</div>
+			<div class="row">
 			<div class="col-md-12 text-center">
 				<table id="tablaPublicaciones" class="table table-hover table-condensed">
 				</table>
@@ -85,8 +100,8 @@
 								class="glyphicon glyphicon-chevron-right"></div>
 							<span id="text-login-msg">Escriba su email y password</span>
 						</div>
-						<br> <input id="login_username" class="form-control" type="text"
-							placeholder="Email" required> <br> <input id="login_password"
+						<br> <input id="email" class="form-control" type="text"
+							placeholder="Email" required> <br> <input id="pass"
 							class="form-control" type="password" placeholder="Password"
 							required>
 						<div class="checkbox">
@@ -99,7 +114,7 @@
 							<div class="col-md-2"></div>
 							<div class="col-md-4">
 								<button id="login-button" type="button"
-									class="btn btn-primary btn-sm btn-block">Autenticarse</button>
+									class="btn btn-primary btn-sm btn-block" onclick="autenticarse();" >Autenticarse</button>
 							</div>
 							<div class="col-md-4">
 								<button class="btn btn-primary btn-sm btn-block"

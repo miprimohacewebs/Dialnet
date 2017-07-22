@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Usuario;
+use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -29,7 +29,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -70,45 +70,4 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-
-    /**
-     * Método para autenticar al usuario desde el controlador
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postLogin(Request $request)
-    {
-
-        if (Auth::attempt(
-            [
-                'email' => $request->email,
-                'password' => $request->password,
-                'active' => 1
-            ]
-            , $request->has('remember')
-        )
-        ) {
-            return redirect()->intended($this->redirectPath());
-        } else {
-            $rules = [
-                'email' => 'required|email',
-                'password' => 'required',
-            ];
-
-            $messages = [
-                'email.required' => 'El campo email es requerido',
-                'email.email' => 'El formato de email es incorrecto',
-                'password.required' => 'El campo password es requerido',
-            ];
-
-            $validator = Validator::make($request->all(), $rules, $messages);
-
-            return redirect('auth/login')
-                ->withErrors($validator)
-                ->withInput()
-                ->with('message', 'Error al iniciar sesión');
-        }
-    }
-
 }
