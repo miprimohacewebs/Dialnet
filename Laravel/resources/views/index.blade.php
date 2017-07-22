@@ -34,7 +34,7 @@
 					</a>
 				</div>
 				<div class="col-md-1 text-center">
-					<a href="#" id="atoz"> <span class="fa-stack fa-2x"> <i class="fa fa-eraser"
+					<a href="#" id="limpiar" onclick="resetearPantalla();"> <span class="fa-stack fa-2x"> <i class="fa fa-eraser"
 																			aria-hidden="true"></i>
 							<p class="textoInferiorIconosAwasome">Limpiar</p>
 					</span>
@@ -49,14 +49,6 @@
 			<div class="row">
 			<div class="col-md-12 text-center">
 				<table id="tablaPublicaciones" class="table table-hover table-condensed">
-					<thead>
-						<tr>
-							<th>Título</th>
-							<th>Resumen</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
-
 				</table>
 				</div>
 			</div>

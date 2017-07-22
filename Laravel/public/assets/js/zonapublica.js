@@ -23,7 +23,6 @@ $(function() {
                     "loadingRecords": "Cargando publicaciones en curso...",
                     "infoPostFix": "",
                     "emptyTable": "No existen publicaciones disponibles.",
-                    "bLengthChange" : false,
                     "paginate": {
                         "first":      "Primero",
                         "previous":   "Anterior",
@@ -33,16 +32,19 @@ $(function() {
                 },
                 "columns" : [
                     {
+                        title: 'Título',
                         data : 'tx_titulo',
                         name : 'tx_titulo',
                         sWidth : '50%'
                     },
                     {
+                        title: 'Resumen',
                         data : 'tx_resumen',
                         name : 'tx_resumen',
                         sWidth : '40%'
                     },
                     {
+                        title: 'Ver detalle',
                         data : 'x_idpublicacion',
                         sWidth : '10%',
                         mRender : function(data, type, full) {
@@ -170,24 +172,23 @@ $(function() {
 		"pagingType": "simple",
 		"ajax" : "/api/categorias",
 		"language": {
-                    "processing": "Procesando publicaciones...",
+                    "processing": "Procesando...",
                     "search": "Buscar:",
                     "lengthMenu": "Mostrar _MENU_ registros por página.",
-                    "zeroRecords": "No existen publicaciones.",
+                    "zeroRecords": "No existen categorías.",
                     "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay publicaciones disponibles",
-                    "infoFiltered": "(Filtrados _MAX_ del total de publicaciones)",
-                    "loadingRecords": "Cargando publicaciones en curso...",
+                    "infoEmpty": "No hay categorías disponibles",
+                    "infoFiltered": "(Filtrados _MAX_ del total de categorías)",
+                    "loadingRecords": "En curso...",
                     "infoPostFix": "",
-                    "emptyTable": "No existen publicaciones disponibles.",
-                    "bLengthChange" : false,
+                    "emptyTable": "No existen categorías disponibles.",
                     "paginate": {
                         "first":      "Primero",
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
-                },
+                    }
+        },
 		"columns" : [ {
 			data : 'tx_categoria',
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
@@ -205,24 +206,23 @@ $(function() {
 		"pagingType": "simple",
 		"ajax" : "/api/autores",
 		"language": {
-                    "processing": "Procesando publicaciones...",
+                    "processing": "Procesando...",
                     "search": "Buscar:",
                     "lengthMenu": "Mostrar _MENU_ registros por página.",
-                    "zeroRecords": "No existen publicaciones.",
+                    "zeroRecords": "No existen autores.",
                     "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay publicaciones disponibles",
-                    "infoFiltered": "(Filtrados _MAX_ del total de publicaciones)",
-                    "loadingRecords": "Cargando publicaciones en curso...",
+                    "infoEmpty": "No hay autores disponibles",
+                    "infoFiltered": "(Filtrados _MAX_ del total de autores)",
+                    "loadingRecords": "En curso...",
                     "infoPostFix": "",
-                    "emptyTable": "No existen publicaciones disponibles.",
-                    "bLengthChange" : false,
+                    "emptyTable": "No existen autores disponibles.",
                     "paginate": {
                         "first":      "Primero",
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
-                },
+                    }
+        },
 		"columns" : [ {
 			data : 'tx_autor',
 			"fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
@@ -239,24 +239,23 @@ $(function() {
 		"pageLength": 27,
 		"pagingType": "simple",
 		"language": {
-                    "processing": "Procesando publicaciones...",
+                    "processing": "Procesando...",
                     "search": "Buscar:",
                     "lengthMenu": "Mostrar _MENU_ registros por página.",
                     "zeroRecords": "No existen publicaciones.",
                     "info": "Mostrando _PAGE_ de _PAGES_",
                     "infoEmpty": "No hay publicaciones disponibles",
                     "infoFiltered": "(Filtrados _MAX_ del total de publicaciones)",
-                    "loadingRecords": "Cargando publicaciones en curso...",
+                    "loadingRecords": "En curso...",
                     "infoPostFix": "",
                     "emptyTable": "No existen publicaciones disponibles.",
-                    "bLengthChange" : false,
                     "paginate": {
                         "first":      "Primero",
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
-                },
+                    }
+        },
 		"ajax" : "/api/letras",
 		"columns" : [ {
 			data : 'letras',
@@ -299,13 +298,22 @@ function actualizarListado (tipo, valor){
 	$("#tablaPublicaciones").DataTable().destroy();
 	$("#tablaPublicaciones").empty();
 
-	$("#tablaPublicaciones").DataTable({
-		"processing" : true,
-		"serverSide" : true,
-		"ajax": {
-            "url" : "/api/publicacionesFiltro",
-            "type": "GET",
-			"language": {
+
+    $("#tablaPublicaciones")
+        .DataTable(
+            {
+                "processing" : true,
+                "serverSide" : true,
+                "ajax": {
+                    "url" : "/api/publicacionesFiltro",
+                    "type": "GET",
+                    "data" : {
+                        "valor": valor,
+                        "tipo": tipo
+                    }
+                },
+                "lengthChange" : false,
+                "language": {
                     "processing": "Procesando publicaciones...",
                     "search": "Buscar:",
                     "lengthMenu": "Mostrar _MENU_ registros por página.",
@@ -316,7 +324,6 @@ function actualizarListado (tipo, valor){
                     "loadingRecords": "Cargando publicaciones en curso...",
                     "infoPostFix": "",
                     "emptyTable": "No existen publicaciones disponibles.",
-                    "bLengthChange" : false,
                     "paginate": {
                         "first":      "Primero",
                         "previous":   "Anterior",
@@ -324,38 +331,103 @@ function actualizarListado (tipo, valor){
                         "last":       "Último"
                     },
                 },
-            "data" : {
-            	"valor": valor,
-            	"tipo": tipo
-            }
-        },
-		"columns" : [
-            {
-                title: 'Título',
-                data : 'tx_titulo',
-                name : 'tx_titulo',
-                sWidth : '50%'
-            },
-            {
-                title: 'Resumen',
-                data : 'tx_resumen',
-                name : 'tx_resumen',
-                sWidth : '40%'
-            },
-            {
-                title: 'Ver detalle',
-                data : 'x_idpublicacion',
-                sWidth : '10%',
-                mRender : function(data, type, full) {
-                    return "<a href='detallePublicacion' id='"
-                        + data
-                        + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
-                }
+                "columns" : [
+                    {
+                        title: 'Título',
+                        data : 'tx_titulo',
+                        name : 'tx_titulo',
+                        sWidth : '50%'
+                    },
+                    {
+                        title: 'Resumen',
+                        data : 'tx_resumen',
+                        name : 'tx_resumen',
+                        sWidth : '40%'
+                    },
+                    {
+                        title: 'Ver detalle',
+                        data : 'x_idpublicacion',
+                        sWidth : '10%',
+                        mRender : function(data, type, full) {
+                            return "<a href='detallePublicacion' id='"
+                                + data
+                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>"
+                                + "&nbsp;&nbsp;<a href='descargarPublicacion' id='"+data+ "' class='descargarPublicacion'  data-toggle='modal' data-target='#descargarPublicacion' title='Descargar'"
+                                + " alt='Descargar'><i class='fa fa-download'></i></a>";
+                        }
 
-            }
-        ]
-	});
+                    } ]
+            });
+}
 
+/**
+ *
+ * Función que resetea la pantalla pública de la aplicación.
+ * Acciones que realiza:
+ * - Resetea el listado de publicaciones para que no contenga ningún filtro.
+ * - Oculta los filtros del menú lateral.
+ */
+function resetearPantalla(){
+
+    $('#categoriasMenu').hide();
+    $('#autoresMenu').hide();
+    $('#atozMenu').hide();
+
+    $("#tablaPublicaciones").DataTable().destroy();
+    $("#tablaPublicaciones").empty();
+
+    $("#tablaPublicaciones")
+        .DataTable(
+            {
+                "processing" : true,
+                "serverSide" : true,
+                "ajax" : "/api/publicaciones",
+                "lengthChange" : false,
+                "language": {
+                    "processing": "Procesando publicaciones...",
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ registros por página.",
+                    "zeroRecords": "No existen publicaciones.",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay publicaciones disponibles",
+                    "infoFiltered": "(Filtrados _MAX_ del total de publicaciones)",
+                    "loadingRecords": "Cargando publicaciones en curso...",
+                    "infoPostFix": "",
+                    "emptyTable": "No existen publicaciones disponibles.",
+                    "paginate": {
+                        "first":      "Primero",
+                        "previous":   "Anterior",
+                        "next":       "Siguiente",
+                        "last":       "Último"
+                    },
+                },
+                "columns" : [
+                    {
+                        title: 'Título',
+                        data : 'tx_titulo',
+                        name : 'tx_titulo',
+                        sWidth : '50%'
+                    },
+                    {
+                        title: 'Resumen',
+                        data : 'tx_resumen',
+                        name : 'tx_resumen',
+                        sWidth : '40%'
+                    },
+                    {
+                        title: 'Ver detalle',
+                        data : 'x_idpublicacion',
+                        sWidth : '10%',
+                        mRender : function(data, type, full) {
+                            return "<a href='detallePublicacion' id='"
+                                + data
+                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>"
+                                + "&nbsp;&nbsp;<a href='descargarPublicacion' id='"+data+ "' class='descargarPublicacion'  data-toggle='modal' data-target='#descargarPublicacion' title='Descargar'"
+                                + " alt='Descargar'><i class='fa fa-download'></i></a>";
+                        }
+
+                    } ]
+            });
 }
 
 
