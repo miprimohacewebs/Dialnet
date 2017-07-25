@@ -58,6 +58,49 @@ $(function() {
                     } ]
             });
 
+    $.ajax({
+        cache: false,
+        type: 'GET',
+        url: '/estaAutenticado',
+        success: function(data) {
+            var html="";
+            html+= ' <!-- Contacto -->';
+            html+= ' <li class="dropdown">';
+            html+= '    <a href="#"><i class="fa fa-envelope-o"></i> Contacto </a>';
+            html+= '</li>';
+            html+= '<!-- Preguntas frecuentes -->';
+            html+= '<li class="dropdown">';
+            html+= '    <a href="#"><i class="fa fa-question"></i> FAQS </a>';
+            html+= '</li>';
+
+            if (data=='true') {
+                html += '<li>';
+                $.ajax({
+                    cache: false,
+                    type: 'GET',
+                    url: '/getUsername',
+                    success: function(data2) {
+                        html += '    <a href="#" class="dropdown" ><i class="fa fa-user"></i> Bienvenido/a:  '+data2+' <b class="caret"></b></a>';
+                    }
+                });
+                html += '</li>';
+                html += '<li class="dropdown" >';
+                html += '    <a href="#"><i class="fa fa-fw fa-gear"></i> Administración</a>';
+                html += '</li>';
+                html += '<li class="dropdown">';
+                html += '    <a href="#"><i class="fa fa-fw fa-power-off"></i>Salir</a>';
+                html += '</li>';
+            }else{
+                html+= '<li  class="dropdown" >';
+                html+= '    <a href="{{url(\'login\')}}" ><i class="fa fa-user"></i> Login </a>';
+                html+= '</li>';
+            }
+            $('#botoneraSuperior').html(html);
+        }
+    });
+
+
+
     /** Modal de detalle */
     /** Modal de detalle */
     $('#verDetalle').on('show.bs.modal',function(e) {
@@ -73,7 +116,7 @@ $(function() {
                     // Título
                     if(data.publicacion[0].tx_titulo){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'>Título:</div>";
+                        html += "<div class='col-md-3'><strong>Título:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_titulo;
                         html += "</div>";
@@ -82,7 +125,7 @@ $(function() {
                     // ISBN
                     if(data.publicacion[0].tx_isbn){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'>ISBN:</div>";
+                        html += "<div class='col-md-3'><strong>ISBN:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_isbn;
                         html += "</div>";
@@ -91,7 +134,7 @@ $(function() {
                     // Año
                     if(data.publicacion[0].nu_ano){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'>Año:</div>";
+                        html += "<div class='col-md-3'><strong>Año:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].nu_ano;
                         html += "</div>";
@@ -100,7 +143,7 @@ $(function() {
                     // Páginas
                     if(data.publicacion[0].tx_paginas){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'>Páginas:</div>";
+                        html += "<div class='col-md-3'><strong>Páginas:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_paginas;
                         html += "</div>";
@@ -109,16 +152,25 @@ $(function() {
                     // Edición
                     if(data.publicacion[0].tx_edicion){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'>Edición:</div>";
+                        html += "<div class='col-md-3'><strong>Edición:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_edicion;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // Obra
+                    if(data.publicacion[0].tx_obra){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Obra:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].tx_obra;
                         html += "</div>";
                         html += "</div>";
                     }
                     // Resumen
                     if(data.publicacion[0].tx_resumen){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'>Resumen:</div>";
+                        html += "<div class='col-md-3'><strong>Resumen:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_edicion;
                         html += "</div>";
@@ -127,16 +179,25 @@ $(function() {
                     // Descriptores
                     if(data.publicacion[0].tx_descriptores){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'>Descriptores:</div>";
+                        html += "<div class='col-md-3'><strong>Descriptores:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_descriptores;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // Imágen
+                    if(data.publicacion[0].tx_imagen){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Imagen:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].tx_imagen;
                         html += "</div>";
                         html += "</div>";
                     }
                     // Subtitulo
                     if(data.publicacion[0].tx_subtitulo){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'>Subtítulo:</div>";
+                        html += "<div class='col-md-3'><strong>Subtítulo:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_subtitulo;
                         html += "</div>";
@@ -145,9 +206,81 @@ $(function() {
                     // Genero
                     if(data.publicacion[0].tx_genero){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'>Genero:</div>";
+                        html += "<div class='col-md-3'><strong>Genero:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_genero;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // Asunto
+                    if(data.publicacion[0].tx_asunto){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Asunto:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].tx_asunto;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // Fecha de publicación
+                    if(data.publicacion[0].fh_fechapublicacion){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Fecha de publicación:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].fh_fechapublicacion;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // País
+                    if(data.publicacion[0].tx_pais){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>País:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].tx_pais;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // Idioma
+                    if(data.publicacion[0].tx_idioma){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Idioma:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].tx_idioma;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // Número de páginas
+                    if(data.publicacion[0].nu_numPaginas){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Número de páginas:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].nu_numPaginas;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // Categoría
+                    if(data.publicacion[0].tx_categoria){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Categoría:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].tx_categoria;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // Autores
+                    if(data.publicacion[0].autores){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Autores/as:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].autores;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+                    // Editores
+                    if(data.publicacion[0].editores){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Editores/as:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].editores;
                         html += "</div>";
                         html += "</div>";
                     }
