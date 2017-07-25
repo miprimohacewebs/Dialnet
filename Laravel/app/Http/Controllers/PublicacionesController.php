@@ -28,8 +28,7 @@ class PublicacionesController extends Controller
         return Datatables::of($publicaciones)->make(true);
         
     }
-    
-    
+
     /**
      * Muestra los campos de la tablaPublicaciones
      * @param int $valor
@@ -93,7 +92,8 @@ class PublicacionesController extends Controller
      */
     public function verDetallePublicacion(Request $request) {
         $idPublicacion= $request->idPublicacion;
-        $publicacion = Publicaciones::where('x_idpublicacion','=',$idPublicacion)->get();
+
+        $publicacion = Publicaciones::obtenerInformacionDetalle($idPublicacion);
         return response()->json(array('success' => true, 'publicacion' => $publicacion, 'msg' => 'Se han generado los detalles de la publicacion'));
 
     }
