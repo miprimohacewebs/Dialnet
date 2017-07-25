@@ -10,23 +10,21 @@
  * |
  */
 /** Ruta index */
-Route::get('/', function () {
-    return View::make('index');
-});
+
 
 Route::get('publicaciones','PublicacionesController@index');
 /** Ruta para rellenar la tabla de publicaciones */
 Route::get('api/publicaciones','PublicacionesController@getTablaPublicaciones');
+/** Ruta para rellenar el detalle de una publicación */
+Route::get('api/verDetallePublicacion', 'PublicacionesController@verDetallePublicacion');
+/** Ruta para cargar la tabla de publicaciones filtrada */
+Route::get('api/publicacionesFiltro', 'PublicacionesController@getTablaPublicacionesFiltro');
 /** Ruta para rellenar la tabla de categorías */
 Route::get('api/categorias', 'CategoriasController@show');
 /** Ruta para rellenar la tabla de autores */
 Route::get('api/autores', 'AutoresController@show');
 /** Ruta para rellenar la tabla de letras de publicaciones */
 Route::get('api/letras', 'PublicacionesController@obtenerLetras');
-/** Ruta para rellenar el detalle de una publicación */
-Route::get('api/verDetallePublicacion', 'PublicacionesController@verDetallePublicacion');
-/** Ruta para cargar la tabla de publicaciones filtrada */
-Route::get('api/publicacionesFiltro', 'PublicacionesController@getTablaPublicacionesFiltro');
 /** Ruta para la autenticación de administradores */
 Route::get('login', function () {
     return View::make('login');
@@ -42,6 +40,13 @@ Route::get('login', function () {
  * | kernel and includes session state, CSRF protection, and more.
  * |
  */
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return View::make('index');
+    });
+});
+
 
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
