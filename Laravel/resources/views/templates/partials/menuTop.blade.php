@@ -9,14 +9,14 @@
                     <a href="#"><i class="fa fa-question"></i> FAQS </a>
                 </li>
                 <!-- Usuario -->
-                @if (Auth::guest())
+                @if (Auth::check())
                     <li  class="dropdown" >
                     	<a href="{{url('login')}}" ><i class="fa fa-user"></i> Login </a>
                     </li>
 
                 @else
                     <li>
-                    <a href="#" class="dropdown" ><i class="fa fa-user"></i> Bienvenido/a: {{ Auth::user()->name }} <b class="caret"></b></a>
+                    <a href="#" class="dropdown" ><i class="fa fa-user"></i> Bienvenido/a:  {{ Auth::user()->name }} <b class="caret"></b></a>
                     </li>
                     <li class="dropdown" >
                          <a href="#"><i class="fa fa-fw fa-gear"></i> Administración</a>
