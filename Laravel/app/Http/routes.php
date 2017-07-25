@@ -10,7 +10,12 @@
  * |
  */
 /** Ruta index */
+Route::get('/', function () {
+    return View::make('index');
+});
 
+Route::get('estaAutenticado','AutenticacionController@isAuthenticated');
+Route::get('getUsername','AutenticacionController@getName');
 
 Route::get('publicaciones','PublicacionesController@index');
 /** Ruta para rellenar la tabla de publicaciones */
@@ -42,9 +47,7 @@ Route::get('login', function () {
  */
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', function () {
-        return View::make('index');
-    });
+
 });
 
 
