@@ -11,7 +11,7 @@
                 <!-- Usuario -->
                 @if (Auth::check())
                     <li>
-                        <a href="#" class="dropdown" ><i class="fa fa-user"></i> Bienvenido/a:  {{ Auth::user()->name }} <b class="caret"></b></a>
+                        <a href="#" class="dropdown" ><i class="fa fa-user"></i> Bienvenido/a:  {{ Auth::user()->name }}</b></a>
                     </li>
                     <li class="dropdown" >
                         <a href="#"><i class="fa fa-fw fa-gear"></i> Administración</a>
@@ -24,23 +24,5 @@
                         <a href="{{url('login')}}" ><i class="fa fa-user"></i> Login </a>
                     </li>
                 @endif
-            </ul>
-            </ul>
 
-            <!-- Filtros -->
-            <ul class="nav navbar-left top-nav">
-            	 <!-- Categorías -->
-                <li class="dropdown">
-                    <a href="#"><i class="fa fa-folder-open"></i> Categorías </a>
-                </li>
-                <!-- Autorores -->
-                <li class="dropdown">
-                    <a href="#"><i class="fa fa-users"></i> Autores/as </a>
-                </li>
-                <!-- Alfabético -->
-                <li class="dropdown">
-                    <a href="#"><i class="fa fa-filter"></i> A-Z </a>
-                </li>
             </ul>
-
-           
