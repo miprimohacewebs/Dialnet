@@ -58,48 +58,6 @@ $(function() {
                     } ]
             });
 
-    $.ajax({
-        cache: false,
-        type: 'GET',
-        url: '/estaAutenticado',
-        success: function(data) {
-            var html="";
-            html+= ' <!-- Contacto -->';
-            html+= ' <li class="dropdown">';
-            html+= '    <a href="#"><i class="fa fa-envelope-o"></i> Contacto </a>';
-            html+= '</li>';
-            html+= '<!-- Preguntas frecuentes -->';
-            html+= '<li class="dropdown">';
-            html+= '    <a href="#"><i class="fa fa-question"></i> FAQS </a>';
-            html+= '</li>';
-
-            if (data=='true') {
-                html += '<li>';
-                $.ajax({
-                    cache: false,
-                    type: 'GET',
-                    url: '/getUsername',
-                    success: function(data2) {
-                        html += '    <a href="#" class="dropdown" ><i class="fa fa-user"></i> Bienvenido/a:  '+data2+' <b class="caret"></b></a>';
-                    }
-                });
-                html += '</li>';
-                html += '<li class="dropdown" >';
-                html += '    <a href="#"><i class="fa fa-fw fa-gear"></i> Administración</a>';
-                html += '</li>';
-                html += '<li class="dropdown">';
-                html += '    <a href="#"><i class="fa fa-fw fa-power-off"></i>Salir</a>';
-                html += '</li>';
-            }else{
-                html+= '<li  class="dropdown" >';
-                html+= '    <a href="{{url(\'login\')}}" ><i class="fa fa-user"></i> Login </a>';
-                html+= '</li>';
-            }
-            html += data;
-            $('#botoneraSuperior').html(html);
-        }
-    });
-
 
 
     /** Modal de detalle */

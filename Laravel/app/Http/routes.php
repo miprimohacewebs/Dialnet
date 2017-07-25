@@ -14,8 +14,6 @@ Route::get('/', function () {
     return View::make('index');
 });
 
-Route::get('estaAutenticado','AutenticacionController@isAuthenticated');
-Route::get('getUsername','AutenticacionController@getName');
 
 Route::get('publicaciones','PublicacionesController@index');
 /** Ruta para rellenar la tabla de publicaciones */
@@ -46,13 +44,26 @@ Route::get('login', function () {
  * |
  */
 
+/**
+ * Grupo con el middleware auth
+ * Necesario para:
+ * - Validar que el usuario se encuentra logado.
+ * - OJO: todas las acciones que se metan aquí solo podrán ser ejecutadas por usuarios logados.
+ */
 Route::group(['middleware' => 'auth'], function () {
 
 });
 
-
+/**
+ * Grupo con el middleware web
+ * Necesario para:
+ * - Obtener la información de login del usuario.
+ */
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
+    Route::get('/', function () {
+        return View::make('index');
+    });
 });
 
 
