@@ -423,6 +423,17 @@ body {
 
 }
 
+.modal-header{
+  background: #ba0600;
+  color: #ffffff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+}
+.modal-title{
+  font-weight: bold;
+}
+
 .loginmodal-container input[type=submit] {
   width: 100%;
   display: block;
@@ -541,3 +552,4 @@ table.dataTable thead .sorting_desc {
   background-color: trasparent;
   background: none;
 }
+
