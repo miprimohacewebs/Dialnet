@@ -95,6 +95,7 @@ $(function() {
                 html+= '    <a href="{{url(\'login\')}}" ><i class="fa fa-user"></i> Login </a>';
                 html+= '</li>';
             }
+            html += data;
             $('#botoneraSuperior').html(html);
         }
     });
