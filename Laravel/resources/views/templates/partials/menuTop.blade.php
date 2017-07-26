@@ -2,7 +2,7 @@
             <ul class="nav navbar-right top-nav">
                 <!-- Preguntas frecuentes -->
                 <li class="dropdown">
-                    <a href="#"><i class="fa fa-envelope-o"></i> Contacto </a>
+                    <a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-envelope-o"></i> Contacto </a>
                 </li>
                 <!-- Preguntas frecuentes -->
                 <li class="dropdown">
@@ -11,7 +11,7 @@
                 <!-- Usuario -->
                 @if (Auth::check())
                     <li>
-                        <a href="#" class="dropdown" ><i class="fa fa-user"></i> Bienvenido/a:  {{ Auth::user()->name }}</b></a>
+                        <a href="#" class="dropdown" ><i class="fa fa-user"></i> Bienvenido/a:  {{ Auth::user()->name }}</a>
                     </li>
                     <li class="dropdown" >
                         <a href="#"><i class="fa fa-fw fa-gear"></i> Administración</a>

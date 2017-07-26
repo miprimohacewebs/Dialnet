@@ -35,7 +35,7 @@ a {
   color: #ba0600;
 }
 
-a:HOVER {
+a:hover, a:active, a:focus {
   color: #8d0500;
 }
 
@@ -57,20 +57,7 @@ a:HOVER {
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
-.btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  color: #ffffff;
-  background-color: #ba0600;
-  border-color: #ba0600;
-  font-family: 'Josefin Sans', sans-serif;
-  text-transform: uppercase;
-  font-weight: 700;
-  border-radius: 0;
-}
-.btn-primary:active,
-.btn-primary.active,
-.open .dropdown-toggle.btn-primary {
-  background-image: none;
   color: #ffffff;
   background-color: #ba0600;
   border-color: #ba0600;
@@ -217,7 +204,7 @@ body {
 .top-nav>li>a:hover, .top-nav>li>a:focus, .top-nav>.open>a, .top-nav>.open>a:hover,
 .top-nav>.open>a:focus {
   color: #fff;
-  background-color: #000;
+  background-color: #282931;
 }
 
 .top-nav>.open>.dropdown-menu {
@@ -552,4 +539,16 @@ table.dataTable thead .sorting_desc {
   background-color: trasparent;
   background: none;
 }
-
+input[type="search"]{
+  border: 1px solid #282931;
+}
+.btn-link {
+  font-weight: 400;
+  color: #ba0600;
+  border-radius: 0;
+}
+.btn-link:focus, .btn-link:hover {
+  color: #8d0500;
+  text-decoration: underline;
+  background-color: transparent;
+}
