@@ -17,7 +17,7 @@
                         <a href="{{url('administracion')}}"><i class="fa fa-fw fa-gear"></i> Administración</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#"><i class="fa fa-fw fa-power-off"></i>Salir</a>
+                        <a href="{{url('app/logout')}}"><i class="fa fa-fw fa-power-off"></i>Salir</a>
                     </li>
                 @else
                     <li  class="dropdown" >

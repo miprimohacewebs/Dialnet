@@ -68,6 +68,8 @@ Route::group(['middleware' => ['web']], function () {
         return View::make('administracion/administracion');
     });
 
+    /** Ruta para realizar el logout */
+    Route::get('app/logout', 'Auth\AuthController@logout');
 });
 
 
