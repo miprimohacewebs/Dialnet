@@ -102,7 +102,7 @@
 
 <!-- Datatables -->
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<script src="{{ URL::asset('assets/js/zonapublica.js') }}"></script>
+<script src="{{ URL::asset('assets/js/zonaprivada.js') }}"></script>
 <!-- Morris Charts JavaScript -->
 <!-- 	<script -->
 <!-- 		src="{{ URL::asset('assets/js/plugins/morris/raphael.min.js') }}"></script> -->
