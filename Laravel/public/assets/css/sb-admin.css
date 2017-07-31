@@ -306,14 +306,34 @@ ul.alert-dropdown {
   font-size: 40px;
 }
 
-.panel-green {
-  border-color: #5cb85c;
+/** Panel cibermov*/
+
+.panel-civermov {
+  border-color: #ba0600;
+}
+
+.panel-civermov>.panel-heading {
+  border-color: #ba0600;
+  color: #fff;
+  background-color: #ba0600;
+}
+
+.panel-civermov>a {
+  color: #ba0600;
+}
+
+.panel-civermov>a:hover {
+  color: #8d0500;
+}
+
+.panel-civermov {
+  border-color: #ba0600;
 }
 
 .panel-green>.panel-heading {
-  border-color: #5cb85c;
+  border-color: #ba0600;
   color: #fff;
-  background-color: #5cb85c;
+  background-color: #ba0600;
 }
 
 .panel-green>a {
