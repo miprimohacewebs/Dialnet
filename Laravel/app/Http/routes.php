@@ -64,6 +64,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
         return View::make('index');
     });
+    Route::get('administracion', function () {
+        return View::make('administracion/administracion');
+    });
+
 });
 
 

@@ -14,7 +14,7 @@
                         <a href="#" class="dropdown" ><i class="fa fa-user"></i> Bienvenido/a:  {{ Auth::user()->name }}</a>
                     </li>
                     <li class="dropdown" >
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Administración</a>
+                        <a href="{{url('administracion')}}"><i class="fa fa-fw fa-gear"></i> Administración</a>
                     </li>
                     <li class="dropdown">
                         <a href="#"><i class="fa fa-fw fa-power-off"></i>Salir</a>

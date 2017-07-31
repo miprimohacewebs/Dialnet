@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Página de Autenticación
+@endsection
 @section('content')
  <div style="height: 50px; width: 100%"></div>
 <div class="container">
