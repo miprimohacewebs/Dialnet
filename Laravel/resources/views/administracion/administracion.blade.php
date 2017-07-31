@@ -92,6 +92,13 @@
                     </div>
                 </div>
             </div>
+            <div style="height: 50px; width: 100%"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="tablaEdicionPublicaciones" class="table table-hover table-condensed">
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
