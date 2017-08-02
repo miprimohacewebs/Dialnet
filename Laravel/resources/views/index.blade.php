@@ -42,7 +42,7 @@
                     </a>
                 </div>
                 <div class="col-md-5 text-center">
-                    <p class="parrafoResultadoDocumentosEncontrados">350 Publicaciones</p>
+                    <p class="parrafoResultadoDocumentosEncontrados">{{$publicaciones}}</p>
                 </div>
                 <div class="col-md-3"></div>
             </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
+use App\Publicaciones;
+
 class IndexController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class IndexController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     /**
@@ -24,6 +26,13 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('/');
+        $publi='';
+        $publicaciones = Publicaciones::obtenerNumeroPublicaciones();
+        if ($publicaciones != '1'){
+            $publicaciones = $publicaciones.' Publicaciones';
+        }else{
+            $publicaciones = $publicaciones.' Publicación';
+        }
+        return view('index', ['publicaciones' => $publicaciones]);
     }
 }

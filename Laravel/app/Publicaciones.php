@@ -138,4 +138,8 @@ class Publicaciones extends Model
             ->get();
         return collect($detallePublicacion);
     }
+
+    public static function obtenerNumeroPublicaciones(){
+        return DB::table('publicaciones')->count();
+    }
 }

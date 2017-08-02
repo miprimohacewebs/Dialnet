@@ -9,10 +9,6 @@
  * | and give it the controller to call when that URI is requested.
  * |
  */
-/** Ruta index */
-Route::get('/', function () {
-    return View::make('index');
-});
 
 
 Route::get('publicaciones','PublicacionesController@index');
@@ -61,9 +57,9 @@ Route::group(['middleware' => 'auth'], function () {
  */
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
-    Route::get('/', function () {
-        return View::make('index');
-    });
+
+    Route::get('/', 'IndexController@index');
+    
     Route::get('administracion', function () {
         return View::make('administracion/administracion');
     });
