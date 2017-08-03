@@ -59,9 +59,18 @@ Route::group(['middleware' => ['web']], function () {
     Route::auth();
 
     Route::get('/', 'IndexController@index');
-    
-    Route::get('administracion', function () {
-        return View::make('administracion/administracion');
+
+    /** Rutas zona administración*/
+    Route::get('administracion','AdministracionController@index');
+
+    Route::get('categoriasadmin', function () {
+        return View::make('administracion/categorias');
+    });
+    Route::get('autoresadmin', function () {
+        return View::make('administracion/autores');
+    });
+    Route::get('publicacionesadmin', function () {
+        return View::make('administracion/publicaciones');
     });
 
     /** Ruta para realizar el logout */

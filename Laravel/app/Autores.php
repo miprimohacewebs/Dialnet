@@ -1,8 +1,10 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Support\Facades\DB;
+
 
 /**
  * @property integer $ta_x_idtipoautor
@@ -32,5 +34,14 @@ class autores extends Model
     public function autorGrupoautors()
     {
         return $this->hasMany('App\AutorGrupoAutor', 'aut_x_idautor', 'idAutor');
+    }
+
+    /**
+     * Método para conseguir el número total de publicaciones
+     *
+     * @return número de autores
+     */
+    public static function obtenerNumeroAutores(){
+        return DB::table('autores')->count();
     }
 }

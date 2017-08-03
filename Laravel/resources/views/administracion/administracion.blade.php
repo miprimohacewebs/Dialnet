@@ -15,11 +15,11 @@
                                     <i class="fa fa-folder-open fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><h4>Categorías</h4>26</div>
+                                    <div class="huge"><h4>Categorías</h4>{{$categorias}}</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{url('categoriasadmin')}}">
                             <div class="panel-footer">
                                 <span class="pull-left">Administrar categorías</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -29,18 +29,18 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-civermov">
+                    <div class="panel panel-civermov002">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
                                     <i class="fa fa-users fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><h4>Autores/as</h4> 12</div>
+                                    <div class="huge"><h4>Autores/as</h4>{{$autores}}</div>
                                </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{url('autoresadmin')}}">
                             <div class="panel-footer">
                                 <span class="pull-left">Administrar autores/as</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-civermov">
+                    <div class="panel panel-civermov003">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -71,18 +71,18 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-civermov">
+                    <div class="panel panel-civermov004">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
                                     <i class="fa fa-file-text-o fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><h4>Publicaciones</h4> 13</div>
+                                    <div class="huge"><h4>Publicaciones</h4> {{$publicaciones}}</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{url('publicacionesadmin')}}">
                             <div class="panel-footer">
                                 <span class="pull-left">Administrar publicaciones</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

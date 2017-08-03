@@ -306,16 +306,15 @@ ul.alert-dropdown {
   font-size: 40px;
 }
 
-/** Panel cibermov*/
-
+/** Panel cibermov 001 */
 .panel-civermov {
-  border-color: #ba0600;
+  border-color: #e02d28;
 }
 
 .panel-civermov>.panel-heading {
-  border-color: #ba0600;
+  border-color: #e02d28;
   color: #fff;
-  background-color: #ba0600;
+  background-color: #e02d28;
 }
 
 .panel-civermov>a {
@@ -326,59 +325,63 @@ ul.alert-dropdown {
   color: #8d0500;
 }
 
-.panel-civermov {
+/** Panel cibermov 002 */
+.panel-civermov002 {
+  border-color: #c91711;
+}
+
+.panel-civermov002>.panel-heading {
+  border-color: #c91711;
+  color: #fff;
+  background-color: #c91711;
+}
+
+.panel-civermov002>a {
+  color: #ba0600;
+}
+
+.panel-civermov002>a:hover {
+  color: #8d0500;
+}
+
+/** Panel cibermov 003 */
+.panel-civermov003 {
   border-color: #ba0600;
 }
 
-.panel-green>.panel-heading {
+.panel-civermov003>.panel-heading {
   border-color: #ba0600;
   color: #fff;
   background-color: #ba0600;
 }
 
-.panel-green>a {
-  color: #5cb85c;
+.panel-civermov003>a {
+  color: #ba0600;
 }
 
-.panel-green>a:hover {
-  color: #3d8b3d;
+.panel-civermov003>a:hover {
+  color: #8d0500;
 }
 
-.panel-red {
-  border-color: #d9534f;
+/** Panel cibermov 004 */
+.panel-civermov004 {
+  border-color: #ab0701;
 }
 
-.panel-red>.panel-heading {
-  border-color: #d9534f;
+.panel-civermov004>.panel-heading {
+  border-color: #ab0701;
   color: #fff;
-  background-color: #d9534f;
+  background-color: #ab0701;
 }
 
-.panel-red>a {
-  color: #d9534f;
+.panel-civermov004>a {
+  color: #ba0600;
 }
 
-.panel-red>a:hover {
-  color: #b52b27;
+.panel-civermov004>a:hover {
+  color: #8d0500;
 }
 
-.panel-yellow {
-  border-color: #f0ad4e;
-}
-
-.panel-yellow>.panel-heading {
-  border-color: #f0ad4e;
-  color: #fff;
-  background-color: #f0ad4e;
-}
-
-.panel-yellow>a {
-  color: #f0ad4e;
-}
-
-.panel-yellow>a:hover {
-  color: #df8a13;
-}
 
 /** Modificaciones de estilos bootstrap */
 .btn-lg {
@@ -556,7 +559,7 @@ table.dataTable thead .sorting_desc {
   color: #8d0500 !important;
   font-weight: bold;
   border: none;
-  background-color: trasparent;
+  background-color: transparent;
   background: none;
 }
 input[type="search"]{

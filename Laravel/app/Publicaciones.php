@@ -139,6 +139,11 @@ class Publicaciones extends Model
         return collect($detallePublicacion);
     }
 
+    /**
+     * Método para conseguir el número total de publicaciones
+     *
+     * @return número de publicaciones
+     */
     public static function obtenerNumeroPublicaciones(){
         return DB::table('publicaciones')->count();
     }
