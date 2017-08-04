@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <form role="form">
-
+                                    {{ csrf_field() }}
                                     <div class="form-group">
                                         <label>Título</label>
                                         <input class="form-control">

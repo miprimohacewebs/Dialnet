@@ -95,6 +95,7 @@
             <div id="div-forms">
                 <!-- Begin # Login Form -->
                 <form id="contactoForm">
+                    {{ csrf_field() }}
                     <div class="modal-footer">
                         <div class="row">
                             <div class="form-group">
