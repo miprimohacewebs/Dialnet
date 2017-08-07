@@ -26,7 +26,7 @@ class AdministracionController extends Controller
         $publicaciones = Publicaciones::obtenerNumeroPublicaciones();
         $categorias = Categorias::obtenerNumeroCategorias();
         $autores = Autores::obtenerNumeroAutores();
-        return view('administracion\administracion', ['publicaciones' => $publicaciones, 'categorias' => $categorias, 'autores' => $autores]);
+        return view('administracion.administracion', ['publicaciones' => $publicaciones, 'categorias' => $categorias, 'autores' => $autores]);
     }
 
     /**
