@@ -71,7 +71,16 @@ class PublicacionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
+            'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
+            'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
+            'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
+            'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
+            'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
+            'numPaginas'=>$request->numPaginas];
+        Publicaciones::guardarPublicacion($publicacion);
     }
 
     /**

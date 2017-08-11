@@ -31,94 +31,112 @@
                 <div class="tab-content ">
                     <div class="tab-pane active" id="1">
                         <div style="height: 20px; width: 100%"></div>
-                        <!-- <h3>Standard tab panel created on bootstrap using nav-tabs</h3> -->
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <form role="form">
+                        <form role="form" name="guardarPublicacion" action="administrador/guardarPublicacion">
+                            <!-- <h3>Standard tab panel created on bootstrap using nav-tabs</h3> -->
+                            <div class="row">
+                                <div class="col-lg-6">
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label>Título</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="titulo">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>Subtítulo</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="subtitulo">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>Asunto</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="asunto">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>Resumen</label>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <textarea class="form-control" rows="3" name="resumen"></textarea>
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>Obra</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="obra">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
-                                </form>
-                                <div class="form-group">
-                                    <label>Descriptores</label>
-                                    <input class="form-control">
-                                    <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                    <div class="form-group">
+                                        <label>Descriptores</label>
+                                        <input class="form-control" name="descriptores">
+                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Género</label>
+                                        <input class="form-control" name="genero">
+                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Núm Páginas</label>
+                                        <input class="form-control" name="numPaginas">
+                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Género</label>
-                                    <input class="form-control">
-                                    <!-- <p class="help-block">Texto de ayuda.</p> -->
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <form role="form">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Categoría</label>
-                                        <select class="form-control">
+                                        <select class="form-control" name="categoria">
                                             <option>Seleccionar...</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>ISBN</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="isbn">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>Año</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="anno">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>País</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="pais">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>Idioma</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="idioma">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>Edición</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="edicion">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de publicación</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="fechaPublicacion">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label>Páginas</label>
-                                        <input class="form-control">
+                                        <input class="form-control" name="paginas">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
-                                </form>
+                                </div>
                             </div>
-                        </div>
+                            <div style="height: 20px; width: 100%"></div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                </div>
+                                <div class="col-md-1">
+                                    <button id="btnReset" type="reset"
+                                            class="btn btn-primary btn-sm btn-block" >Limpiar
+                                    </button>
+                                </div>
+                                <div class="col-md-1">
+                                    <button id="btnGuardar" type="submit"
+                                            class="btn btn-primary btn-sm btn-block" >Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="tab-pane" id="2">
                         <div style="height: 20px; width: 100%"></div>
@@ -163,23 +181,6 @@
                     </div>
                 </div>
             </div>
-            <div style="height: 20px; width: 100%"></div>
-            <div class="row">
-                <div class="col-md-10">
-                </div>
-                <div class="col-md-1">
-                    <button id="btnReset" type="reset"
-                            class="btn btn-primary btn-sm btn-block" >Limpiar
-                    </button>
-                </div>
-                <div class="col-md-1">
-                    <button id="btnGuardar" type="submit"
-                            class="btn btn-primary btn-sm btn-block" >Guardar
-                    </button>
-                </div>
-            </div>
-
-
             <!-- Tabla edición/eliminar publicaciones-->
             <div style="height: 50px; width: 100%"></div>
             <div class="row">

@@ -147,4 +147,16 @@ class Publicaciones extends Model
     public static function obtenerNumeroPublicaciones(){
         return DB::table('publicaciones')->count();
     }
+
+
+
+    public static function guardarPublicacion($publicacion){
+        DB::table('publicaciones')->insertGetId(
+            ['tx_titulo'=>$publicacion->titulo, 'cat_x_idcategoria'=>1,
+                'tx_subtitulo'=>$publicacion->subtitulo, 'tx_isbn'=>$publicacion->isbn, 'tx_asunto'=>$publicacion->asunto, 'nu_anno'=>$publicacion->anno,
+                'tx_resumen'=>$publicacion->resumen, 'tx_pais'=>$publicacion->pais, 'tx_idioma'=>$publicacion->idioma, 'tx_obra'=>$publicacion->obra,
+                'tx_edicion'=>$publicacion->edicion, 'tx_descriptores'=>$publicacion->descriptores, 'fh_fechapublicacion'=>$publicacion->fechaPublicacion,
+                'tx_genero'=>$publicacion->genero, 'tx_paginas'=>$publicacion->paginas, 'nu_numPaginas'=>$publicacion->numPaginas ]
+        );
+    }
 }
