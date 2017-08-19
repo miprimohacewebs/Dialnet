@@ -80,13 +80,13 @@ class PublicacionesController extends Controller
             'descriptores' => 'max:500',
             'genero' => 'max:30',
             'isbn' => 'max:80',
-            'anno' => 'date_format:Y|before:today',
+            'anno' => 'date_format:Y|before:+1 year',
             'pais' => 'max:50',
             'idioma' => 'max:50',
             'edicion' => 'max:50',
             'fechaPublicacion' => 'date_format:d/m/Y|before:today',
             'paginas' => 'max:16',
-            'numPaginas' => 'integer|max:8',
+            'numPaginas' => 'integer|max:99999999',
 
         ]);
 

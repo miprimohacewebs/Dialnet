@@ -47,86 +47,86 @@
                                 <div class="col-lg-6">
                                     {{ csrf_field() }}
                                     <div class="form-group">
-                                        <label>Título</label>
-                                        <input class="form-control" name="titulo">
+                                        <label for="titulo">Título</label>
+                                        <input class="form-control" id="titulo" name="titulo" value="{{old('titulo')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Subtítulo</label>
-                                        <input class="form-control" name="subtitulo">
+                                        <label for="subtitulo">Subtítulo</label>
+                                        <input class="form-control" id="subtitulo" name="subtitulo" value="{{old('subtitulo')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Asunto</label>
-                                        <input class="form-control" name="asunto">
+                                        <label for="asunto">Asunto</label>
+                                        <input class="form-control" id="asunto" name="asunto" value="{{old('asunto')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Resumen</label>
-                                        <textarea class="form-control" rows="3" name="resumen"></textarea>
+                                        <label for="resumen">Resumen</label>
+                                        <textarea class="form-control" id="resumen" rows="3" name="resumen" content="{{old('resumen')}}"></textarea>
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Obra</label>
-                                        <input class="form-control" name="obra">
+                                        <label for="obra">Obra</label>
+                                        <input class="form-control" id="obra" name="obra" value="{{old('obra')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Descriptores</label>
-                                        <input class="form-control" name="descriptores">
+                                        <label for="descriptores">Descriptores</label>
+                                        <input class="form-control" id="descriptores" name="descriptores" value="{{old('descriptores')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Género</label>
-                                        <input class="form-control" name="genero">
+                                        <label for="genero">Género</label>
+                                        <input class="form-control" id="genero" name="genero" value="{{old('genero')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Núm Páginas</label>
-                                        <input class="form-control" name="numPaginas">
+                                        <label for="numPaginas">Núm Páginas</label>
+                                        <input class="form-control" id="numPaginas" name="numPaginas" value="{{old('numPaginas')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Categoría</label>
-                                        <select class="form-control" name="categoria">
+                                        <label for="categoria">Categoría</label>
+                                        <select class="form-control" id="categoria" name="categoria" value="{{old('categoria')}}">
                                             <option>Seleccionar...</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>ISBN</label>
-                                        <input class="form-control" name="isbn">
+                                        <label for="isbn">ISBN</label>
+                                        <input class="form-control" id="isbn" name="isbn" value="{{old('isbn')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Año</label>
-                                        <input class="form-control" name="anno">
+                                        <label for="anno">Año</label>
+                                        <input class="form-control" id="anno" name="anno" value="{{old('anno')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>País</label>
-                                        <input class="form-control" name="pais">
+                                        <label for="pais">País</label>
+                                        <input class="form-control" id="pais" name="pais" value="{{old('pais')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Idioma</label>
-                                        <input class="form-control" name="idioma">
+                                        <label for="idioma">Idioma</label>
+                                        <input class="form-control" id="idioma" name="idioma" value="{{old('idioma')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Edición</label>
-                                        <input class="form-control" name="edicion">
+                                        <label for="edicion">Edición</label>
+                                        <input class="form-control" id="edicion" name="edicion" value="{{old('edicion')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Fecha de publicación</label>
-                                        <input class="form-control" name="fechaPublicacion">
+                                        <label for="fechaPublicacion">Fecha de publicación</label>
+                                        <input class="form-control" id="fechaPublicacion" name="fechaPublicacion" value="{{old('fechaPublicacion')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label>Páginas</label>
-                                        <input class="form-control" name="paginas">
+                                        <label for="paginas">Páginas</label>
+                                        <input class="form-control" id="paginas" name="paginas" value="{{old('paginas')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                 </div>
