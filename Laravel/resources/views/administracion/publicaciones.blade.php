@@ -16,6 +16,16 @@
                 </div>
             </div>
 
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <!-- Panel tab para insertar publicación -->
             <div id="exTab2" class="container">
                 <ul class="nav nav-tabs">
