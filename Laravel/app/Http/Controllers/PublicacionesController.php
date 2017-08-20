@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Publicaciones;
+use App\Categorias;
+use App\Autores;
 use Datatables;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -60,7 +62,10 @@ class PublicacionesController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
+        $autores = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
+        $vuelta = array('categorias'=>$categorias, 'autores'=>$autores);
+        return view('administracion/publicaciones', $vuelta);
     }
 
     /**

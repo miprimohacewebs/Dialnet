@@ -33,9 +33,7 @@ Route::group(['middleware' => ['autenticado']], function () {
     Route::get('autoresadmin', function () {
         return View::make('administracion/autores');
     });
-    Route::get('publicacionesadmin', function () {
-        return View::make('administracion/publicaciones');
-    });
+    Route::get('publicacionesadmin','PublicacionesController@create');
 
     /** Ruta para guardar una publicación sin autores/editores */
     Route::get('administrador/guardarPublicacion','PublicacionesController@store');

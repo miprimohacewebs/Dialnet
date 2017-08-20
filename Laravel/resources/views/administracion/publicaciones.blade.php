@@ -91,7 +91,10 @@
                                     <div class="form-group">
                                         <label for="categoria">Categoría</label>
                                         <select class="form-control" id="categoria" name="categoria" value="{{old('categoria')}}">
-                                            <option>Seleccionar...</option>
+                                            <option value="">Seleccione...</option>
+                                            @foreach($categorias as $categoria)
+                                                <option value="{{$categoria->x_idcategoria}}">{{$categoria->tx_categoria}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -156,11 +159,9 @@
                                     <div class="form-group">
                                         <label>Autores/as</label>
                                         <select multiple class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                            @foreach($autores as $autor)
+                                                <option value="{{$autor->idautor}}">{{$autor->tx_autor}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <button id="btnAnadir" type="button" class="btn btn-primary btn-sm" >Añadir
@@ -172,11 +173,7 @@
                                     <div class="form-group">
                                         <label>Autores/as asignados a la publicación</label>
                                         <select multiple class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+
                                         </select>
                                     </div>
                                     <button id="btnQuitar" type="button" class="btn btn-primary btn-sm" >Quitar
