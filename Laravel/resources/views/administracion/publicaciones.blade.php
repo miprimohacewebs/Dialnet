@@ -26,6 +26,12 @@
                 </div>
             @endif
 
+            @if(session()->has('alert-success'))
+                <div class="alert alert-success">
+                    {{ session()->get('alert-success') }}
+                </div>
+            @endif
+
             <!-- Panel tab para insertar publicación -->
             <div id="exTab2" class="container">
                 <ul class="nav nav-tabs">
@@ -41,7 +47,7 @@
                 <div class="tab-content ">
                     <div class="tab-pane active" id="1">
                         <div style="height: 20px; width: 100%"></div>
-                        <form role="form" name="guardarPublicacion" action="administrador/guardarPublicacion">
+                        <form role="form" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion">
                             <!-- <h3>Standard tab panel created on bootstrap using nav-tabs</h3> -->
                             <div class="row">
                                 <div class="col-lg-6">
@@ -63,7 +69,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="resumen">Resumen</label>
-                                        <textarea class="form-control" id="resumen" rows="3" name="resumen" content="{{old('resumen')}}"></textarea>
+                                        <textarea class="form-control" id="resumen" rows="3" name="resumen">{{old('resumen')}}</textarea>
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
@@ -90,10 +96,10 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="categoria">Categoría</label>
-                                        <select class="form-control" id="categoria" name="categoria" value="{{old('categoria')}}">
+                                        <select class="form-control" id="categoria" name="categoria">
                                             <option value="">Seleccione...</option>
-                                            @foreach($categorias as $categoria)
-                                                <option value="{{$categoria->x_idcategoria}}">{{$categoria->tx_categoria}}</option>
+                                            @foreach($categorias as $categoriaHija)
+                                                <option value="{{$categoriaHija->x_idcategoria}}" {{ $categoriaHija->x_idcategoria == old('categoria') ? "selected" : "" }}>{{$categoriaHija->tx_categoria}}</option>
                                             @endforeach
                                         </select>
                                     </div>

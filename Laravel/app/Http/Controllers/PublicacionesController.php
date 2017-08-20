@@ -79,22 +79,21 @@ class PublicacionesController extends Controller
         $this->validate($request, [
             'titulo' => 'max:300',
             'subtitulo' => 'max:500',
-            'asunto' => 'max:8',
+            'asunto' => 'max:200',
             'resumen' => 'max:200',
             'obra' => 'max:200',
             'descriptores' => 'max:500',
             'genero' => 'max:30',
             'isbn' => 'max:80',
-            'anno' => 'date_format:Y|before:+1 year',
+            'anno' => 'bail|date_format:Y|before:+1 year',
             'pais' => 'max:50',
             'idioma' => 'max:50',
             'edicion' => 'max:50',
-            'fechaPublicacion' => 'date_format:d/m/Y|before:today',
+            'fechaPublicacion' => 'bail|date_format:d/m/Y|before:today',
             'paginas' => 'max:16',
-            'numPaginas' => 'integer|max:99999999',
+            'numPaginas' => 'bail|integer|max:99999999',
 
         ]);
-
         $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
             'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
             'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
@@ -103,6 +102,8 @@ class PublicacionesController extends Controller
             'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
             'numPaginas'=>$request->numPaginas];
         Publicaciones::guardarPublicacion($publicacion);
+        $request->session()->flash('alert-success', 'Se ha creado la publicación');
+        return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha creado la publicación');
     }
 
     /**
