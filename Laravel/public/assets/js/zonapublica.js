@@ -3,7 +3,10 @@ $.ajaxSetup({
 		'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
 	}
 });
+/** Constantes */
+var RUTA_IMAGENES = 'assets/images/imagesPublicaciones/';
 
+/** Carga de tabla publicaciones */
 $(function() {
     $("#tablaPublicaciones")
         .DataTable(
@@ -59,8 +62,6 @@ $(function() {
             });
 
 
-
-    /** Modal de detalle */
     /** Modal de detalle */
     $('#verDetalle').on('show.bs.modal',function(e) {
         var $modal = $(this), idPublicacion = e.relatedTarget.id;
@@ -72,6 +73,8 @@ $(function() {
             success: function(data){
                 var html=""
                 if (data.publicacion) {
+                  html +="<div class='row'>";
+                    html += "<div class='col-md-3'><img src='" + RUTA_IMAGENES + data.publicacion[0].tx_imagen + "'  class='img-responsive' /></div><div class='col-md-9'>";
                     // Título
                     if(data.publicacion[0].tx_titulo){
                         html += "<div class='row'>";
@@ -243,6 +246,8 @@ $(function() {
                         html += "</div>";
                         html += "</div>";
                     }
+                    html += "</div>";
+                    html += "</div>";
                     $modal.find('.edit-content').html(html);
                 }else{
                     $modal.find('.edit-content').html("<div class='row'><div class='col-md-12'>"+data.msg+"</div></div>");
