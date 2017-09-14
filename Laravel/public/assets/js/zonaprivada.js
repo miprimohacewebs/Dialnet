@@ -62,4 +62,27 @@ $(function() {
 
 });
 
+function anadirValores(selectSeleccion, selectAnadir){
+
+    for(var i =0; i < $("#"+selectSeleccion)[0].selectedOptions.length; i++){
+        var texto = $("#"+selectSeleccion)[0].selectedOptions[i].text;
+        var valor = $("#"+selectSeleccion)[0].selectedOptions[i].value;
+        var option = new Option(texto, parseInt(valor));
+        $("#"+selectAnadir).append(option);
+    }
+
+    var found = [];
+    $("#"+selectAnadir+" option").each(function() {
+        if($.inArray(this.value, found) != -1) $(this).remove();
+        found.push(this.value);
+    });
+}
+
+function quitarValores (select){
+    $('#'+select+' :selected').each(function(i, selected){
+        $('#'+select+' option[value="'+selected.value+'"]').remove();
+    });
+
+}
+
 

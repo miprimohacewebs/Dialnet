@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Publicaciones;
 use App\Categorias;
 use App\Autores;
+use App\Editor;
 use Datatables;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -64,7 +65,8 @@ class PublicacionesController extends Controller
     {
         $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
-        $vuelta = array('categorias'=>$categorias, 'autores'=>$autores);
+        $editores = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
+        $vuelta = array('categorias'=>$categorias, 'autores'=>$autores, 'editores'=>$editores);
         return view('administracion/publicaciones', $vuelta);
     }
 

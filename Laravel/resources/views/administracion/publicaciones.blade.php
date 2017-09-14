@@ -42,7 +42,9 @@
                         </li>
                         <li><a href="#2" data-toggle="tab">Selección autores/as</a>
                         </li>
-                        <li><a href="#3" data-toggle="tab">Selección ...</a>
+                        <li><a href="#3" data-toggle="tab">Selección editores</a>
+                        </li>
+                        <li><a href="#4" data-toggle="tab">Subir imagen</a>
                         </li>
                     </ul>
 
@@ -160,13 +162,13 @@
 
                                     <div class="form-group">
                                         <label>Autores/as</label>
-                                        <select multiple class="form-control">
+                                        <select multiple class="form-control" id="selectAutores">
                                             @foreach($autores as $autor)
                                                 <option value="{{$autor->idautor}}">{{$autor->tx_autor}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <button id="btnAnadir" type="button" class="btn btn-primary btn-sm">Añadir
+                                    <button id="btnAnadir" type="button" class="btn btn-primary btn-sm" onclick="anadirValores('selectAutores','seleccionadosAutores')">Añadir
                                     </button>
 
                                 </div>
@@ -174,11 +176,11 @@
 
                                     <div class="form-group">
                                         <label>Autores/as asignados a la publicación</label>
-                                        <select multiple class="form-control">
+                                        <select multiple class="form-control" id="seleccionadosAutores">
 
                                         </select>
                                     </div>
-                                    <button id="btnQuitar" type="button" class="btn btn-primary btn-sm">Quitar
+                                    <button id="btnQuitar" type="button" class="btn btn-primary btn-sm" onclick="quitarValores('seleccionadosAutores')">Quitar
                                     </button>
 
                                 </div>
@@ -186,7 +188,40 @@
                         </div>
                         <div class="tab-pane" id="3">
                             <div style="height: 20px; width: 100%"></div>
-                            <p>Por ver</p>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label>Editores/as</label>
+                                        <select multiple class="form-control" id="selectEditores">
+                                            @foreach($editores as $editor)
+                                                <option value="{{$editor->x_ideditor}}">{{$editor->tx_editor}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button id="btnAnadirEditores" type="button" class="btn btn-primary btn-sm" onclick="anadirValores('selectEditores','seleccionadosEditores')">Añadir
+                                    </button>
+
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label>Editores/as asignados a la publicación</label>
+                                        <select multiple class="form-control" id="seleccionadosEditores">
+
+                                        </select>
+                                    </div>
+                                    <button id="btnQuitarEditores" type="button" class="btn btn-primary btn-sm" onclick="quitarValores('seleccionadosEditores')">Quitar
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="4">
+                            <div style="height: 20px; width: 100%"></div>
+                            <div class="row">
+                                Por Ver...
+                            </div>
                         </div>
                     </div>
                     <div style="height: 20px; width: 100%"></div>
