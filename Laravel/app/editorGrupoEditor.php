@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\DB;
+
 /**
  * @property integer $ge_x_idgrupoeditor
  * @property integer $ed_x_ideditor
@@ -29,5 +31,25 @@ class editorGrupoEditor extends Model
     public function publicaciones()
     {
         return $this->hasMany('App\publicaciones', 'ge_x_idgrupoeditor', 'ge_x_idgrupoeditor');
+    }
+
+    public static function AgruparEditores($editoresGuardar){
+        if ($editoresGuardar) {
+            $idEditorGrupoEditor = DB::table('editor_grupoeditor')->select('ge_x_idgrupoeditor')->max('ge_x_idgrupoeditor');
+            if ($idEditorGrupoEditor) {
+                $id = $idEditorGrupoEditor+1;
+
+                foreach ($editoresGuardar as $editor) {
+                    DB::table('editor_grupoeditor')->insertGetId(
+                        [
+                            'ge_x_idgrupoeditor' => $id,
+                            'ed_x_ideditor' => $editor
+                        ]
+                    );
+                }
+            }
+        }
+
+        return $id;
     }
 }

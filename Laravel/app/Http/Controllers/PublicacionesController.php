@@ -5,6 +5,8 @@ use App\Publicaciones;
 use App\Categorias;
 use App\Autores;
 use App\Editor;
+use App\autorGrupoAutor;
+use App\editorGrupoEditor;
 use Datatables;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -96,14 +98,20 @@ class PublicacionesController extends Controller
             'numPaginas' => 'bail|integer|max:99999999',
 
         ]);
+
+        $idGrupoAutor = autorGrupoAutor::agruparAutores($request->seleccionadosAutores);
+
+        $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
+
         $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
             'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
             'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
             'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
             'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
             'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
-            'numPaginas'=>$request->numPaginas];
+            'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor];
         Publicaciones::guardarPublicacion($publicacion);
+
         $request->session()->flash('alert-success', 'Se ha creado la publicación');
         return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha creado la publicación');
     }

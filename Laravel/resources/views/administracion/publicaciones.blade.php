@@ -34,7 +34,7 @@
         @endif
 
         <!-- Panel tab para insertar publicación -->
-            <form role="form" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion">
+            <form role="form" id="guardarPublicacion" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion">
                 <div id="exTab2" class="container">
                     <ul class="nav nav-tabs">
                         <li class="active">
@@ -176,7 +176,7 @@
 
                                     <div class="form-group">
                                         <label>Autores/as asignados a la publicación</label>
-                                        <select multiple class="form-control" id="seleccionadosAutores">
+                                        <select multiple class="form-control" id="seleccionadosAutores" name="seleccionadosAutores[]" value="{{old('seleccionadosAutores')}}">
 
                                         </select>
                                     </div>
@@ -207,7 +207,7 @@
 
                                     <div class="form-group">
                                         <label>Editores/as asignados a la publicación</label>
-                                        <select multiple class="form-control" id="seleccionadosEditores">
+                                        <select multiple class="form-control" id="seleccionadosEditores" name="seleccionadosEditores[]" value="{{old('seleccionadosEditores')}}">
 
                                         </select>
                                     </div>

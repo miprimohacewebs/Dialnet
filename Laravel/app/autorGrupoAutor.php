@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\DB;
+
 /**
  * @property integer $aut_x_idautor
  * @property integer $ga_x_idgrupoautor
@@ -38,5 +40,25 @@ class autorGrupoAutor extends Model
     public function publicaciones()
     {
         return $this->hasMany('App\publicaciones', 'aga_x_idgrupoautor', 'ga_x_idgrupoautor');
+    }
+
+    public static function agruparAutores($autoresGuardar){
+        if ($autoresGuardar) {
+            $idAutorGrupoAutor = DB::table('autor_grupoautor')->select('ga_x_idgrupoautor')->max('ga_x_idgrupoautor');
+            if ($idAutorGrupoAutor) {
+                $id = $idAutorGrupoAutor+1;
+
+                foreach ($autoresGuardar as $autor) {
+                    DB::table('autor_grupoautor')->insertGetId(
+                        [
+                            'ga_x_idgrupoautor' => $id,
+                            'aut_x_idautor' => $autor
+                        ]
+                    );
+                }
+            }
+        }
+
+        return $id;
     }
 }

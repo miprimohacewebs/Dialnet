@@ -59,7 +59,11 @@ $(function() {
             });
 
 
-
+    $('#btnGuardar').click(function() {
+        $('#seleccionadosAutores option').prop('selected', true);
+        $('#seleccionadosEditores option').prop('selected', true);
+        $('#guardarPublicacion').submit();
+    });
 });
 
 function anadirValores(selectSeleccion, selectAnadir){
