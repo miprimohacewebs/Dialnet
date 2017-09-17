@@ -43,7 +43,8 @@ class autorGrupoAutor extends Model
     }
 
     public static function agruparAutores($autoresGuardar){
-        if ($autoresGuardar) {
+        $id=null;
+        if ($autoresGuardar!=null) {
             $idAutorGrupoAutor = DB::table('autor_grupoautor')->select('ga_x_idgrupoautor')->max('ga_x_idgrupoautor');
             if ($idAutorGrupoAutor) {
                 $id = $idAutorGrupoAutor+1;

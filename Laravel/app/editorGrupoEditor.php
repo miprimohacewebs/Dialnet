@@ -34,7 +34,8 @@ class editorGrupoEditor extends Model
     }
 
     public static function AgruparEditores($editoresGuardar){
-        if ($editoresGuardar) {
+        $id=null;
+        if ($editoresGuardar!=null) {
             $idEditorGrupoEditor = DB::table('editor_grupoeditor')->select('ge_x_idgrupoeditor')->max('ge_x_idgrupoeditor');
             if ($idEditorGrupoEditor) {
                 $id = $idEditorGrupoEditor+1;

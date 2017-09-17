@@ -10,6 +10,8 @@ use App\editorGrupoEditor;
 use Datatables;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Validator;
+use Session;
 
 class PublicacionesController extends Controller
 {
@@ -63,12 +65,20 @@ class PublicacionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
-        $autores = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
-        $editores = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
-        $vuelta = array('categorias'=>$categorias, 'autores'=>$autores, 'editores'=>$editores);
+        $autoresSeleccionados1 = null;
+        $editoresSeleccionados1 = null;
+        $categorias1 = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
+        $autores1 = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
+        $editores1 = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
+        if (! empty ($request->session()->get('autoresSeleccionados2'))) {
+            $autoresSeleccionados1 = $request->session()->get('autoresSeleccionados2');
+        }
+        if (! empty ($request->session()->get('editoresSeleccionados2'))) {
+            $editoresSeleccionados1 = $request->session()->get('editoresSeleccionados2');
+        }
+        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1, 'editoresSeleccionados' => $editoresSeleccionados1);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -80,7 +90,7 @@ class PublicacionesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'titulo' => 'max:300',
             'subtitulo' => 'max:500',
             'asunto' => 'max:200',
@@ -98,6 +108,18 @@ class PublicacionesController extends Controller
             'numPaginas' => 'bail|integer|max:99999999',
 
         ]);
+
+        if ($validator->fails()){
+            $autores2 = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
+            $editores2 = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
+            $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
+
+            return redirect()->to('publicacionesadmin')
+                ->with($vuelta)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 
         $idGrupoAutor = autorGrupoAutor::agruparAutores($request->seleccionadosAutores);
 
