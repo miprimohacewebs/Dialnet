@@ -175,10 +175,10 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Autores/as asignados a la publicación</label>
-                                        <select multiple class="form-control" id="seleccionadosAutores" name="seleccionadosAutores[]" value="{{old('seleccionadosAutores')}}">
+                                        <select multiple class="form-control" id="seleccionadosAutores" name="seleccionadosAutores[]" >
                                             @if( ! empty($autoresSeleccionados))
-                                                @foreach($autoresSeleccionados as $autor)
-                                                    <option value="{{$autor->idautor}}">{{$autor->tx_autor}}</option>
+                                                @foreach($autoresSeleccionados as $autorSeleccionado)
+                                                    <option value="{{$autorSeleccionado->idAutor}}">{{$autorSeleccionado->tx_autor}}</option>
                                                 @endforeach
                                             @endif
 
@@ -211,10 +211,10 @@
 
                                     <div class="form-group">
                                         <label>Editores/as asignados a la publicación</label>
-                                        <select multiple class="form-control" id="seleccionadosEditores" name="seleccionadosEditores[]" value="{{old('seleccionadosEditores')}}">
+                                        <select multiple class="form-control" id="seleccionadosEditores" name="seleccionadosEditores[]">
                                             @if( ! empty($editoresSeleccionados))
-                                                @foreach($editoresSeleccionados as $editor)
-                                                    <option value="{{$editor->x_ideditor}}">{{$editor->tx_editor}}</option>
+                                                @foreach($editoresSeleccionados as $editorSeleccionado)
+                                                    <option value="{{$editorSeleccionado->x_ideditor}}">{{$editorSeleccionado->tx_editor}}</option>
                                                 @endforeach
                                             @endif
                                         </select>

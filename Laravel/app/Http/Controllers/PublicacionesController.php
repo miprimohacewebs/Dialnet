@@ -73,10 +73,10 @@ class PublicacionesController extends Controller
         $autores1 = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
         $editores1 = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
         if (! empty ($request->session()->get('autoresSeleccionados2'))) {
-            $autoresSeleccionados1 = $request->session()->get('autoresSeleccionados2');
+            $autoresSeleccionados1 = collect($request->session()->get('autoresSeleccionados2'));
         }
         if (! empty ($request->session()->get('editoresSeleccionados2'))) {
-            $editoresSeleccionados1 = $request->session()->get('editoresSeleccionados2');
+            $editoresSeleccionados1 = collect($request->session()->get('editoresSeleccionados2'));
         }
         $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1, 'editoresSeleccionados' => $editoresSeleccionados1);
         return view('administracion/publicaciones', $vuelta);
@@ -110,14 +110,13 @@ class PublicacionesController extends Controller
         ]);
 
         if ($validator->fails()){
-            $autores2 = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
-            $editores2 = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
+            $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
+            $editores2 = Editor::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
             $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
-
             return redirect()->to('publicacionesadmin')
-                ->with($vuelta)
                 ->withErrors($validator)
-                ->withInput();
+                ->withInput()
+                ->with($vuelta);
         }
 
 

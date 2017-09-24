@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\DB;
+
 /**
  * @property integer $x_ideditor
  * @property string $tx_editor
@@ -30,5 +32,12 @@ class editor extends Model
     public function tipoeditor()
     {
         return $this->belongsTo('App\tipoEditor', 'te_x_idTipoEditor', 'x_idtipoeditor');
+    }
+
+    public static function obtenerListaEditoresSeleccionados($editores){
+        if ($editores!=null) {
+            return DB::table('editor')->select('x_ideditor','tx_editor')->whereIn('x_ideditor', $editores)->orderBy('tx_editor')->get();
+        }
+        return null;
     }
 }
