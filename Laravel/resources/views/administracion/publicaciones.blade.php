@@ -42,7 +42,7 @@
                         </li>
                         <li><a href="#2" data-toggle="tab">Selección autores/as</a>
                         </li>
-                        <li><a href="#3" data-toggle="tab">Selección ...</a>
+                        <li><a href="#3" data-toggle="tab">Imagen</a>
                         </li>
                     </ul>
 
@@ -186,7 +186,41 @@
                         </div>
                         <div class="tab-pane" id="3">
                             <div style="height: 20px; width: 100%"></div>
-                            <p>Por ver</p>
+                            <div class="row">
+                                <div class="col-lg-2 text-center">
+                                    <div class="form-group">
+                                        <img src="assets/images/imagesPublicaciones/imgTemplate.jpg" alt="Imagen por defecto" title="Imagen por defecto" class="img-thumbnail">
+                                        <legend style="font-size:10px"> Imagen actual </legend>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <dl class="dl-horizontal">
+                                            <dt>Peso en Mb</dt>
+                                            <dd>Importante, la imagen no puede tener un peso superior a 1024Kb o lo que es lo mismo 1Mb</dd>
+                                            <dt>Tamaño de la imagen</dt>
+                                            <dd>Para una correcta visualización la imagen debe tener un tamaño de 120px de ancho por 160px de alto.</dd>
+                                         </dl>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Imagen de la publicación</label>
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default btn-file">
+                                                    Buscar… <input type="file" id="imgInp">
+                                                </span>
+                                            </span>
+                                            <input type="text" class="form-control" readonly>
+                                        </div>
+                                        <br />
+                                        <img id='img-upload'/>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                     <div style="height: 20px; width: 100%"></div>
