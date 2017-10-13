@@ -10,8 +10,11 @@ use App\editorGrupoEditor;
 use Datatables;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Log;
 use Validator;
 use Session;
+use Exception;
+use Storage;
 
 class PublicacionesController extends Controller
 {
@@ -191,6 +194,17 @@ class PublicacionesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $imagenPublicacion = Publicaciones::select('tx_imagen')->where('x_idpublicacion', $id)->first();
+            if ($imagenPublicacion['tx_imagen']!=null && Storage::disk('local')->exists($imagenPublicacion['tx_imagen'])){
+                Storage::delete($imagenPublicacion['tx_imagen']);
+            }
+            Publicaciones::destroy($id);
+        }catch (Exception $e){
+            Log::error($e);
+            return redirect()->action('AdministracionController@index')->with('alert-error', 'Ha ocurrido un error al borrar la publicación');
+        }
+
+        return redirect()->action('AdministracionController@index')->with('alert-success', 'Se ha borrado la publicación');
     }
 }

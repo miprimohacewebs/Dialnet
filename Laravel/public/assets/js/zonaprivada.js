@@ -51,8 +51,8 @@ $(function() {
                             return "<a href='modificarPublicacion' id='"
                                 + data
                                 + "' class='detallePublicacion'  data-toggle='modal' data-target='#modificar' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
-                                + "&nbsp;&nbsp;<a href='eliminarPublicacion' id='"+data+ "' class='descargarPublicacion'  data-toggle='modal' data-target='#eliminarPublicacion' title='Eliminar'"
-                                + " alt='Eliminar'><i class='fa fa-trash'></i></a>";
+                                + "&nbsp;&nbsp;<a href='eliminarPublicacion/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
+                                + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar esta publicación?\");' ><i class='fa fa-trash'></i></a>";
                         }
 
                     } ]

@@ -31,7 +31,7 @@
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     {{ session()->get('alert-success') }}
                 </div>
-        @endif
+            @endif
 
         <!-- Panel tab para insertar publicación -->
             <form role="form" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion">

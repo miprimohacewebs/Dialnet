@@ -93,6 +93,18 @@
                 </div>
             </div>
             <div style="height: 50px; width: 100%"></div>
+            @if(session()->has('alert-success'))
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ session()->get('alert-success') }}
+                </div>
+            @endif
+            @if(session()->has('alert-error'))
+                <div class="alert alert-error alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ session()->get('alert-error') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-12">
                     <table id="tablaEdicionPublicaciones" class="table table-hover table-condensed">
