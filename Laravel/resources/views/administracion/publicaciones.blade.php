@@ -42,7 +42,6 @@
                         </li>
                         <li><a href="#2" data-toggle="tab">Selección autores/as</a>
                         </li>
-                        <li><a href="#3" data-toggle="tab">Imagen</a>
                         <li><a href="#3" data-toggle="tab">Selección editores</a>
                         </li>
                         <li><a href="#4" data-toggle="tab">Subir imagen</a>
