@@ -44,4 +44,11 @@ class autores extends Model
     public static function obtenerNumeroAutores(){
         return DB::table('autores')->count();
     }
+
+    public static function obtenerlistaAutoresSeleccionados($autores){
+        if ($autores!=null) {
+            return DB::table('autores')->select('idAutor','tx_autor')->whereIn('idAutor', $autores)->orderBy('tx_autor')->get();
+        }
+        return null;
+    }
 }

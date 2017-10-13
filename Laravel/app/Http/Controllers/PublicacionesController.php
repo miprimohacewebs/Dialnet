@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 use App\Publicaciones;
 use App\Categorias;
 use App\Autores;
+use App\Editor;
+use App\autorGrupoAutor;
+use App\editorGrupoEditor;
 use Datatables;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Validator;
+use Session;
 
 class PublicacionesController extends Controller
 {
@@ -60,11 +65,20 @@ class PublicacionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
-        $autores = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
-        $vuelta = array('categorias'=>$categorias, 'autores'=>$autores);
+        $autoresSeleccionados1 = null;
+        $editoresSeleccionados1 = null;
+        $categorias1 = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
+        $autores1 = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
+        $editores1 = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
+        if (! empty ($request->session()->get('autoresSeleccionados2'))) {
+            $autoresSeleccionados1 = collect($request->session()->get('autoresSeleccionados2'));
+        }
+        if (! empty ($request->session()->get('editoresSeleccionados2'))) {
+            $editoresSeleccionados1 = collect($request->session()->get('editoresSeleccionados2'));
+        }
+        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1, 'editoresSeleccionados' => $editoresSeleccionados1);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -76,7 +90,7 @@ class PublicacionesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'titulo' => 'max:300',
             'subtitulo' => 'max:500',
             'asunto' => 'max:200',
@@ -94,14 +108,31 @@ class PublicacionesController extends Controller
             'numPaginas' => 'bail|integer|max:99999999',
 
         ]);
+
+        if ($validator->fails()){
+            $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
+            $editores2 = Editor::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
+            $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
+            return redirect()->to('publicacionesadmin')
+                ->withErrors($validator)
+                ->withInput()
+                ->with($vuelta);
+        }
+
+
+        $idGrupoAutor = autorGrupoAutor::agruparAutores($request->seleccionadosAutores);
+
+        $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
+
         $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
             'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
             'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
             'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
             'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
             'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
-            'numPaginas'=>$request->numPaginas];
+            'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor];
         Publicaciones::guardarPublicacion($publicacion);
+
         $request->session()->flash('alert-success', 'Se ha creado la publicación');
         return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha creado la publicación');
     }

@@ -167,5 +167,7 @@ class Publicaciones extends Model
                 'tx_edicion'=>$publicacion['edicion'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
                 'tx_genero'=>$publicacion['genero'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'] ]
         );
+
+        return DB::getPdo()->lastInsertId();
     }
 }
