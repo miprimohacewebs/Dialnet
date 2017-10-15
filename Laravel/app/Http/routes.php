@@ -36,6 +36,8 @@ Route::group(['middleware' => ['autenticado']], function () {
 
     Route::get('publicacionesadmin','PublicacionesController@create');
 
+    Route::get('modificarPublicacion/{id}','PublicacionesController@edit');
+
     Route::get('eliminarPublicacion/{id}','PublicacionesController@destroy');
 
     /** Ruta para guardar una publicación */

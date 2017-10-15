@@ -228,9 +228,6 @@
                         <div class="tab-pane" id="4">
                             <div style="height: 20px; width: 100%"></div>
                             <div class="row">
-                                Por Ver...
-                            </div>
-                            <div class="row">
                                 <div class="col-lg-2 text-center">
                                     <div class="form-group">
                                         <img src="assets/images/imagesPublicaciones/imgTemplate.jpg" alt="Imagen por defecto" title="Imagen por defecto" class="img-thumbnail">
@@ -253,7 +250,7 @@
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-default btn-file">
-                                                    Buscar… <input type="file" id="imgInp">
+                                                    Buscar… <input type="file" id="imgInp" name="imagenPublicacion">
                                                 </span>
                                             </span>
                                             <input type="text" class="form-control" readonly>

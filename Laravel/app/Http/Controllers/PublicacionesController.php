@@ -85,6 +85,7 @@ class PublicacionesController extends Controller
         return view('administracion/publicaciones', $vuelta);
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -126,6 +127,12 @@ class PublicacionesController extends Controller
         $idGrupoAutor = autorGrupoAutor::agruparAutores($request->seleccionadosAutores);
 
         $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
+
+        $imagen = $request->imagenPublicacion;
+
+        if ($imagen!=null){
+            Storage::get($imagen);
+        }
 
         $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
             'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
@@ -171,7 +178,31 @@ class PublicacionesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $publicacion = Publicaciones::where('x_idpublicacion', $id)->first();
+        $imagen = null;
+        if ($publicacion['tx_imagen']!=null) {
+            $imagen = Storage::get($publicacion['tx_imagen']);
+        }
+
+        $publicacionVuelta= ['titulo'=>$publicacion['tx_titulo'], 'subtitulo'=>$publicacion['tx_subtitulo'],
+        'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'obra'=>$publicacion['tx_obra'],
+            'descriptores'=>$publicacion['tx_descriptores'], 'genero'=>$publicacion['tx_genero'],
+            'categoria'=>$publicacion['cat_x_idcategoria'], 'isbn'=>$publicacion['tx_isbn'], 'anno'=>$publicacion['nu_anno'],
+            'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'edicion'=>$publicacion['tx_edicion'],
+            'fechaPublicacion'=>$publicacion['fh_fechapublicacion'], 'paginas'=>$publicacion['tx_paginas'],
+            'numPaginas'=>$publicacion['nu_numPaginas'], 'idAutor'=>$publicacion['aga_x_idgrupoautor'], 'idEditor'=> $publicacion['ge_x_idgrupoeditor'],
+            'imagen'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion']];
+
+        $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
+        $autores = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
+        $editores = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
+        $autoresSeleccionados = autorGrupoAutor::where('aut_x_idautor',$publicacion['aga_x_idgrupoautor'])->get(['aut_x_idautor']);
+        dd($autoresSeleccionados);
+        $editoresSeleccionados = Editor::obtenerListaeditoresSeleccionados($publicacion['ge_x_idgrupoeditor']);
+
+        $vuelta = array('publicacion' => $publicacionVuelta, 'categorias' => $categorias, 'autores' => $autores, 'editores' => $editores,
+            'autoresSeleccionados' => $autoresSeleccionados, 'editoresSeleccionados' => $editoresSeleccionados);
+        return view('administracion/publicaciones', $vuelta);
     }
 
     /**
