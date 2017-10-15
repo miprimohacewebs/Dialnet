@@ -33,6 +33,9 @@ Route::group(['middleware' => ['autenticado']], function () {
     Route::get('autoresadmin', function () {
         return View::make('administracion/autores');
     });
+    Route::get('editoresadmin', function () {
+        return View::make('administracion/editores');
+    });
 
     Route::get('publicacionesadmin','PublicacionesController@create');
 
@@ -76,6 +79,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('api/autores','AutoresController@show');
     /** Ruta para rellenar la tabla de categorias */
     Route::get('api/categorias','CategoriasController@show');
+    /** Ruta para rellenar la tabla de editores */
+    Route::get('api/editores','EditoresController@show');
+
 });
 
 

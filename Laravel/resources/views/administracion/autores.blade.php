@@ -20,7 +20,7 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-10">
-                    <h3>Administrar autores</h3>
+                    <h3>Administrar autores/as</h3>
                     <div style="height: 40px; width: 100%"></div>
                 </div>
             </div>

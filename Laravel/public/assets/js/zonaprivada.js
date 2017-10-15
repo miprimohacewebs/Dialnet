@@ -157,6 +157,56 @@ $(function() {
                     } ]
             });
 
+
+
+    /*  Tabla de edición de editores     */
+    $("#tablaEdicionEditores")
+        .DataTable(
+            {
+                "processing" : true,
+                "serverSide" : true,
+                "ajax" : "/api/editores",
+                "lengthChange" : false,
+                "language": {
+                    "processing": "Procesando editores/as...",
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ registros por página.",
+                    "zeroRecords": "No existen editores/as.",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay editores/as disponibles",
+                    "infoFiltered": "(Filtrados _MAX_ del total de editores/as)",
+                    "loadingRecords": "Cargando editores/as...",
+                    "infoPostFix": "",
+                    "emptyTable": "No existen editores/as disponibles.",
+                    "paginate": {
+                        "first":      "Primero",
+                        "previous":   "Anterior",
+                        "next":       "Siguiente",
+                        "last":       "Último"
+                    },
+                },
+                "columns" : [
+                    {
+                        title: 'Editores/as',
+                        data : 'tx_editor',
+                        name : 'tx_editor',
+                        sWidth : '100%'
+                    },
+                    {
+                        title: 'Acciones',
+                        data : 'x_ideditor',
+                        sWidth : '10%',
+                        mRender : function(data, type, full) {
+                            return "<a href='modificarEditor' id='"
+                                + data
+                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#modificar' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
+                                + "&nbsp;&nbsp;<a href='eliminarEditor/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
+                                + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar este editor/a?\");' ><i class='fa fa-trash'></i></a>";
+                        }
+
+                    } ]
+            });
+
     $('#btnGuardar').click(function() {
         $('#seleccionadosAutores option').prop('selected', true);
         $('#seleccionadosEditores option').prop('selected', true);

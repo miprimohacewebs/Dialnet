@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
  * @property integer $te_x_idTipoEditor
  * @property Tipoeditor $tipoeditor
  */
-class editor extends Model
+class Editores extends Model
 {
     /**
      * The table associated with the model.
@@ -39,5 +39,14 @@ class editor extends Model
             return DB::table('editor')->select('x_ideditor','tx_editor')->whereIn('x_ideditor', $editores)->orderBy('tx_editor')->get();
         }
         return null;
+    }
+
+    /**
+     * Método para conseguir el número total de editores
+     *
+     * @return número de editores
+     */
+    public static function obtenerNumeroEditores(){
+        return DB::table('editor')->count();
     }
 }
