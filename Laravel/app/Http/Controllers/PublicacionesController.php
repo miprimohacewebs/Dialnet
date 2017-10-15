@@ -133,7 +133,7 @@ class PublicacionesController extends Controller
         $nombreImagen=null;
         if ($imagen!=null){
             $nombreImagen = uniqid('img_', true).'.'.$imagen->clientExtension();
-            Storage::put($nombreImagen,File::get($imagen));
+            Storage::put($nombreImagen,File::get($imagen), 'public');
         }
         $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
             'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
@@ -169,6 +169,9 @@ class PublicacionesController extends Controller
         $idPublicacion= $request->idPublicacion;
 
         $publicacion = Publicaciones::obtenerInformacionDetalle($idPublicacion);
+        if ($publicacion[0]->tx_imagen!=null){
+            $publicacion[0]->tx_imagen=Storage::url($publicacion[0]->tx_imagen);
+        }
         return response()->json(array('success' => true, 'publicacion' => $publicacion, 'msg' => 'Se han generado los detalles de la publicacion'));
 
     }

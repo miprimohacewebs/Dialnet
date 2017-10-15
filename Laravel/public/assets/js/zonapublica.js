@@ -74,7 +74,7 @@ $(function() {
                 var html=""
                 if (data.publicacion) {
                   html +="<div class='row'>";
-                    html += "<div class='col-md-3'><img src='" + RUTA_IMAGENES + data.publicacion[0].tx_imagen + "'  class='img-responsive' /></div><div class='col-md-9'>";
+                    html += "<div class='col-md-3'><img src='" + data.publicacion[0].tx_imagen + "'  class='img-responsive' /></div><div class='col-md-9'>";
                     // Título
                     if(data.publicacion[0].tx_titulo){
                         html += "<div class='row'>";
