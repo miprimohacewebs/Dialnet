@@ -31,7 +31,7 @@
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     {{ session()->get('alert-success') }}
                 </div>
-            @endif
+        @endif
 
         <!-- Panel tab para insertar publicación -->
             <form role="form" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion">
@@ -162,13 +162,13 @@
 
                                     <div class="form-group">
                                         <label>Autores/as</label>
-                                        <select multiple class="form-control">
+                                        <select multiple class="form-control" id="selectAutores">
                                             @foreach($autores as $autor)
                                                 <option value="{{$autor->idautor}}">{{$autor->tx_autor}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <button id="btnAnadir" type="button" class="btn btn-primary btn-sm">Añadir
+                                    <button id="btnAnadir" type="button" class="btn btn-primary btn-sm" onclick="anadirValores('selectAutores','seleccionadosAutores')">Añadir
                                     </button>
 
                                 </div>
