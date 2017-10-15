@@ -69,6 +69,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('api/autores', 'AutoresController@show');
     /** Ruta para rellenar la tabla de letras de publicaciones */
     Route::get('api/letras', 'PublicacionesController@obtenerLetras');
+
+    /** Ruta para rellenar la tabla de autores */
+    Route::get('api/autores','AutoresController@show');
 });
 
 

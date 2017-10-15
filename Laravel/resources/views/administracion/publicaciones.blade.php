@@ -33,6 +33,15 @@
                 </div>
         @endif
 
+        <!-- Título sección -->
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+                <h3>Administrar publicaciones</h3>
+                <div style="height: 40px; width: 100%"></div>
+            </div>
+        </div>
         <!-- Panel tab para insertar publicación -->
             <form role="form" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion">
                 <div id="exTab2" class="container">

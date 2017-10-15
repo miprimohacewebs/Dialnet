@@ -16,4 +16,5 @@ class AutoresController extends Controller
         $autores = Autores::all();
         return Datatables::of($autores)->make(true);
     }
+
 }

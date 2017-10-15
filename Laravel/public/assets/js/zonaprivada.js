@@ -5,6 +5,8 @@ $.ajaxSetup({
 });
 
 $(function() {
+
+    /*  Tabla de edición de publicaciones     */
     $("#tablaEdicionPublicaciones")
         .DataTable(
             {
@@ -53,6 +55,54 @@ $(function() {
                                 + "' class='detallePublicacion'  data-toggle='modal' data-target='#modificar' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
                                 + "&nbsp;&nbsp;<a href='eliminarPublicacion/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
                                 + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar esta publicación?\");' ><i class='fa fa-trash'></i></a>";
+                        }
+
+                    } ]
+            });
+
+    /*  Tabla de edición de autores     */
+    $("#tablaEdicionAutores")
+        .DataTable(
+            {
+                "processing" : true,
+                "serverSide" : true,
+                "ajax" : "/api/autores",
+                "lengthChange" : false,
+                "language": {
+                    "processing": "Procesando autores...",
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ registros por página.",
+                    "zeroRecords": "No existen autores.",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay autores disponibles",
+                    "infoFiltered": "(Filtrados _MAX_ del total de autores)",
+                    "loadingRecords": "Cargando autores...",
+                    "infoPostFix": "",
+                    "emptyTable": "No existen autores disponibles.",
+                    "paginate": {
+                        "first":      "Primero",
+                        "previous":   "Anterior",
+                        "next":       "Siguiente",
+                        "last":       "Último"
+                    },
+                },
+                "columns" : [
+                    {
+                        title: 'Autor/a',
+                        data : 'tx_autor',
+                        name : 'tx_autor',
+                        sWidth : '100%'
+                    },
+                    {
+                        title: 'Acciones',
+                        data : 'idAutor',
+                        sWidth : '10%',
+                        mRender : function(data, type, full) {
+                            return "<a href='modificarAutor' id='"
+                                + data
+                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#modificar' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
+                                + "&nbsp;&nbsp;<a href='eliminarAutor/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
+                                + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar esta autor/a?\");' ><i class='fa fa-trash'></i></a>";
                         }
 
                     } ]
