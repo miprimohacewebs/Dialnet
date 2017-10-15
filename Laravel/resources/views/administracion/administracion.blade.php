@@ -54,16 +54,16 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-font fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"><h4>XXX</h4> 124</div>
+                                    <div class="huge"><h4>Editores</h4> {{$editores}}</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{url('editoresadmin')}}">
                             <div class="panel-footer">
-                                <span class="pull-left">Administrar XXX</span>
+                                <span class="pull-left">Administrar editores</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>

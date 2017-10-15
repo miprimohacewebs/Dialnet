@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Publicaciones;
 use App\Categorias;
 use App\Autores;
+use App\Editores;
 /**
  * Class AdministracionController para controlar la vista de administración.
  * @package App\Http\Controllers
@@ -26,7 +27,8 @@ class AdministracionController extends Controller
         $publicaciones = Publicaciones::obtenerNumeroPublicaciones();
         $categorias = Categorias::obtenerNumeroCategorias();
         $autores = Autores::obtenerNumeroAutores();
-        return view('administracion.administracion', ['publicaciones' => $publicaciones, 'categorias' => $categorias, 'autores' => $autores]);
+        $editores = Editores::obtenerNumeroEditores();
+        return view('administracion.administracion', ['publicaciones' => $publicaciones, 'categorias' => $categorias, 'autores' => $autores, 'editores' => $editores]);
     }
 
     /**
