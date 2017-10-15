@@ -43,7 +43,7 @@
             </div>
         </div>
         <!-- Panel tab para insertar publicación -->
-            <form role="form" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion">
+            <form role="form" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion" enctype="multipart/form-data">
                 <div id="exTab2" class="container">
                     <ul class="nav nav-tabs">
                         <li class="active">

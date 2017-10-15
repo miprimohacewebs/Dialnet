@@ -7,14 +7,15 @@ use App\Autores;
 use App\Editor;
 use App\autorGrupoAutor;
 use App\editorGrupoEditor;
-use Datatables;
+use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Log;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Exception;
-use Storage;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class PublicacionesController extends Controller
 {
@@ -129,9 +130,10 @@ class PublicacionesController extends Controller
         $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
 
         $imagen = $request->imagenPublicacion;
-
+        $nombreImagen=null;
         if ($imagen!=null){
-            Storage::get($imagen);
+            $nombreImagen = uniqid('img_', true).'.'.$imagen->clientExtension();
+            Storage::put($nombreImagen,File::get($imagen));
         }
 
         $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
@@ -140,7 +142,8 @@ class PublicacionesController extends Controller
             'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
             'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
             'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
-            'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor];
+            'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
+            'imagen'=>$nombreImagen];
         Publicaciones::guardarPublicacion($publicacion);
 
         $request->session()->flash('alert-success', 'Se ha creado la publicación');
