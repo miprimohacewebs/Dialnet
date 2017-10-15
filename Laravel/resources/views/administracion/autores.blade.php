@@ -24,9 +24,7 @@
                     <div style="height: 40px; width: 100%"></div>
                 </div>
             </div>
-
-        <!-- Panel tab para insertar publicación -->
-            <form role="form" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion">
+          <form role="form" name="guardarAutor" method="POST" action="administrador/guardarAutor">
                             <div class="row">
                                 <div class="col-lg-3"></div>
                                 <div class="col-lg-6">

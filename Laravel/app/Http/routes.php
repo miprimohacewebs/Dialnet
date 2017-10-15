@@ -72,6 +72,8 @@ Route::group(['middleware' => ['web']], function () {
 
     /** Ruta para rellenar la tabla de autores */
     Route::get('api/autores','AutoresController@show');
+    /** Ruta para rellenar la tabla de categorias */
+    Route::get('api/categorias','CategoriasController@show');
 });
 
 

@@ -109,6 +109,54 @@ $(function() {
             });
 
 
+    /*  Tabla de edición de categorias     */
+    $("#tablaEdicionCategorias")
+        .DataTable(
+            {
+                "processing" : true,
+                "serverSide" : true,
+                "ajax" : "/api/categorias",
+                "lengthChange" : false,
+                "language": {
+                    "processing": "Procesando categorias...",
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ registros por página.",
+                    "zeroRecords": "No existen categorias.",
+                    "info": "Mostrando _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay categorias disponibles",
+                    "infoFiltered": "(Filtrados _MAX_ del total de categorias)",
+                    "loadingRecords": "Cargando categorias...",
+                    "infoPostFix": "",
+                    "emptyTable": "No existen categorias disponibles.",
+                    "paginate": {
+                        "first":      "Primero",
+                        "previous":   "Anterior",
+                        "next":       "Siguiente",
+                        "last":       "Último"
+                    },
+                },
+                "columns" : [
+                    {
+                        title: 'Categoria',
+                        data : 'tx_categoria',
+                        name : 'tx_categoria',
+                        sWidth : '100%'
+                    },
+                    {
+                        title: 'Acciones',
+                        data : 'x_idcategoria',
+                        sWidth : '10%',
+                        mRender : function(data, type, full) {
+                            return "<a href='modificarCategoria' id='"
+                                + data
+                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#modificar' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
+                                + "&nbsp;&nbsp;<a href='eliminarCategoria/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
+                                + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar esta categoria?\");' ><i class='fa fa-trash'></i></a>";
+                        }
+
+                    } ]
+            });
+
     $('#btnGuardar').click(function() {
         $('#seleccionadosAutores option').prop('selected', true);
         $('#seleccionadosEditores option').prop('selected', true);
