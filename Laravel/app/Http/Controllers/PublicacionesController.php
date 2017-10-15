@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Publicaciones;
 use App\Categorias;
 use App\Autores;
-use App\Editor;
+use App\Editores;
 use App\autorGrupoAutor;
 use App\editorGrupoEditor;
 use Yajra\Datatables\Facades\Datatables;
@@ -75,7 +75,7 @@ class PublicacionesController extends Controller
         $editoresSeleccionados1 = null;
         $categorias1 = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores1 = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
-        $editores1 = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
+        $editores1 = Editores::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
         if (! empty ($request->session()->get('autoresSeleccionados2'))) {
             $autoresSeleccionados1 = collect($request->session()->get('autoresSeleccionados2'));
         }
@@ -116,7 +116,7 @@ class PublicacionesController extends Controller
 
         if ($validator->fails()){
             $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
-            $editores2 = Editor::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
+            $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
             $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
             return redirect()->to('publicacionesadmin')
                 ->withErrors($validator)
@@ -135,7 +135,6 @@ class PublicacionesController extends Controller
             $nombreImagen = uniqid('img_', true).'.'.$imagen->clientExtension();
             Storage::put($nombreImagen,File::get($imagen));
         }
-
         $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
             'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
             'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
@@ -186,7 +185,6 @@ class PublicacionesController extends Controller
         if ($publicacion['tx_imagen']!=null) {
             $imagen = Storage::get($publicacion['tx_imagen']);
         }
-
         $publicacionVuelta= ['titulo'=>$publicacion['tx_titulo'], 'subtitulo'=>$publicacion['tx_subtitulo'],
         'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'obra'=>$publicacion['tx_obra'],
             'descriptores'=>$publicacion['tx_descriptores'], 'genero'=>$publicacion['tx_genero'],
@@ -198,10 +196,15 @@ class PublicacionesController extends Controller
 
         $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
-        $editores = Editor::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
-        $autoresSeleccionados = autorGrupoAutor::where('aut_x_idautor',$publicacion['aga_x_idgrupoautor'])->get(['aut_x_idautor']);
-        dd($autoresSeleccionados);
-        $editoresSeleccionados = Editor::obtenerListaeditoresSeleccionados($publicacion['ge_x_idgrupoeditor']);
+        $editores = Editores::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
+        $autoresSeleccionados=null;
+        if ($publicacion['aga_x_idgrupoautor']!=null) {
+            $autoresSeleccionados = autorGrupoAutor::obtenerAutoresPublicacion($publicacion['aga_x_idgrupoautor']);
+        }
+        $editoresSeleccionados=null;
+        if ($publicacion['ge_x_idgrupoeditor']!=null) {
+            $editoresSeleccionados = editorGrupoEditor::obtenerEditoresPublicacion($publicacion['ge_x_idgrupoeditor']);
+        }
 
         $vuelta = array('publicacion' => $publicacionVuelta, 'categorias' => $categorias, 'autores' => $autores, 'editores' => $editores,
             'autoresSeleccionados' => $autoresSeleccionados, 'editoresSeleccionados' => $editoresSeleccionados);

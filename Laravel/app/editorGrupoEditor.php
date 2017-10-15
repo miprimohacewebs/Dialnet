@@ -53,4 +53,8 @@ class editorGrupoEditor extends Model
 
         return $id;
     }
+
+    public static function obtenerEditoresPublicacion($idGrupoEditor){
+        return DB::table('v_editores')->select('x_ideditor', 'tx_editor')->where('idGrupo', '=', $idGrupoEditor)->orderBy('tx_editor')->get();
+    }
 }

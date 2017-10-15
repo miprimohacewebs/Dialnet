@@ -62,4 +62,8 @@ class autorGrupoAutor extends Model
 
         return $id;
     }
+
+    public static function obtenerAutoresPublicacion($idGrupoAutor){
+        return DB::table('v_autores')->select('idautor', 'tx_autor')->where('idGrupo', '=', $idGrupoAutor)->orderBy('tx_autor')->get();
+    }
 }
