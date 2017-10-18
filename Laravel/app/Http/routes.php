@@ -46,6 +46,10 @@ Route::group(['middleware' => ['autenticado']], function () {
     /** Ruta para guardar una publicación */
     Route::post('administrador/guardarPublicacion','PublicacionesController@store');
 
+    /** Ruta para guardar una publicación */
+    Route::post('administrador/modificarPublicacion/{id}','PublicacionesController@update');
+
+
     /** Ruta para realizar el logout */
     Route::get('app/logout', 'Auth\AuthController@logout');
 });

@@ -113,7 +113,6 @@ class PublicacionesController extends Controller
             'numPaginas' => 'bail|integer|max:99999999',
 
         ]);
-
         if ($validator->fails()){
             $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
             $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
@@ -223,7 +222,57 @@ class PublicacionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'titulo' => 'max:300',
+            'subtitulo' => 'max:500',
+            'asunto' => 'max:200',
+            'resumen' => 'max:200',
+            'obra' => 'max:200',
+            'descriptores' => 'max:500',
+            'genero' => 'max:30',
+            'isbn' => 'max:80',
+            'anno' => 'bail|date_format:Y|before:+1 year',
+            'pais' => 'max:50',
+            'idioma' => 'max:50',
+            'edicion' => 'max:50',
+            'fechaPublicacion' => 'bail|date_format:d/m/Y|before:today',
+            'paginas' => 'max:16',
+            'numPaginas' => 'bail|integer|max:99999999',
+
+        ]);
+        if ($validator->fails() || $id==null){
+            $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
+            $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
+            $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
+            return redirect()->to('publicacionesadmin')
+                ->withErrors($validator)
+                ->withInput()
+                ->with($vuelta);
+        }
+
+
+        $idGrupoAutor = autorGrupoAutor::agruparAutores($request->seleccionadosAutores);
+
+        $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
+
+        $imagen = $request->imagenPublicacion;
+        $nombreImagen=null;
+        if ($imagen!=null){
+            $nombreImagen = uniqid('img_', true).'.'.$imagen->clientExtension();
+            Storage::put($nombreImagen,File::get($imagen), 'public');
+        }
+        $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
+            'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
+            'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
+            'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
+            'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
+            'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
+            'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
+            'imagen'=>$nombreImagen];
+        Publicaciones::guardarPublicacion($publicacion);
+
+        $request->session()->flash('alert-success', 'Se ha creado la publicación');
+        return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha creado la publicación');
     }
 
     /**

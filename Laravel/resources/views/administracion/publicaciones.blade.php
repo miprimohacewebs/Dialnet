@@ -43,7 +43,12 @@
             </div>
         </div>
         <!-- Panel tab para insertar publicación -->
-            <form role="form" name="guardarPublicacion" method="POST" action="administrador/guardarPublicacion" enctype="multipart/form-data">
+            @if(isset($publicacion))
+                <form role="form" name="guardarPublicacion" method="POST" action="/administrador/modificarPublicacion/{{$publicacion['idPublicacion']}}" enctype="multipart/form-data">
+                    @else
+                        <form role="form" name="guardarPublicacion" method="POST" action="/administrador/guardarPublicacion" enctype="multipart/form-data">
+                    @endif
+
                 <div id="exTab2" class="container">
                     <ul class="nav nav-tabs">
                         <li class="active">
@@ -67,46 +72,46 @@
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label for="titulo">Título</label>
-                                        <input class="form-control" id="titulo" name="titulo" value="{{old('titulo')}}">
+                                        <input class="form-control" id="titulo" name="titulo"  value="{{ old('titulo',isset($publicacion) ? $publicacion['titulo'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="subtitulo">Subtítulo</label>
                                         <input class="form-control" id="subtitulo" name="subtitulo"
-                                               value="{{old('subtitulo')}}">
+                                               value="{{old('subtitulo',isset($publicacion) ? $publicacion['subtitulo'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="asunto">Asunto</label>
-                                        <input class="form-control" id="asunto" name="asunto" value="{{old('asunto')}}">
+                                        <input class="form-control" id="asunto" name="asunto" value="{{ old('asunto',isset($publicacion) ? $publicacion['asunto'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="resumen">Resumen</label>
                                         <textarea class="form-control" id="resumen" rows="3"
-                                                  name="resumen">{{old('resumen')}}</textarea>
+                                                  name="resumen">{{old('resumen',isset($publicacion) ? $publicacion['resumen'] : null)}}</textarea>
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="obra">Obra</label>
-                                        <input class="form-control" id="obra" name="obra" value="{{old('obra')}}">
+                                        <input class="form-control" id="obra" name="obra" value="{{ old('obra',isset($publicacion) ? $publicacion['obra'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="descriptores">Descriptores</label>
                                         <input class="form-control" id="descriptores" name="descriptores"
-                                               value="{{old('descriptores')}}">
+                                               value="{{ old('descriptores',isset($publicacion) ? $publicacion['descriptores'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="genero">Género</label>
-                                        <input class="form-control" id="genero" name="genero" value="{{old('genero')}}">
+                                        <input class="form-control" id="genero" name="genero" value="{{ old('genero',isset($publicacion) ? $publicacion['genero'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="numPaginas">Núm Páginas</label>
                                         <input class="form-control" id="numPaginas" name="numPaginas"
-                                               value="{{old('numPaginas')}}">
+                                               value="{{ old('numPaginas',isset($publicacion) ? $publicacion['numPaginas'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                 </div>
@@ -116,46 +121,46 @@
                                         <select class="form-control" id="categoria" name="categoria">
                                             <option value="">Seleccione...</option>
                                             @foreach($categorias as $categoriaHija)
-                                                <option value="{{$categoriaHija->x_idcategoria}}" {{ $categoriaHija->x_idcategoria == old('categoria') ? "selected" : "" }}>{{$categoriaHija->tx_categoria}}</option>
+                                                <option value="{{$categoriaHija->x_idcategoria}}" {{ $categoriaHija->x_idcategoria == old('categoria', isset($publicacion) ? $publicacion['categoria'] : null) ? "selected" : "" }}>{{$categoriaHija->tx_categoria}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="isbn">ISBN</label>
-                                        <input class="form-control" id="isbn" name="isbn" value="{{old('isbn')}}">
+                                        <input class="form-control" id="isbn" name="isbn" value="{{ old('isbn',isset($publicacion) ? $publicacion['isbn'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="anno">Año</label>
-                                        <input class="form-control" id="anno" name="anno" value="{{old('anno')}}">
+                                        <input class="form-control" id="anno" name="anno"  value="{{ old('anno',isset($publicacion) ? $publicacion['anno'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="pais">País</label>
-                                        <input class="form-control" id="pais" name="pais" value="{{old('pais')}}">
+                                        <input class="form-control" id="pais" name="pais" value="{{ old('pais',isset($publicacion) ? $publicacion['pais'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="idioma">Idioma</label>
-                                        <input class="form-control" id="idioma" name="idioma" value="{{old('idioma')}}">
+                                        <input class="form-control" id="idioma" name="idioma" value="{{ old('idioma',isset($publicacion) ? $publicacion['idioma'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="edicion">Edición</label>
                                         <input class="form-control" id="edicion" name="edicion"
-                                               value="{{old('edicion')}}">
+                                               value="{{ old('edicion',isset($publicacion) ? $publicacion['edicion'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="fechaPublicacion">Fecha de publicación</label>
                                         <input class="form-control" id="fechaPublicacion" name="fechaPublicacion"
-                                               value="{{old('fechaPublicacion')}}">
+                                               value="{{ old('fechaPublicacion',isset($publicacion) ? $publicacion['fechaPublicacion'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
                                         <label for="paginas">Páginas</label>
                                         <input class="form-control" id="paginas" name="paginas"
-                                               value="{{old('paginas')}}">
+                                               value="{{ old('paginas',isset($publicacion) ? $publicacion['paginas'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                 </div>
