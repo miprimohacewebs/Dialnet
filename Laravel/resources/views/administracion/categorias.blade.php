@@ -15,6 +15,23 @@
                     </button>
                 </div>
             </div>
+            <!-- Mensajes de error -->
+            @if (count($errors) > 0)
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if(session()->has('alert-success'))
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ session()->get('alert-success') }}
+                </div>
+        @endif
             <!-- Título sección -->
             <div class="row">
                 <div class="col-md-2">
@@ -32,8 +49,8 @@
                     <div class="col-lg-6">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="titulo">Categoria</label>
-                            <input class="form-control" id="categoria" name="categoria" value="{{old('categoria')}}">
+                            <label for="titulo">Categoria *</label>
+                            <input class="form-control" id="categoria" name="categoria" value="{{old('categoria')}}" required>
                             <!-- <p class="help-block">Texto de ayuda.</p> -->
                         </div>
                     </div>

@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\DB;
 
+
 /**
  * @property integer $x_idcategoria
  * @property string $tx_categoria
@@ -11,19 +12,11 @@ use Illuminate\Support\Facades\DB;
  */
 class categorias extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = ['tx_categoria'];
+    /** Tabla asociada con el modelo. */
+    protected $table = 'categorias';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function publicaciones()
-    {
-        return $this->hasMany('App\publicaciones', 'cat_x_idcategoria', 'x_idcategoria');
-    }
-
+    /** Primary key de la tabla. */
+    protected $primaryKey = 'x_idpublicacion';
     /**
      * Método para conseguir el número total de categorias
      *
@@ -31,5 +24,18 @@ class categorias extends Model
      */
     public static function obtenerNumeroCategorias(){
         return DB::table('categorias')->count();
+    }
+
+    /**
+     * Guarda categoria en BD
+     * @param $categoria
+     * @return mixed
+     */
+    public static function guardarCategoria($categoria){
+        DB::table('categorias')->insertGetId(
+            ['tx_categoria'=>$categoria['categoria']]
+        );
+
+        return DB::getPdo()->lastInsertId();
     }
 }

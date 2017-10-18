@@ -43,11 +43,22 @@ Route::group(['middleware' => ['autenticado']], function () {
 
     Route::get('eliminarPublicacion/{id}','PublicacionesController@destroy');
 
+    Route::get('eliminarCategoria/{id}','CategoriasController@destroy');
+
+
     /** Ruta para guardar una publicación */
     Route::post('administrador/guardarPublicacion','PublicacionesController@store');
 
     /** Ruta para guardar una publicación */
     Route::post('administrador/modificarPublicacion/{id}','PublicacionesController@update');
+
+    Route::get('categoriasadmin','CategoriasController@create');
+
+    /** Ruta para guardar una categoria */
+    Route::post('administrador/guardarCategoria','CategoriasController@store');
+
+    /** Ruta para guardar una categoria */
+    Route::post('administrador/modificarCategoria/{id}','CategoriasController@update');
 
 
     /** Ruta para realizar el logout */
