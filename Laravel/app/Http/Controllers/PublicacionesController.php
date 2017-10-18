@@ -240,7 +240,7 @@ class PublicacionesController extends Controller
             'numPaginas' => 'bail|integer|max:99999999',
 
         ]);
-        if ($validator->fails() || $id==null){
+        if ($validator->fails()){
             $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
             $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
             $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
@@ -261,7 +261,7 @@ class PublicacionesController extends Controller
             $nombreImagen = uniqid('img_', true).'.'.$imagen->clientExtension();
             Storage::put($nombreImagen,File::get($imagen), 'public');
         }
-        $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
+        $publicacion= ['idPublicacion'=>$id,'titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
             'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
             'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
             'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
@@ -269,10 +269,10 @@ class PublicacionesController extends Controller
             'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
             'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
             'imagen'=>$nombreImagen];
-        Publicaciones::guardarPublicacion($publicacion);
+        Publicaciones::actualizarPublicacion($publicacion);
 
-        $request->session()->flash('alert-success', 'Se ha creado la publicación');
-        return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha creado la publicación');
+        $request->session()->flash('alert-success', 'Se ha modificado la publicación');
+        return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha modificado la publicación');
     }
 
     /**
@@ -291,9 +291,9 @@ class PublicacionesController extends Controller
             Publicaciones::destroy($id);
         }catch (Exception $e){
             Log::error($e);
-            return redirect()->action('AdministracionController@index')->with('alert-error', 'Ha ocurrido un error al borrar la publicación');
+            return redirect()->action('PublicacionesController@create')->with('alert-error', 'Ha ocurrido un error al borrar la publicación');
         }
 
-        return redirect()->action('AdministracionController@index')->with('alert-success', 'Se ha borrado la publicación');
+        return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha borrado la publicación');
     }
 }

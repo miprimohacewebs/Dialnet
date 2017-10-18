@@ -31,7 +31,7 @@
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     {{ session()->get('alert-success') }}
                 </div>
-        @endif
+            @endif
             <!-- Título sección -->
             <div class="row">
                 <div class="col-md-2">
@@ -96,13 +96,8 @@
                         </button>
                     </div>
                 </div>
-
+            </form>
         </div>
-        </form>
-
-
-
-    </div>
     </div>
 
 

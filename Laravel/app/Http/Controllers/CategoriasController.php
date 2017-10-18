@@ -73,9 +73,9 @@ class CategoriasController extends Controller
             Categorias::destroy($id);
         } catch (Exception $e) {
             Log::error($e);
-            return redirect()->action('AdministracionController@index')->with('alert-error', 'Ha ocurrido un error al borrar la categoria, puede ser que esté relacionada con alguna publación. Por favor revise las publicaciones y observe si hay alguna con esa categoría');
+            return redirect()->action('CategoriasController@create')->with('alert-error', 'Ha ocurrido un error al borrar la categoria, puede ser que esté relacionada con alguna publación. Por favor revise las publicaciones y observe si hay alguna con esa categoría');
         }
 
-        return redirect()->action('AdministracionController@index')->with('alert-success', 'Se ha borrado la categoria correctamente');
+        return redirect()->action('CategoriasController@create')->with('alert-success', 'Se ha borrado la categoria correctamente');
     }
 }

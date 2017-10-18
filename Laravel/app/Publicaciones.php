@@ -172,4 +172,26 @@ class Publicaciones extends Model
 
         return DB::getPdo()->lastInsertId();
     }
+
+    public static function actualizarPublicacion($publicacion){
+        $convert_date = null;
+        if ($publicacion['fechaPublicacion']!='') {
+            $convert_date = date("Y-m-d", strtotime($publicacion['fechaPublicacion']));
+        }
+        $publicacionSeleccionada = null;
+        if ($publicacion['categoria']!=''){
+            $publicacionSeleccionada=$publicacion['categoria'];
+        }
+
+        DB::table('publicaciones')->where('x_idpublicacion', $publicacion['idPublicacion'])
+            ->update(
+            ['tx_titulo'=>$publicacion['titulo'], 'cat_x_idcategoria'=>$publicacionSeleccionada,
+                'tx_subtitulo'=>$publicacion['subtitulo'], 'tx_isbn'=>$publicacion['isbn'], 'tx_asunto'=>$publicacion['asunto'], 'nu_anno'=>$publicacion['anno'],
+                'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_obra'=>$publicacion['obra'],
+                'tx_edicion'=>$publicacion['edicion'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
+                'tx_genero'=>$publicacion['genero'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'], 'tx_imagen'=>$publicacion['imagen'],
+                'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor']
+            ]
+        );
+    }
 }

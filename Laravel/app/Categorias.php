@@ -16,7 +16,7 @@ class categorias extends Model
     protected $table = 'categorias';
 
     /** Primary key de la tabla. */
-    protected $primaryKey = 'x_idpublicacion';
+    protected $primaryKey = 'x_idcategoria';
     /**
      * Método para conseguir el número total de categorias
      *
