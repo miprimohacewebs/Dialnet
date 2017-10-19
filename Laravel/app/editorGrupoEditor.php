@@ -20,6 +20,9 @@ class editorGrupoEditor extends Model
      */
     protected $table = 'editor_grupoeditor';
 
+    /** Primary key de la tabla. */
+    protected $primaryKey = 'ge_x_idgrupoeditor';
+
     /**
      * @var array
      */

@@ -43,8 +43,11 @@
             </div>
         </div>
         <!-- Panel tab para insertar publicación -->
-            @if(isset($publicacion))
-                <form role="form" name="guardarPublicacion" method="POST" action="/administrador/modificarPublicacion/{{$publicacion['idPublicacion']}}" enctype="multipart/form-data">
+            @if(isset($publicacion) || old('idPublicacion')!=null)
+                <form role="form" name="guardarPublicacion" method="POST" action="/administrador/modificarPublicacion/{{old('idPublicacion',isset($publicacion) ? $publicacion['idPublicacion'] : null)}}" enctype="multipart/form-data">
+                    <input type="hidden" name="idGrupoAutores" id="idGrupoAutores" value="{{ old('idGrupoAutores',isset($publicacion) ? $publicacion['idAutor'] : null)}}"/>
+                    <input type="hidden" name="idGrupoEditores" id="idGrupoEditores" value="{{ old('idGrupoEditores',isset($publicacion) ? $publicacion['idEditor'] : null)}}"/>
+                    <input type="hidden" name="idPublicacion" id="idPublicacion" value="{{ old('idPublicacion',isset($publicacion) ? $publicacion['idPublicacion'] : null)}}"/>
                     @else
                         <form role="form" name="guardarPublicacion" method="POST" action="/administrador/guardarPublicacion" enctype="multipart/form-data">
                     @endif

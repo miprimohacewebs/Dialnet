@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\DB;
  */
 class autorGrupoAutor extends Model
 {
+
+    /** Primary key de la tabla. */
+    protected $primaryKey = 'ga_x_idgrupoautor';
+
     /**
      * The table associated with the model.
      * 
