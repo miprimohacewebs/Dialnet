@@ -118,6 +118,9 @@ class PublicacionesController extends Controller
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
                 $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
                 $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
+                if ($request->imagenPublicacion!=null) {
+                    $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
+                }
                 return redirect()->to('publicacionesadmin')
                     ->withErrors($validator)
                     ->withInput()
@@ -250,6 +253,11 @@ class PublicacionesController extends Controller
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
                 $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
                 $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
+
+                if ($request->imagenPublicacion!=null) {
+                    $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
+                }
+
                 return redirect()->to('publicacionesadmin')
                     ->withErrors($validator)
                     ->withInput()
