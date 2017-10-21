@@ -133,7 +133,7 @@ class PublicacionesController extends Controller
             $nombreImagen=null;
             if ($imagen!=null){
                 $nombreImagen = uniqid('img_', true).'.'.$imagen->clientExtension();
-                Storage::put($nombreImagen,File::get($imagen), 'public');
+                Storage::put('public/'.$nombreImagen,File::get($imagen), 'public');
             }
             $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
                 'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
@@ -190,16 +190,16 @@ class PublicacionesController extends Controller
         $publicacion = Publicaciones::where('x_idpublicacion', $id)->first();
         $imagen = null;
         if ($publicacion['tx_imagen']!=null) {
-            $imagen = Storage::get($publicacion['tx_imagen']);
+            $imagen = Storage::url($publicacion['tx_imagen']);
         }
         $publicacionVuelta= ['titulo'=>$publicacion['tx_titulo'], 'subtitulo'=>$publicacion['tx_subtitulo'],
-        'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'obra'=>$publicacion['tx_obra'],
+            'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'obra'=>$publicacion['tx_obra'],
             'descriptores'=>$publicacion['tx_descriptores'], 'genero'=>$publicacion['tx_genero'],
             'categoria'=>$publicacion['cat_x_idcategoria'], 'isbn'=>$publicacion['tx_isbn'], 'anno'=>$publicacion['nu_anno'],
             'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'edicion'=>$publicacion['tx_edicion'],
             'fechaPublicacion'=>$publicacion['fh_fechapublicacion'], 'paginas'=>$publicacion['tx_paginas'],
             'numPaginas'=>$publicacion['nu_numPaginas'], 'idAutor'=>$publicacion['aga_x_idgrupoautor'], 'idEditor'=> $publicacion['ge_x_idgrupoeditor'],
-            'imagen'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion']];
+            'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion']];
 
         $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
@@ -264,8 +264,13 @@ class PublicacionesController extends Controller
             $imagen = $request->imagenPublicacion;
             $nombreImagen=null;
             if ($imagen!=null){
+                if ($request->imagenPublicacionAnt !=null){
+                    Storage::delete($request->imagenPublicacionAnt);
+                }
                 $nombreImagen = uniqid('img_', true).'.'.$imagen->clientExtension();
-                Storage::put($nombreImagen,File::get($imagen), 'public');
+                Storage::put('public/'.$nombreImagen,File::get($imagen), 'public');
+            }else if ($request->imagenPublicacionAnt !=null){
+                $nombreImagen = $request->imagenPublicacionAnt;
             }
             $publicacion= ['idPublicacion'=>$id,'titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
                 'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
