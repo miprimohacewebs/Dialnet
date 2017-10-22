@@ -43,6 +43,8 @@ Route::group(['middleware' => ['autenticado']], function () {
 
     Route::get('eliminarPublicacion/{id}','PublicacionesController@destroy');
 
+    Route::get('modificarCategorias/{id}','CategoriasController@edit');
+
     Route::get('eliminarCategoria/{id}','CategoriasController@destroy');
 
 

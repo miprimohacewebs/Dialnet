@@ -34,6 +34,14 @@
                     </a>
                 </div>
                 <div class="col-md-1 text-center">
+                    <a href="#" id="pclaves" style="opacity: 0.2;" > <span class="fa-stack fa-2x"> <i class="fa fa-compass"
+                                                                            aria-hidden="true"></i>
+							<p class="textoInferiorIconosAwasome" >Palabras</p>
+                            <p class="textoInferiorIconosAwasome" style="margin-top: -53px;">clave</p>
+					</span>
+                    </a>
+                </div>
+                <div class="col-md-1 text-center">
                     <a href="#" id="limpiar" onclick="resetearPantalla();"> <span class="fa-stack fa-2x"> <i
                                     class="fa fa-eraser"
                                     aria-hidden="true"></i>
@@ -41,10 +49,10 @@
 					</span>
                     </a>
                 </div>
-                <div class="col-md-5 text-center">
+                <div class="col-md-2 text-center">
                     <p class="parrafoResultadoDocumentosEncontrados">{{$publicaciones}}</p>
                 </div>
-                <div class="col-md-3"></div>
+                <div class="col-md-6"></div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -61,6 +69,7 @@
                     @endif
                 </div>
             </div>
+            <div style="width: 100%; height: 40px;"></div>
             <div class="row">
                 <div class="col-md-12 text-center">
                     <table id="tablaPublicaciones" class="table table-hover table-condensed">

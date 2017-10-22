@@ -32,73 +32,83 @@
                     {{ session()->get('alert-success') }}
                 </div>
             @endif
-            <!-- Título sección -->
+        <!-- Título sección -->
             <div class="row">
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-10">
-                    <h3>Administrar categorias</h3>
+                    <h3 style="color: #ba0600;"><i class="fa fa-chevron-right" aria-hidden="true"></i> Administrar
+                        categorías</h3>
                     <div style="height: 40px; width: 100%"></div>
                 </div>
             </div>
 
             <!-- Panel tab para insertar publicación -->
-            <form role="form" name="guardarCategoria" method="POST" action="administrador/guardarCategoria">
-                <div class="row">
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-6">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="titulo">Categoria *</label>
-                            <input class="form-control" id="categoria" name="categoria" value="{{old('categoria')}}" required>
-                            <!-- <p class="help-block">Texto de ayuda.</p> -->
-                        </div>
-                    </div>
-                    <div class="col-lg-3"></div>
-                </div>
+            <!-- <form role="form" name="guardarCategoria" method="POST" action="administrador/guardarCategoria"> -->
+            @if(isset($categoria) || old('idCategoria')!=null)
+                <form role="form" name="guardarCategoria" method="POST"
+                      action="/administrador/modificarCategoria/{{old('idCategoria',isset($categoria) ? $categoria['idCategoria'] : null)}}"
+                      enctype="multipart/form-data">
+                    <input type="hidden" name="idCategoria" id="idCategoria"
+                           value="{{ old('categoria',isset($categoria) ? $categoria['categoria'] : null)}}"/>
+                    @else
+                        <form role="form" name="guardarCategoria" method="POST" action="/administrador/guardarCategoria"
+                              enctype="multipart/form-data">
+                            @endif
+                            <div class="row">
+                                <div class="col-lg-3"></div>
+                                <div class="col-lg-6">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <label for="titulo">Categoria *</label>
+                                        <input class="form-control" id="categoria" name="categoria"
+                                               value="{{old('categoria')}}" required>
+                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-3"></div>
+                            </div>
 
-                <div style="height: 20px; width: 100%"></div>
-                <div class="row">
-                    <div class="col-md-10">
-                    </div>
-                    <div class="col-md-1">
-                        <button id="btnReset" type="reset"
-                                class="btn btn-primary btn-sm">Limpiar
-                        </button>
-                    </div>
-                    <div class="col-md-1">
-                        <button id="btnGuardar" type="submit"
-                                class="btn btn-primary btn-sm">Guardar
-                        </button>
-                    </div>
-                </div>
-                <!-- Tabla edición/eliminar autores-->
-                <div style="height: 50px; width: 100%"></div>
-                <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-8">
-                        <table id="tablaEdicionCategorias" class="table table-hover table-condensed">
-                        </table>
-                    </div>
-                    <div class="col-md-2">
-                    </div>
-                </div>
+                            <div style="height: 20px; width: 100%"></div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                </div>
+                                <div class="col-md-2">
+                                    <button id="btnReset" type="reset"
+                                            class="btn btn-primary btn-sm">Limpiar
+                                    </button>
+                                    <button id="btnGuardar" type="submit"
+                                            class="btn btn-primary btn-sm">Guardar
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Tabla edición/eliminar autores-->
+                            <div style="height: 50px; width: 100%"></div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-8">
+                                    <table id="tablaEdicionCategorias" class="table table-hover table-condensed">
+                                    </table>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                            </div>
 
-                <!-- Botón volver -->
-                <div style="height: 50px; width: 100%"></div>
-                <div class="row">
-                    <div class="col-md-11">
-                    </div>
-                    <div class="col-md-1">
-                        <button id="btnVolver2" type="button"
-                                class="btn btn-primary btn-sm btn-block" onclick="history.back()">Volver
-                        </button>
-                    </div>
-                </div>
-            </form>
+                            <!-- Botón volver -->
+                            <div style="height: 50px; width: 100%"></div>
+                            <div class="row">
+                                <div class="col-md-11">
+                                </div>
+                                <div class="col-md-1">
+                                    <button id="btnVolver2" type="button"
+                                            class="btn btn-primary btn-sm btn-block" onclick="history.back()">Volver
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
         </div>
     </div>
 
-
+    </div>
 @endsection

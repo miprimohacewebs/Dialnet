@@ -38,4 +38,17 @@ class categorias extends Model
 
         return DB::getPdo()->lastInsertId();
     }
+
+    /**
+     * Actualiza la categoría de BD
+     * @param $categoria
+     */
+    public static function actualizarCategoria($categoria){
+        $publicacionSeleccionada = null;
+
+        DB::table('categorias')->where('x_idcategoria', $categoria['idCategoria'])
+            ->update(
+                ['tx_categoria'=>$categoria['categoria']]
+            );
+    }
 }

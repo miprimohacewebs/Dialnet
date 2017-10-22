@@ -38,7 +38,7 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-10">
-                <h3>Administrar publicaciones</h3>
+                <h3 style="color: #ba0600;"><i class="fa fa-chevron-right" aria-hidden="true"></i> Administrar publicaciones</h3>
                 <div style="height: 40px; width: 100%"></div>
             </div>
         </div>
@@ -286,12 +286,10 @@
                     <div class="row">
                         <div class="col-md-10">
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <button id="btnReset" type="reset"
                                     class="btn btn-primary btn-sm">Limpiar
                             </button>
-                        </div>
-                        <div class="col-md-1">
                             <button id="btnGuardar" type="submit"
                                     class="btn btn-primary btn-sm">Guardar
                             </button>

@@ -11,10 +11,11 @@ $(function() {
     $("#tablaPublicaciones")
         .DataTable(
             {
+               // "dom": '<"top"i>rt<"bottom"flp><"clear">',
                 "processing" : true,
                 "serverSide" : true,
                 "ajax" : "/api/publicaciones",
-                "lengthChange" : false,
+                "lengthChange" : true,
                 "language": {
                     "processing": "Procesando publicaciones...",
                     "search": "Buscar:",

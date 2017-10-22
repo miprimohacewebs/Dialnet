@@ -147,7 +147,7 @@ $(function() {
                         data : 'x_idcategoria',
                         sWidth : '10%',
                         mRender : function(data, type, full) {
-                            return "<a href='modificarCategoria' id='"
+                            return "<a href='modificarCategorias/"+data+"' id='"
                                 + data
                                 + "' class='detallePublicacion'  data-toggle='modal' data-target='#modificar' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
                                 + "&nbsp;&nbsp;<a href='eliminarCategoria/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"

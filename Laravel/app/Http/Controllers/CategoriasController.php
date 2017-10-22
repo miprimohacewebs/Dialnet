@@ -78,4 +78,48 @@ class CategoriasController extends Controller
 
         return redirect()->action('CategoriasController@create')->with('alert-success', 'Se ha borrado la categoria correctamente');
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $categoria = Categorias::where('x_idpublicacion', $id)->first();
+        $categoriaVuelta= [ 'categoria'=>$categoria['tx_categoria']];
+        $vuelta = array('categoria' => $categoriaVuelta);
+        return view('administracion/categorias', $vuelta);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'categoria' => 'max:100',
+             ]);
+            if ($validator->fails()){
+                return redirect()->to('categoriasadmin')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $categoria = array('categoria'=>$request->categoria);
+            Categorias::actualizarCategoria($categoria);
+
+            $request->session()->flash('alert-success', 'Se ha modificado la categoría');
+            return redirect()->action('CategoriasController@create')->with('alert-success', 'Se ha modificado la categoría');
+        }catch (Exception $e){
+            Log::error($e);
+            return redirect()->action('CategoriasController@create')->with('alert-error', 'Ha ocurrido un error al modificar la categoría');
+        }
+    }
 }
