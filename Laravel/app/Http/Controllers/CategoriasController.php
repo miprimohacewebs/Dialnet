@@ -87,8 +87,8 @@ class CategoriasController extends Controller
      */
     public function edit($id)
     {
-        $categoria = Categorias::where('x_idpublicacion', $id)->first();
-        $categoriaVuelta= [ 'categoria'=>$categoria['tx_categoria']];
+        $categoria = Categorias::where('x_idcategoria', $id)->first();
+        $categoriaVuelta= [ 'categoria'=>$categoria['tx_categoria'],'idCategoria'=>$categoria['x_idcategoria']];
         $vuelta = array('categoria' => $categoriaVuelta);
         return view('administracion/categorias', $vuelta);
     }
@@ -112,7 +112,7 @@ class CategoriasController extends Controller
                     ->withInput();
             }
 
-            $categoria = array('categoria'=>$request->categoria);
+            $categoria = array('categoria'=>$request->categoria, 'idCategoria'=>$request->idCategoria);
             Categorias::actualizarCategoria($categoria);
 
             $request->session()->flash('alert-success', 'Se ha modificado la categoría');

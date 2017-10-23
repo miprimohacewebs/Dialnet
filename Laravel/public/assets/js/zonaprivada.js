@@ -50,7 +50,7 @@ $(function() {
                         data : 'x_idpublicacion',
                         sWidth : '10%',
                         mRender : function(data, type, full) {
-                            return "<a href='modificarPublicacion/"+data+"' id='"
+                            return "<a href='/modificarPublicacion/"+data+"' id='"
                                 + data
                                 + "' class='detallePublicacion' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
                                 + "&nbsp;&nbsp;<a href='eliminarPublicacion/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
@@ -147,9 +147,9 @@ $(function() {
                         data : 'x_idcategoria',
                         sWidth : '10%',
                         mRender : function(data, type, full) {
-                            return "<a href='modificarCategorias/"+data+"' id='"
+                            return "<a href='/modificarCategorias/"+data+"' id='"
                                 + data
-                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#modificar' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
+                                + "' class='detallePublicacion' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
                                 + "&nbsp;&nbsp;<a href='eliminarCategoria/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
                                 + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar esta categoria?\");' ><i class='fa fa-trash'></i></a>";
                         }

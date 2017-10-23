@@ -50,7 +50,7 @@
                       action="/administrador/modificarCategoria/{{old('idCategoria',isset($categoria) ? $categoria['idCategoria'] : null)}}"
                       enctype="multipart/form-data">
                     <input type="hidden" name="idCategoria" id="idCategoria"
-                           value="{{ old('categoria',isset($categoria) ? $categoria['categoria'] : null)}}"/>
+                           value="{{ old('idCategoria',isset($categoria) ? $categoria['idCategoria'] : null)}}"/>
                     @else
                         <form role="form" name="guardarCategoria" method="POST" action="/administrador/guardarCategoria"
                               enctype="multipart/form-data">
@@ -62,7 +62,7 @@
                                     <div class="form-group">
                                         <label for="titulo">Categoria *</label>
                                         <input class="form-control" id="categoria" name="categoria"
-                                               value="{{old('categoria')}}" required>
+                                               value="{{ old('categoria',isset($categoria) ? $categoria['categoria'] : null)}}" required>
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                 </div>

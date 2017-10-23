@@ -34,13 +34,6 @@
                                         <input class="form-control" id="nombreAutor" name="nombreAutor" value="{{old('nombreAutor')}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
-                                    <div class="form-group">
-                                        <label for="categoria">Tipo de autor</label>
-                                        <select class="form-control" id="tipoAutor" name="tipoAutor">
-                                            <option value="">Seleccione...</option>
-
-                                        </select>
-                                    </div>
 
                                 </div>
                                 <div class="col-lg-3"></div>
