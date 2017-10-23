@@ -15,6 +15,7 @@
                     </button>
                 </div>
             </div>
+            <div style="height: 50px; width: 100%"></div>
             <!-- Mensajes de error -->
             @if (count($errors) > 0)
                 <div class="alert alert-danger alert-dismissable">
@@ -26,12 +27,20 @@
                     </ul>
                 </div>
             @endif
+            @if(session()->has('alert-error'))
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ session()->get('alert-error') }}
+                </div>
+            @endif
             @if(session()->has('alert-success'))
                 <div class="alert alert-success alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     {{ session()->get('alert-success') }}
                 </div>
-        @endif
+            @endif
+
+
 
         <!-- Título sección -->
         <div class="row">

@@ -98,11 +98,11 @@ $(function() {
                         data : 'idAutor',
                         sWidth : '10%',
                         mRender : function(data, type, full) {
-                            return "<a href='modificarAutor' id='"
+                            return "<a href='/modificarAutor/"+data+"' id='"
                                 + data
-                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#modificar' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
-                                + "&nbsp;&nbsp;<a href='eliminarAutor/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
-                                + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar esta autor/a?\");' ><i class='fa fa-trash'></i></a>";
+                                + "' class='detallePublicacion' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
+                                + "&nbsp;&nbsp;<a href='/eliminarAutor/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
+                                + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar este/a editor/a?\");' ><i class='fa fa-trash'></i></a>";
                         }
 
                     } ]
@@ -197,9 +197,9 @@ $(function() {
                         data : 'x_ideditor',
                         sWidth : '10%',
                         mRender : function(data, type, full) {
-                            return "<a href='modificarEditor' id='"
+                            return "<a href='/modificarEditor/"+data+"' id='"
                                 + data
-                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#modificar' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
+                                + "' class='detallePublicacion' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
                                 + "&nbsp;&nbsp;<a href='eliminarEditor/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
                                 + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar este editor/a?\");' ><i class='fa fa-trash'></i></a>";
                         }

@@ -44,7 +44,6 @@ class categorias extends Model
      * @param $categoria
      */
     public static function actualizarCategoria($categoria){
-        $publicacionSeleccionada = null;
 
         DB::table('categorias')->where('x_idcategoria', $categoria['idCategoria'])
             ->update(

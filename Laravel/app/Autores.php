@@ -21,6 +21,16 @@ class autores extends Model
     protected $fillable = ['ta_x_idtipoautor', 'tx_autor'];
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'autores';
+
+    /** Primary key de la tabla. */
+    protected $primaryKey = 'idAutor';
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function tipoautor()
@@ -50,5 +60,30 @@ class autores extends Model
             return DB::table('autores')->select('idAutor','tx_autor')->whereIn('idAutor', $autores)->orderBy('tx_autor')->get();
         }
         return null;
+    }
+
+    /**
+     * Guarda categoria en BD
+     * @param $categoria
+     * @return mixed
+     */
+    public static function guardarAutor($autor){
+        DB::table('autores')->insertGetId(
+            ['tx_autor'=>$autor['autor'],'ta_x_idtipoautor'=>1]
+        );
+
+        return DB::getPdo()->lastInsertId();
+    }
+
+    /**
+     * Actualiza el autor de BD
+     * @param $autor
+     */
+    public static function actualizarAutor($autor){
+
+        DB::table('autores')->where('idAutor', $autor['idAutor'])
+            ->update(
+                ['tx_autor'=>$autor['autor']]
+            );
     }
 }

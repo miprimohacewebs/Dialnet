@@ -15,6 +15,7 @@
                     </button>
                 </div>
             </div>
+            <div style="height: 50px; width: 100%"></div>
             <!-- Mensajes de error -->
             @if (count($errors) > 0)
                 <div class="alert alert-danger alert-dismissable">
@@ -24,6 +25,12 @@
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
+                </div>
+            @endif
+            @if(session()->has('alert-error'))
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ session()->get('alert-error') }}
                 </div>
             @endif
             @if(session()->has('alert-success'))
@@ -62,7 +69,8 @@
                                     <div class="form-group">
                                         <label for="titulo">Categoria *</label>
                                         <input class="form-control" id="categoria" name="categoria"
-                                               value="{{ old('categoria',isset($categoria) ? $categoria['categoria'] : null)}}" required>
+                                               value="{{ old('categoria',isset($categoria) ? $categoria['categoria'] : null)}}"
+                                               required>
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                 </div>
@@ -108,7 +116,5 @@
                             </div>
                         </form>
         </div>
-    </div>
-
     </div>
 @endsection

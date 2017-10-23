@@ -56,9 +56,7 @@ class CategoriasController extends Controller
      */
     public function create(Request $request)
     {
-        $categorias ="pepe";
-        $vuelta = array('categorias' => $categorias);
-        return view('administracion/categorias', $vuelta);
+        return view('administracion/categorias');
     }
 
     /**

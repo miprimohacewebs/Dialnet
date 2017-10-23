@@ -21,6 +21,9 @@ class Editores extends Model
      */
     protected $table = 'editor';
 
+    /** Primary key de la tabla. */
+    protected $primaryKey = 'x_ideditor';
+
     /**
      * @var array
      */
@@ -48,5 +51,30 @@ class Editores extends Model
      */
     public static function obtenerNumeroEditores(){
         return DB::table('editor')->count();
+    }
+
+    /**
+     * Guarda editores en BD
+     * @param $editor
+     * @return mixed
+     */
+    public static function guardarEditor($editor){
+        DB::table('editor')->insertGetId(
+            ['tx_editor'=>$editor['editor'],'te_x_idTipoEditor'=>1]
+        );
+
+        return DB::getPdo()->lastInsertId();
+    }
+
+    /**
+     * Actualiza el editor de BD
+     * @param $editor
+     */
+    public static function actualizarEditor($editor){
+
+        DB::table('editor')->where('x_ideditor', $editor['idEditor'])
+            ->update(
+                ['tx_editor'=>$editor['editor']]
+            );
     }
 }

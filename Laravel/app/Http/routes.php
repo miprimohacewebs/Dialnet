@@ -24,29 +24,18 @@ Route::get('login', function () {
  * - Obtener datos de la sesión/request.
  */
 Route::group(['middleware' => ['autenticado']], function () {
+
     /** Rutas zona administración*/
     Route::get('administracion','AdministracionController@index');
 
-    Route::get('categoriasadmin', function () {
-        return View::make('administracion/categorias');
-    });
-    Route::get('autoresadmin', function () {
-        return View::make('administracion/autores');
-    });
-    Route::get('editoresadmin', function () {
-        return View::make('administracion/editores');
-    });
+    /** Ruta para realizar el logout */
+    Route::get('app/logout', 'Auth\AuthController@logout');
+
+    /**
+     * Rutas de publicaciones
+     */
 
     Route::get('publicacionesadmin','PublicacionesController@create');
-
-    Route::get('modificarPublicacion/{id}','PublicacionesController@edit');
-
-    Route::get('eliminarPublicacion/{id}','PublicacionesController@destroy');
-
-    Route::get('modificarCategorias/{id}','CategoriasController@edit');
-
-    Route::get('eliminarCategoria/{id}','CategoriasController@destroy');
-
 
     /** Ruta para guardar una publicación */
     Route::post('administrador/guardarPublicacion','PublicacionesController@store');
@@ -54,17 +43,55 @@ Route::group(['middleware' => ['autenticado']], function () {
     /** Ruta para guardar una publicación */
     Route::post('administrador/modificarPublicacion/{id}','PublicacionesController@update');
 
-    Route::get('categoriasadmin','CategoriasController@create');
+    Route::get('modificarPublicacion/{id}','PublicacionesController@edit');
+
+    Route::get('eliminarPublicacion/{id}','PublicacionesController@destroy');
+
+
+    /**
+     * Rutas de Categorías
+     */
+
+    Route::get('categoriasadmin', 'CategoriasController@create');
 
     /** Ruta para guardar una categoria */
     Route::post('administrador/guardarCategoria','CategoriasController@store');
 
+    Route::get('modificarCategorias/{id}','CategoriasController@edit');
+
     /** Ruta para guardar una categoria */
     Route::post('administrador/modificarCategoria/{id}','CategoriasController@update');
 
+    Route::get('eliminarCategoria/{id}','CategoriasController@destroy');
 
-    /** Ruta para realizar el logout */
-    Route::get('app/logout', 'Auth\AuthController@logout');
+
+    /**
+     * Rutas de autores
+     */
+
+    Route::get('autoresadmin', 'AutoresController@create');
+
+    Route::post('administrador/guardarAutor','AutoresController@store');
+
+    Route::get('modificarAutor/{id}','AutoresController@edit');
+
+    Route::post('administrador/modificarAutor/{id}','AutoresController@update');
+
+    Route::get('eliminarAutor/{id}','AutoresController@destroy');
+
+    /**
+     * Rutas de editores
+     */
+
+    Route::get('editoresadmin', 'EditoresController@create');
+
+    Route::post('administrador/guardarEditor','EditoresController@store');
+
+    Route::get('modificarEditor/{id}','EditoresController@edit');
+
+    Route::post('administrador/modificarEditor/{id}','EditoresController@update');
+
+    Route::get('eliminarEditor/{id}','EditoresController@destroy');
 });
 
 /**
