@@ -126,8 +126,10 @@ Route::group(['middleware' => ['web']], function () {
     /** Ruta para rellenar la tabla de editores */
     Route::get('api/editores','EditoresController@show');
     /** Formulario de contacto */
-    Route::get('contacto','ContactoController@create');
-    Route::post('contacto_store','ContactoController@store');
+    Route::get('contacto',
+        ['as' => 'contacto', 'uses' => 'ContactoController@create']);
+    Route::post('contacto',
+        ['as' => 'contacto_store', 'uses' => 'ContactoController@store']);
 
 });
 
