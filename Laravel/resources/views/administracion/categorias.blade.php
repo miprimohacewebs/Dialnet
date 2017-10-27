@@ -15,7 +15,6 @@
                     </button>
                 </div>
             </div>
-            <div style="height: 50px; width: 100%"></div>
             <!-- Mensajes de error -->
             @if (count($errors) > 0)
                 <div class="alert alert-danger alert-dismissable">
@@ -25,12 +24,6 @@
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
-                </div>
-            @endif
-            @if(session()->has('alert-error'))
-                <div class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ session()->get('alert-error') }}
                 </div>
             @endif
             @if(session()->has('alert-success'))
@@ -57,7 +50,7 @@
                       action="/administrador/modificarCategoria/{{old('idCategoria',isset($categoria) ? $categoria['idCategoria'] : null)}}"
                       enctype="multipart/form-data">
                     <input type="hidden" name="idCategoria" id="idCategoria"
-                           value="{{ old('idCategoria',isset($categoria) ? $categoria['idCategoria'] : null)}}"/>
+                           value="{{ old('categoria',isset($categoria) ? $categoria['categoria'] : null)}}"/>
                     @else
                         <form role="form" name="guardarCategoria" method="POST" action="/administrador/guardarCategoria"
                               enctype="multipart/form-data">
@@ -69,8 +62,7 @@
                                     <div class="form-group">
                                         <label for="titulo">Categoria *</label>
                                         <input class="form-control" id="categoria" name="categoria"
-                                               value="{{ old('categoria',isset($categoria) ? $categoria['categoria'] : null)}}"
-                                               required>
+                                               value="{{old('categoria')}}" required>
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                 </div>
@@ -116,5 +108,7 @@
                             </div>
                         </form>
         </div>
+    </div>
+
     </div>
 @endsection

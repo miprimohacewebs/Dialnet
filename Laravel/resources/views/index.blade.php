@@ -88,6 +88,7 @@
 <!-- /#wrapper -->
 
 <!-- MODALES -->
+<!-- FORMULARIO DE CONTACTO -->
 <!-- BEGIN # MODAL LOGIN -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
      aria-labelledby="contacto" aria-hidden="true"
@@ -103,15 +104,23 @@
             </div>
             <div id="div-forms">
                 <!-- Begin # Login Form -->
-                <form id="contactoForm">
+                <form role="form" name="guardarCategoria" method="POST" action="contacto_store"
+                      enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="modal-footer">
                         <div class="row">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="row">
                             <div class="form-group">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i
+                               <span class="col-md-1 col-md-offset-2 text-center"><i
                                             class="fa fa-user bigicon"></i></span>
                                 <div class="col-md-8">
-                                    <input id="nombre" name="nombre" type="text" placeholder="Nombre"
+                                   <input id="nombre" name="nombre" type="text" placeholder="Nombre"
                                            class="form-control">
                                 </div>
                             </div>
@@ -156,7 +165,7 @@
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-4">
-                                <button id="login-button" type="button"
+                                <button id="login-button" type="submit"
                                         class="btn btn-primary btn-sm btn-block" onclick="">Enviar
                                 </button>
                             </div>

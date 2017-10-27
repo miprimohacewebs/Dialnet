@@ -13,7 +13,7 @@ $(function() {
                 "processing" : true,
                 "serverSide" : true,
                 "ajax" : "/api/publicaciones",
-                "lengthChange" : false,
+                "lengthChange" : true,
                 "language": {
                     "processing": "Procesando publicaciones...",
                     "search": "Buscar:",

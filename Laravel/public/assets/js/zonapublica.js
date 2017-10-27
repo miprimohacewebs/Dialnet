@@ -42,15 +42,27 @@ $(function() {
                         sWidth : '50%'
                     },
                     {
-                        title: 'Resumen',
-                        data : 'tx_resumen',
-                        name : 'tx_resumen',
-                        sWidth : '40%'
+                        title: 'ISBN',
+                        data : 'tx_isbn',
+                        name : 'tx_isbn',
+                        sWidth : '10%'
+                    },
+                    {
+                        title: 'Año',
+                        data : 'nu_anno',
+                        name : 'nu_anno',
+                        sWidth : '5%'
+                    },
+                    {
+                        title: 'Obra',
+                        data : 'tx_obra',
+                        name : 'tx_obra',
+                        sWidth : '35%'
                     },
                     {
                         title: 'Ver detalle',
                         data : 'x_idpublicacion',
-                        sWidth : '10%',
+                        sWidth : '20%',
                         mRender : function(data, type, full) {
                             return "<a href='detallePublicacion' id='"
                                 + data
