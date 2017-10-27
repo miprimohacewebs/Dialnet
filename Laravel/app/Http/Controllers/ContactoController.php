@@ -39,7 +39,7 @@ class ContactoController extends Controller
     public function store(Request $request)
     {
 
-        Mail::send('emails.contact',
+        Mail::send('contacto',
             array(
                 'nombre' => $request->get('nombre'),
                 'apellidos' => $request->get('apellidos'),

@@ -131,6 +131,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('contacto',
         ['as' => 'contacto_store', 'uses' => 'ContactoController@store']);
 
+    Route::get('emails.contacto', function () {
+        return View::make('contacto');
+    });
 });
 
 
