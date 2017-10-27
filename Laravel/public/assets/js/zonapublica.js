@@ -422,7 +422,7 @@ function actualizarListado (tipo, valor){
                         "tipo": tipo
                     }
                 },
-                "lengthChange" : false,
+                "lengthChange" : true,
                 "language": {
                     "processing": "Procesando publicaciones...",
                     "search": "Buscar:",
@@ -492,7 +492,7 @@ function resetearPantalla(){
                 "processing" : true,
                 "serverSide" : true,
                 "ajax" : "/api/publicaciones",
-                "lengthChange" : false,
+                "lengthChange" : true,
                 "language": {
                     "processing": "Procesando publicaciones...",
                     "search": "Buscar:",
