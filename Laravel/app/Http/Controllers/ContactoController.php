@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Mail;
+
 class ContactoController extends Controller
 {
     /**
@@ -36,21 +38,21 @@ class ContactoController extends Controller
      */
     public function store(ContactFormRequest $request)
     {
-        \Mail::send('emails.contact',
+        Mail::send('emails.contact',
             array(
-                \Mail::send('emails.contact',
+                Mail::send('emails.contact',
                     array(
                         'nombre' => $request->get('nombre'),
                         'apellidos' => $request->get('apellidos'),
                         'email' => $request->get('email'),
                         'mensaje' => $request->get('mensaje')
-                    ), function($message)
-                    {
+                    ), function ($message) {
                         $message->from('zambranosoft@gmail.com');
                         $message->to('zambranosoft@gmail.com', 'Admin')->subject('Formulario de contacto de Cibermov');
-                    }));
+                    })));
 
-        return \Redirect::route('contacto')->with('mensaje', 'Ha contactado con Cibermov, en breve tendrá una respuesta a su consulta.');
+        return redirect()->route('contacto')->with('mensaje', 'Ha contactado con Cibermov, en breve tendrá una respuesta a su consulta.');
+    }
 
 
     /**
