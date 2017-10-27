@@ -36,20 +36,21 @@ class ContactoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ContactFormRequest $request)
+    public function store(Request $request)
     {
+
         Mail::send('emails.contact',
             array(
-                Mail::send('emails.contact',
-                    array(
-                        'nombre' => $request->get('nombre'),
-                        'apellidos' => $request->get('apellidos'),
-                        'email' => $request->get('email'),
-                        'mensaje' => $request->get('mensaje')
-                    ), function ($message) {
-                        $message->from('zambranosoft@gmail.com');
-                        $message->to('zambranosoft@gmail.com', 'Admin')->subject('Formulario de contacto de Cibermov');
-                    })));
+                'nombre' => $request->get('nombre'),
+                'apellidos' => $request->get('apellidos'),
+                'email' => $request->get('email'),
+                'mensaje' => $request->get('mensaje')
+            ), function ($message) {
+                $message->from('zambranosoft@gmail.com');
+                $message->to('zambranosoft@gmail.com', 'Admin')->subject('Formulario de contacto de Cibermov');
+                $message->sender("",$request->get('nombre').' '.$request->get('apellidos'));
+
+            });
 
         return redirect()->route('contacto')->with('mensaje', 'Ha contactado con Cibermov, en breve tendrá una respuesta a su consulta.');
     }
