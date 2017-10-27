@@ -48,7 +48,6 @@ class ContactoController extends Controller
             ), function ($message) {
                 $message->from('zambranosoft@gmail.com');
                 $message->to('zambranosoft@gmail.com', 'Admin')->subject('Formulario de contacto de Cibermov');
-                $message->sender("",$request->get('nombre').' '.$request->get('apellidos'));
 
             });
 
