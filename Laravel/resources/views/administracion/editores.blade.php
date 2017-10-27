@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-md-1">
                     <button id="btnVolver1" type="button"
-                            class="btn btn-primary btn-sm btn-block" onclick="history.back()">Volver
+                            class="btn btn-primary btn-sm btn-block" onclick="window.location='{{url('administracion')}}'" >Volver
                     </button>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="col-md-1">
                                     <button id="btnVolver2" type="button"
-                                            class="btn btn-primary btn-sm btn-block" onclick="history.back()">Volver
+                                            class="btn btn-primary btn-sm btn-block" onclick="window.location='{{url('administracion')}}'">Volver
                                     </button>
                                 </div>
                             </div>
