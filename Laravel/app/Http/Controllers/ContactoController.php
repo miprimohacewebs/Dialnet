@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
 use Mail;
+use App\User;
+use App\Http\Controllers\Controller;
 
 class ContactoController extends Controller
 {
@@ -27,7 +26,7 @@ class ContactoController extends Controller
      */
     public function create()
     {
-
+        return view('contacto');
     }
 
     /**
@@ -39,11 +38,12 @@ class ContactoController extends Controller
     public function store(Request $request)
     {
 
-        Mail::send('emails.contact',
+        Mail::send('contacto',
             array(
                 'nombre' => $request->get('nombre'),
                 'apellidos' => $request->get('apellidos'),
                 'email' => $request->get('email'),
+                'telefono' => $request->get('telefono'),
                 'mensaje' => $request->get('mensaje')
             ), function ($message) {
                 $message->from('zambranosoft@gmail.com');
