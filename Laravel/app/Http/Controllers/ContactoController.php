@@ -63,7 +63,7 @@ class ContactoController extends Controller
 
             });
 
-        return redirect()->route('/')->with('mensaje', 'Ha contactado con Cibermov, en breve tendrá una respuesta a su consulta.');
+        return redirect()->to('/')->with('mensaje', 'Ha contactado con Cibermov, en breve tendrá una respuesta a su consulta.');
     }
 
 
