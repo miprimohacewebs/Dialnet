@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
-use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class ContactoController extends Controller
 {
@@ -37,7 +37,19 @@ class ContactoController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'email' => 'required|email',
+            'telefono' => 'required',
+            'mensaje' => 'required',
+        ]);
+        if ($validator->fails()){
 
+            return redirect()->to('/')
+                ->withErrors($validator)
+                ->withInput();
+        }
         Mail::send('contacto',
             array(
                 'nombre' => $request->get('nombre'),
@@ -51,7 +63,7 @@ class ContactoController extends Controller
 
             });
 
-        return redirect()->route('contacto')->with('mensaje', 'Ha contactado con Cibermov, en breve tendrá una respuesta a su consulta.');
+        return redirect()->route('/')->with('mensaje', 'Ha contactado con Cibermov, en breve tendrá una respuesta a su consulta.');
     }
 
 
