@@ -117,6 +117,14 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                <div class="col-md-8">
+                                    * Todos los campos son obligatorios
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
                                <span class="col-md-1 col-md-offset-2 text-center"><i
                                             class="fa fa-user bigicon"></i></span>
                                 <div class="col-md-8">
