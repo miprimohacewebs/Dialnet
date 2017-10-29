@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-md-1">
                                     <button id="btnReset" type="reset"
-                                            class="btn btn-primary btn-sm">Limpiar
+                                            class="btn btn-primary btn-sm" @if(isset($autor) || old('idAutor')!=null)disabled="disabled"@endif>Limpiar
                                     </button>
                                 </div>
                                 <div class="col-md-1">

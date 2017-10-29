@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <button id="btnReset" type="reset"
-                                            class="btn btn-primary btn-sm">Limpiar
+                                            class="btn btn-primary btn-sm" @if(isset($categoria) || old('idCategoria')!=null)disabled="disabled"@endif>Limpiar
                                     </button>
                                     <button id="btnGuardar" type="submit"
                                             class="btn btn-primary btn-sm">Guardar
