@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\File;
 
 class PublicacionesController extends Controller
 {
+    private $imagenPublicacionDefecto = '/assets/images/imagesPublicaciones/imgTemplate.jpg';
     /**
      * Display a listing of the resource.
      *
@@ -178,6 +179,8 @@ class PublicacionesController extends Controller
         $publicacion = Publicaciones::obtenerInformacionDetalle($idPublicacion);
         if ($publicacion[0]->tx_imagen!=null){
             $publicacion[0]->tx_imagen=Storage::url($publicacion[0]->tx_imagen);
+        }else{
+            $publicacion[0]->tx_imagen=$this->imagenPublicacionDefecto;
         }
         return response()->json(array('success' => true, 'publicacion' => $publicacion, 'msg' => 'Se han generado los detalles de la publicacion'));
 
@@ -194,6 +197,8 @@ class PublicacionesController extends Controller
         $imagen = null;
         if ($publicacion['tx_imagen']!=null) {
             $imagen = Storage::url($publicacion['tx_imagen']);
+        }else{
+            $imagen=$this->imagenPublicacionDefecto;
         }
         $publicacionVuelta= ['titulo'=>$publicacion['tx_titulo'], 'subtitulo'=>$publicacion['tx_subtitulo'],
             'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'obra'=>$publicacion['tx_obra'],

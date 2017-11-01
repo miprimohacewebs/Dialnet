@@ -256,7 +256,7 @@
                             <div class="row">
                                 <div class="col-lg-2 text-center">
                                     <div class="form-group">
-                                        <img src="{{{old('imagenPublicacionAnt', isset($publicacion)?$publicacion['imagenPublicacionAnt']:'assets/images/imagesPublicaciones/imgTemplate.jpg')}}}" alt="Imagen por defecto" title="Imagen por defecto" class="img-thumbnail">
+                                        <img src="{{{old('imagenPublicacionAnt', isset($publicacion)?$publicacion['imagenPublicacionAnt']:'assets/images/imagesPublicaciones/imgTemplate.jpg')}}}" onerror="this.src='/assets/images/imagesPublicaciones/imgTemplate.jpg'" alt="Imagen por defecto"  title="Imagen por defecto" class="img-thumbnail">
                                         <legend style="font-size:10px"> Imagen actual </legend>
                                         <input type="hidden" name="imagenPublicacionAnt" id="imagenPublicacionAnt" value="{{old('imagenPublicacionAnt', isset($publicacion)?$publicacion['imagenPublicacionAnt']:null)}}"/>
                                     </div>

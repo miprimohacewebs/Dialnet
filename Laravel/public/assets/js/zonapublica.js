@@ -1,7 +1,7 @@
 $.ajaxSetup({
-	headers : {
-		'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-	}
+    headers : {
+        'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+    }
 });
 /** Constantes */
 var RUTA_IMAGENES = 'assets/images/imagesPublicaciones/';
@@ -11,7 +11,7 @@ $(function() {
     $("#tablaPublicaciones")
         .DataTable(
             {
-               // "dom": '<"top"i>rt<"bottom"flp><"clear">',
+                // "dom": '<"top"i>rt<"bottom"flp><"clear">',
                 "processing" : true,
                 "serverSide" : true,
                 "ajax" : "/api/publicaciones",
@@ -32,7 +32,7 @@ $(function() {
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
+                    }
                 },
                 "columns" : [
                     {
@@ -84,10 +84,10 @@ $(function() {
             url: '/api/verDetallePublicacion',
             data: 'idPublicacion=' + idPublicacion,
             success: function(data){
-                var html=""
+                var html="";
                 if (data.publicacion) {
-                  html +="<div class='row'>";
-                    html += "<div class='col-md-3'><img src='" + data.publicacion[0].tx_imagen + "'  class='img-responsive' /></div><div class='col-md-9'>";
+                    html +="<div class='row'>";
+                    html += "<div class='col-md-3'><img src='" + data.publicacion[0].tx_imagen + "' onerror=\"this.src='assets/images/imagesPublicaciones/imgTemplate.jpg'\"  class='img-responsive' /></div><div class='col-md-9'>";
                     // Título
                     if(data.publicacion[0].tx_titulo){
                         html += "<div class='row'>";
@@ -270,127 +270,127 @@ $(function() {
 
             error:function() {
                 $modal.find('.edit-content').html("<div class='row'><div class='col-md-12'>Ha surgido un error al mostrar el detalle de la publicación.</div></div>");
-            },
+            }
         });
     });
-	$("#tablaCategorias").DataTable({
-		"serverSide" : false,
-		"lengthChange": false,
-		"info": false,
-		"searching": false,
-		"pageLength": 10,
-		"pagingType": "simple",
-		"ajax" : "/api/categorias",
-		"language": {
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "lengthMenu": "Mostrar _MENU_ registros por página.",
-                    "zeroRecords": "No existen categorías.",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay categorías disponibles",
-                    "infoFiltered": "(Filtrados _MAX_ del total de categorías)",
-                    "loadingRecords": "En curso...",
-                    "infoPostFix": "",
-                    "emptyTable": "No existen categorías disponibles.",
-                    "paginate": {
-                        "first":      "Primero",
-                        "previous":   "Anterior",
-                        "next":       "Siguiente",
-                        "last":       "Último"
-                    }
+    $("#tablaCategorias").DataTable({
+        "serverSide" : false,
+        "lengthChange": false,
+        "info": false,
+        "searching": false,
+        "pageLength": 10,
+        "pagingType": "simple",
+        "ajax" : "/api/categorias",
+        "language": {
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ registros por página.",
+            "zeroRecords": "No existen categorías.",
+            "info": "Mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay categorías disponibles",
+            "infoFiltered": "(Filtrados _MAX_ del total de categorías)",
+            "loadingRecords": "En curso...",
+            "infoPostFix": "",
+            "emptyTable": "No existen categorías disponibles.",
+            "paginate": {
+                "first":      "Primero",
+                "previous":   "Anterior",
+                "next":       "Siguiente",
+                "last":       "Último"
+            }
         },
-		"columns" : [ {
-			data : 'tx_categoria',
+        "columns" : [ {
+            data : 'tx_categoria',
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                 $(nTd).html("<a href='#' onClick='actualizarListado(\"cat\","+oData.x_idcategoria+");' >"+oData.tx_categoria+"</a>");
-			}
-		} ]
-	});
+            }
+        } ]
+    });
 
-	$("#tablaAutores").DataTable({
-		"serverSide" : false,
-		"lengthChange": false,
-		"info": false,
-		"searching": false,
-		"pageLength": 10,
-		"pagingType": "simple",
-		"ajax" : "/api/autores",
-		"language": {
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "lengthMenu": "Mostrar _MENU_ registros por página.",
-                    "zeroRecords": "No existen autores.",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay autores disponibles",
-                    "infoFiltered": "(Filtrados _MAX_ del total de autores)",
-                    "loadingRecords": "En curso...",
-                    "infoPostFix": "",
-                    "emptyTable": "No existen autores disponibles.",
-                    "paginate": {
-                        "first":      "Primero",
-                        "previous":   "Anterior",
-                        "next":       "Siguiente",
-                        "last":       "Último"
-                    }
+    $("#tablaAutores").DataTable({
+        "serverSide" : false,
+        "lengthChange": false,
+        "info": false,
+        "searching": false,
+        "pageLength": 10,
+        "pagingType": "simple",
+        "ajax" : "/api/autores",
+        "language": {
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ registros por página.",
+            "zeroRecords": "No existen autores.",
+            "info": "Mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay autores disponibles",
+            "infoFiltered": "(Filtrados _MAX_ del total de autores)",
+            "loadingRecords": "En curso...",
+            "infoPostFix": "",
+            "emptyTable": "No existen autores disponibles.",
+            "paginate": {
+                "first":      "Primero",
+                "previous":   "Anterior",
+                "next":       "Siguiente",
+                "last":       "Último"
+            }
         },
-		"columns" : [ {
-			data : 'tx_autor',
-			"fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-	            $(nTd).html("<a href='#' onClick='actualizarListado(\"aut\","+oData.idAutor+");'>"+oData.tx_autor+"</a>");
-			}
-		} ]
-	});
+        "columns" : [ {
+            data : 'tx_autor',
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                $(nTd).html("<a href='#' onClick='actualizarListado(\"aut\","+oData.idAutor+");'>"+oData.tx_autor+"</a>");
+            }
+        } ]
+    });
 
-	$("#tablaAtoz").DataTable({
-		"serverSide" : false,
-		"lengthChange": false,
-		"info": false,
-		"searching": false,
-		"pageLength": 27,
-		"pagingType": "simple",
-		"language": {
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "lengthMenu": "Mostrar _MENU_ registros por página.",
-                    "zeroRecords": "No existen publicaciones.",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay publicaciones disponibles",
-                    "infoFiltered": "(Filtrados _MAX_ del total de publicaciones)",
-                    "loadingRecords": "En curso...",
-                    "infoPostFix": "",
-                    "emptyTable": "No existen publicaciones disponibles.",
-                    "paginate": {
-                        "first":      "Primero",
-                        "previous":   "Anterior",
-                        "next":       "Siguiente",
-                        "last":       "Último"
-                    }
+    $("#tablaAtoz").DataTable({
+        "serverSide" : false,
+        "lengthChange": false,
+        "info": false,
+        "searching": false,
+        "pageLength": 27,
+        "pagingType": "simple",
+        "language": {
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ registros por página.",
+            "zeroRecords": "No existen publicaciones.",
+            "info": "Mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay publicaciones disponibles",
+            "infoFiltered": "(Filtrados _MAX_ del total de publicaciones)",
+            "loadingRecords": "En curso...",
+            "infoPostFix": "",
+            "emptyTable": "No existen publicaciones disponibles.",
+            "paginate": {
+                "first":      "Primero",
+                "previous":   "Anterior",
+                "next":       "Siguiente",
+                "last":       "Último"
+            }
         },
-		"ajax" : "/api/letras",
-		"columns" : [ {
-			data : 'letras',
-			"fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-	            $(nTd).html("<a href='#' onClick='actualizarListado(\"tit\",\""+oData.letras+"\");'>"+oData.letras+"</a>");
-			}
-		} ]
-	});
+        "ajax" : "/api/letras",
+        "columns" : [ {
+            data : 'letras',
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                $(nTd).html("<a href='#' onClick='actualizarListado(\"tit\",\""+oData.letras+"\");'>"+oData.letras+"</a>");
+            }
+        } ]
+    });
 
-	$('#categorias').click(function(){
-	    $('#categoriasMenu').show();
-	    $('#autoresMenu').hide();
-	    $('#atozMenu').hide();
-	});
+    $('#categorias').click(function(){
+        $('#categoriasMenu').show();
+        $('#autoresMenu').hide();
+        $('#atozMenu').hide();
+    });
 
-	$('#autores').click(function(){
-	    $('#categoriasMenu').hide();
-	    $('#autoresMenu').show();
-	    $('#atozMenu').hide();
-	});
-	$('#atoz').click(function(){
-	    $('#categoriasMenu').hide();
-	    $('#autoresMenu').hide();
-	    $('#atozMenu').show();
-	});
+    $('#autores').click(function(){
+        $('#categoriasMenu').hide();
+        $('#autoresMenu').show();
+        $('#atozMenu').hide();
+    });
+    $('#atoz').click(function(){
+        $('#categoriasMenu').hide();
+        $('#autoresMenu').hide();
+        $('#atozMenu').show();
+    });
 
 });
 
@@ -401,15 +401,15 @@ $(function() {
  * 		- cat: filtra por categorias.
  * 		- tit: filtra por primera letra del título.
  * 		- aut: filtra por el autor.
-*/
+ */
 function actualizarListado (tipo, valor){
 
+    var tablaPublicaciones = $("#tablaPublicaciones");
+    tablaPublicaciones.DataTable().destroy();
+    tablaPublicaciones.empty();
 
-	$("#tablaPublicaciones").DataTable().destroy();
-	$("#tablaPublicaciones").empty();
 
-
-    $("#tablaPublicaciones")
+    tablaPublicaciones
         .DataTable(
             {
                 "processing" : true,
@@ -439,7 +439,7 @@ function actualizarListado (tipo, valor){
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
+                    }
                 },
                 "columns" : [
                     {
@@ -483,10 +483,12 @@ function resetearPantalla(){
     $('#autoresMenu').hide();
     $('#atozMenu').hide();
 
-    $("#tablaPublicaciones").DataTable().destroy();
-    $("#tablaPublicaciones").empty();
+    var tablaPublicaciones = $("#tablaPublicaciones");
 
-    $("#tablaPublicaciones")
+    tablaPublicaciones.DataTable().destroy();
+    tablaPublicaciones.empty();
+
+    tablaPublicaciones
         .DataTable(
             {
                 "processing" : true,
@@ -509,7 +511,7 @@ function resetearPantalla(){
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
+                    }
                 },
                 "columns" : [
                     {
@@ -539,5 +541,3 @@ function resetearPantalla(){
                     } ]
             });
 }
-
-

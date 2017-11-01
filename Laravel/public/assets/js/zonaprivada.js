@@ -1,7 +1,7 @@
 $.ajaxSetup({
-	headers : {
-		'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-	}
+    headers : {
+        'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+    }
 });
 
 $(function() {
@@ -30,7 +30,7 @@ $(function() {
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
+                    }
                 },
                 "columns" : [
                     {
@@ -84,7 +84,7 @@ $(function() {
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
+                    }
                 },
                 "columns" : [
                     {
@@ -100,9 +100,9 @@ $(function() {
                         mRender : function(data, type, full) {
                             return "<a href='/modificarAutor/"+data+"' id='"
                                 + data
-                                + "' class='detallePublicacion' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
+                                + "' class='detallePublicacion' title='Modificar'><i class='fa fa-pencil'></i></a>"
                                 + "&nbsp;&nbsp;<a href='/eliminarAutor/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
-                                + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar este/a editor/a?\");' ><i class='fa fa-trash'></i></a>";
+                                + " onclick='return confirm(\"¿Quieres eliminar este/a editor/a?\");' ><i class='fa fa-trash'></i></a>";
                         }
 
                     } ]
@@ -133,7 +133,7 @@ $(function() {
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
+                    }
                 },
                 "columns" : [
                     {
@@ -149,9 +149,9 @@ $(function() {
                         mRender : function(data, type, full) {
                             return "<a href='/modificarCategorias/"+data+"' id='"
                                 + data
-                                + "' class='detallePublicacion' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
+                                + "' class='detallePublicacion' title='Modificar'><i class='fa fa-pencil'></i></a>"
                                 + "&nbsp;&nbsp;<a href='eliminarCategoria/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
-                                + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar esta categoria?\");' ><i class='fa fa-trash'></i></a>";
+                                + " onclick='return confirm(\"¿Quieres eliminar esta categoria?\");' ><i class='fa fa-trash'></i></a>";
                         }
 
                     } ]
@@ -183,7 +183,7 @@ $(function() {
                         "previous":   "Anterior",
                         "next":       "Siguiente",
                         "last":       "Último"
-                    },
+                    }
                 },
                 "columns" : [
                     {
@@ -199,17 +199,18 @@ $(function() {
                         mRender : function(data, type, full) {
                             return "<a href='/modificarEditor/"+data+"' id='"
                                 + data
-                                + "' class='detallePublicacion' title='Modificar' alt='Modificar'><i class='fa fa-pencil'></i></a>"
+                                + "' class='detallePublicacion' title='Modificar'><i class='fa fa-pencil'></i></a>"
                                 + "&nbsp;&nbsp;<a href='eliminarEditor/"+data+ "' id='"+data+ "' class='eliminarPublicacion' title='Eliminar'"
-                                + " alt='Eliminar' onclick='return confirm(\"¿Quieres eliminar este editor/a?\");' ><i class='fa fa-trash'></i></a>";
+                                + " onclick='return confirm(\"¿Quieres eliminar este editor/a?\");' ><i class='fa fa-trash'></i></a>";
                         }
 
                     } ]
             });
 
     $('#btnGuardar').click(function() {
-        $('#seleccionadosAutores option').prop('selected', true);
-        $('#seleccionadosEditores option').prop('selected', true);
+        var seleccionAutores = $('#seleccionadosAutores option');
+        seleccionAutores.prop('selected', true);
+        seleccionAutores.prop('selected', true);
         $('#guardarPublicacion').submit();
     });
 });
@@ -225,7 +226,7 @@ function anadirValores(selectSeleccion, selectAnadir){
 
     var found = [];
     $("#"+selectAnadir+" option").each(function() {
-        if($.inArray(this.value, found) != -1) $(this).remove();
+        if($.inArray(this.value, found) !== -1) $(this).remove();
         found.push(this.value);
     });
 }
@@ -261,7 +262,7 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#img-upload').attr('src', e.target.result);
-        }
+        };
 
         reader.readAsDataURL(input.files[0]);
     }
