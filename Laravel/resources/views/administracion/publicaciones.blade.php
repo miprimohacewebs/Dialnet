@@ -138,7 +138,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="isbn">ISBN</label>
+                                        <label for="isbn">ISBN/ISSN</label>
                                         <input class="form-control" id="isbn" name="isbn" value="{{ old('isbn',isset($publicacion) ? $publicacion['isbn'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
@@ -158,7 +158,7 @@
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label for="edicion">Edición</label>
+                                        <label for="edicion">Editorial</label>
                                         <input class="form-control" id="edicion" name="edicion"
                                                value="{{ old('edicion',isset($publicacion) ? $publicacion['edicion'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
@@ -256,7 +256,7 @@
                             <div class="row">
                                 <div class="col-lg-2 text-center">
                                     <div class="form-group">
-                                        <img src="{{{old('imagenPublicacionAnt', isset($publicacion)?$publicacion['imagenPublicacionAnt']:'assets/images/imagesPublicaciones/imgTemplate.jpg')}}}" onerror="this.src='/assets/images/imagesPublicaciones/imgTemplate.jpg'" alt="Imagen por defecto"  title="Imagen por defecto" class="img-thumbnail">
+                                        <img src="{{old('imagenPublicacionAnt', isset($publicacion)?$publicacion['imagenPublicacionAnt']:'assets/images/imagesPublicaciones/imgTemplate.jpg')}}}" onerror="this.src='/assets/images/imagesPublicaciones/imgTemplate.jpg'" alt="Imagen por defecto"  title="Imagen por defecto" class="img-thumbnail">
                                         <legend style="font-size:10px"> Imagen actual </legend>
                                         <input type="hidden" name="imagenPublicacionAnt" id="imagenPublicacionAnt" value="{{old('imagenPublicacionAnt', isset($publicacion)?$publicacion['imagenPublicacionAnt']:null)}}"/>
                                     </div>

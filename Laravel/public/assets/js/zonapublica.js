@@ -42,7 +42,7 @@ $(function() {
                         sWidth : '50%'
                     },
                     {
-                        title: 'ISBN',
+                        title: 'ISBN/ISSN',
                         data : 'tx_isbn',
                         name : 'tx_isbn',
                         sWidth : '10%'
@@ -66,9 +66,7 @@ $(function() {
                         mRender : function(data, type, full) {
                             return "<a href='detallePublicacion' id='"
                                 + data
-                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>"
-                                + "&nbsp;&nbsp;<a href='descargarPublicacion' id='"+data+ "' class='descargarPublicacion'  data-toggle='modal' data-target='#descargarPublicacion' title='Descargar'"
-                                + " alt='Descargar'><i class='fa fa-download'></i></a>";
+                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
                         }
 
                     } ]
@@ -100,7 +98,7 @@ $(function() {
                     // ISBN
                     if(data.publicacion[0].tx_isbn){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'><strong>ISBN:</strong></div>";
+                        html += "<div class='col-md-3'><strong>ISBN/ISSN:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_isbn;
                         html += "</div>";
@@ -127,7 +125,7 @@ $(function() {
                     // Edición
                     if(data.publicacion[0].tx_edicion){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'><strong>Edición:</strong></div>";
+                        html += "<div class='col-md-3'><strong>Editorial:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_edicion;
                         html += "</div>";
@@ -147,7 +145,7 @@ $(function() {
                         html += "<div class='row'>";
                         html += "<div class='col-md-3'><strong>Resumen:</strong></div>";
                         html += "<div class='col-md-9'>";
-                        html += data.publicacion[0].tx_edicion;
+                        html += data.publicacion[0].tx_resumen;
                         html += "</div>";
                         html += "</div>";
                     }
@@ -208,7 +206,7 @@ $(function() {
                     // País
                     if(data.publicacion[0].tx_pais){
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'><strong>País:</strong></div>";
+                        html += "<div class='col-md-3'><strong>Lugar de edición:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_pais;
                         html += "</div>";
@@ -449,10 +447,22 @@ function actualizarListado (tipo, valor){
                         sWidth : '50%'
                     },
                     {
-                        title: 'Resumen',
-                        data : 'tx_resumen',
-                        name : 'tx_resumen',
-                        sWidth : '40%'
+                        title: 'ISBN/ISSN',
+                        data : 'tx_isbn',
+                        name : 'tx_isbn',
+                        sWidth : '10%'
+                    },
+                    {
+                        title: 'Año',
+                        data : 'nu_anno',
+                        name : 'nu_anno',
+                        sWidth : '5%'
+                    },
+                    {
+                        title: 'Obra',
+                        data : 'tx_obra',
+                        name : 'tx_obra',
+                        sWidth : '35%'
                     },
                     {
                         title: 'Ver detalle',
@@ -461,9 +471,7 @@ function actualizarListado (tipo, valor){
                         mRender : function(data, type, full) {
                             return "<a href='detallePublicacion' id='"
                                 + data
-                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>"
-                                + "&nbsp;&nbsp;<a href='descargarPublicacion' id='"+data+ "' class='descargarPublicacion'  data-toggle='modal' data-target='#descargarPublicacion' title='Descargar'"
-                                + " alt='Descargar'><i class='fa fa-download'></i></a>";
+                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
                         }
 
                     } ]
@@ -521,10 +529,22 @@ function resetearPantalla(){
                         sWidth : '50%'
                     },
                     {
-                        title: 'Resumen',
-                        data : 'tx_resumen',
-                        name : 'tx_resumen',
-                        sWidth : '40%'
+                        title: 'ISBN/ISSN',
+                        data : 'tx_isbn',
+                        name : 'tx_isbn',
+                        sWidth : '10%'
+                    },
+                    {
+                        title: 'Año',
+                        data : 'nu_anno',
+                        name : 'nu_anno',
+                        sWidth : '5%'
+                    },
+                    {
+                        title: 'Obra',
+                        data : 'tx_obra',
+                        name : 'tx_obra',
+                        sWidth : '35%'
                     },
                     {
                         title: 'Ver detalle',
@@ -533,9 +553,7 @@ function resetearPantalla(){
                         mRender : function(data, type, full) {
                             return "<a href='detallePublicacion' id='"
                                 + data
-                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>"
-                                + "&nbsp;&nbsp;<a href='descargarPublicacion' id='"+data+ "' class='descargarPublicacion'  data-toggle='modal' data-target='#descargarPublicacion' title='Descargar'"
-                                + " alt='Descargar'><i class='fa fa-download'></i></a>";
+                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
                         }
 
                     } ]
