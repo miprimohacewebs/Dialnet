@@ -606,3 +606,25 @@ input[type="search"]{
 #img-upload{
   width: 100%;
 }
+
+.btn-primary[disabled]{
+  color: #ba0600;
+  background-color: transparent;
+  border-color: #ba0600;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 0;
+  opacity: 0.2;
+}
+
+.btn-primary[disabled]:hover{
+  color: #ba0600;
+  background-color: transparent;
+  border-color: #ba0600;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 0;
+  opacity: 0.2;
+}
