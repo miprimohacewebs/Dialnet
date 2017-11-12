@@ -94,7 +94,7 @@ $(function() {
                         sWidth : '30%'
                     },
                     {
-                        title: 'Apelldiso autor/a',
+                        title: 'Apellido/s autor/a',
                         data : 'tx_autorApellidos',
                         name : 'tx_autorApellidos',
                         sWidth : '70%'

@@ -335,11 +335,13 @@ $(function() {
         },
         "columns" : [ {
             data : 'tx_autor',
+            data : 'tx_autorApellidos',
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                 $(nTd).html("<a href='#' onClick='actualizarListado(\"aut\","+oData.idAutor+");'>"+oData.tx_autorApellidos+" " +oData.tx_autor+"</a>");
             }
-        } ]
+        } ],
     });
+
 
     $("#tablaAtoz").DataTable({
         "serverSide" : false,

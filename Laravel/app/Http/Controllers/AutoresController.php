@@ -20,9 +20,12 @@ use Datatables;
 class AutoresController extends Controller
 {
     public function show(){
-        /* $autores = Autores::all(); */
-        $autores = Autores::orderBy('tx_autorApellidos', 'desc')->get();
-        /* $autores = DB::table('Autores')->orderBy('tx_autorApellidos', 'desc')->get(); */
+       /*  $autores = Autores::orderBy('tx_autorApellidos')->get(['idautor', 'tx_autor', 'tx_autorApellidos']); */
+
+        $autores = Autores::all();
+        /* $autores = Autores::orderBy('tx_autorApellidos', 'desc')->get(); */
+        /* $autores = DB::table('autores')->orderBy('tx_autorApellidos', 'desc')->get(); */
+        /* $autores = DB::table('autores')->select('idAutor','tx_autor','tx_autor')->whereIn('idAutor', $autores)->orderBy('tx_autor')->get() */
         return Datatables::of($autores)->make(true);
     }
 
@@ -106,7 +109,7 @@ class AutoresController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'autor' => 'max:100',
-                'autorApellidos' => 'max:100',
+                'autorApellidos' => 'max:500',
             ]);
             if ($validator->fails()){
                 return redirect()->to('autoresadmin')
@@ -114,7 +117,7 @@ class AutoresController extends Controller
                     ->withInput();
             }
 
-            $autor = array('autor'=>$request->nombreAutor, 'autor'=>$request->apellidosAutor, 'idAutor'=>$request->idAutor);
+            $autor = array('autor'=>$request->nombreAutor, 'autorApellidos'=>$request->apellidosAutor, 'idAutor'=>$request->idAutor);
             Autores::actualizarAutor($autor);
 
             $request->session()->flash('alert-success', 'Se ha modificado el/la autor/a');
