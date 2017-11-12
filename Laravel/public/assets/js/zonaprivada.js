@@ -88,10 +88,16 @@ $(function() {
                 },
                 "columns" : [
                     {
-                        title: 'Autor/a',
+                        title: 'Nombre autor/a',
                         data : 'tx_autor',
                         name : 'tx_autor',
-                        sWidth : '100%'
+                        sWidth : '30%'
+                    },
+                    {
+                        title: 'Apelldiso autor/a',
+                        data : 'tx_autorApellidos',
+                        name : 'tx_autorApellidos',
+                        sWidth : '70%'
                     },
                     {
                         title: 'Acciones',

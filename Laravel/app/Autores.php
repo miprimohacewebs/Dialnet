@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
  * @property integer $ta_x_idtipoautor
  * @property integer $idAutor
  * @property string $tx_autor
+ * @property string $tx_autorApellidos
  * @property Tipoautor $tipoautor
  * @property AutorGrupoautor[] $autorGrupoautors
  */
@@ -18,7 +19,7 @@ class autores extends Model
     /**
      * @var array
      */
-    protected $fillable = ['ta_x_idtipoautor', 'tx_autor'];
+    protected $fillable = ['ta_x_idtipoautor', 'tx_autor', 'tx_autorApellidos'];
 
     /**
      * The table associated with the model.
@@ -47,7 +48,7 @@ class autores extends Model
     }
 
     /**
-     * Método para conseguir el número total de publicaciones
+     * Método para conseguir el número total de autores
      *
      * @return número de autores
      */
@@ -55,9 +56,14 @@ class autores extends Model
         return DB::table('autores')->count();
     }
 
+    /**
+     * Método para obtener los autores seleccionados
+     * @param $autores
+     * @return null
+     */
     public static function obtenerlistaAutoresSeleccionados($autores){
         if ($autores!=null) {
-            return DB::table('autores')->select('idAutor','tx_autor')->whereIn('idAutor', $autores)->orderBy('tx_autor')->get();
+            return DB::table('autores')->select('idAutor','tx_autor', 'tx_autorApellidos')->whereIn('idAutor', $autores)->orderBy('tx_autorApellidos')->get();
         }
         return null;
     }
@@ -69,7 +75,7 @@ class autores extends Model
      */
     public static function guardarAutor($autor){
         DB::table('autores')->insertGetId(
-            ['tx_autor'=>$autor['autor'],'ta_x_idtipoautor'=>1]
+            ['tx_autor'=>$autor['autor'],'tx_autorApellidos'=>$autor['autorApellidos'],'ta_x_idtipoautor'=>1]
         );
 
         return DB::getPdo()->lastInsertId();
@@ -83,7 +89,8 @@ class autores extends Model
 
         DB::table('autores')->where('idAutor', $autor['idAutor'])
             ->update(
-                ['tx_autor'=>$autor['autor']]
+                ['tx_autor'=>$autor['autor']],
+                ['tx_autorApellidos'=>$autor['autorApellidos']]
             );
     }
 }

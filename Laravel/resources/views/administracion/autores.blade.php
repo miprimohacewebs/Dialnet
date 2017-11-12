@@ -63,9 +63,15 @@
                                 <div class="col-lg-6">
                                     {{ csrf_field() }}
                                     <div class="form-group">
-                                        <label for="titulo">Nombre y apellidos de autor</label>
+                                        <label for="titulo">Nombre de autor/a</label>
                                         <input class="form-control" id="nombreAutor" name="nombreAutor"
                                                value="{{ old('nombreAutor',isset($autor) ? $autor['autor'] : null)}}">
+                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="titulo">Apellidos del autor/a</label>
+                                        <input class="form-control" id="apellidosAutor" name="apellidosAutor"
+                                               value="{{ old('apellidosAutor',isset($autor) ? $autor['autorApellidos'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
 

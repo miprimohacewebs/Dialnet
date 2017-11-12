@@ -20,7 +20,9 @@ use Datatables;
 class AutoresController extends Controller
 {
     public function show(){
-        $autores = Autores::all();
+        /* $autores = Autores::all(); */
+        $autores = Autores::orderBy('tx_autorApellidos', 'desc')->get();
+        /* $autores = DB::table('Autores')->orderBy('tx_autorApellidos', 'desc')->get(); */
         return Datatables::of($autores)->make(true);
     }
 
@@ -44,6 +46,7 @@ class AutoresController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nombreAutor' => 'max:100',
+            'apellidosAutor' => 'max:500',
         ]);
 
         if ($validator->fails()){
@@ -52,7 +55,7 @@ class AutoresController extends Controller
                 ->withInput();
         }
 
-        $autor= ['autor'=>$request->nombreAutor];
+        $autor= ['autor'=>$request->nombreAutor, 'autorApellidos'=>$request->apellidosAutor];
         Autores::guardarAutor($autor);
 
         $request->session()->flash('alert-success', 'Se ha creado el/la autor/a correctamente');
@@ -86,7 +89,7 @@ class AutoresController extends Controller
     public function edit($id)
     {
         $autor = Autores::where('idautor', $id)->first();
-        $autorVuelta= [ 'autor'=>$autor['tx_autor'],'idAutor'=>$autor['idAutor']];
+        $autorVuelta= [ 'autor'=>$autor['tx_autor'],'autorApellidos'=>$autor['tx_autorApellidos'],'idAutor'=>$autor['idAutor']];
         $vuelta = array('autor' => $autorVuelta);
         return view('administracion/autores', $vuelta);
     }
@@ -102,7 +105,8 @@ class AutoresController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'nombreAutor' => 'max:100',
+                'autor' => 'max:100',
+                'autorApellidos' => 'max:100',
             ]);
             if ($validator->fails()){
                 return redirect()->to('autoresadmin')
@@ -110,7 +114,7 @@ class AutoresController extends Controller
                     ->withInput();
             }
 
-            $autor = array('autor'=>$request->nombreAutor, 'idAutor'=>$request->idAutor);
+            $autor = array('autor'=>$request->nombreAutor, 'autor'=>$request->apellidosAutor, 'idAutor'=>$request->idAutor);
             Autores::actualizarAutor($autor);
 
             $request->session()->flash('alert-success', 'Se ha modificado el/la autor/a');

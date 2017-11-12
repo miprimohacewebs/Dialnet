@@ -159,6 +159,7 @@ $(function() {
                         html += "</div>";
                     }
                     // Imágen
+                    /*
                     if(data.publicacion[0].tx_imagen){
                         html += "<div class='row'>";
                         html += "<div class='col-md-3'><strong>Imagen:</strong></div>";
@@ -167,6 +168,7 @@ $(function() {
                         html += "</div>";
                         html += "</div>";
                     }
+                    */
                     // Subtitulo
                     if(data.publicacion[0].tx_subtitulo){
                         html += "<div class='row'>";
@@ -334,7 +336,7 @@ $(function() {
         "columns" : [ {
             data : 'tx_autor',
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                $(nTd).html("<a href='#' onClick='actualizarListado(\"aut\","+oData.idAutor+");'>"+oData.tx_autor+"</a>");
+                $(nTd).html("<a href='#' onClick='actualizarListado(\"aut\","+oData.idAutor+");'>"+oData.tx_autorApellidos+" " +oData.tx_autor+"</a>");
             }
         } ]
     });
