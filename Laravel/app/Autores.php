@@ -86,11 +86,11 @@ class autores extends Model
      * @param $autor
      */
     public static function actualizarAutor($autor){
-
+;
         DB::table('autores')->where('idAutor', $autor['idAutor'])
             ->update(
-                ['tx_autor'=>$autor['autor']],
-                ['tx_autorApellidos'=>$autor['autorApellidos']]
+                ['tx_autor'=>$autor['autor'],
+                'tx_autorApellidos'=>$autor['autorApellidos']]
             );
     }
 }

@@ -58,6 +58,8 @@ class AutoresController extends Controller
                 ->withInput();
         }
 
+
+
         $autor= ['autor'=>$request->nombreAutor, 'autorApellidos'=>$request->apellidosAutor];
         Autores::guardarAutor($autor);
 
@@ -109,7 +111,7 @@ class AutoresController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'autor' => 'max:100',
-                'autorApellidos' => 'max:500',
+                'apellidosAutor' => 'max:500',
             ]);
             if ($validator->fails()){
                 return redirect()->to('autoresadmin')
