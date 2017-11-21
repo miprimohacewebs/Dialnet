@@ -75,7 +75,7 @@ class PublicacionesController extends Controller
         $autoresSeleccionados1 = null;
         $editoresSeleccionados1 = null;
         $categorias1 = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
-        $autores1 = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
+        $autores1 = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
         $editores1 = Editores::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
         if (! empty ($request->session()->get('autoresSeleccionados2'))) {
             $autoresSeleccionados1 = collect($request->session()->get('autoresSeleccionados2'));
@@ -210,7 +210,7 @@ class PublicacionesController extends Controller
             'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion']];
 
         $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
-        $autores = Autores::orderBy('tx_autor')->get(['idautor', 'tx_autor']);
+        $autores = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
         $editores = Editores::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
         $autoresSeleccionados=null;
         if ($publicacion['aga_x_idgrupoautor']!=null) {

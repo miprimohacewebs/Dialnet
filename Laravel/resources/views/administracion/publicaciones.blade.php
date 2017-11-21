@@ -190,7 +190,7 @@
                                         <label>Autores/as</label>
                                         <select multiple class="form-control" id="selectAutores">
                                             @foreach($autores as $autor)
-                                                <option value="{{$autor->idautor}}">{{$autor->tx_autor}}</option>
+                                                <option value="{{$autor->idautor}}">{{$autor->tx_autorapellidos}}, {{$autor->tx_autor}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -204,7 +204,7 @@
                                         <select multiple class="form-control" id="seleccionadosAutores" name="seleccionadosAutores[]" >
                                             @if( ! empty($autoresSeleccionados))
                                                 @foreach($autoresSeleccionados as $autorSeleccionado)
-                                                    <option value="{{$autorSeleccionado->idAutor}}">{{$autorSeleccionado->tx_autor}}</option>
+                                                    <option value="{{$autorSeleccionado->idAutor}}">{{$autor->tx_autorapellidos}}, {{$autorSeleccionado->tx_autor}}</option>
                                                 @endforeach
                                             @endif
 
