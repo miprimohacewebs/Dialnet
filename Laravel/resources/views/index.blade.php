@@ -13,6 +13,14 @@
         <!-- Page Heading -->
             <div class="row">
                 <div class="col-md-1 text-center">
+                    <a href="#" id="limpiar" onclick="resetearPantalla();"> <span class="fa-stack fa-2x"> <i
+                                    class="fa fa-eraser"
+                                    aria-hidden="true"></i>
+							<p class="textoInferiorIconosAwasome">Limpiar</p>
+					</span>
+                    </a>
+                </div>
+                <div class="col-md-1 text-center">
                     <a href="#" id="categorias"> <span class="fa-stack fa-2x"> <i
                                     class="fa fa-folder-open" aria-hidden="true"></i>
 							<p class="textoInferiorIconosAwasome">Categorías</p>
@@ -38,14 +46,6 @@
                                                                             aria-hidden="true"></i>
 							<p class="textoInferiorIconosAwasome" >Palabras</p>
                             <p class="textoInferiorIconosAwasome" style="margin-top: -53px;">clave</p>
-					</span>
-                    </a>
-                </div>
-                <div class="col-md-1 text-center">
-                    <a href="#" id="limpiar" onclick="resetearPantalla();"> <span class="fa-stack fa-2x"> <i
-                                    class="fa fa-eraser"
-                                    aria-hidden="true"></i>
-							<p class="textoInferiorIconosAwasome">Limpiar</p>
 					</span>
                     </a>
                 </div>

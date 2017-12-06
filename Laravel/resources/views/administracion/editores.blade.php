@@ -73,14 +73,15 @@
 
                             <div style="height: 20px; width: 100%"></div>
                             <div class="row">
-                                <div class="col-md-10">
+                                <div class="col-md-9">
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-3">
                                     <button id="btnReset" type="reset"
                                             class="btn btn-primary btn-sm" @if(isset($editor) || old('idEditor')!=null)disabled="disabled"@endif>Limpiar
                                     </button>
-                                </div>
-                                <div class="col-md-1">
+                                    <button id="btnCancelar" type="button"
+                                            class="btn btn-primary btn-sm" onclick="window.location='{{url('editores')}}'">Cancelar
+                                    </button>
                                     <button id="btnGuardar" type="submit"
                                             class="btn btn-primary btn-sm">Guardar
                                     </button>

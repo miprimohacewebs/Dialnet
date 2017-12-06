@@ -165,7 +165,7 @@ class PublicacionesController extends Controller
      */
     public function show($id)
     {
-        $publicacion = Publicaciones::where('x_idpublicacion', $id)->get(['tx_titulo', 'tx_isbn', 'tx_paginas', 'tx_edicion', 'tx_resumen']);
+        $publicacion = Publicaciones::where('x_idpublicacion', $id)->get(['tx_titulo', 'tx_isbn', 'tx_paginas', 'tx_editorial', 'tx_resumen']);
         return $publicacion;
     }
 
@@ -200,11 +200,11 @@ class PublicacionesController extends Controller
         }else{
             $imagen=$this->imagenPublicacionDefecto;
         }
-        $publicacionVuelta= ['titulo'=>$publicacion['tx_titulo'], 'subtitulo'=>$publicacion['tx_subtitulo'],
-            'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'obra'=>$publicacion['tx_obra'],
-            'descriptores'=>$publicacion['tx_descriptores'], 'genero'=>$publicacion['tx_genero'],
+        $publicacionVuelta= ['titulo'=>$publicacion['tx_titulo'], 'subtitulo'=>$publicacion['tx_doi'],
+            'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'obra'=>$publicacion['tx_publicacion'],
+            'descriptores'=>$publicacion['tx_descriptores'], 'genero'=>$publicacion['tx_enlacedoi'],
             'categoria'=>$publicacion['cat_x_idcategoria'], 'isbn'=>$publicacion['tx_isbn'], 'anno'=>$publicacion['nu_anno'],
-            'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'edicion'=>$publicacion['tx_edicion'],
+            'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'edicion'=>$publicacion['tx_editorial'],
             'fechaPublicacion'=>$publicacion['fh_fechapublicacion'], 'paginas'=>$publicacion['tx_paginas'],
             'numPaginas'=>$publicacion['nu_numPaginas'], 'idAutor'=>$publicacion['aga_x_idgrupoautor'], 'idEditor'=> $publicacion['ge_x_idgrupoeditor'],
             'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion']];
@@ -238,17 +238,17 @@ class PublicacionesController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'titulo' => 'max:300',
-                'subtitulo' => 'max:500',
+                'doi' => 'max:500',
                 'asunto' => 'max:200',
                 'resumen' => 'max:200',
-                'obra' => 'max:200',
+                'publicacion' => 'max:200',
                 'descriptores' => 'max:500',
-                'genero' => 'max:30',
+                'enlacedoi' => 'max:30',
                 'isbn' => 'max:80',
                 'anno' => 'bail|date_format:Y|before:+1 year',
                 'pais' => 'max:50',
                 'idioma' => 'max:50',
-                'edicion' => 'max:50',
+                'editorial' => 'max:50',
                 'fechaPublicacion' => 'bail|date_format:d/m/Y|before:today',
                 'paginas' => 'max:16',
                 'numPaginas' => 'bail|integer|max:99999999',
@@ -285,9 +285,9 @@ class PublicacionesController extends Controller
             }else if ($request->imagenPublicacionAnt !=null){
                 $nombreImagen = $request->imagenPublicacionAnt;
             }
-            $publicacion= ['idPublicacion'=>$id,'titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
-                'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
-                'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
+            $publicacion= ['idPublicacion'=>$id,'titulo'=>$request->titulo, 'doi'=>$request->doi,
+                'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'publicacion'=>$request->publicacion,
+                'descriptores'=>$request->descriptores, 'enlacedoi'=>$request->enlacedoi,
                 'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
                 'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,

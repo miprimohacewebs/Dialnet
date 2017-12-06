@@ -85,18 +85,7 @@
                                     <div class="form-group">
                                         <label for="titulo">Título</label>
                                         <input class="form-control" id="titulo" name="titulo"  value="{{ old('titulo',isset($publicacion) ? $publicacion['titulo'] : null)}}">
-                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="subtitulo">Subtítulo</label>
-                                        <input class="form-control" id="subtitulo" name="subtitulo"
-                                               value="{{old('subtitulo',isset($publicacion) ? $publicacion['subtitulo'] : null)}}">
-                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="asunto">Asunto</label>
-                                        <input class="form-control" id="asunto" name="asunto" value="{{ old('asunto',isset($publicacion) ? $publicacion['asunto'] : null)}}">
-                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                        <p class="help-block">Introduzca el título de la publicación</p>
                                     </div>
                                     <div class="form-group">
                                         <label for="resumen">Resumen</label>
@@ -105,27 +94,43 @@
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label for="obra">Obra</label>
-                                        <input class="form-control" id="obra" name="obra" value="{{ old('obra',isset($publicacion) ? $publicacion['obra'] : null)}}">
+                                        <label for="publicacion">Publicación</label>
+                                        <input class="form-control" id="publicacion" name="publicacion" value="{{ old('publicacion',isset($publicacion) ? $publicacion['publicacion'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
-                                    <div class="form-group">
-                                        <label for="descriptores">Descriptores</label>
-                                        <input class="form-control" id="descriptores" name="descriptores"
-                                               value="{{ old('descriptores',isset($publicacion) ? $publicacion['descriptores'] : null)}}">
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="descriptores">Descriptores</label>--}}
+                                        {{--<input class="form-control" id="descriptores" name="descriptores"--}}
+                                               {{--value="{{ old('descriptores',isset($publicacion) ? $publicacion['descriptores'] : null)}}">--}}
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
-                                    </div>
+                                    {{--</div>--}}
                                     <div class="form-group">
-                                        <label for="genero">Género</label>
-                                        <input class="form-control" id="genero" name="genero" value="{{ old('genero',isset($publicacion) ? $publicacion['genero'] : null)}}">
-                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="numPaginas">Núm Páginas</label>
+                                        <label for="numPaginas">Núm. Páginas</label>
                                         <input class="form-control" id="numPaginas" name="numPaginas"
                                                value="{{ old('numPaginas',isset($publicacion) ? $publicacion['numPaginas'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
+                                    <div class="form-group">
+                                        <label for="doi">DOI</label>
+                                        <input class="form-control" id="doi" name="doi"
+                                               value="{{ old('doi',isset($publicacion) ? $publicacion['doi'] : null)}}">
+                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="enlacedoi">Enlace DOI</label>
+                                        <input class="form-control" id="enlacedoi" name="enlacedoi"
+                                               value="{{ old('enlacedoi',isset($publicacion) ? $publicacion['enlacedoi'] : null)}}">
+                                        <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                    </div>
+
+
+
+
+
+
+
+
+
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -158,9 +163,9 @@
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
-                                        <label for="edicion">Editorial</label>
-                                        <input class="form-control" id="edicion" name="edicion"
-                                               value="{{ old('edicion',isset($publicacion) ? $publicacion['edicion'] : null)}}">
+                                        <label for="editorial">Editorial</label>
+                                        <input class="form-control" id="editorial" name="editorial"
+                                               value="{{ old('editorial',isset($publicacion) ? $publicacion['editorial'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
                                     <div class="form-group">
@@ -293,11 +298,14 @@
                     </div>
                     <div style="height: 20px; width: 100%"></div>
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <button id="btnReset" type="reset"
                                     class="btn btn-primary btn-sm" @if(isset($publicacion) || old('idPublicacion')!=null)disabled="disabled"@endif>Limpiar
+                            </button>
+                            <button id="btnCancelar" type="button"
+                                    class="btn btn-primary btn-sm" onclick="window.location='{{url('publicaciones')}}'">Cancelar
                             </button>
                             <button id="btnGuardar" type="submit"
                                     class="btn btn-primary btn-sm">Guardar
@@ -311,7 +319,7 @@
             <div style="height: 50px; width: 100%"></div>
             <div class="row">
                 <div class="col-md-12">
-                    <table id="tablaEdicionPublicaciones" class="table table-hover table-condensed">
+                    <table id="tablaeditorialPublicaciones" class="table table-hover table-condensed">
                     </table>
                 </div>
             </div>
