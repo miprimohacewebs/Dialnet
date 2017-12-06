@@ -305,7 +305,7 @@
                                     class="btn btn-primary btn-sm" @if(isset($publicacion) || old('idPublicacion')!=null)disabled="disabled"@endif>Limpiar
                             </button>
                             <button id="btnCancelar" type="button"
-                                    class="btn btn-primary btn-sm" onclick="window.location='{{url('publicaciones')}}'">Cancelar
+                                    class="btn btn-primary btn-sm" @if(!isset($publicacion) && old('idPublicacion')==null)disabled="disabled"@endif onclick="window.location='{{url('publicacionesadmin')}}'">Cancelar
                             </button>
                             <button id="btnGuardar" type="submit"
                                     class="btn btn-primary btn-sm">Guardar
@@ -319,7 +319,7 @@
             <div style="height: 50px; width: 100%"></div>
             <div class="row">
                 <div class="col-md-12">
-                    <table id="tablaeditorialPublicaciones" class="table table-hover table-condensed">
+                    <table id="tablaEdicionPublicaciones" class="table table-hover table-condensed">
                     </table>
                 </div>
             </div>
