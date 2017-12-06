@@ -88,7 +88,7 @@
                                             class="btn btn-primary btn-sm" @if(isset($autor) || old('idAutor')!=null)disabled="disabled"@endif>Limpiar
                                     </button>
                                     <button id="btnCancelar" type="button"
-                                            class="btn btn-primary btn-sm" onclick="window.location='{{url('autoresadmin')}}'">Cancelar
+                                            class="btn btn-primary btn-sm" @if(!isset($autor) && old('idAutor')==null)disabled="disabled"@endif onclick="window.location='{{url('autoresadmin')}}'">Cancelar
                                     </button>
                                     <button id="btnGuardar" type="submit"
                                             class="btn btn-primary btn-sm">Guardar
