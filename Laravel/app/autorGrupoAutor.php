@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 /**
  * @property integer $aut_x_idautor
  * @property integer $ga_x_idgrupoautor
- * @property Autore $autore
- * @property Publicacione[] $publicaciones
+ * @property Autores $autores
+ * @property Publicaciones[] $publicaciones
  */
 class autorGrupoAutor extends Model
 {
@@ -33,7 +33,7 @@ class autorGrupoAutor extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function autore()
+    public function autores()
     {
         return $this->belongsTo('App\autores', 'aut_x_idautor', 'idAutor');
     }

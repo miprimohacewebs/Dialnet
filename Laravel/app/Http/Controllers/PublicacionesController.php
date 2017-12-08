@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\categoriaGrupoCategoria;
 use App\Publicaciones;
 use App\Categorias;
 use App\Autores;
@@ -133,6 +134,8 @@ class PublicacionesController extends Controller
 
             $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
 
+            $idGrupoCategoria = categoriaGrupoCategoria::AgruparCategorias($request->seleccionadosCategorias);
+
             $imagen = $request->imagenPublicacion;
             $nombreImagen=null;
             if ($imagen!=null){
@@ -142,9 +145,10 @@ class PublicacionesController extends Controller
             $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
                 'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'publicacion'=>$request->publicacion,
                 'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
-                'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
-                'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
+                'categoria'=>$idGrupoCategoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
+                'pais'=>$request->pais, 'idioma'=>$request->idioma, 'editorial'=>$request->editorial,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
+                'enlacedoi'=>$request->enlacedoi, 'doi'=>$request->doi,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
                 'imagen'=>$nombreImagen];
             Publicaciones::guardarPublicacion($publicacion);
@@ -203,7 +207,7 @@ class PublicacionesController extends Controller
         $publicacionVuelta= ['titulo'=>$publicacion['tx_titulo'], 'doi'=>$publicacion['tx_doi'],
             'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'publicacion'=>$publicacion['tx_publicacion'],
             'descriptores'=>$publicacion['tx_descriptores'], 'enlacedoi'=>$publicacion['tx_enlacedoi'],
-            'categoria'=>$publicacion['cat_x_idcategoria'], 'isbn'=>$publicacion['tx_isbn'], 'anno'=>$publicacion['nu_anno'],
+            'categoria'=>$publicacion['gcat_x_idgrupocategoria'], 'isbn'=>$publicacion['tx_isbn'], 'anno'=>$publicacion['nu_anno'],
             'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'editorial'=>$publicacion['tx_editorial'],
             'fechaPublicacion'=>$publicacion['fh_fechapublicacion'], 'paginas'=>$publicacion['tx_paginas'],
             'numPaginas'=>$publicacion['nu_numPaginas'], 'idAutor'=>$publicacion['aga_x_idgrupoautor'], 'idEditor'=> $publicacion['ge_x_idgrupoeditor'],
@@ -274,6 +278,8 @@ class PublicacionesController extends Controller
 
             $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
 
+            $idGrupoCategoria = categoriaGrupoCategoria::AgruparCategorias($request->seleccionadosCategorias);
+
             $imagen = $request->imagenPublicacion;
             $nombreImagen=null;
             if ($imagen!=null){
@@ -288,7 +294,7 @@ class PublicacionesController extends Controller
             $publicacion= ['idPublicacion'=>$id,'titulo'=>$request->titulo, 'doi'=>$request->doi,
                 'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'publicacion'=>$request->publicacion,
                 'descriptores'=>$request->descriptores, 'enlacedoi'=>$request->enlacedoi,
-                'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
+                'categoria'=>$idGrupoCategoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
                 'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
@@ -301,6 +307,10 @@ class PublicacionesController extends Controller
 
             if ($request->idGrupoEditores!=null) {
                 editorGrupoEditor::destroy($request->idGrupoEditores);
+            }
+
+            if ($request->idGrupoCategorias!=null) {
+                categoriaGrupoCategoria::destroy($request->idGrupoCategorias);
             }
 
             $request->session()->flash('alert-success', 'Se ha modificado la publicación');
@@ -333,6 +343,10 @@ class PublicacionesController extends Controller
 
             if ($publicacion['ge_x_idgrupoeditor']!=null) {
                 editorGrupoEditor::destroy($publicacion['ge_x_idgrupoeditor']);
+            }
+
+            if ($publicacion['gcat_x_idgrupocategoria']!=null) {
+                categoriaGrupoCategoria::destroy($publicacion['gcat_x_idgrupocategoria']);
             }
         }catch (Exception $e){
             Log::error($e);

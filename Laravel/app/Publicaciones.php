@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\DB;
  * @property string $tx_idioma
  * @property integer $nu_numPaginas
  * @property AutorGrupoautor $autorGrupoautor
- * @property Categoria $categoria
+ * @property categoriaGrupoCategoria $categoriaGrupoCategoria
  * @property EditorGrupoeditor $editorGrupoeditor
  */
 class Publicaciones extends Model
@@ -41,7 +41,7 @@ class Publicaciones extends Model
     /**
      * @var array
      */
-    protected $fillable = ['aga_x_idgrupoautor', 'cat_x_idcategoria', 'ge_x_idgrupoeditor', 'tx_titulo', 'tx_isbn', 'nu_anno', 'tx_paginas', 'tx_editorial', 'tx_publicacion', 'tx_resumen', 'tx_descriptores', 'tx_imagen', 'tx_doi', 'tx_enlacedoi', 'tx_asunto', 'fh_fechapublicacion', 'tx_pais', 'tx_idioma', 'nu_numPaginas'];
+    protected $fillable = ['aga_x_idgrupoautor', 'gcat_x_idgrupocategoria', 'ge_x_idgrupoeditor', 'tx_titulo', 'tx_isbn', 'nu_anno', 'tx_paginas', 'tx_editorial', 'tx_publicacion', 'tx_resumen', 'tx_descriptores', 'tx_imagen', 'tx_doi', 'tx_enlacedoi', 'tx_asunto', 'fh_fechapublicacion', 'tx_pais', 'tx_idioma', 'nu_numPaginas'];
     
     /**
      * Método para emparejar autor con grupoAutor
@@ -58,9 +58,9 @@ class Publicaciones extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function categoria()
+    public function categoriaGrupoCategoria()
     {
-        return $this->belongsTo('App\categorias', 'cat_x_idcategoria', 'x_idcategoria');
+        return $this->belongsTo('App\categoriaGrupoCategoria', 'gcat_x_idgrupocategoria', 'gt_x_idGrupoCategoria');
     }
     
     /**
@@ -103,7 +103,7 @@ class Publicaciones extends Model
         
         switch($tipo){
             case 'cat':
-                $tipoValor = "cat_x_idcategoria";
+                $tipoValor = "categoria_grupoAutor.cat_x_idCategoria";
                 break;
             case 'aut':
                 $tipoValor = "autor_grupoautor.aut_x_idautor";
@@ -119,6 +119,7 @@ class Publicaciones extends Model
         $vuelta = DB::table('publicaciones')
                       ->select('publicaciones.*')
                       ->leftjoin('autor_grupoautor', 'publicaciones.aga_x_idgrupoautor', '=', 'autor_grupoautor.ga_x_idgrupoautor')
+                      ->leftjoin('categoria_grupoCategoria', 'publicaciones.gcat_x_idGrupoCategoria', '=', 'categoria_grupoCategoria.gt_x_idGrupoCategoria')
                       ->where($tipoValor, $operador, $valorBuscar)
                       ->distinct()
                       ->get();
@@ -155,17 +156,17 @@ class Publicaciones extends Model
         if ($publicacion['fechaPublicacion']!='') {
             $convert_date = date("Y-m-d", strtotime($publicacion['fechaPublicacion']));
         }
-        $publicacionSeleccionada = null;
+        $categoriaSeleccionada = null;
         if ($publicacion['categoria']!=''){
-            $publicacionSeleccionada=$publicacion['categoria'];
+            $categoriaSeleccionada=$publicacion['categoria'];
         }
 
         DB::table('publicaciones')->insertGetId(
-            ['tx_titulo'=>$publicacion['titulo'], 'cat_x_idcategoria'=>$publicacionSeleccionada,
-                'tx_doi'=>$publicacion['subtitulo'], 'tx_isbn'=>$publicacion['isbn'], 'tx_asunto'=>$publicacion['asunto'], 'nu_anno'=>$publicacion['anno'],
-                'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['obra'],
-                'tx_editorial'=>$publicacion['edicion'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
-                'tx_enlacedoi'=>$publicacion['genero'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'], 'tx_imagen'=>$publicacion['imagen'],
+            ['tx_titulo'=>$publicacion['titulo'], 'gcat_x_idgrupocategoria'=>$categoriaSeleccionada,
+                'tx_doi'=>$publicacion['doi'], 'tx_isbn'=>$publicacion['isbn'], 'tx_asunto'=>$publicacion['asunto'], 'nu_anno'=>$publicacion['anno'],
+                'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['publicacion'],
+                'tx_editorial'=>$publicacion['editorial'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
+                'tx_enlacedoi'=>$publicacion['enlacedoi'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'], 'tx_imagen'=>$publicacion['imagen'],
                 'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor']
             ]
         );
@@ -178,14 +179,14 @@ class Publicaciones extends Model
         if ($publicacion['fechaPublicacion']!='') {
             $convert_date = date("Y-m-d", strtotime($publicacion['fechaPublicacion']));
         }
-        $publicacionSeleccionada = null;
+        $categoriaSeleccionada = null;
         if ($publicacion['categoria']!=''){
-            $publicacionSeleccionada=$publicacion['categoria'];
+            $categoriaSeleccionada=$publicacion['categoria'];
         }
 
         DB::table('publicaciones')->where('x_idpublicacion', $publicacion['idPublicacion'])
             ->update(
-            ['tx_titulo'=>$publicacion['titulo'], 'cat_x_idcategoria'=>$publicacionSeleccionada,
+            ['tx_titulo'=>$publicacion['titulo'], 'gcat_x_idgrupocategoria'=>$categoriaSeleccionada,
                 'tx_doi'=>$publicacion['subtitulo'], 'tx_isbn'=>$publicacion['isbn'], 'tx_asunto'=>$publicacion['asunto'], 'nu_anno'=>$publicacion['anno'],
                 'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['obra'],
                 'tx_editorial'=>$publicacion['edicion'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
