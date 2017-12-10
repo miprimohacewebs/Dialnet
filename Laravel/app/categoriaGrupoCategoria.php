@@ -53,7 +53,7 @@ class categoriaGrupoCategoria extends Model
                 $id = $idCategoriaGrupoCategoria+1;
 
                 foreach ($categoriasGuardar as $categoria) {
-                    DB::table('autor_grupoautor')->insertGetId(
+                    DB::table('categoria_grupoCategoria')->insertGetId(
                         [
                             'gt_x_idGrupoCategoria' => $id,
                             'cat_x_idCategoria' => $categoria
@@ -67,6 +67,6 @@ class categoriaGrupoCategoria extends Model
     }
 
     public static function obtenerCategoriasPublicacion($idGrupoCategoria){
-        return DB::table('v_categorias')->select('x_categoria', 'tx_categoria')->where('idGrupo', '=', $idGrupoCategoria)->orderBy('tx_categoria')->get();
+        return DB::table('v_categorias')->select('x_idcategoria', 'tx_categoria')->where('idGrupo', '=', $idGrupoCategoria)->orderBy('tx_categoria')->get();
     }
 }

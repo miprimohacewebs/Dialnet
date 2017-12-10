@@ -156,13 +156,8 @@ class Publicaciones extends Model
         if ($publicacion['fechaPublicacion']!='') {
             $convert_date = date("Y-m-d", strtotime($publicacion['fechaPublicacion']));
         }
-        $categoriaSeleccionada = null;
-        if ($publicacion['categoria']!=''){
-            $categoriaSeleccionada=$publicacion['categoria'];
-        }
-
         DB::table('publicaciones')->insertGetId(
-            ['tx_titulo'=>$publicacion['titulo'], 'gcat_x_idgrupocategoria'=>$categoriaSeleccionada,
+            ['tx_titulo'=>$publicacion['titulo'], 'gcat_x_idgrupocategoria'=>$publicacion['idCategoria'],
                 'tx_doi'=>$publicacion['doi'], 'tx_isbn'=>$publicacion['isbn'], 'tx_asunto'=>$publicacion['asunto'], 'nu_anno'=>$publicacion['anno'],
                 'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['publicacion'],
                 'tx_editorial'=>$publicacion['editorial'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
@@ -179,18 +174,13 @@ class Publicaciones extends Model
         if ($publicacion['fechaPublicacion']!='') {
             $convert_date = date("Y-m-d", strtotime($publicacion['fechaPublicacion']));
         }
-        $categoriaSeleccionada = null;
-        if ($publicacion['categoria']!=''){
-            $categoriaSeleccionada=$publicacion['categoria'];
-        }
-
         DB::table('publicaciones')->where('x_idpublicacion', $publicacion['idPublicacion'])
             ->update(
-            ['tx_titulo'=>$publicacion['titulo'], 'gcat_x_idgrupocategoria'=>$categoriaSeleccionada,
-                'tx_doi'=>$publicacion['subtitulo'], 'tx_isbn'=>$publicacion['isbn'], 'tx_asunto'=>$publicacion['asunto'], 'nu_anno'=>$publicacion['anno'],
-                'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['obra'],
-                'tx_editorial'=>$publicacion['edicion'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
-                'tx_enlacedoi'=>$publicacion['genero'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'], 'tx_imagen'=>$publicacion['imagen'],
+            ['tx_titulo'=>$publicacion['titulo'], 'gcat_x_idgrupocategoria'=>$publicacion['idCategoria'],
+                'tx_doi'=>$publicacion['doi'], 'tx_isbn'=>$publicacion['isbn'], 'tx_asunto'=>$publicacion['asunto'], 'nu_anno'=>$publicacion['anno'],
+                'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['publicacion'],
+                'tx_editorial'=>$publicacion['editorial'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
+                'tx_enlacedoi'=>$publicacion['enlacedoi'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'], 'tx_imagen'=>$publicacion['imagen'],
                 'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor']
             ]
         );

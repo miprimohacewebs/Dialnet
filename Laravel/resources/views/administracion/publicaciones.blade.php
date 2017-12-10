@@ -56,6 +56,7 @@
                 <form role="form" name="guardarPublicacion" method="POST" action="/administrador/modificarPublicacion/{{old('idPublicacion',isset($publicacion) ? $publicacion['idPublicacion'] : null)}}" enctype="multipart/form-data">
                     <input type="hidden" name="idGrupoAutores" id="idGrupoAutores" value="{{ old('idGrupoAutores',isset($publicacion) ? $publicacion['idAutor'] : null)}}"/>
                     <input type="hidden" name="idGrupoEditores" id="idGrupoEditores" value="{{ old('idGrupoEditores',isset($publicacion) ? $publicacion['idEditor'] : null)}}"/>
+                    <input type="hidden" name="idGrupoCategorias" id="idGrupoCategorias" value="{{ old('idGrupoCategorias',isset($publicacion) ? $publicacion['idCategoria'] : null)}}"/>
                     <input type="hidden" name="idPublicacion" id="idPublicacion" value="{{ old('idPublicacion',isset($publicacion) ? $publicacion['idPublicacion'] : null)}}"/>
                     @else
                         <form role="form" name="guardarPublicacion" method="POST" action="/administrador/guardarPublicacion" enctype="multipart/form-data">
@@ -68,7 +69,7 @@
                         </li>
                         <li><a href="#2" data-toggle="tab">Selección autores/as</a>
                         </li>
-                        <li><a href="#3" data-toggle="tab">Selección editores</a>
+                        <li><a href="#3" data-toggle="tab">Selección categorías</a>
                         </li>
                         <li><a href="#4" data-toggle="tab">Subir imagen</a>
                         </li>
@@ -122,18 +123,9 @@
                                                value="{{ old('enlacedoi',isset($publicacion) ? $publicacion['enlacedoi'] : null)}}">
                                         <!-- <p class="help-block">Texto de ayuda.</p> -->
                                     </div>
-
-
-
-
-
-
-
-
-
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="form-group">
+                                    {{--<div class="form-group">
                                         <label for="categoria">Categoría</label>
                                         <select class="form-control" id="categoria" name="categoria">
                                             <option value="">Seleccione...</option>
@@ -141,7 +133,7 @@
                                                 <option value="{{$categoriaHija->x_idcategoria}}" {{ $categoriaHija->x_idcategoria == old('categoria', isset($publicacion) ? $publicacion['categoria'] : null) ? "selected" : "" }}>{{$categoriaHija->tx_categoria}}</option>
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div>--}}
                                     <div class="form-group">
                                         <label for="isbn">ISBN/ISSN</label>
                                         <input class="form-control" id="isbn" name="isbn" value="{{ old('isbn',isset($publicacion) ? $publicacion['isbn'] : null)}}">
@@ -183,9 +175,12 @@
                                 </div>
                             </div>
                             <div style="height: 20px; width: 100%"></div>
-
-
                         </div>
+
+
+
+
+
                         <div class="tab-pane" id="2">
                             <div style="height: 20px; width: 100%"></div>
                             <div class="row">
@@ -207,9 +202,9 @@
                                     <div class="form-group">
                                         <label>Autores/as asignados a la publicación</label>
                                         <select multiple class="form-control" id="seleccionadosAutores" name="seleccionadosAutores[]" >
-                                            @if( ! empty($autoresSeleccionados))
+                                            @if( !empty($autoresSeleccionados))
                                                 @foreach($autoresSeleccionados as $autorSeleccionado)
-                                                    <option value="{{$autorSeleccionado->idAutor}}">{{$autor->tx_autorapellidos}}, {{$autorSeleccionado->tx_autor}}</option>
+                                                    <option value="{{$autorSeleccionado->idAutor}}">{{$autorSeleccionado->tx_autorapellidos}}, {{$autorSeleccionado->tx_autor}}</option>
                                                 @endforeach
                                             @endif
 
@@ -221,41 +216,49 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+
                         <div class="tab-pane" id="3">
                             <div style="height: 20px; width: 100%"></div>
                             <div class="row">
                                 <div class="col-lg-6">
 
                                     <div class="form-group">
-                                        <label>Editores/as</label>
-                                        <select multiple class="form-control" id="selectEditores">
-                                            @foreach($editores as $editor)
-                                                <option value="{{$editor->x_ideditor}}">{{$editor->tx_editor}}</option>
+                                        <label>Categorías</label>
+                                        <select multiple class="form-control" id="selectCategorias">
+                                            @foreach($categorias as $categoria)
+                                                <option value="{{$categoria->x_idcategoria}}">{{$categoria->tx_categoria}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <button id="btnAnadirEditores" type="button" class="btn btn-primary btn-sm" onclick="anadirValores('selectEditores','seleccionadosEditores')">Añadir
+                                    <button id="btnAnadirCategorias" type="button" class="btn btn-primary btn-sm" onclick="anadirValores('selectCategorias','seleccionadosCategorias')">Añadir
                                     </button>
 
                                 </div>
                                 <div class="col-lg-6">
 
                                     <div class="form-group">
-                                        <label>Editores/as asignados a la publicación</label>
-                                        <select multiple class="form-control" id="seleccionadosEditores" name="seleccionadosEditores[]">
-                                            @if( ! empty($editoresSeleccionados))
-                                                @foreach($editoresSeleccionados as $editorSeleccionado)
-                                                    <option value="{{$editorSeleccionado->x_ideditor}}">{{$editorSeleccionado->tx_editor}}</option>
+                                        <label>Categorías asignadas a la publicación</label>
+                                        <select multiple class="form-control" id="seleccionadosCategorias" name="seleccionadosCategorias[]">
+                                            @if( ! empty($categoriasSeleccionadas))
+                                                @foreach($categoriasSeleccionadas as $categoriaSeleccionada)
+                                                    <option value="{{$categoriaSeleccionada->x_idcategoria}}">{{$categoriaSeleccionada->tx_categoria}}</option>
                                                 @endforeach
                                             @endif
                                         </select>
                                     </div>
-                                    <button id="btnQuitarEditores" type="button" class="btn btn-primary btn-sm" onclick="quitarValores('seleccionadosEditores')">Quitar
+                                    <button id="btnQuitarCategorias" type="button" class="btn btn-primary btn-sm" onclick="quitarValores('seleccionadosCategorias')">Quitar
                                     </button>
 
                                 </div>
                             </div>
                         </div>
+
+
+
+
                         <div class="tab-pane" id="4">
                             <div style="height: 20px; width: 100%"></div>
                             <div class="row">

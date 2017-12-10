@@ -214,9 +214,8 @@ $(function() {
             });
 
     $('#btnGuardar').click(function() {
-        var seleccionAutores = $('#seleccionadosAutores option');
-        seleccionAutores.prop('selected', true);
-        seleccionAutores.prop('selected', true);
+        $('#seleccionadosAutores option').prop('selected', true);
+        $('#seleccionadosCategorias option').prop('selected', true);
         $('#guardarPublicacion').submit();
     });
 });
