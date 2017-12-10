@@ -75,6 +75,7 @@ class PublicacionesController extends Controller
     {
         $autoresSeleccionados1 = null;
         $editoresSeleccionados1 = null;
+        $categoriasSeleccionadas1 = null;
         $categorias1 = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores1 = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
         $editores1 = Editores::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
@@ -84,7 +85,10 @@ class PublicacionesController extends Controller
         if (! empty ($request->session()->get('editoresSeleccionados2'))) {
             $editoresSeleccionados1 = collect($request->session()->get('editoresSeleccionados2'));
         }
-        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1, 'editoresSeleccionados' => $editoresSeleccionados1);
+        if (! empty ($request->session()->get('$categoriasSeleccionadas2'))) {
+            $categoriasSeleccionadas1 = collect($request->session()->get('$categoriasSeleccionadas2'));
+        }
+        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1, 'editoresSeleccionados' => $editoresSeleccionados1, 'categoriasSeleccionadas' => $categoriasSeleccionadas1);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -119,7 +123,8 @@ class PublicacionesController extends Controller
             if ($validator->fails()){
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
                 $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
-                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
+                $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
+                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2);
                 if ($request->imagenPublicacion!=null) {
                     $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
                 }
@@ -225,8 +230,13 @@ class PublicacionesController extends Controller
             $editoresSeleccionados = editorGrupoEditor::obtenerEditoresPublicacion($publicacion['ge_x_idgrupoeditor']);
         }
 
+        $categoriasSeleccionadas=null;
+        if ($publicacion['gcat_x_idgrupocategoria']!=null) {
+            $categoriasSeleccionadas = categoriaGrupoCategoria::obtenerCategoriasPublicacion($publicacion['gcat_x_idgrupocategoria']);
+        }
+
         $vuelta = array('publicacion' => $publicacionVuelta, 'categorias' => $categorias, 'autores' => $autores, 'editores' => $editores,
-            'autoresSeleccionados' => $autoresSeleccionados, 'editoresSeleccionados' => $editoresSeleccionados);
+            'autoresSeleccionados' => $autoresSeleccionados, 'editoresSeleccionados' => $editoresSeleccionados, 'categoriasSeleccionadas' => $categoriasSeleccionadas);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -261,7 +271,8 @@ class PublicacionesController extends Controller
             if ($validator->fails()){
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
                 $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
-                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
+                $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
+                $vuelta = array('autoresSeleccionados2'=>$autores2, 'categoriasSeleccionadas2'=>$categorias2);
 
                 if ($request->imagenPublicacion!=null) {
                     $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');

@@ -50,4 +50,11 @@ class categorias extends Model
                 ['tx_categoria'=>$categoria['categoria']]
             );
     }
+
+    public static function obtenerListaCategoriasSeleccionadas($categoria){
+        if ($categoria!=null) {
+            return DB::table('categorias')->select('x_idcategoria','tx_categoria')->whereIn('x_idcategoria', $categoria)->orderBy('tx_categoria')->get();
+        }
+        return null;
+    }
 }

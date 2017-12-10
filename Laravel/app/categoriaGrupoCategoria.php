@@ -65,4 +65,8 @@ class categoriaGrupoCategoria extends Model
 
         return $id;
     }
+
+    public static function obtenerCategoriasPublicacion($idGrupoCategoria){
+        return DB::table('v_categorias')->select('x_categoria', 'tx_categoria')->where('idGrupo', '=', $idGrupoCategoria)->orderBy('tx_categoria')->get();
+    }
 }
