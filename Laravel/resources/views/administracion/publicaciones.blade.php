@@ -71,7 +71,9 @@
                         </li>
                         <li><a href="#3" data-toggle="tab">Selección categorías</a>
                         </li>
-                        <li><a href="#4" data-toggle="tab">Subir imagen</a>
+                        <li><a href="#4" data-toggle="tab">Selección etiquetas</a>
+                        </li>
+                        <li><a href="#5" data-toggle="tab">Subir imagen</a>
                         </li>
                     </ul>
 
@@ -256,10 +258,42 @@
                             </div>
                         </div>
 
-
-
-
                         <div class="tab-pane" id="4">
+                            <div style="height: 20px; width: 100%"></div>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label for="tags">Etiqueta: </label>
+                                        <input id="tags">
+                                    </div>
+                                    <button id="btnAnadirEtiqueta" type="button" class="btn btn-primary btn-sm" onclick="anadirValoresAutocomplete('tags','seleccionadosEtiquetas')">Añadir
+                                    </button>
+
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label>Etiquetas asignadas a la publicación</label>
+                                        <select multiple class="form-control" id="seleccionadosEtiquetas" name="seleccionadosEtiquetas[]">
+                                            @if( ! empty($etiquetasSeleccionadas))
+                                                @foreach($etiquetasSeleccionadas as $etiquetaSeleccionada)
+                                                    <option value="{{$etiquetaSeleccionada->x_idetiqueta}}">{{$etiquetaSeleccionada->tx_etiqueta}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <button id="btnQuitarEtiquetas" type="button" class="btn btn-primary btn-sm" onclick="quitarValores('seleccionadosEtiquetas')">Quitar
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="tab-pane" id="5">
                             <div style="height: 20px; width: 100%"></div>
                             <div class="row">
                                 <div class="col-lg-2 text-center">

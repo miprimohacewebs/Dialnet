@@ -92,6 +92,12 @@ Route::group(['middleware' => ['autenticado']], function () {
     Route::post('administrador/modificarEditor/{id}','EditoresController@update');
 
     Route::get('eliminarEditor/{id}','EditoresController@destroy');
+
+    /**
+     * Rutas descriptores
+     */
+
+    Route::get('api/obtenerDescriptores/{etiqueta}', 'PublicacionesController@obtenerDescriptores');
 });
 
 /**

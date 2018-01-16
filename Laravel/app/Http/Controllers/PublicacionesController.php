@@ -6,6 +6,7 @@ use App\Publicaciones;
 use App\Categorias;
 use App\Autores;
 use App\Editores;
+use App\Descriptores;
 use App\autorGrupoAutor;
 use App\editorGrupoEditor;
 use Yajra\Datatables\Facades\Datatables;
@@ -384,4 +385,11 @@ class PublicacionesController extends Controller
 
         return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha borrado la publicación');
     }
+
+    public function obtenerDescriptores($etiqueta){
+        return Descriptores::obtenerDescriptoresPorNombre($etiqueta);
+    }
 }
+
+
+

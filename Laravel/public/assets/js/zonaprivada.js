@@ -219,7 +219,18 @@ $(function() {
         $('#guardarPublicacion').submit();
     });
 });
-
+$( "#tags" ).autocomplete({
+    source: function (request, response) {
+        $.ajax({
+            cache: false,
+            type: 'GET',
+            url: '/api/obtenerDescriptores/' + request.term,
+            success: function (data) {
+                response( data );
+            }
+        });
+    }
+});
 function anadirValores(selectSeleccion, selectAnadir){
 
     for(var i =0; i < $("#"+selectSeleccion)[0].selectedOptions.length; i++){
@@ -241,6 +252,23 @@ function quitarValores (select){
         $('#'+select+' option[value="'+selected.value+'"]').remove();
     });
 
+}
+
+function anadirValoresAutocomplete(campoAnadir, selectAnadir){
+
+
+    var texto = $("#"+campoAnadir)[0].value;
+    var valor = $("#"+campoAnadir)[0].value;
+    var option = new Option(texto, valor);
+    $("#"+selectAnadir).append(option);
+
+    var found = [];
+    $("#"+selectAnadir+" option").each(function() {
+        if($.inArray(this.value, found) !== -1) $(this).remove();
+        found.push(this.value);
+    });
+
+    $("#"+campoAnadir)[0].value = "";
 }
 
 $(document).on('change', '.btn-file :file', function() {

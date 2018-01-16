@@ -103,7 +103,7 @@ class Publicaciones extends Model
         
         switch($tipo){
             case 'cat':
-                $tipoValor = "categoria_grupoAutor.cat_x_idCategoria";
+                $tipoValor = "categoria_grupoCategoria.cat_x_idCategoria";
                 break;
             case 'aut':
                 $tipoValor = "autor_grupoautor.aut_x_idautor";
