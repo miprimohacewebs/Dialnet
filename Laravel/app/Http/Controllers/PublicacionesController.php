@@ -9,6 +9,7 @@ use App\Editores;
 use App\Descriptores;
 use App\autorGrupoAutor;
 use App\editorGrupoEditor;
+use App\descriptoresGrupoDescriptor;
 use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -77,6 +78,7 @@ class PublicacionesController extends Controller
         $autoresSeleccionados1 = null;
         $editoresSeleccionados1 = null;
         $categoriasSeleccionadas1 = null;
+        $etiquetasSeleccionadas1 = null;
         $categorias1 = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores1 = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
         $editores1 = Editores::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
@@ -89,7 +91,11 @@ class PublicacionesController extends Controller
         if (! empty ($request->session()->get('categoriasSeleccionadas2'))) {
             $categoriasSeleccionadas1 = collect($request->session()->get('categoriasSeleccionadas2'));
         }
-        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1, 'editoresSeleccionados' => $editoresSeleccionados1, 'categoriasSeleccionadas' => $categoriasSeleccionadas1);
+        if (! empty ($request->session()->get('etiquetasSeleccionadas2'))) {
+            $etiquetasSeleccionadas1 = collect($request->session()->get('etiquetasSeleccionadas2'));
+        }
+        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1,
+            'editoresSeleccionados' => $editoresSeleccionados1, 'categoriasSeleccionadas' => $categoriasSeleccionadas1, 'etiquetasSeleccionadas' => $etiquetasSeleccionadas1);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -125,7 +131,9 @@ class PublicacionesController extends Controller
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
                 $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
                 $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
-                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2);
+                $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
+                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2,
+                    'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionadas2'=>$etiquetas2);
                 if ($request->imagenPublicacion!=null) {
                     $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
                 }
@@ -142,6 +150,8 @@ class PublicacionesController extends Controller
 
             $idGrupoCategoria = categoriaGrupoCategoria::AgruparCategorias($request->seleccionadosCategorias);
 
+            $idGrupoEtiqueta = descriptoresGrupoDescriptor::AgruparDescriptores($request->seleccionadosEtiquetas);
+
             $imagen = $request->imagenPublicacion;
             $nombreImagen=null;
             if ($imagen!=null){
@@ -156,7 +166,7 @@ class PublicacionesController extends Controller
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
                 'enlacedoi'=>$request->enlacedoi, 'doi'=>$request->doi,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
-                'imagen'=>$nombreImagen];
+                'idEtiqueta'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
             Publicaciones::guardarPublicacion($publicacion);
 
             $request->session()->flash('alert-success', 'Se ha creado la publicación');
@@ -166,7 +176,9 @@ class PublicacionesController extends Controller
             $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
             $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
             $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
-            $vuelta = array('alert-error'=>'Ha ocurrido un error al crear la publicación', 'autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2);
+            $etiquetas2 = descriptoresGrupoDescriptor::obtenerDescriptoresPublicacion($publicacion['gcat_x_idgrupocategoria']);
+            $vuelta = array('alert-error'=>'Ha ocurrido un error al crear la publicación', 'autoresSeleccionados2'=>$autores2,
+                'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionasas2'=>$etiquetas2);
             if ($request->imagenPublicacion!=null) {
                 $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
             }
@@ -226,7 +238,7 @@ class PublicacionesController extends Controller
             'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'editorial'=>$publicacion['tx_editorial'],
             'fechaPublicacion'=>$publicacion['fh_fechapublicacion'], 'paginas'=>$publicacion['tx_paginas'],
             'numPaginas'=>$publicacion['nu_numPaginas'], 'idAutor'=>$publicacion['aga_x_idgrupoautor'], 'idEditor'=> $publicacion['ge_x_idgrupoeditor'],
-            'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion']];
+            'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion'], 'idEtiqueta'=>$publicacion['gcat_x_idgrupocategoria']];
 
         $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
@@ -245,8 +257,14 @@ class PublicacionesController extends Controller
             $categoriasSeleccionadas = categoriaGrupoCategoria::obtenerCategoriasPublicacion($publicacion['gcat_x_idgrupocategoria']);
         }
 
+        $etiquetasSeleccionadas=null;
+        if ($publicacion['gcat_x_idgrupocategoria']!=null){
+            $etiquetasSeleccionadas = descriptoresGrupoDescriptor::obtenerDescriptoresPublicacion($publicacion['gcat_x_idgrupocategoria']);
+        }
+
         $vuelta = array('publicacion' => $publicacionVuelta, 'categorias' => $categorias, 'autores' => $autores, 'editores' => $editores,
-            'autoresSeleccionados' => $autoresSeleccionados, 'editoresSeleccionados' => $editoresSeleccionados, 'categoriasSeleccionadas' => $categoriasSeleccionadas);
+            'autoresSeleccionados' => $autoresSeleccionados, 'editoresSeleccionados' => $editoresSeleccionados,
+            'categoriasSeleccionadas' => $categoriasSeleccionadas, 'etiquetasSeleccionadas' => $etiquetasSeleccionadas);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -282,7 +300,10 @@ class PublicacionesController extends Controller
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
                 $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
                 $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
-                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2);
+                $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
+
+                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2,
+                    'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionadas2'=>$etiquetas2);
 
                 if ($request->imagenPublicacion!=null) {
                     $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
@@ -299,6 +320,8 @@ class PublicacionesController extends Controller
             $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
 
             $idGrupoCategoria = categoriaGrupoCategoria::AgruparCategorias($request->seleccionadosCategorias);
+
+            $idGrupoEtiqueta = descriptoresGrupoDescriptor::AgruparDescriptores($request->seleccionadosEtiquetas);
 
             $imagen = $request->imagenPublicacion;
             $nombreImagen=null;
@@ -318,7 +341,7 @@ class PublicacionesController extends Controller
                 'pais'=>$request->pais, 'idioma'=>$request->idioma, 'editorial'=>$request->editorial,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
-                'imagen'=>$nombreImagen];
+                'idEtiqueta'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
             Publicaciones::actualizarPublicacion($publicacion);
 
             if ($request->idGrupoAutores!=null) {
@@ -333,6 +356,10 @@ class PublicacionesController extends Controller
                 categoriaGrupoCategoria::destroy($request->idGrupoCategorias);
             }
 
+            if ($request->idGrupoEtiquetas!=null) {
+                descriptoresGrupoDescriptor::destroy($request->idGrupoEtiquetas);
+            }
+
             $request->session()->flash('alert-success', 'Se ha modificado la publicación');
             return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha modificado la publicación');
         }catch (Exception $e){
@@ -341,7 +368,9 @@ class PublicacionesController extends Controller
             $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
             $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
             $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
-            $vuelta = array('alert-error'=>'Ha ocurrido un error al modificar la publicación', 'autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2);
+            $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
+            $vuelta = array('alert-error'=>'Ha ocurrido un error al modificar la publicación', 'autoresSeleccionados2'=>$autores2,
+                'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionadas2'=>$etiquetas2);
             if ($request->imagenPublicacion!=null) {
                 $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
             }
@@ -377,6 +406,10 @@ class PublicacionesController extends Controller
 
             if ($publicacion['gcat_x_idgrupocategoria']!=null) {
                 categoriaGrupoCategoria::destroy($publicacion['gcat_x_idgrupocategoria']);
+            }
+
+            if ($publicacion['dgd_idGrupoDescriptor']!=null) {
+                descriptoresGrupoDescriptor::destroy($publicacion['dgd_idGrupoDescriptor']);
             }
         }catch (Exception $e){
             Log::error($e);

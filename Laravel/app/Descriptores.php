@@ -49,4 +49,11 @@ class descriptores extends Model
         }
         return null;
     }
+
+    public static function obtenerDescriptoresSeleccionados($descriptores){
+        if ($descriptores!=null) {
+            return DB::table('descriptores')->select('tx_descriptor','tx_descriptor')->wherein('tx_descriptor', $descriptores)->orderBy('tx_descriptor')->get();
+        }
+        return null;
+    }
 }

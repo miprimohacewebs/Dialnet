@@ -57,6 +57,7 @@
                     <input type="hidden" name="idGrupoAutores" id="idGrupoAutores" value="{{ old('idGrupoAutores',isset($publicacion) ? $publicacion['idAutor'] : null)}}"/>
                     <input type="hidden" name="idGrupoEditores" id="idGrupoEditores" value="{{ old('idGrupoEditores',isset($publicacion) ? $publicacion['idEditor'] : null)}}"/>
                     <input type="hidden" name="idGrupoCategorias" id="idGrupoCategorias" value="{{ old('idGrupoCategorias',isset($publicacion) ? $publicacion['idCategoria'] : null)}}"/>
+                    <input type="hidden" name="idGrupoEtiquetas" id="idGrupoEtiquetas" value="{{ old('idGrupoEtiquetas',isset($publicacion) ? $publicacion['idEtiqueta'] : null)}}"/>
                     <input type="hidden" name="idPublicacion" id="idPublicacion" value="{{ old('idPublicacion',isset($publicacion) ? $publicacion['idPublicacion'] : null)}}"/>
                     @else
                         <form role="form" name="guardarPublicacion" method="POST" action="/administrador/guardarPublicacion" enctype="multipart/form-data">

@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\DB;
 /**
  * @property integer $x_idpublicacion
  * @property integer $aga_x_idgrupoautor
- * @property integer $cat_x_idcategoria
+ * @property integer $gcat_x_idgrupocategoria
  * @property integer $ge_x_idgrupoeditor
+ * @property integer $dgd_idGrupoDescriptor
  * @property string $tx_titulo
  * @property string $tx_isbn
  * @property string $nu_anno
@@ -41,7 +42,7 @@ class Publicaciones extends Model
     /**
      * @var array
      */
-    protected $fillable = ['aga_x_idgrupoautor', 'gcat_x_idgrupocategoria', 'ge_x_idgrupoeditor', 'tx_titulo', 'tx_isbn', 'nu_anno', 'tx_paginas', 'tx_editorial', 'tx_publicacion', 'tx_resumen', 'tx_descriptores', 'tx_imagen', 'tx_doi', 'tx_enlacedoi', 'tx_asunto', 'fh_fechapublicacion', 'tx_pais', 'tx_idioma', 'nu_numPaginas'];
+    protected $fillable = ['aga_x_idgrupoautor', 'gcat_x_idgrupocategoria', 'ge_x_idgrupoeditor', 'dgd_idGrupoDescriptor', 'tx_titulo', 'tx_isbn', 'nu_anno', 'tx_paginas', 'tx_editorial', 'tx_publicacion', 'tx_resumen', 'tx_descriptores', 'tx_imagen', 'tx_doi', 'tx_enlacedoi', 'tx_asunto', 'fh_fechapublicacion', 'tx_pais', 'tx_idioma', 'nu_numPaginas'];
     
     /**
      * Método para emparejar autor con grupoAutor
@@ -71,6 +72,16 @@ class Publicaciones extends Model
     public function editorGrupoeditor()
     {
         return $this->belongsTo('App\editorGrupoeditor', 'ge_x_idgrupoeditor', 'ge_x_idgrupoeditor');
+    }
+
+    /**
+     * Método para emparejar editor con grupoEditor
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function descriptoresGrupoDescriptor()
+    {
+        return $this->belongsTo('App\descriptoresGrupoDescriptor', 'dgd_idGrupoDescriptor', 'x_idGrupoDescriptor');
     }
 
     /**
@@ -134,7 +145,7 @@ class Publicaciones extends Model
     public static function obtenerInformacionDetalle($idPublicacion){
         $detallePublicacion = DB::table('v_publicaciones')->select('tx_titulo', 'tx_isbn', 'nu_anno','tx_paginas','tx_editorial','tx_publicacion',
             'tx_resumen','tx_descriptores','tx_imagen','tx_doi','tx_enlacedoi','tx_asunto','fh_fechapublicacion', 'tx_pais','tx_idioma',
-            'nu_numPaginas','tx_categoria','autores','editores')
+            'nu_numPaginas','tx_categoria','autores','editores','descriptores')
             ->where('x_idpublicacion','=',$idPublicacion)
             ->get();
         return collect($detallePublicacion);
@@ -162,7 +173,7 @@ class Publicaciones extends Model
                 'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['publicacion'],
                 'tx_editorial'=>$publicacion['editorial'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
                 'tx_enlacedoi'=>$publicacion['enlacedoi'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'], 'tx_imagen'=>$publicacion['imagen'],
-                'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor']
+                'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor'],'dgd_idGrupoDescriptor'=>$publicacion['idDescriptor']
             ]
         );
 
@@ -181,7 +192,7 @@ class Publicaciones extends Model
                 'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['publicacion'],
                 'tx_editorial'=>$publicacion['editorial'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$convert_date,
                 'tx_enlacedoi'=>$publicacion['enlacedoi'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'], 'tx_imagen'=>$publicacion['imagen'],
-                'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor']
+                'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor'],'dgd_idGrupoDescriptor'=>$publicacion['idDescriptor']
             ]
         );
     }
