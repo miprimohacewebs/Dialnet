@@ -25,7 +25,7 @@ class descriptores extends Model
      */
     public static function guardarDescriptor($descriptor){
         DB::table('descriptores')->insertGetId(
-            ['tx_descriptor'=>$descriptor['descriptor']]
+            ['tx_descriptor'=>$descriptor]
         );
 
         return DB::getPdo()->lastInsertId();
@@ -50,10 +50,35 @@ class descriptores extends Model
         return null;
     }
 
-    public static function obtenerDescriptoresSeleccionados($descriptores){
-        if ($descriptores!=null) {
-            return DB::table('descriptores')->select('tx_descriptor','tx_descriptor')->wherein('tx_descriptor', $descriptores)->orderBy('tx_descriptor')->get();
+    public static function obtenerCrearDescriptorPorNombre($descriptor){
+        if ($descriptor!=null) {
+            $descriptorObtenido = DB::table('descriptores')->select('x_iddescriptor')->where('tx_descriptor', $descriptor)->pluck('x_iddescriptor');
+            if ($descriptorObtenido == null) {
+                $descriptorObtenido = self::guardarDescriptor($descriptor);
+            } else {
+                $descriptorObtenido = $descriptorObtenido[0];
+            }
         }
-        return null;
+        return $descriptorObtenido;
+    }
+
+    public static function obtenerDescriptoresSeleccionadosModificacion ($descriptores){
+        $descriptoresVuelta = Array();
+        foreach ($descriptores as $descriptor) {
+            $descriptoresVuelta[]=['tx_descriptor'=>$descriptor->tx_descriptor];
+        }
+        //dd(DB::table('descriptores')->select('tx_descriptor')->get(), $descriptoresVuelta);
+        return $descriptoresVuelta;
+    }
+
+    public static function obtenerDescriptoresSeleccionados ($descriptores){
+
+        $descriptoresVuelta = Array();
+        foreach ($descriptores as $descriptor) {
+            $descriptoresVuelta[]=['tx_descriptor'=>$descriptor];
+        }
+        //dd(DB::table('descriptores')->select('tx_descriptor')->get(), $descriptoresVuelta);
+        return $descriptoresVuelta;
+
     }
 }

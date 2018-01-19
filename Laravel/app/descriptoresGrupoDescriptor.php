@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Descriptores;
+
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\DB;
@@ -19,7 +21,7 @@ class descriptoresGrupoDescriptor extends Model
      * 
      * @var string
      */
-    protected $table = 'cdescriptores_grupoDescriptor';
+    protected $table = 'descriptores_grupoDescriptor';
 
     /** Primary key de la tabla. */
     protected $primaryKey = 'x_idGrupoDescriptor';
@@ -49,14 +51,17 @@ class descriptoresGrupoDescriptor extends Model
         $id=null;
         if ($descriptoresGuardar!=null) {
             $idDescriptorGrupoDescriptor = DB::table('descriptores_grupoDescriptor')->select('x_idGrupoDescriptor')->max('x_idGrupoDescriptor');
-            if ($idDescriptorGrupoDescriptor) {
+            if ($idDescriptorGrupoDescriptor==null){
+                $idDescriptorGrupoDescriptor = 0;
+            }
+            if ($idDescriptorGrupoDescriptor==0 || $idDescriptorGrupoDescriptor) {
                 $id = $idDescriptorGrupoDescriptor+1;
-
                 foreach ($descriptoresGuardar as $descriptor) {
+                    $idDescriptor = Descriptores::obtenerCrearDescriptorPorNombre($descriptor);
                     DB::table('descriptores_grupoDescriptor')->insertGetId(
                         [
                             'x_idGrupoDescriptor' => $id,
-                            'desc_x_iddescriptor' => $descriptor
+                            'desc_x_iddescriptor' => $idDescriptor
                         ]
                     );
                 }
@@ -67,6 +72,6 @@ class descriptoresGrupoDescriptor extends Model
     }
 
     public static function obtenerDescriptoresPublicacion($idGrupoDescriptor){
-        return DB::table('v_descriptores')->select('x_iddescriptor', 'tx_descriptor')->where('idGrupo', '=', $idGrupoDescriptor)->orderBy('tx_descriptor')->get();
+        return Descriptores::obtenerDescriptoresSeleccionadosModificacion(DB::table('v_descriptores')->select('tx_descriptor')->where('idGrupo', '=', $idGrupoDescriptor)->orderBy('tx_descriptor')->get());
     }
 }

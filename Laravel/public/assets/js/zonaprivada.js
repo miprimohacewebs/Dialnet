@@ -216,6 +216,7 @@ $(function() {
     $('#btnGuardar').click(function() {
         $('#seleccionadosAutores option').prop('selected', true);
         $('#seleccionadosCategorias option').prop('selected', true);
+        $('#seleccionadosEtiquetas option').prop('selected', true);
         $('#guardarPublicacion').submit();
     });
 });

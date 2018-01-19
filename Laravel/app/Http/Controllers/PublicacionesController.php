@@ -151,7 +151,6 @@ class PublicacionesController extends Controller
             $idGrupoCategoria = categoriaGrupoCategoria::AgruparCategorias($request->seleccionadosCategorias);
 
             $idGrupoEtiqueta = descriptoresGrupoDescriptor::AgruparDescriptores($request->seleccionadosEtiquetas);
-
             $imagen = $request->imagenPublicacion;
             $nombreImagen=null;
             if ($imagen!=null){
@@ -166,7 +165,7 @@ class PublicacionesController extends Controller
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
                 'enlacedoi'=>$request->enlacedoi, 'doi'=>$request->doi,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
-                'idEtiqueta'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
+                'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
             Publicaciones::guardarPublicacion($publicacion);
 
             $request->session()->flash('alert-success', 'Se ha creado la publicación');
@@ -176,7 +175,7 @@ class PublicacionesController extends Controller
             $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
             $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
             $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
-            $etiquetas2 = descriptoresGrupoDescriptor::obtenerDescriptoresPublicacion($publicacion['gcat_x_idgrupocategoria']);
+            $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
             $vuelta = array('alert-error'=>'Ha ocurrido un error al crear la publicación', 'autoresSeleccionados2'=>$autores2,
                 'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionasas2'=>$etiquetas2);
             if ($request->imagenPublicacion!=null) {
@@ -238,7 +237,7 @@ class PublicacionesController extends Controller
             'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'editorial'=>$publicacion['tx_editorial'],
             'fechaPublicacion'=>$publicacion['fh_fechapublicacion'], 'paginas'=>$publicacion['tx_paginas'],
             'numPaginas'=>$publicacion['nu_numPaginas'], 'idAutor'=>$publicacion['aga_x_idgrupoautor'], 'idEditor'=> $publicacion['ge_x_idgrupoeditor'],
-            'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion'], 'idEtiqueta'=>$publicacion['gcat_x_idgrupocategoria']];
+            'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion'], 'idDescriptor'=>$publicacion['dgd_idGrupoDescriptor']];
 
         $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
@@ -258,8 +257,8 @@ class PublicacionesController extends Controller
         }
 
         $etiquetasSeleccionadas=null;
-        if ($publicacion['gcat_x_idgrupocategoria']!=null){
-            $etiquetasSeleccionadas = descriptoresGrupoDescriptor::obtenerDescriptoresPublicacion($publicacion['gcat_x_idgrupocategoria']);
+        if ($publicacion['dgd_idGrupoDescriptor']!=null){
+            $etiquetasSeleccionadas = descriptoresGrupoDescriptor::obtenerDescriptoresPublicacion($publicacion['dgd_idGrupoDescriptor']);
         }
 
         $vuelta = array('publicacion' => $publicacionVuelta, 'categorias' => $categorias, 'autores' => $autores, 'editores' => $editores,
@@ -341,7 +340,7 @@ class PublicacionesController extends Controller
                 'pais'=>$request->pais, 'idioma'=>$request->idioma, 'editorial'=>$request->editorial,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
-                'idEtiqueta'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
+                'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
             Publicaciones::actualizarPublicacion($publicacion);
 
             if ($request->idGrupoAutores!=null) {
