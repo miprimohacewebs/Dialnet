@@ -66,7 +66,7 @@
             <div class="navbar-header">
 
                 <a class="navbar-brand" href="#"><img
-                            src="assets/images/logo-nuevo3.png" class="img-responsive"/></a>
+                            src="/assets/images/logo-nuevo3.png" class="img-responsive"/></a>
 
             </div>
         </div>
