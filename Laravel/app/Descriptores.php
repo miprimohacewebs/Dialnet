@@ -45,14 +45,14 @@ class descriptores extends Model
 
     public static function obtenerDescriptoresPorNombre($descriptor){
         if ($descriptor!=null) {
-            return DB::table('descriptores')->select('tx_descriptor')->where('tx_descriptor', 'LIKE', $descriptor.'%')->orderBy('tx_descriptor')->pluck('tx_descriptor');
+            return DB::table('descriptores')->select('tx_descriptor')->whereRaw("LOWER(tx_descriptor) like '$descriptor%'")->orderBy('tx_descriptor')->pluck('tx_descriptor');
         }
         return null;
     }
 
     public static function obtenerCrearDescriptorPorNombre($descriptor){
         if ($descriptor!=null) {
-            $descriptorObtenido = DB::table('descriptores')->select('x_iddescriptor')->where('tx_descriptor', $descriptor)->pluck('x_iddescriptor');
+            $descriptorObtenido = DB::table('descriptores')->select('x_iddescriptor')->where('tx_descriptor', 'like', $descriptor)->pluck('x_iddescriptor');
             if ($descriptorObtenido == null) {
                 $descriptorObtenido = self::guardarDescriptor($descriptor);
             } else {
