@@ -130,4 +130,9 @@ class AutoresController extends Controller
         }
     }
 
+    public function mostrarAutores (){
+        $autores = Autores::obtenerAutoresDatatable();
+        return Datatables::of($autores)->make(true);
+    }
+
 }

@@ -39,7 +39,7 @@ class PublicacionesController extends Controller
      */
     public function getTablaPublicaciones()
     {
-        $publicaciones = Publicaciones::all();
+        $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades(null,null,null,null);
         return Datatables::of($publicaciones)->make(true);
         
     }
@@ -67,7 +67,17 @@ class PublicacionesController extends Controller
         $letras = Publicaciones::obtenerLetrasSeccion();
         return Datatables::of($letras)->make(true);
     }
-    
+
+
+    public function obtenerDescriptoresDatatable() {
+        $descriptores = Descriptores::obtenerDescriptoresDatatable();
+        return Datatables::of($descriptores)->make(true);
+    }
+
+    public function obtenerAnnos() {
+        $annos = Publicaciones::obtenerAnnosDatatable();
+        return Datatables::of($annos)->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -363,7 +373,6 @@ class PublicacionesController extends Controller
             return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha modificado la publicación');
         }catch (Exception $e){
             Log::error($e);
-            dd($e);
             $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
             $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
             $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);

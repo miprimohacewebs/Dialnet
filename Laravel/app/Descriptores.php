@@ -81,4 +81,18 @@ class descriptores extends Model
         return $descriptoresVuelta;
 
     }
+
+    public static function obtenerDescriptoresDatatable()
+    {
+        return collect(DB::table('publicaciones AS p')
+            ->rightJoin('descriptores_grupoDescriptor AS dgd', 'p.dgd_idGrupoDescriptor', '=', 'dgd.x_idGrupoDescriptor')
+            ->leftJoin('descriptores AS d', 'dgd.desc_x_iddescriptor', '=', 'd.x_iddescriptor')
+            ->leftJoin('autor_grupoautor AS a', 'p.aga_x_idgrupoautor', '=', 'a.ga_x_idgrupoautor')
+            ->leftJoin('autores AS a2', 'a.aut_x_idautor', '=', 'a2.idAutor')
+            ->leftJoin('categoria_grupoCategoria AS C2', 'p.gcat_x_idgrupocategoria', '=', 'C2.gt_x_idGrupoCategoria')
+            ->leftJoin('categorias AS c', 'C2.cat_x_idCategoria', '=', 'c.x_idcategoria')
+            ->select(DB::raw('dgd.desc_x_iddescriptor numPublicaciones, d.tx_descriptor nombre, d.x_iddescriptor id'))
+            ->groupBy('dgd.desc_x_iddescriptor')
+            ->orderBy('nombre')->get());
+    }
 }

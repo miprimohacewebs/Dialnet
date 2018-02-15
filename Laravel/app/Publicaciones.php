@@ -138,6 +138,42 @@ class Publicaciones extends Model
     }
 
     /**
+     * Método para obtener las publicaciones según filtro.
+     *
+     * @param $valor
+     * @param $tipo
+     * @return \Illuminate\Support\Collection
+     */
+    public static function obtenerPublicacionesMultiplesPosibilidades($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores){
+
+        $query = DB::table('publicaciones')
+            ->select('publicaciones.*')
+            ->leftjoin('autor_grupoautor', 'publicaciones.aga_x_idgrupoautor', '=', 'autor_grupoautor.ga_x_idgrupoautor')
+            ->leftjoin('categoria_grupoCategoria', 'publicaciones.gcat_x_idGrupoCategoria', '=', 'categoria_grupoCategoria.gt_x_idGrupoCategoria')
+            ->leftjoin('descriptores_grupoDescriptor', 'publicaciones.dgd_idGrupoDescriptor', '=', 'descriptores_grupoDescriptor.x_idGrupoDescriptor');
+
+        if ($valoresAnio!=null){
+            $query->whereIn('publicaciones.nu_anno', $valoresAnio);
+        }
+
+        if ($valoresAutores!=null){
+            $query->whereIn('autor_grupoautor.aut_x_idautor', $valoresAutores);
+        }
+
+        if ($valoresCategorias!=null){
+            $query->whereIn('categoria_grupoCategoria.cat_x_idCategoria', $valoresCategorias);
+        }
+
+        if ($valoresDescriptores!=null){
+            $query->whereIn('descriptores_grupoDescriptor.desc_x_iddescriptor', $valoresDescriptores);
+        }
+
+
+        $vuelta = $query->distinct()->get();
+        return collect($vuelta);
+    }
+
+    /**
      * Método para obtener datos de la vista publicaciones
      *
      * @return \Illuminate\Support\Collection
@@ -158,6 +194,19 @@ class Publicaciones extends Model
      */
     public static function obtenerNumeroPublicaciones(){
         return DB::table('publicaciones')->count();
+    }
+
+    public static function obtenerAnnosDatatable (){
+        return collect(DB::table('publicaciones AS p')
+            ->leftJoin('descriptores_grupoDescriptor AS dgd', 'p.dgd_idGrupoDescriptor', '=', 'dgd.x_idGrupoDescriptor')
+            ->leftJoin('descriptores AS d', 'dgd.desc_x_iddescriptor', '=', 'd.x_iddescriptor')
+            ->leftJoin('autor_grupoautor AS a', 'p.aga_x_idgrupoautor', '=', 'a.ga_x_idgrupoautor')
+            ->leftJoin('autores AS a2', 'a.aut_x_idautor', '=', 'a2.idAutor')
+            ->leftJoin('categoria_grupoCategoria AS C2', 'p.gcat_x_idgrupocategoria', '=', 'C2.gt_x_idGrupoCategoria')
+            ->leftJoin('categorias AS c', 'C2.cat_x_idCategoria', '=', 'c.x_idcategoria')
+            ->select(DB::raw('count(p.nu_anno) numPublicaciones, p.nu_anno nombre, p.nu_anno id'))
+            ->groupBy('p.nu_anno')
+            ->orderBy('nombre')->get());
     }
 
 

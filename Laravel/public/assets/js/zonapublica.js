@@ -343,12 +343,14 @@ $(function () {
                 }
             },
             "columns": [{
-                data: 'tx_categoria',
+                data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#' onClick='actualizarListado(\"cat\"," + oData.x_idcategoria + ");' >" + oData.tx_categoria + "</a>");
+                    $(nTd).html("<a href='#' >" + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
+
+
 
         $("#tablaAutores").DataTable({
             "serverSide": false,
@@ -377,33 +379,32 @@ $(function () {
                 }
             },
             "columns": [{
-                data: 'tx_autor',
-                data: 'tx_autorApellidos',
+                data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#' onClick='actualizarListado(\"aut\"," + oData.idAutor + ");'>" + oData.tx_autorApellidos + ", " + oData.tx_autor + "</a>");
+                    $(nTd).html("<a href='#'>" + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
-            }],
+            }]
         });
 
-
-        $("#tablaAtoz").DataTable({
+        $("#tablaDescriptores").DataTable({
             "serverSide": false,
             "lengthChange": false,
             "info": false,
             "searching": false,
-            "pageLength": 27,
+            "pageLength": 10,
             "pagingType": "simple",
+            "ajax": "/api/descriptores",
             "language": {
                 "processing": "Procesando...",
                 "search": "Buscar:",
                 "lengthMenu": "Mostrar _MENU_ registros por página.",
-                "zeroRecords": "No existen publicaciones.",
+                "zeroRecords": "No existen autores.",
                 "info": "Mostrando _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay publicaciones disponibles",
-                "infoFiltered": "(Filtrados _MAX_ del total de publicaciones)",
+                "infoEmpty": "No hay autores disponibles",
+                "infoFiltered": "(Filtrados _MAX_ del total de autores)",
                 "loadingRecords": "En curso...",
                 "infoPostFix": "",
-                "emptyTable": "No existen publicaciones disponibles.",
+                "emptyTable": "No existen autores disponibles.",
                 "paginate": {
                     "first": "Primero",
                     "previous": "Anterior",
@@ -411,32 +412,47 @@ $(function () {
                     "last": "Último"
                 }
             },
-            "ajax": "/api/letras",
             "columns": [{
-                data: 'letras',
+                data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#' onClick='actualizarListado(\"tit\",\"" + oData.letras + "\");'>" + oData.letras + "</a>");
+                    $(nTd).html("<a href='#'>" + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
 
-        $('#categorias').click(function () {
-            $('#categoriasMenu').show();
-            $('#autoresMenu').hide();
-            $('#atozMenu').hide();
+        $("#tablaAnnos").DataTable({
+            "serverSide": false,
+            "lengthChange": false,
+            "info": false,
+            "searching": false,
+            "pageLength": 10,
+            "pagingType": "simple",
+            "ajax": "/api/annos",
+            "language": {
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "lengthMenu": "Mostrar _MENU_ registros por página.",
+                "zeroRecords": "No existen autores.",
+                "info": "Mostrando _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay autores disponibles",
+                "infoFiltered": "(Filtrados _MAX_ del total de autores)",
+                "loadingRecords": "En curso...",
+                "infoPostFix": "",
+                "emptyTable": "No existen autores disponibles.",
+                "paginate": {
+                    "first": "Primero",
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                    "last": "Último"
+                }
+            },
+            "columns": [{
+                data: 'nombre',
+                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a href='#'>" + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                }
+            }]
         });
-
-        $('#autores').click(function () {
-            $('#categoriasMenu').hide();
-            $('#autoresMenu').show();
-            $('#atozMenu').hide();
-        });
-        $('#atoz').click(function () {
-            $('#categoriasMenu').hide();
-            $('#autoresMenu').hide();
-            $('#atozMenu').show();
-        });
-
     }
 
     );
@@ -535,10 +551,6 @@ function actualizarListado(tipo, valor) {
  * - Oculta los filtros del menú lateral.
  */
 function resetearPantalla() {
-
-    $('#categoriasMenu').hide();
-    $('#autoresMenu').hide();
-    $('#atozMenu').hide();
 
     var tablaPublicaciones = $("#tablaPublicaciones");
 

@@ -20,35 +20,6 @@
 					</span>
                     </a>
                 </div>
-                <div class="col-md-1 text-center">
-                    <a href="#" id="categorias"> <span class="fa-stack fa-2x"> <i
-                                    class="fa fa-folder-open" aria-hidden="true"></i>
-							<p class="textoInferiorIconosAwasome">Categorías</p>
-					</span>
-                    </a>
-                </div>
-                <div class="col-md-1 text-center">
-                    <a href="#" id="autores"> <span class="fa-stack fa-2x"> <i class="fa fa-users"
-                                                                               aria-hidden="true"></i>
-							<p class="textoInferiorIconosAwasome">Autores</p>
-					</span>
-                    </a>
-                </div>
-                <div class="col-md-1 text-center">
-                    <a href="#" id="atoz"> <span class="fa-stack fa-2x"> <i class="fa fa-filter"
-                                                                            aria-hidden="true"></i>
-							<p class="textoInferiorIconosAwasome">A-Z</p>
-					</span>
-                    </a>
-                </div>
-                <div class="col-md-1 text-center">
-                    <a href="#" id="pclaves" style="opacity: 0.2;" > <span class="fa-stack fa-2x"> <i class="fa fa-compass"
-                                                                            aria-hidden="true"></i>
-							<p class="textoInferiorIconosAwasome" >Palabras</p>
-                            <p class="textoInferiorIconosAwasome" style="margin-top: -53px;">clave</p>
-					</span>
-                    </a>
-                </div>
                 <div class="col-md-2 text-center">
                     <p class="parrafoResultadoDocumentosEncontrados">{{$publicaciones}}</p>
                 </div>

@@ -120,4 +120,9 @@ class CategoriasController extends Controller
             return redirect()->action('CategoriasController@create')->with('alert-error', 'Ha ocurrido un error al modificar la categoría');
         }
     }
+
+    public function mostrarCategorias (){
+        $categorias = Categorias::obtenerCategoriasDatatable();
+        return Datatables::of($categorias)->make(true);
+    }
 }

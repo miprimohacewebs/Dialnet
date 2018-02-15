@@ -119,15 +119,17 @@ Route::group(['middleware' => ['web']], function () {
     /** Ruta para cargar la tabla de publicaciones filtrada */
     Route::get('api/publicacionesFiltro', 'PublicacionesController@getTablaPublicacionesFiltro');
     /** Ruta para rellenar la tabla de categorías */
-    Route::get('api/categorias', 'CategoriasController@show');
+    Route::get('api/categorias', 'CategoriasController@mostrarCategorias');
     /** Ruta para rellenar la tabla de autores */
-    Route::get('api/autores', 'AutoresController@show');
+    Route::get('api/autores', 'AutoresController@mostrarAutores');
     /** Ruta para rellenar la tabla de letras de publicaciones */
     Route::get('api/letras', 'PublicacionesController@obtenerLetras');
-    /** Ruta para rellenar la tabla de categorias */
-    Route::get('api/categorias','CategoriasController@show');
     /** Ruta para rellenar la tabla de editores */
     Route::get('api/editores','EditoresController@show');
+    /** Ruta para rellenar la tabla de descriptores en publicaciones */
+    Route::get('api/descriptores', 'PublicacionesController@obtenerDescriptoresDatatable');
+    /** Ruta para rellenar la tabla de descriptores en publicaciones */
+    Route::get('api/annos', 'PublicacionesController@obtenerAnnos');
     /** Formulario de contacto */
     Route::get('contacto','ContactoController@create');
     Route::post('contacto_store','ContactoController@store');
