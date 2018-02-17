@@ -93,4 +93,18 @@ class autores extends Model
                 'tx_autorApellidos'=>$autor['autorApellidos']]
             );
     }
+
+    public static function obtenerAutoresDatatable()
+    {
+        return collect(DB::table('publicaciones AS p')
+            ->leftJoin('descriptores_grupoDescriptor AS dgd', 'p.dgd_idGrupoDescriptor', '=', 'dgd.x_idGrupoDescriptor')
+            ->leftJoin('descriptores AS d', 'dgd.desc_x_iddescriptor', '=', 'd.x_iddescriptor')
+            ->rightJoin('autor_grupoautor AS a', 'p.aga_x_idgrupoautor', '=', 'a.ga_x_idgrupoautor')
+            ->leftJoin('autores AS a2', 'a.aut_x_idautor', '=', 'a2.idAutor')
+            ->leftJoin('categoria_grupoCategoria AS C2', 'p.gcat_x_idgrupocategoria', '=', 'C2.gt_x_idGrupoCategoria')
+            ->leftJoin('categorias AS c', 'C2.cat_x_idCategoria', '=', 'c.x_idcategoria')
+            ->select(DB::raw('count(a.aut_x_idautor) numPublicaciones, concat(concat(a2.tx_autorApellidos,", "), a2.tx_autor) nombre, a2.idAutor id'))
+            ->groupBy('a.aut_x_idautor')
+            ->orderBy('nombre')->get());
+    }
 }

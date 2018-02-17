@@ -80,7 +80,7 @@
                                             class="btn btn-primary btn-sm" @if(isset($editor) || old('idEditor')!=null)disabled="disabled"@endif>Limpiar
                                     </button>
                                     <button id="btnCancelar" type="button"
-                                            class="btn btn-primary btn-sm" onclick="window.location='{{url('editores')}}'">Cancelar
+                                            class="btn btn-primary btn-sm" @if(!isset($editor) && old('idEditor')==null)disabled="disabled"@endif onclick="window.location='{{url('editoresadmin')}}'">Cancelar
                                     </button>
                                     <button id="btnGuardar" type="submit"
                                             class="btn btn-primary btn-sm">Guardar

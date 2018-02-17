@@ -21,6 +21,9 @@
           href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"
           media="all" type="text/css"/>
 
+    <link href="{{ URL::asset('assets/css/jquery-ui.css') }}"
+          rel="stylesheet" media="all" type="text/css">
+
     <!-- Custom CSS -->
     <link href="{{ URL::asset('assets/css/sb-admin.css') }}"
           rel="stylesheet" media="all" type="text/css">
@@ -63,7 +66,7 @@
             <div class="navbar-header">
 
                 <a class="navbar-brand" href="#"><img
-                            src="assets/images/logo-nuevo3.png" class="img-responsive"/></a>
+                            src="/assets/images/logo-nuevo3.png" class="img-responsive"/></a>
 
             </div>
         </div>
@@ -102,6 +105,9 @@
 
 <!-- Datatables -->
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
+<script src="{{ URL::asset('assets/js/jquery-ui.js') }}"></script>
+
 <script src="{{ URL::asset('assets/js/zonaprivada.js') }}"></script>
 <!-- Morris Charts JavaScript -->
 <!-- 	<script -->

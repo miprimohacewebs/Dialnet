@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\categoriaGrupoCategoria;
 use App\Publicaciones;
 use App\Categorias;
 use App\Autores;
 use App\Editores;
+use App\Descriptores;
 use App\autorGrupoAutor;
 use App\editorGrupoEditor;
+use App\descriptoresGrupoDescriptor;
 use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -36,7 +39,7 @@ class PublicacionesController extends Controller
      */
     public function getTablaPublicaciones()
     {
-        $publicaciones = Publicaciones::all();
+        $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades(null,null,null,null);
         return Datatables::of($publicaciones)->make(true);
         
     }
@@ -64,7 +67,17 @@ class PublicacionesController extends Controller
         $letras = Publicaciones::obtenerLetrasSeccion();
         return Datatables::of($letras)->make(true);
     }
-    
+
+
+    public function obtenerDescriptoresDatatable() {
+        $descriptores = Descriptores::obtenerDescriptoresDatatable();
+        return Datatables::of($descriptores)->make(true);
+    }
+
+    public function obtenerAnnos() {
+        $annos = Publicaciones::obtenerAnnosDatatable();
+        return Datatables::of($annos)->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -74,6 +87,8 @@ class PublicacionesController extends Controller
     {
         $autoresSeleccionados1 = null;
         $editoresSeleccionados1 = null;
+        $categoriasSeleccionadas1 = null;
+        $etiquetasSeleccionadas1 = null;
         $categorias1 = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores1 = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
         $editores1 = Editores::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
@@ -83,7 +98,14 @@ class PublicacionesController extends Controller
         if (! empty ($request->session()->get('editoresSeleccionados2'))) {
             $editoresSeleccionados1 = collect($request->session()->get('editoresSeleccionados2'));
         }
-        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1, 'editoresSeleccionados' => $editoresSeleccionados1);
+        if (! empty ($request->session()->get('categoriasSeleccionadas2'))) {
+            $categoriasSeleccionadas1 = collect($request->session()->get('categoriasSeleccionadas2'));
+        }
+        if (! empty ($request->session()->get('etiquetasSeleccionadas2'))) {
+            $etiquetasSeleccionadas1 = collect($request->session()->get('etiquetasSeleccionadas2'));
+        }
+        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1,
+            'editoresSeleccionados' => $editoresSeleccionados1, 'categoriasSeleccionadas' => $categoriasSeleccionadas1, 'etiquetasSeleccionadas' => $etiquetasSeleccionadas1);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -99,10 +121,10 @@ class PublicacionesController extends Controller
         try{
             $validator = Validator::make($request->all(), [
                 'titulo' => 'max:300',
-                'subtitulo' => 'max:500',
+                'doi' => 'max:500',
                 'asunto' => 'max:200',
                 'resumen' => 'max:200',
-                'obra' => 'max:200',
+                'publicacion' => 'max:200',
                 'descriptores' => 'max:500',
                 'genero' => 'max:30',
                 'isbn' => 'max:80',
@@ -118,7 +140,10 @@ class PublicacionesController extends Controller
             if ($validator->fails()){
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
                 $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
-                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
+                $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
+                $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
+                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2,
+                    'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionadas2'=>$etiquetas2);
                 if ($request->imagenPublicacion!=null) {
                     $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
                 }
@@ -133,27 +158,42 @@ class PublicacionesController extends Controller
 
             $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
 
+            $idGrupoCategoria = categoriaGrupoCategoria::AgruparCategorias($request->seleccionadosCategorias);
+
+            $idGrupoEtiqueta = descriptoresGrupoDescriptor::AgruparDescriptores($request->seleccionadosEtiquetas);
             $imagen = $request->imagenPublicacion;
             $nombreImagen=null;
             if ($imagen!=null){
                 $nombreImagen = uniqid('img_', true).'.'.$imagen->clientExtension();
                 Storage::put('public/'.$nombreImagen,File::get($imagen), 'public');
             }
-            $publicacion= ['titulo'=>$request->titulo, 'subtitulo'=>$request->subtitulo,
-                'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'obra'=>$request->obra,
+            $publicacion= ['titulo'=>$request->titulo, 'doi'=>$request->doi,
+                'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'publicacion'=>$request->publicacion,
                 'descriptores'=>$request->descriptores, 'genero'=>$request->genero,
-                'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
-                'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
+                'idCategoria'=>$idGrupoCategoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
+                'pais'=>$request->pais, 'idioma'=>$request->idioma, 'editorial'=>$request->editorial,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
+                'enlacedoi'=>$request->enlacedoi, 'doi'=>$request->doi,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
-                'imagen'=>$nombreImagen];
+                'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
             Publicaciones::guardarPublicacion($publicacion);
 
             $request->session()->flash('alert-success', 'Se ha creado la publicación');
             return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha creado la publicación');
         }catch (Exception $e){
             Log::error($e);
-            return redirect()->action('PublicacionesController@create')->with('alert-error', 'Ha ocurrido un error al crear la publicación');
+            $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
+            $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
+            $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
+            $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
+            $vuelta = array('alert-error'=>'Ha ocurrido un error al crear la publicación', 'autoresSeleccionados2'=>$autores2,
+                'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionasas2'=>$etiquetas2);
+            if ($request->imagenPublicacion!=null) {
+                $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
+            }
+            return redirect()->action('PublicacionesController@create')
+                ->withInput()
+                ->with($vuelta);
         }
     }
 
@@ -200,14 +240,14 @@ class PublicacionesController extends Controller
         }else{
             $imagen=$this->imagenPublicacionDefecto;
         }
-        $publicacionVuelta= ['titulo'=>$publicacion['tx_titulo'], 'subtitulo'=>$publicacion['tx_doi'],
-            'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'obra'=>$publicacion['tx_publicacion'],
-            'descriptores'=>$publicacion['tx_descriptores'], 'genero'=>$publicacion['tx_enlacedoi'],
-            'categoria'=>$publicacion['cat_x_idcategoria'], 'isbn'=>$publicacion['tx_isbn'], 'anno'=>$publicacion['nu_anno'],
-            'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'edicion'=>$publicacion['tx_editorial'],
+        $publicacionVuelta= ['titulo'=>$publicacion['tx_titulo'], 'doi'=>$publicacion['tx_doi'],
+            'asunto'=>$publicacion['tx_asunto'], 'resumen'=>$publicacion['tx_resumen'], 'publicacion'=>$publicacion['tx_publicacion'],
+            'descriptores'=>$publicacion['tx_descriptores'], 'enlacedoi'=>$publicacion['tx_enlacedoi'],
+            'idCategoria'=>$publicacion['gcat_x_idgrupocategoria'], 'isbn'=>$publicacion['tx_isbn'], 'anno'=>$publicacion['nu_anno'],
+            'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'editorial'=>$publicacion['tx_editorial'],
             'fechaPublicacion'=>$publicacion['fh_fechapublicacion'], 'paginas'=>$publicacion['tx_paginas'],
             'numPaginas'=>$publicacion['nu_numPaginas'], 'idAutor'=>$publicacion['aga_x_idgrupoautor'], 'idEditor'=> $publicacion['ge_x_idgrupoeditor'],
-            'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion']];
+            'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion'], 'idDescriptor'=>$publicacion['dgd_idGrupoDescriptor']];
 
         $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
@@ -221,8 +261,19 @@ class PublicacionesController extends Controller
             $editoresSeleccionados = editorGrupoEditor::obtenerEditoresPublicacion($publicacion['ge_x_idgrupoeditor']);
         }
 
+        $categoriasSeleccionadas=null;
+        if ($publicacion['gcat_x_idgrupocategoria']!=null) {
+            $categoriasSeleccionadas = categoriaGrupoCategoria::obtenerCategoriasPublicacion($publicacion['gcat_x_idgrupocategoria']);
+        }
+
+        $etiquetasSeleccionadas=null;
+        if ($publicacion['dgd_idGrupoDescriptor']!=null){
+            $etiquetasSeleccionadas = descriptoresGrupoDescriptor::obtenerDescriptoresPublicacion($publicacion['dgd_idGrupoDescriptor']);
+        }
+
         $vuelta = array('publicacion' => $publicacionVuelta, 'categorias' => $categorias, 'autores' => $autores, 'editores' => $editores,
-            'autoresSeleccionados' => $autoresSeleccionados, 'editoresSeleccionados' => $editoresSeleccionados);
+            'autoresSeleccionados' => $autoresSeleccionados, 'editoresSeleccionados' => $editoresSeleccionados,
+            'categoriasSeleccionadas' => $categoriasSeleccionadas, 'etiquetasSeleccionadas' => $etiquetasSeleccionadas);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -257,7 +308,11 @@ class PublicacionesController extends Controller
             if ($validator->fails()){
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
                 $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
-                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2);
+                $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
+                $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
+
+                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2,
+                    'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionadas2'=>$etiquetas2);
 
                 if ($request->imagenPublicacion!=null) {
                     $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
@@ -269,10 +324,13 @@ class PublicacionesController extends Controller
                     ->with($vuelta);
             }
 
-
             $idGrupoAutor = autorGrupoAutor::agruparAutores($request->seleccionadosAutores);
 
             $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
+
+            $idGrupoCategoria = categoriaGrupoCategoria::AgruparCategorias($request->seleccionadosCategorias);
+
+            $idGrupoEtiqueta = descriptoresGrupoDescriptor::AgruparDescriptores($request->seleccionadosEtiquetas);
 
             $imagen = $request->imagenPublicacion;
             $nombreImagen=null;
@@ -288,11 +346,11 @@ class PublicacionesController extends Controller
             $publicacion= ['idPublicacion'=>$id,'titulo'=>$request->titulo, 'doi'=>$request->doi,
                 'asunto'=>$request->asunto, 'resumen'=>$request->resumen, 'publicacion'=>$request->publicacion,
                 'descriptores'=>$request->descriptores, 'enlacedoi'=>$request->enlacedoi,
-                'categoria'=>$request->categoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
-                'pais'=>$request->pais, 'idioma'=>$request->idioma, 'edicion'=>$request->edicion,
+                'idCategoria'=>$idGrupoCategoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
+                'pais'=>$request->pais, 'idioma'=>$request->idioma, 'editorial'=>$request->editorial,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
-                'imagen'=>$nombreImagen];
+                'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
             Publicaciones::actualizarPublicacion($publicacion);
 
             if ($request->idGrupoAutores!=null) {
@@ -303,11 +361,30 @@ class PublicacionesController extends Controller
                 editorGrupoEditor::destroy($request->idGrupoEditores);
             }
 
+            if ($request->idGrupoCategorias!=null) {
+                categoriaGrupoCategoria::destroy($request->idGrupoCategorias);
+            }
+
+            if ($request->idGrupoEtiquetas!=null) {
+                descriptoresGrupoDescriptor::destroy($request->idGrupoEtiquetas);
+            }
+
             $request->session()->flash('alert-success', 'Se ha modificado la publicación');
             return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha modificado la publicación');
         }catch (Exception $e){
             Log::error($e);
-            return redirect()->action('PublicacionesController@create')->with('alert-error', 'Ha ocurrido un error al modificar la publicación');
+            $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
+            $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
+            $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
+            $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
+            $vuelta = array('alert-error'=>'Ha ocurrido un error al modificar la publicación', 'autoresSeleccionados2'=>$autores2,
+                'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionadas2'=>$etiquetas2);
+            if ($request->imagenPublicacion!=null) {
+                $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
+            }
+            return redirect()->action('PublicacionesController@create')
+                ->withInput()
+                ->with($vuelta);
         }
     }
 
@@ -334,6 +411,14 @@ class PublicacionesController extends Controller
             if ($publicacion['ge_x_idgrupoeditor']!=null) {
                 editorGrupoEditor::destroy($publicacion['ge_x_idgrupoeditor']);
             }
+
+            if ($publicacion['gcat_x_idgrupocategoria']!=null) {
+                categoriaGrupoCategoria::destroy($publicacion['gcat_x_idgrupocategoria']);
+            }
+
+            if ($publicacion['dgd_idGrupoDescriptor']!=null) {
+                descriptoresGrupoDescriptor::destroy($publicacion['dgd_idGrupoDescriptor']);
+            }
         }catch (Exception $e){
             Log::error($e);
             return redirect()->action('PublicacionesController@create')->with('alert-error', 'Ha ocurrido un error al borrar la publicación');
@@ -341,4 +426,11 @@ class PublicacionesController extends Controller
 
         return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha borrado la publicación');
     }
+
+    public function obtenerDescriptores($etiqueta){
+        return Descriptores::obtenerDescriptoresPorNombre($etiqueta);
+    }
 }
+
+
+
