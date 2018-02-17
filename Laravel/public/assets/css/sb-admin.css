@@ -520,17 +520,19 @@ user-select: none; */
 }
 
 /*   Estilos para los datatables menús*/
-#tablaCategorias td, #tablaAtoz td, #tablaAutores  td{
+#tablaCategorias td, #tablaAtoz td, #tablaAutores  td, #descriptoresMenu td, #annosMenu td{
   display: block;
   border-top : none;
 }
-#categoriasMenu .no-footer, #autoresMenu  .no-footer, #atozMenu .no-footer{
+#categoriasMenu .no-footer, #autoresMenu  .no-footer, #atozMenu .no-footer, #descriptoresMenu .no-footer, #annosMenu .no-footer{
   border-bottom: none!Important;
 }
-#categoriasMenu h4, #autoresMenu h4, #atozMenu h4{
+#categoriasMenu h4, #autoresMenu h4, #atozMenu h4, #descriptoresMenu h4, #annosMenu h4{
   display: block;
   margin-left: 10px;
 }
+
+
 /*  Estilos para el datatable principal */
 #tablaPublicaciones{
   font-size: 1.2rem;
@@ -632,4 +634,35 @@ input[type="search"]{
 /* Para estrechar filas datatable*/
 table.dataTable tbody th, table.dataTable tbody td {
   padding: 5px 5px;
+
+}
+#categoriasMenu H4{
+  font-size: 1.3rem;
+}
+
+#categoriasMenu table.dataTable tbody th, #categoriasMenu table.dataTable tbody td {
+  padding: 0px 12px;
+  font-size: 1.2rem;
+}
+#autoresMenu H4{
+  font-size: 1.3rem;
+}
+
+#autoresMenu table.dataTable tbody th, #autoresMenu table.dataTable tbody td {
+  padding: 0px 12px;
+  font-size: 1.2rem;
+}
+#descriptoresMenu H4{
+  font-size: 1.3rem;
+}
+#descriptoresMenu table.dataTable tbody th, #descriptoresMenu table.dataTable tbody td {
+  padding: 0px 12px;
+  font-size: 1.2rem;
+}
+#annosMenu H4{
+  font-size: 1.3rem;
+}
+#annosMenu table.dataTable tbody th, #annosMenu table.dataTable tbody td {
+  padding: 0px 12px;
+  font-size: 1.2rem;
 }
