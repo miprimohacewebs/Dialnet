@@ -47,7 +47,23 @@ $(function () {
                     data: 'tx_publicacion',
                     data: 'x_idpublicacion',
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html("<strong style ='color: #ba0600; font-family: 'Josefin Sans', sans-serif;'> <i class='fa fa-angle-right'></i> " + oData.tx_titulo + "</strong>, <strong style ='font-family: 'Josefin Sans', sans-serif;'> ISBN/ISSN: </strong>"+ oData.tx_isbn  +", <strong style ='font-family: 'Josefin Sans', sans-serif;'> AÑO: </strong>" + oData.nu_anno + ", <strong style ='font-family: 'Josefin Sans', sans-serif;'> PUBLICACIÓN: </strong>" + oData.tx_publicacion + " <a href='detallePublicacion' id='"+oData.x_idpublicacion+ "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>");
+                        var bufferSalida="";
+                        if ( oData.tx_titulo != null ) {
+                            bufferSalida += "<strong style ='color: #ba0600; font-family: 'Josefin Sans', sans-serif;'> <i class='fa fa-angle-right'></i> " + oData.tx_titulo + "</strong>";
+                        }
+                        if ( oData.tx_isbn != null ) {
+                            bufferSalida += "<strong style ='font-family: 'Josefin Sans', sans-serif;'> ISBN/ISSN: </strong>"+ oData.tx_isbn;
+                        }
+                        if ( oData.nu_anno != null ) {
+                            bufferSalida += "<strong style ='font-family: 'Josefin Sans', sans-serif;'> AÑO: </strong>" + oData.nu_anno;
+                        }
+                        if ( oData.tx_publicacion != null ) {
+                            bufferSalida += "<strong style ='font-family: 'Josefin Sans', sans-serif;'> PUBLICACIÓN: </strong>" + oData.tx_publicacion ;
+                        }
+                        // Ver detalle
+                        bufferSalida += " <a href='detallePublicacion' id='"+oData.x_idpublicacion+ "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
+
+                        $(nTd).html(bufferSalida );
 
                     },
 
