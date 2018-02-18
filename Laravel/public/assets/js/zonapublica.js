@@ -657,101 +657,28 @@ function actualizarListado(tipo, valor) {
 function resetearPantalla() {
 
     var tablaPublicaciones = $("#tablaPublicaciones");
-
     tablaPublicaciones.DataTable().destroy();
     tablaPublicaciones.empty();
+    var tablaAnnos = $("#tablaAnnos");
+    tablaAnnos.DataTable().destroy();
+    tablaAnnos.empty();
+    var tablaDescriptores = $("#tablaDescriptores");
+    tablaDescriptores.DataTable().destroy();
+    tablaDescriptores.empty();
+    var tablaAutores = $("#tablaAutores");
+    tablaAutores.DataTable().destroy();
+    tablaAutores.empty();
+    var tablaCategorias = $("#tablaCategorias");
+    tablaCategorias.DataTable().destroy();
+    tablaCategorias.empty();
 
-    tablaPublicaciones
-        .DataTable(
-            {
-                "processing": true,
-                "serverSide": true,
-                "ajax": "/api/publicaciones",
-                "lengthChange": true,
-                "language": {
-                    "processing": "Procesando publicaciones...",
-                    "search": "Buscar:",
-                    "lengthMenu": "Mostrar _MENU_ registros por página.",
-                    "zeroRecords": "No existen publicaciones.",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay publicaciones disponibles",
-                    "infoFiltered": "(Filtrados _MAX_ del total de publicaciones)",
-                    "loadingRecords": "Cargando publicaciones en curso...",
-                    "infoPostFix": "",
-                    "emptyTable": "No existen publicaciones disponibles.",
-                    "paginate": {
-                        "first": "Primero",
-                        "previous": "Anterior",
-                        "next": "Siguiente",
-                        "last": "Último"
-                    }
-                },
-                "columns": [
-                    {
-                        title: 'Título',
-                        data: 'tx_titulo',
-                        name: 'tx_titulo',
-                        sWidth: '50%'
-                    },
-                    {
-                        title: 'ISBN/ISSN',
-                        data: 'tx_isbn',
-                        name: 'tx_isbn',
-                        sWidth: '10%'
-                    },
-                    {
-                        title: 'Año',
-                        data: 'nu_anno',
-                        name: 'nu_anno',
-                        sWidth: '5%'
-                    },
-                    {
-                        title: 'Publicación',
-                        data: 'tx_publicacion',
-                        name: 'tx_publicacion',
-                        sWidth: '35%'
-                    },
-                    {
-                        title: 'Ver detalle',
-                        data: 'x_idpublicacion',
-                        sWidth: '10%',
-                        mRender: function (data, type, full) {
-                            return "<a href='detallePublicacion' id='"
-                                + data
-                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
-                        }
+    $("#textoBusqueda").val('');
 
-                    }]
-            });
+    $("#autoresMenu").hide();
+    $("#descriptoresMenu").hide();
+    $("#annosMenu").hide();
+    $("#categoriasMenu").hide();
+    $("#divPublicaciones").hide();
+    $("#divUtilidades").hide();
 
-    jQuery.fn.DataTable.ext.type.search.string = function (data) {
-        return !data ?
-            '' :
-            typeof data === 'string' ?
-                data
-                    .replace(/έ/g, 'ε')
-                    .replace(/[ύϋΰ]/g, 'υ')
-                    .replace(/ό/g, 'ο')
-                    .replace(/ώ/g, 'ω')
-                    .replace(/ά/g, 'α')
-                    .replace(/[ίϊΐ]/g, 'ι')
-                    .replace(/ή/g, 'η')
-                    .replace(/\n/g, ' ')
-                    .replace(/á/g, 'a')
-                    .replace(/é/g, 'e')
-                    .replace(/í/g, 'i')
-                    .replace(/ó/g, 'o')
-                    .replace(/ú/g, 'u')
-                    .replace(/ê/g, 'e')
-                    .replace(/î/g, 'i')
-                    .replace(/ô/g, 'o')
-                    .replace(/è/g, 'e')
-                    .replace(/ï/g, 'i')
-                    .replace(/ü/g, 'u')
-                    .replace(/ã/g, 'a')
-                    .replace(/õ/g, 'o')
-                    .replace(/ç/g, 'c')
-                    .replace(/ì/g, 'i') :
-                data;
-    };
 }

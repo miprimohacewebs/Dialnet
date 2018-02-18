@@ -49,7 +49,7 @@
                 <div class="col-md-6">
                     <!-- Buscar -->
                     <div class="form-group">
-                        <input type="text" id="textoBusqueda" class="form-control" id="txtBuscar" placeholder="Buscar">
+                        <input type="text" id="textoBusqueda" class="form-control" placeholder="Buscar">
 
                     </div>
                 </div>
