@@ -169,7 +169,7 @@ class Publicaciones extends Model
         }
 
 
-        $vuelta = $query->distinct()->get();
+        $vuelta = $query->distinct()->distinct()->get();
         return collect($vuelta);
     }
 
@@ -196,8 +196,8 @@ class Publicaciones extends Model
         return DB::table('publicaciones')->count();
     }
 
-    public static function obtenerAnnosDatatable (){
-        return collect(DB::table('publicaciones AS p')
+    public static function obtenerAnnosDatatable ($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores){
+        $query = DB::table('publicaciones AS p')
             ->leftJoin('descriptores_grupoDescriptor AS dgd', 'p.dgd_idGrupoDescriptor', '=', 'dgd.x_idGrupoDescriptor')
             ->leftJoin('descriptores AS d', 'dgd.desc_x_iddescriptor', '=', 'd.x_iddescriptor')
             ->leftJoin('autor_grupoautor AS a', 'p.aga_x_idgrupoautor', '=', 'a.ga_x_idgrupoautor')
@@ -206,7 +206,25 @@ class Publicaciones extends Model
             ->leftJoin('categorias AS c', 'C2.cat_x_idCategoria', '=', 'c.x_idcategoria')
             ->select(DB::raw('count(p.nu_anno) numPublicaciones, p.nu_anno nombre, p.nu_anno id'))
             ->groupBy('p.nu_anno')
-            ->orderBy('nombre')->get());
+            ->orderBy('nombre');
+
+        if ($valoresAnio!=null){
+            $query->whereIn('p.nu_anno', $valoresAnio);
+        }
+
+        if ($valoresAutores!=null){
+            $query->whereIn('a.aut_x_idautor', $valoresAutores);
+        }
+
+        if ($valoresCategorias!=null){
+            $query->whereIn('C2.cat_x_idCategoria', $valoresCategorias);
+        }
+
+        if ($valoresDescriptores!=null){
+            $query->whereIn('dgd.desc_x_iddescriptor', $valoresDescriptores);
+        }
+
+        return collect($query->distinct()->get());
     }
 
 

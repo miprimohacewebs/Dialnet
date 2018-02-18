@@ -361,7 +361,7 @@ $(function () {
             "columns": [{
                 data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#' > <i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"cat\", "+oData.id+")'> <i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
@@ -397,7 +397,7 @@ $(function () {
             "columns": [{
                 data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"aut\", "+oData.id+")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
@@ -431,7 +431,7 @@ $(function () {
             "columns": [{
                 data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"desc\", "+oData.id+")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
@@ -465,7 +465,7 @@ $(function () {
             "columns": [{
                 data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"anno\", "+oData.id+")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
@@ -490,68 +490,290 @@ function actualizarListado(tipo, valor) {
     var descriptoresSeleccionados = $("#descriptoresSeleccionados").val();
 
     if (tipo==='cat'){
-        if (categoriasSeleccionadas!==''){
-            categoriasSeleccionadas = categoriasSeleccionadas+',';
+        if (categoriasSeleccionadas.indexOf(','+valor+',') !== -1){
+            categoriasSeleccionadas = categoriasSeleccionadas.replace(valor+',','');
+        }else if (categoriasSeleccionadas.indexOf(valor+',') !== -1){
+            categoriasSeleccionadas = categoriasSeleccionadas.replace(valor+',','');
+        }else if (categoriasSeleccionadas.indexOf(','+valor) !== -1) {
+            categoriasSeleccionadas = categoriasSeleccionadas.replace(',' + valor, '');
+        }else if (categoriasSeleccionadas.indexOf(valor) !== -1){
+            categoriasSeleccionadas = categoriasSeleccionadas.replace(valor, '');
+        }else {
+            if (categoriasSeleccionadas!==''){
+                categoriasSeleccionadas = categoriasSeleccionadas+',';
+            }
+            categoriasSeleccionadas = categoriasSeleccionadas+valor;
         }
-        categoriasSeleccionadas = categoriasSeleccionadas+valor;
+
         $("#categoriasSeleccionadas").val(categoriasSeleccionadas);
-    }else if (tipo==='anno'){
-        if (annosSeleccionados!==''){
-            annosSeleccionados = annosSeleccionados+',';
+    }else if (tipo==='anno') {
+        if (annosSeleccionados.indexOf(',' + valor + ',') !== -1) {
+            annosSeleccionados = annosSeleccionados.replace(valor + ',', '');
+        } else if (annosSeleccionados.indexOf(valor + ',') !== -1) {
+            annosSeleccionados = annosSeleccionados.replace(valor + ',', '');
+        } else if (annosSeleccionados.indexOf(',' + valor) !== -1) {
+            annosSeleccionados = annosSeleccionados.replace(',' + valor, '');
+        }else if (annosSeleccionados.indexOf(valor) !== -1){
+            annosSeleccionados = annosSeleccionados.replace(valor, '');
+        }else {
+            if (annosSeleccionados !== '') {
+                annosSeleccionados = annosSeleccionados + ',';
+            }
+            annosSeleccionados = annosSeleccionados + valor;
         }
-        annosSeleccionados = annosSeleccionados+valor;
         $("#annosSeleccionados").val(annosSeleccionados);
     }else if (tipo==='aut'){
-        if (autoresSeleccionados!==''){
-            autoresSeleccionados = autoresSeleccionados+',';
+        if (autoresSeleccionados.indexOf(','+valor+',') !== -1){
+            autoresSeleccionados = autoresSeleccionados.replace(valor+',','');
+        }else if (autoresSeleccionados.indexOf(valor+',') !== -1){
+            autoresSeleccionados = autoresSeleccionados.replace(valor+',','');
+        }else if (autoresSeleccionados.indexOf(','+valor) !== -1) {
+            autoresSeleccionados = autoresSeleccionados.replace(',' + valor, '');
+        }else if (autoresSeleccionados.indexOf(valor) !== -1){
+            autoresSeleccionados = autoresSeleccionados.replace(valor, '');
+        }else {
+            if (autoresSeleccionados !== '') {
+                autoresSeleccionados = autoresSeleccionados + ',';
+            }
+            autoresSeleccionados = autoresSeleccionados + valor;
         }
-        autoresSeleccionados = autoresSeleccionados+valor;
         $("#autoresSeleccionados").val(autoresSeleccionados);
     }else if (tipo==='desc'){
-        if (descriptoresSeleccionados!==''){
-            descriptoresSeleccionados = descriptoresSeleccionados+',';
+        if (descriptoresSeleccionados.indexOf(','+valor+',') !== -1){
+            descriptoresSeleccionados = descriptoresSeleccionados.replace(valor+',','');
+        }else if (descriptoresSeleccionados.indexOf(valor+',') !== -1){
+            descriptoresSeleccionados = descriptoresSeleccionados.replace(valor+',','');
+        }else if (descriptoresSeleccionados.indexOf(','+valor) !== -1) {
+            descriptoresSeleccionados = descriptoresSeleccionados.replace(',' + valor, '');
+        }else if (descriptoresSeleccionados.indexOf(valor) !== -1){
+            descriptoresSeleccionados = descriptoresSeleccionados.replace(valor, '');
+        }else {
+            if (descriptoresSeleccionados !== '') {
+                descriptoresSeleccionados = descriptoresSeleccionados + ',';
+            }
+            descriptoresSeleccionados = descriptoresSeleccionados + valor;
         }
-        descriptoresSeleccionados = descriptoresSeleccionados+valor;
         $("#descriptoresSeleccionados").val(descriptoresSeleccionados);
     }
 
 
 
     var tablaCategorias = $("#tablaCategorias");
-    tablaCategorias.DataTable().desctroy();
+    tablaCategorias.DataTable().destroy();
     tablaCategorias.empty();
+    tablaCategorias.DataTable({
+        "serverSide": false,
+        "lengthChange": false,
+        "info": false,
+        "searching": false,
+        "pageLength": 10,
+        "pagingType": "simple",
+        "ajax": "/api/categorias",
+        "language": {
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ registros por página.",
+            "zeroRecords": "No existen categorías.",
+            "info": "Mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay categorías disponibles",
+            "infoFiltered": "(Filtrados _MAX_ del total de categorías)",
+            "loadingRecords": "En curso...",
+            "infoPostFix": "",
+            "emptyTable": "No existen categorías disponibles.",
+            "paginate": {
+                "first": "Primero",
+                "previous": "Anterior",
+                "next": "Siguiente",
+                "last": "Último"
+            }
+        },
+        "columns": [{
+            data: 'nombre',
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                var categorias = $("#categoriasSeleccionadas").val().split(',');
+                if (categorias.indexOf(String(oData.id)) >= 0){
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"cat\", "+oData.id+")'> <i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                }else{
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"cat\", "+oData.id+")'> <i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                }
+
+            }
+        }]
+    });
 
 
     var tablaAutores = $("#tablaAutores");
-    tablaAutores.DataTable().desctroy();
+    tablaAutores.DataTable().destroy();
     tablaAutores.empty();
+    tablaAutores.DataTable({
+        "serverSide": false,
+        "lengthChange": false,
+        "info": false,
+        "searching": false,
+        "pageLength": 10,
+        "pagingType": "simple",
+        "ajax": {
+            "url": "/api/autores",
+            "type": "GET",
+            "data": {
+                "autores": autoresSeleccionados,
+                "descriptores": descriptoresSeleccionados,
+                "categorias": categoriasSeleccionadas,
+                "annos": annosSeleccionados
+            }
+        },
+        "language": {
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ registros por página.",
+            "zeroRecords": "No existen autores.",
+            "info": "Mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay autores disponibles",
+            "infoFiltered": "(Filtrados _MAX_ del total de autores)",
+            "loadingRecords": "En curso...",
+            "infoPostFix": "",
+            "emptyTable": "No existen autores disponibles.",
+            "paginate": {
+                "first": "Primero",
+                "previous": "Anterior",
+                "next": "Siguiente",
+                "last": "Último"
+            }
+        },
+        "columns": [{
+            data: 'nombre',
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                var autores = $("#autoresSeleccionados").val().split(',');
+                if (autores.indexOf(String(oData.id)) >= 0){
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"aut\", "+oData.id+")'><i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                }else{
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"aut\", "+oData.id+")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                }
+
+            }
+        }]
+    });
 
     var tablaDescriptores = $("#tablaDescriptores");
-    tablaDescriptores.DataTable().desctroy();
+    tablaDescriptores.DataTable().destroy();
     tablaDescriptores.empty();
+    tablaDescriptores.DataTable({
+        "serverSide": false,
+        "lengthChange": false,
+        "info": false,
+        "searching": false,
+        "pageLength": 10,
+        "pagingType": "simple",
+        "ajax": {
+            "url": "/api/descriptores",
+            "type": "GET",
+            "data": {
+                "autores": autoresSeleccionados,
+                "descriptores": descriptoresSeleccionados,
+                "categorias": categoriasSeleccionadas,
+                "annos": annosSeleccionados
+            }
+        },
+        "language": {
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ registros por página.",
+            "zeroRecords": "No existen autores.",
+            "info": "Mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay autores disponibles",
+            "infoFiltered": "(Filtrados _MAX_ del total de autores)",
+            "loadingRecords": "En curso...",
+            "infoPostFix": "",
+            "emptyTable": "No existen autores disponibles.",
+            "paginate": {
+                "first": "Primero",
+                "previous": "Anterior",
+                "next": "Siguiente",
+                "last": "Último"
+            }
+        },
+        "columns": [{
+            data: 'nombre',
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                var descriptores = $("#descriptoresSeleccionados").val().split(',');
+                if (descriptores.indexOf(String(oData.id)) >= 0){
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"desc\", "+oData.id+")'><i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                }else{
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"desc\", "+oData.id+")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                }
+            }
+        }]
+    });
+
 
     var tablaAnnos = $("#tablaAnnos");
-    tablaAnnos.DataTable().desctroy();
+    tablaAnnos.DataTable().destroy();
     tablaAnnos.empty();
+    tablaAnnos.DataTable({
+        "serverSide": false,
+        "lengthChange": false,
+        "info": false,
+        "searching": false,
+        "pageLength": 10,
+        "pagingType": "simple",
+        "ajax": {
+            "url": "/api/annos",
+            "type": "GET",
+            "data": {
+                "autores": autoresSeleccionados,
+                "descriptores": descriptoresSeleccionados,
+                "categorias": categoriasSeleccionadas,
+                "annos": annosSeleccionados
+            }
+        },
+        "language": {
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ registros por página.",
+            "zeroRecords": "No existen autores.",
+            "info": "Mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay autores disponibles",
+            "infoFiltered": "(Filtrados _MAX_ del total de autores)",
+            "loadingRecords": "En curso...",
+            "infoPostFix": "",
+            "emptyTable": "No existen autores disponibles.",
+            "paginate": {
+                "first": "Primero",
+                "previous": "Anterior",
+                "next": "Siguiente",
+                "last": "Último"
+            }
+        },
+        "columns": [{
+            data: 'nombre',
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                var annos = $("#annosSeleccionados").val().split(',');
+                if (annos.indexOf(String(oData.id)) >= 0){
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"anno\", "+oData.id+")'><i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                }else{
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"anno\", "+oData.id+")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                }
+
+            }
+        }]
+    });
 
     var tablaPublicaciones = $("#tablaPublicaciones");
     tablaPublicaciones.DataTable().destroy();
     tablaPublicaciones.empty();
-
-
-
-
     tablaPublicaciones
         .DataTable(
             {
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
-                    "url": "/api/publicacionesFiltro",
+                    "url": "/api/publicaciones",
                     "type": "GET",
                     "data": {
-                        "valor": valor,
-                        "tipo": tipo
+                        "autores": autoresSeleccionados,
+                        "descriptores": descriptoresSeleccionados,
+                        "categorias": categoriasSeleccionadas,
+                        "annos": annosSeleccionados
                     }
                 },
                 "lengthChange": true,

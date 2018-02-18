@@ -37,9 +37,38 @@ class PublicacionesController extends Controller
      * Muestra los campos de la tablaPublicaciones
      * @return publicaciones para rellenar el datatable
      */
-    public function getTablaPublicaciones()
+    public function getTablaPublicaciones(Request $request)
     {
-        $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades(null,null,null,null);
+        $annos = $request->get('annos');
+        $autores = $request->get('autores');
+        $categorias = $request->get('categorias');
+        $descriptores = $request->get('descriptores');
+        if ($annos===''){
+            $annos=null;
+        }
+        if ($autores===''){
+            $autores = null;
+        }
+        if ($categorias===''){
+            $categorias=null;
+        }
+        if ($descriptores===''){
+            $descriptores=null;
+        }
+        if ($annos!==null){
+            $annos = explode(',', $annos);
+        }
+        if ($autores!==null){
+            $autores = explode(',', $autores);
+        }
+        if ($categorias!==null){
+            $categorias = explode(',', $categorias);
+        }
+        if ($descriptores!==null){
+            $descriptores = explode(',', $descriptores);
+        }
+
+        $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades($annos, $autores, $categorias, $descriptores);
         return Datatables::of($publicaciones)->make(true);
         
     }
@@ -52,9 +81,37 @@ class PublicacionesController extends Controller
      */
     public function getTablaPublicacionesFiltro(Request $request)
     {
-        $valor = $request->get('valor');
-        $tipo = $request->get('tipo');
-        $publicaciones = Publicaciones::obtenerPublicaciones($valor, $tipo);
+
+        $annos = $request->get('annos');
+        $autores = $request->get('autores');
+        $categorias = $request->get('categorias');
+        $descriptores = $request->get('descriptores');
+        if ($annos===''){
+            $annos=null;
+        }
+        if ($autores===''){
+            $autores = null;
+        }
+        if ($categorias===''){
+            $categorias=null;
+        }
+        if ($descriptores===''){
+            $descriptores=null;
+        }
+        if ($annos!==null){
+            $annos = explode(',', $annos);
+        }
+        if ($autores!==null){
+            $autores = explode(',', $autores);
+        }
+        if ($categorias!==null){
+            $categorias = explode(',', $categorias);
+        }
+        if ($descriptores!==null){
+            $descriptores = explode(',', $descriptores);
+        }
+
+        $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades($annos, $autores, $categorias, $descriptores);
         return Datatables::of($publicaciones)->make(true);
         
     }
@@ -69,13 +126,71 @@ class PublicacionesController extends Controller
     }
 
 
-    public function obtenerDescriptoresDatatable() {
-        $descriptores = Descriptores::obtenerDescriptoresDatatable();
+    public function obtenerDescriptoresDatatable(Request $request) {
+        $annos = $request->get('annos');
+        $autores = $request->get('autores');
+        $categorias = $request->get('categorias');
+        $descriptores = $request->get('descriptores');
+        if ($annos===''){
+            $annos=null;
+        }
+        if ($autores===''){
+            $autores = null;
+        }
+        if ($categorias===''){
+            $categorias=null;
+        }
+        if ($descriptores===''){
+            $descriptores=null;
+        }
+        if ($annos!==null){
+            $annos = explode(',', $annos);
+        }
+        if ($autores!==null){
+            $autores = explode(',', $autores);
+        }
+        if ($categorias!==null){
+            $categorias = explode(',', $categorias);
+        }
+        if ($descriptores!==null){
+            $descriptores = explode(',', $descriptores);
+        }
+
+        $descriptores = Descriptores::obtenerDescriptoresDatatable($annos, $autores, $categorias, $descriptores);
         return Datatables::of($descriptores)->make(true);
     }
 
-    public function obtenerAnnos() {
-        $annos = Publicaciones::obtenerAnnosDatatable();
+    public function obtenerAnnos(Request $request) {
+        $annos = $request->get('annos');
+        $autores = $request->get('autores');
+        $categorias = $request->get('categorias');
+        $descriptores = $request->get('descriptores');
+        if ($annos===''){
+            $annos=null;
+        }
+        if ($autores===''){
+            $autores = null;
+        }
+        if ($categorias===''){
+            $categorias=null;
+        }
+        if ($descriptores===''){
+            $descriptores=null;
+        }
+        if ($annos!==null){
+            $annos = explode(',', $annos);
+        }
+        if ($autores!==null){
+            $autores = explode(',', $autores);
+        }
+        if ($categorias!==null){
+            $categorias = explode(',', $categorias);
+        }
+        if ($descriptores!==null){
+            $descriptores = explode(',', $descriptores);
+        }
+
+        $annos = Publicaciones::obtenerAnnosDatatable($annos, $autores, $categorias, $descriptores);
         return Datatables::of($annos)->make(true);
     }
     /**

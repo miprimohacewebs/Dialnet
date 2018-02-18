@@ -82,9 +82,9 @@ class descriptores extends Model
 
     }
 
-    public static function obtenerDescriptoresDatatable()
+    public static function obtenerDescriptoresDatatable($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores)
     {
-        return collect(DB::table('publicaciones AS p')
+        $query = DB::table('publicaciones AS p')
             ->rightJoin('descriptores_grupoDescriptor AS dgd', 'p.dgd_idGrupoDescriptor', '=', 'dgd.x_idGrupoDescriptor')
             ->leftJoin('descriptores AS d', 'dgd.desc_x_iddescriptor', '=', 'd.x_iddescriptor')
             ->leftJoin('autor_grupoautor AS a', 'p.aga_x_idgrupoautor', '=', 'a.ga_x_idgrupoautor')
@@ -93,6 +93,24 @@ class descriptores extends Model
             ->leftJoin('categorias AS c', 'C2.cat_x_idCategoria', '=', 'c.x_idcategoria')
             ->select(DB::raw('dgd.desc_x_iddescriptor numPublicaciones, d.tx_descriptor nombre, d.x_iddescriptor id'))
             ->groupBy('dgd.desc_x_iddescriptor')
-            ->orderBy('nombre')->get());
+            ->orderBy('nombre');
+
+        if ($valoresAnio!=null){
+            $query->whereIn('p.nu_anno', $valoresAnio);
+        }
+
+        if ($valoresAutores!=null){
+            $query->whereIn('a.aut_x_idautor', $valoresAutores);
+        }
+
+        if ($valoresCategorias!=null){
+            $query->whereIn('C2.cat_x_idCategoria', $valoresCategorias);
+        }
+
+        if ($valoresDescriptores!=null){
+            $query->whereIn('dgd.desc_x_iddescriptor', $valoresDescriptores);
+        }
+
+        return collect($query->get());
     }
 }

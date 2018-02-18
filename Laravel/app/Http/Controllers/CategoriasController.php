@@ -121,8 +121,38 @@ class CategoriasController extends Controller
         }
     }
 
-    public function mostrarCategorias (){
-        $categorias = Categorias::obtenerCategoriasDatatable();
+    public function mostrarCategorias (Request $request){
+        $annos = $request->get('annos');
+        $autores = $request->get('autores');
+        $categorias = $request->get('categorias');
+        $descriptores = $request->get('descriptores');
+        if ($annos===''){
+            $annos=null;
+        }
+        if ($autores===''){
+            $autores = null;
+        }
+        if ($categorias===''){
+            $categorias=null;
+        }
+        if ($descriptores===''){
+            $descriptores=null;
+        }
+        if ($annos!==null){
+            $annos = explode(',', $annos);
+        }
+        if ($autores!==null){
+            $autores = explode(',', $autores);
+        }
+        if ($categorias!==null){
+            $categorias = explode(',', $categorias);
+        }
+        if ($descriptores!==null){
+            $descriptores = explode(',', $descriptores);
+        }
+
+
+        $categorias = Categorias::obtenerCategoriasDatatable($annos, $autores, $categorias, $descriptores);
         return Datatables::of($categorias)->make(true);
     }
 }

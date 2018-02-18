@@ -130,8 +130,37 @@ class AutoresController extends Controller
         }
     }
 
-    public function mostrarAutores (){
-        $autores = Autores::obtenerAutoresDatatable();
+    public function mostrarAutores (Request $request){
+        $annos = $request->get('annos');
+        $autores = $request->get('autores');
+        $categorias = $request->get('categorias');
+        $descriptores = $request->get('descriptores');
+        if ($annos===''){
+            $annos=null;
+        }
+        if ($autores===''){
+            $autores = null;
+        }
+        if ($categorias===''){
+            $categorias=null;
+        }
+        if ($descriptores===''){
+            $descriptores=null;
+        }
+        if ($annos!==null){
+            $annos = explode(',', $annos);
+        }
+        if ($autores!==null){
+            $autores = explode(',', $autores);
+        }
+        if ($categorias!==null){
+            $categorias = explode(',', $categorias);
+        }
+        if ($descriptores!==null){
+            $descriptores = explode(',', $descriptores);
+        }
+
+        $autores = Autores::obtenerAutoresDatatable($annos, $autores, $categorias, $descriptores);
         return Datatables::of($autores)->make(true);
     }
 
