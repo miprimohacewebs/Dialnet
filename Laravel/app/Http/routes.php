@@ -35,6 +35,8 @@ Route::group(['middleware' => ['autenticado']], function () {
      * Rutas de publicaciones
      */
 
+    Route::get('api/publicacionesAdmin','PublicacionesController@obtenerTablaPublicaciones');
+
     Route::get('publicacionesadmin','PublicacionesController@create');
 
     /** Ruta para guardar una publicación */
@@ -51,6 +53,7 @@ Route::group(['middleware' => ['autenticado']], function () {
     /**
      * Rutas de Categorías
      */
+    Route::get('api/categoriasAdmin', 'CategoriasController@show');
 
     Route::get('categoriasadmin', 'CategoriasController@create');
 
@@ -68,6 +71,7 @@ Route::group(['middleware' => ['autenticado']], function () {
     /**
      * Rutas de autores
      */
+    Route::get('api/autoresAdmin', 'AutoresController@show');
 
     Route::get('autoresadmin', 'AutoresController@create');
 
@@ -92,6 +96,8 @@ Route::group(['middleware' => ['autenticado']], function () {
     Route::post('administrador/modificarEditor/{id}','EditoresController@update');
 
     Route::get('eliminarEditor/{id}','EditoresController@destroy');
+
+
 
     /**
      * Rutas descriptores

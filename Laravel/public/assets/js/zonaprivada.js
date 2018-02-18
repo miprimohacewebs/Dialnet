@@ -12,7 +12,7 @@ $(function() {
             {
                 "processing" : true,
                 "serverSide" : true,
-                "ajax" : "/api/publicaciones",
+                "ajax" : "/api/publicacionesAdmin",
                 "lengthChange" : true,
                 "language": {
                     "processing": "Procesando publicaciones...",
@@ -66,7 +66,7 @@ $(function() {
             {
                 "processing" : true,
                 "serverSide" : true,
-                "ajax" : "/api/autores",
+                "ajax" : "api/autoresAdmin",
                 "lengthChange" : false,
                 "language": {
                     "processing": "Procesando autores...",
@@ -121,7 +121,7 @@ $(function() {
             {
                 "processing" : true,
                 "serverSide" : true,
-                "ajax" : "/api/categorias",
+                "ajax" : "api/categoriasAdmin",
                 "lengthChange" : false,
                 "language": {
                     "processing": "Procesando categorias...",

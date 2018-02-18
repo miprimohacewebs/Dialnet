@@ -32,6 +32,11 @@ class PublicacionesController extends Controller
     {
         return view('publicaciones.index');
     }
+
+    public function obtenerTablaPublicaciones(){
+        $publicaciones = Publicaciones::all();
+        return Datatables::of($publicaciones)->make(true);
+    }
     
     /**
      * Muestra los campos de la tablaPublicaciones
