@@ -308,59 +308,59 @@ ul.alert-dropdown {
 
 /** Panel cibermov 001 */
 .panel-civermov {
-  border-color: #e02d28;
+  border-color: #454545;
 }
 
 .panel-civermov>.panel-heading {
-  border-color: #e02d28;
+  border-color: #454545;
   color: #fff;
-  background-color: #e02d28;
+  background-color: #454545;
 }
 
 .panel-civermov>a {
-  color: #ba0600;
+  color: #454545;
 }
 
 .panel-civermov>a:hover {
-  color: #8d0500;
+  color: #454545;
 }
 
 /** Panel cibermov 002 */
 .panel-civermov002 {
-  border-color: #c91711;
+  border-color: #6E0400;
 }
 
 .panel-civermov002>.panel-heading {
-  border-color: #c91711;
+  border-color: #6E0400;
   color: #fff;
-  background-color: #c91711;
+  background-color: #6E0400;
 }
 
 .panel-civermov002>a {
-  color: #ba0600;
+  color: #6E0400;
 }
 
 .panel-civermov002>a:hover {
-  color: #8d0500;
+  color: #6E0400;
 }
 
 /** Panel cibermov 003 */
 .panel-civermov003 {
-  border-color: #ba0600;
+  border-color: #6E3A00;
 }
 
 .panel-civermov003>.panel-heading {
-  border-color: #ba0600;
+  border-color: #6E3A00;
   color: #fff;
-  background-color: #ba0600;
+  background-color: #6E3A00;
 }
 
 .panel-civermov003>a {
-  color: #ba0600;
+  color: #6E3A00;
 }
 
 .panel-civermov003>a:hover {
-  color: #8d0500;
+  color: #6E3A00;
 }
 
 /** Panel cibermov 004 */

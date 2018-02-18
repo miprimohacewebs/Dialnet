@@ -20,6 +20,8 @@
 					</span>
                     </a>
                 </div>
+                <div class="col-md-3 text-center">
+                </div>
                 <div class="col-md-2 text-center">
                     <p class="parrafoResultadoDocumentosEncontrados">{{$publicaciones}}</p>
                 </div>
