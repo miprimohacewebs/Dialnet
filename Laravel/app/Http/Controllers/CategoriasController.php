@@ -138,20 +138,6 @@ class CategoriasController extends Controller
         if ($descriptores===''){
             $descriptores=null;
         }
-        if ($annos!==null){
-            $annos = explode(',', $annos);
-        }
-        if ($autores!==null){
-            $autores = explode(',', $autores);
-        }
-        if ($categorias!==null){
-            $categorias = explode(',', $categorias);
-        }
-        if ($descriptores!==null){
-            $descriptores = explode(',', $descriptores);
-        }
-
-
         $categorias = Categorias::obtenerCategoriasDatatable($annos, $autores, $categorias, $descriptores);
         return Datatables::of($categorias)->make(true);
     }

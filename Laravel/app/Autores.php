@@ -96,33 +96,36 @@ class autores extends Model
 
     public static function obtenerAutoresDatatable($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores)
     {
-        $query = DB::table('publicaciones AS p')
-            ->leftJoin('descriptores_grupoDescriptor AS dgd', 'p.dgd_idGrupoDescriptor', '=', 'dgd.x_idGrupoDescriptor')
-            ->leftJoin('descriptores AS d', 'dgd.desc_x_iddescriptor', '=', 'd.x_iddescriptor')
-            ->rightJoin('autor_grupoautor AS a', 'p.aga_x_idgrupoautor', '=', 'a.ga_x_idgrupoautor')
-            ->leftJoin('autores AS a2', 'a.aut_x_idautor', '=', 'a2.idAutor')
-            ->leftJoin('categoria_grupoCategoria AS C2', 'p.gcat_x_idgrupocategoria', '=', 'C2.gt_x_idGrupoCategoria')
-            ->leftJoin('categorias AS c', 'C2.cat_x_idCategoria', '=', 'c.x_idcategoria')
-            ->select(DB::raw('count(a.aut_x_idautor) numPublicaciones, concat(concat(a2.tx_autorApellidos,", "), a2.tx_autor) nombre, a2.idAutor id'))
-            ->groupBy('a.aut_x_idautor')
-            ->orderBy('nombre');
-
-        if ($valoresAnio!=null){
-            $query->whereIn('p.nu_anno', $valoresAnio);
+        $reemplazo1='';
+        $reemplazo2='';
+        $query = 'SELECT count(a.aut_x_idautor) numPublicaciones, concat(concat(a2.tx_autorApellidos,\', \'), a2.tx_autor) nombre, a.aut_x_idautor id FROM autor_grupoautor a LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor WHERE a.ga_x_idgrupoautor IN (SELECT p.aga_x_idgrupoautor FROM publicaciones p LEFT JOIN categoria_grupoCategoria C2 on p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria LEFT JOIN descriptores_grupoDescriptor dgd ON p.dgd_idGrupoDescriptor = dgd.x_idGrupoDescriptor LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor &insert2) &insert GROUP BY a.aut_x_idautor ORDER BY concat(concat(a2.tx_autorApellidos,\', \'), a2.tx_autor)';
+        if ($valoresAnio!==null){
+            $reemplazo2 = 'where p.nu_anno in ('.$valoresAnio.')';
         }
 
-        if ($valoresAutores!=null){
-            $query->whereIn('a.aut_x_idautor', $valoresAutores);
+        if ($valoresAutores!==null){
+            $reemplazo1 = ' and a.aut_x_idautor in ('.$valoresAutores.')';
         }
 
-        if ($valoresCategorias!=null){
-            $query->whereIn('C2.cat_x_idCategoria', $valoresCategorias);
+        if ($valoresCategorias!==null){
+            if ($reemplazo2===''){
+                $reemplazo2 = 'where C2.cat_x_idCategoria in ('.$valoresCategorias.')';
+            }else{
+                $reemplazo2 = $reemplazo2.' and C2.cat_x_idCategoria in ('.$valoresCategorias.')';
+            }
         }
 
-        if ($valoresDescriptores!=null){
-            $query->whereIn('dgd.desc_x_iddescriptor', $valoresDescriptores);
+        if ($valoresDescriptores!==null){
+            if ($reemplazo2===''){
+                $reemplazo2 = 'where dgd.desc_x_iddescriptor in ('.$valoresDescriptores.')';
+            }else {
+                $reemplazo2 = $reemplazo2 . ' and dgd.desc_x_iddescriptor in (' . $valoresDescriptores . ')';
+            }
         }
 
-        return collect($query->distinct()->get());
+        $query = str_replace('&insert2', $reemplazo2, $query);
+        $query = str_replace('&insert', $reemplazo1, $query);
+
+        return collect(DB::select (DB::raw($query)));
     }
 }

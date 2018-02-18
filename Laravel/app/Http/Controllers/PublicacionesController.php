@@ -143,19 +143,6 @@ class PublicacionesController extends Controller
         if ($descriptores===''){
             $descriptores=null;
         }
-        if ($annos!==null){
-            $annos = explode(',', $annos);
-        }
-        if ($autores!==null){
-            $autores = explode(',', $autores);
-        }
-        if ($categorias!==null){
-            $categorias = explode(',', $categorias);
-        }
-        if ($descriptores!==null){
-            $descriptores = explode(',', $descriptores);
-        }
-
         $descriptores = Descriptores::obtenerDescriptoresDatatable($annos, $autores, $categorias, $descriptores);
         return Datatables::of($descriptores)->make(true);
     }
@@ -176,18 +163,6 @@ class PublicacionesController extends Controller
         }
         if ($descriptores===''){
             $descriptores=null;
-        }
-        if ($annos!==null){
-            $annos = explode(',', $annos);
-        }
-        if ($autores!==null){
-            $autores = explode(',', $autores);
-        }
-        if ($categorias!==null){
-            $categorias = explode(',', $categorias);
-        }
-        if ($descriptores!==null){
-            $descriptores = explode(',', $descriptores);
         }
 
         $annos = Publicaciones::obtenerAnnosDatatable($annos, $autores, $categorias, $descriptores);
