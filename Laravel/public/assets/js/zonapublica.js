@@ -329,6 +329,10 @@ $(function () {
                 }
             });
         });
+
+        // Deseleccionado - fa-square-o
+        // Seleccionado - fa-check-square-o
+
         $("#tablaCategorias").DataTable({
             "serverSide": false,
             "lengthChange": false,
@@ -358,7 +362,7 @@ $(function () {
             "columns": [{
                 data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#' > <i class='fa fa-check-circle'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' > <i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
@@ -394,7 +398,7 @@ $(function () {
             "columns": [{
                 data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#'><i class='fa fa-check-circle'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
@@ -428,7 +432,7 @@ $(function () {
             "columns": [{
                 data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#'><i class='fa fa-check-circle'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
@@ -462,7 +466,7 @@ $(function () {
             "columns": [{
                 data: 'nombre',
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#'><i class='fa fa-check-circle'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }]
         });
