@@ -37,7 +37,7 @@
     	</table>
 	</div>
 
-	<div id="annosMenu" class="nav navbar-nav side-nav" style="height:150px; top:720px;">
+	<div id="annosMenu" class="nav navbar-nav side-nav" style="height:150px; top:660px;">
 		<h4>Años</h4>
 		<table id="tablaAnnos" class="table table-hover table-condensed">
 			<thead style="display:none;">

@@ -666,3 +666,17 @@ table.dataTable tbody th, table.dataTable tbody td {
   padding: 0px 12px;
   font-size: 1.2rem;
 }
+
+/*Scrollbar*/
+body::-webkit-scrollbar {
+  width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #ba0600;
+  outline: 1px solid #ba0600;
+}
