@@ -476,17 +476,70 @@ $(function () {
 
 /**
  *
- * Función que actualiza la tabla de publicaciones filtrando por el valor seleccionado.
- * Tipo: indica el tipo de filtro a realizar opciones posibles:
- *        - cat: filtra por categorias.
- *        - tit: filtra por primera letra del título.
- *        - aut: filtra por el autor.
+ * Función que actualiza la tabla de publicaciones filtrando por los valores seleccionado.
+ * Tipo: indica el tipo de valor seleccionado actualmente a realizar opciones posibles:
+ *        - cat: categoria.
+ *        - anno: año de publicación.
+ *        - aut: autor.
+ *        - desc: descriptor
  */
 function actualizarListado(tipo, valor) {
+
+    var autoresSeleccionados = $("#autoresSeleccionados").val();
+    var annosSeleccionados = $("#annosSeleccionados").val();
+    var categoriasSeleccionadas = $("#categoriasSeleccionadas").val();
+    var descriptoresSeleccionados = $("#descriptoresSeleccionados").val();
+
+    if (tipo==='cat'){
+        if (categoriasSeleccionadas!==''){
+            categoriasSeleccionadas = categoriasSeleccionadas+',';
+        }
+        categoriasSeleccionadas = categoriasSeleccionadas+valor;
+        $("#categoriasSeleccionadas").val(categoriasSeleccionadas);
+    }else if (tipo==='anno'){
+        if (annosSeleccionados!==''){
+            annosSeleccionados = annosSeleccionados+',';
+        }
+        annosSeleccionados = annosSeleccionados+valor;
+        $("#annosSeleccionados").val(annosSeleccionados);
+    }else if (tipo==='aut'){
+        if (autoresSeleccionados!==''){
+            autoresSeleccionados = autoresSeleccionados+',';
+        }
+        autoresSeleccionados = autoresSeleccionados+valor;
+        $("#autoresSeleccionados").val(autoresSeleccionados);
+    }else if (tipo==='desc'){
+        if (descriptoresSeleccionados!==''){
+            descriptoresSeleccionados = descriptoresSeleccionados+',';
+        }
+        descriptoresSeleccionados = descriptoresSeleccionados+valor;
+        $("#descriptoresSeleccionados").val(descriptoresSeleccionados);
+    }
+
+
+
+    var tablaCategorias = $("#tablaCategorias");
+    tablaCategorias.DataTable().desctroy();
+    tablaCategorias.empty();
+
+
+    var tablaAutores = $("#tablaAutores");
+    tablaAutores.DataTable().desctroy();
+    tablaAutores.empty();
+
+    var tablaDescriptores = $("#tablaDescriptores");
+    tablaDescriptores.DataTable().desctroy();
+    tablaDescriptores.empty();
+
+    var tablaAnnos = $("#tablaAnnos");
+    tablaAnnos.DataTable().desctroy();
+    tablaAnnos.empty();
 
     var tablaPublicaciones = $("#tablaPublicaciones");
     tablaPublicaciones.DataTable().destroy();
     tablaPublicaciones.empty();
+
+
 
 
     tablaPublicaciones

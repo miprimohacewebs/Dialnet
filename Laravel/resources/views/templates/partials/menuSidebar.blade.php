@@ -1,4 +1,7 @@
-
+<input type="hidden" id="autoresSeleccionados"/>
+<input type="hidden" id="categoriasSeleccionadas"/>
+<input type="hidden" id="descriptoresSeleccionados"/>
+<input type="hidden" id="annosSeleccionados"/>
 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 <div class="collapse navbar-collapse navbar-ex1-collapse">
 	<div id="categoriasMenu" class="nav navbar-nav side-nav" style="height:180px;">
