@@ -84,33 +84,36 @@ class descriptores extends Model
 
     public static function obtenerDescriptoresDatatable($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores)
     {
-        $query = DB::table('publicaciones AS p')
-            ->rightJoin('descriptores_grupoDescriptor AS dgd', 'p.dgd_idGrupoDescriptor', '=', 'dgd.x_idGrupoDescriptor')
-            ->leftJoin('descriptores AS d', 'dgd.desc_x_iddescriptor', '=', 'd.x_iddescriptor')
-            ->leftJoin('autor_grupoautor AS a', 'p.aga_x_idgrupoautor', '=', 'a.ga_x_idgrupoautor')
-            ->leftJoin('autores AS a2', 'a.aut_x_idautor', '=', 'a2.idAutor')
-            ->leftJoin('categoria_grupoCategoria AS C2', 'p.gcat_x_idgrupocategoria', '=', 'C2.gt_x_idGrupoCategoria')
-            ->leftJoin('categorias AS c', 'C2.cat_x_idCategoria', '=', 'c.x_idcategoria')
-            ->select(DB::raw('dgd.desc_x_iddescriptor numPublicaciones, d.tx_descriptor nombre, d.x_iddescriptor id'))
-            ->groupBy('dgd.desc_x_iddescriptor')
-            ->orderBy('nombre');
-
-        if ($valoresAnio!=null){
-            $query->whereIn('p.nu_anno', $valoresAnio);
+        $reemplazo1='';
+        $reemplazo2='';
+        $query = 'SELECT count(dgd.desc_x_iddescriptor) numPublicaciones, dgd.desc_x_iddescriptor id, d.tx_descriptor nombre FROM descriptores_grupoDescriptor dgd LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor where dgd.x_idGrupoDescriptor in (select p.dgd_idGrupoDescriptor from publicaciones p LEFT JOIN autor_grupoautor a ON p.aga_x_idgrupoautor = a.ga_x_idgrupoautor LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor LEFT JOIN categoria_grupoCategoria C2 ON p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria &insert2) &insert GROUP BY dgd.desc_x_iddescriptor ORDER BY d.tx_descriptor';
+        if ($valoresAnio!==null){
+            $reemplazo2 = 'where p.nu_anno in ('.$valoresAnio.')';
         }
 
-        if ($valoresAutores!=null){
-            $query->whereIn('a.aut_x_idautor', $valoresAutores);
+        if ($valoresAutores!==null){
+            if ($reemplazo2===''){
+                $reemplazo2 = 'where a.aut_x_idautor in ('.$valoresAutores.')';
+            }else{
+                $reemplazo2 = $reemplazo2.' and a.aut_x_idautor in ('.$valoresAutores.')';
+            }
         }
 
-        if ($valoresCategorias!=null){
-            $query->whereIn('C2.cat_x_idCategoria', $valoresCategorias);
+        if ($valoresCategorias!==null){
+            if ($reemplazo2===''){
+                $reemplazo2 = 'where C2.cat_x_idCategoria in ('.$valoresCategorias.')';
+            }else{
+                $reemplazo2 = $reemplazo2.' and C2.cat_x_idCategoria in ('.$valoresCategorias.')';
+            }
         }
 
-        if ($valoresDescriptores!=null){
-            $query->whereIn('dgd.desc_x_iddescriptor', $valoresDescriptores);
+        if ($valoresDescriptores!==null){
+            $reemplazo1 = ' and dgd.desc_x_iddescriptor in ('.$valoresDescriptores.')';
         }
 
-        return collect($query->get());
+        $query = str_replace('&insert2', $reemplazo2, $query);
+        $query = str_replace('&insert', $reemplazo1, $query);
+
+        return collect(DB::select (DB::raw($query)));
     }
 }
