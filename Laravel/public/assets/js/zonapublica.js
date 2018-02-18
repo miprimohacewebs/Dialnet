@@ -586,6 +586,7 @@ function actualizarListado(tipo, valor) {
             {
                 "processing": true,
                 "serverSide": true,
+                "searching": false,
                 "ajax": {
                     "url": "/api/publicaciones",
                     "type": "GET",
