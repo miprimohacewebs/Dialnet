@@ -38,6 +38,7 @@ $(function () {
                         "last": "Último"
                     }
                 },
+
                 "columns": [{
                     title: 'Publicación',
                     data: 'tx_titulo',
@@ -46,11 +47,9 @@ $(function () {
                     data: 'tx_publicacion',
                     data: 'x_idpublicacion',
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html("<strong style ='color: #ba0600; font-family: 'Josefin Sans', sans-serif;'> <i class='fa fa-angle-right'></i> " + oData.tx_titulo + "</strong>, <strong style ='color: #ba0600; font-family: 'Josefin Sans', sans-serif;'> ISBN/ISSN: </strong>" + oData.tx_isbn  + ", <strong style ='color: #ba0600; font-family: 'Josefin Sans', sans-serif;'> AÑO: </strong>" + oData.nu_anno + ", <strong style ='color: #ba0600; font-family: 'Josefin Sans', sans-serif;'> PUBLICACIÓN: </strong>" + oData.tx_publicacion + " <a href='detallePublicacion id='' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>");
+                        $(nTd).html("<strong style ='color: #ba0600; font-family: 'Josefin Sans', sans-serif;'> <i class='fa fa-angle-right'></i> " + oData.tx_titulo + "</strong>, <strong style ='font-family: 'Josefin Sans', sans-serif;'> ISBN/ISSN: </strong>"+ oData.tx_isbn  +", <strong style ='font-family: 'Josefin Sans', sans-serif;'> AÑO: </strong>" + oData.nu_anno + ", <strong style ='font-family: 'Josefin Sans', sans-serif;'> PUBLICACIÓN: </strong>" + oData.tx_publicacion + " <a href='detallePublicacion' id='"+oData.x_idpublicacion+ "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>");
 
                     },
-
-
 
                 }],
 
