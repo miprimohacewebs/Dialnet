@@ -43,6 +43,7 @@ class PublicacionesController extends Controller
         $autores = $request->get('autores');
         $categorias = $request->get('categorias');
         $descriptores = $request->get('descriptores');
+        $busqueda = $request->get('busqueda');
         if ($annos===''){
             $annos=null;
         }
@@ -55,20 +56,8 @@ class PublicacionesController extends Controller
         if ($descriptores===''){
             $descriptores=null;
         }
-        if ($annos!==null){
-            $annos = explode(',', $annos);
-        }
-        if ($autores!==null){
-            $autores = explode(',', $autores);
-        }
-        if ($categorias!==null){
-            $categorias = explode(',', $categorias);
-        }
-        if ($descriptores!==null){
-            $descriptores = explode(',', $descriptores);
-        }
 
-        $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades($annos, $autores, $categorias, $descriptores);
+        $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades($annos, $autores, $categorias, $descriptores, $busqueda);
         return Datatables::of($publicaciones)->make(true);
         
     }
@@ -131,6 +120,7 @@ class PublicacionesController extends Controller
         $autores = $request->get('autores');
         $categorias = $request->get('categorias');
         $descriptores = $request->get('descriptores');
+        $busqueda = $request->get('busqueda');
         if ($annos===''){
             $annos=null;
         }
@@ -143,7 +133,7 @@ class PublicacionesController extends Controller
         if ($descriptores===''){
             $descriptores=null;
         }
-        $descriptores = Descriptores::obtenerDescriptoresDatatable($annos, $autores, $categorias, $descriptores);
+        $descriptores = Descriptores::obtenerDescriptoresDatatable($annos, $autores, $categorias, $descriptores, $busqueda);
         return Datatables::of($descriptores)->make(true);
     }
 
@@ -152,6 +142,7 @@ class PublicacionesController extends Controller
         $autores = $request->get('autores');
         $categorias = $request->get('categorias');
         $descriptores = $request->get('descriptores');
+        $busqueda = $request->get('busqueda');
         if ($annos===''){
             $annos=null;
         }
@@ -165,7 +156,7 @@ class PublicacionesController extends Controller
             $descriptores=null;
         }
 
-        $annos = Publicaciones::obtenerAnnosDatatable($annos, $autores, $categorias, $descriptores);
+        $annos = Publicaciones::obtenerAnnosDatatable($annos, $autores, $categorias, $descriptores, $busqueda);
         return Datatables::of($annos)->make(true);
     }
     /**

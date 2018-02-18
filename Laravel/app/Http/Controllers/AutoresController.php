@@ -135,6 +135,7 @@ class AutoresController extends Controller
         $autores = $request->get('autores');
         $categorias = $request->get('categorias');
         $descriptores = $request->get('descriptores');
+        $busqueda = $request->get('busqueda');
         if ($annos===''){
             $annos=null;
         }
@@ -147,7 +148,7 @@ class AutoresController extends Controller
         if ($descriptores===''){
             $descriptores=null;
         }
-        $autores = Autores::obtenerAutoresDatatable($annos, $autores, $categorias, $descriptores);
+        $autores = Autores::obtenerAutoresDatatable($annos, $autores, $categorias, $descriptores, $busqueda);
         return Datatables::of($autores)->make(true);
     }
 
