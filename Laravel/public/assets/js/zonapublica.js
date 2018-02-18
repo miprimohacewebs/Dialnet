@@ -11,103 +11,7 @@ var RUTA_IMAGENES = 'assets/images/imagesPublicaciones/';
 
 /** Carga de tabla publicaciones */
 $(function () {
-        var tablaPublicaciones =  $("#tablaPublicaciones")
-        .DataTable(
-            {
-                // "dom": '<"top"i>rt<"bottom"flp><"clear">',
-                "processing": true,
-                "serverSide": true,
-                "ajax": "/api/publicaciones",
-                "lengthChange": true,
-                "pageLength": 20,
-                "language": {
-                    "processing": "Procesando publicaciones...",
-                    "search": "Buscar:",
-                    "lengthMenu": "Mostrar _MENU_ registros por página.",
-                    "zeroRecords": "No existen publicaciones.",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay publicaciones disponibles",
-                    "infoFiltered": "(Filtrados _MAX_ del total de publicaciones)",
-                    "loadingRecords": "Cargando publicaciones en curso...",
-                    "infoPostFix": "",
-                    "emptyTable": "No existen publicaciones disponibles.",
-                    "paginate": {
-                        "first": "Primero",
-                        "previous": "Anterior",
-                        "next": "Siguiente",
-                        "last": "Último"
-                    }
-                },
 
-                "columns": [{
-                    title: 'Publicación',
-                    data: 'tx_titulo',
-                    data: 'tx_isbn',
-                    data: 'nu_anno',
-                    data: 'tx_publicacion',
-                    data: 'x_idpublicacion',
-                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                        var bufferSalida="";
-                        if ( oData.tx_titulo != null ) {
-                            bufferSalida += "<strong style ='color: #ba0600; font-family: 'Josefin Sans', sans-serif;'> <i class='fa fa-angle-right'></i> " + oData.tx_titulo + "</strong>";
-                        }
-                        if ( oData.tx_isbn != null ) {
-                            bufferSalida += "<strong style ='font-family: 'Josefin Sans', sans-serif;'> ISBN/ISSN: </strong>"+ oData.tx_isbn;
-                        }
-                        if ( oData.nu_anno != null ) {
-                            bufferSalida += "<strong style ='font-family: 'Josefin Sans', sans-serif;'> AÑO: </strong>" + oData.nu_anno;
-                        }
-                        if ( oData.tx_publicacion != null ) {
-                            bufferSalida += "<strong style ='font-family: 'Josefin Sans', sans-serif;'> PUBLICACIÓN: </strong>" + oData.tx_publicacion ;
-                        }
-                        // Ver detalle
-                        bufferSalida += " <a href='detallePublicacion' id='"+oData.x_idpublicacion+ "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
-
-                        $(nTd).html(bufferSalida );
-
-                    },
-
-                }],
-
-                /*
-                "columns": [
-                    {
-                        title: 'Título',
-                        data: 'tx_titulo',
-                        name: 'tx_titulo',
-                        sWidth: '50%'
-                    },
-                    {
-                        title: 'ISBN/ISSN',
-                        data: 'tx_isbn',
-                        name: 'tx_isbn',
-                        sWidth: '10%'
-                    },
-                    {
-                        title: 'Año',
-                        data: 'nu_anno',
-                        name: 'nu_anno',
-                        sWidth: '5%'
-                    },
-                    {
-                        title: 'Publicación',
-                        data: 'tx_publicacion',
-                        name: 'tx_publicacion',
-                        sWidth: '35%'
-                    },
-                    {
-                        title: 'Detalle',
-                        data: 'x_idpublicacion',
-                        sWidth: '20%',
-                        mRender: function (data, type, full) {
-                            return "<a href='detallePublicacion' id='"
-                                + data
-                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
-                        }
-
-                    }]
-                    */
-            });
 
          jQuery.fn.DataTable.ext.type.search.string = function ( data ) {
             return ! data ?
@@ -344,147 +248,15 @@ $(function () {
                 }
             });
         });
-
+        $("#autoresMenu").hide();
+        $("#descriptoresMenu").hide();
+        $("#annosMenu").hide();
+        $("#categoriasMenu").hide();
+        $("#divPublicaciones").hide();
+        $("#divUtilidades").hide();
         // Deseleccionado - fa-square-o
         // Seleccionado - fa-check-square-o
 
-        $("#tablaCategorias").DataTable({
-            "serverSide": false,
-            "lengthChange": false,
-            "info": false,
-            "searching": false,
-            "pageLength": 10,
-            "pagingType": "simple",
-            "ajax": "/api/categorias",
-            "language": {
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "lengthMenu": "Mostrar _MENU_ registros por página.",
-                "zeroRecords": "No se han encontrado categorías con los filtros seleccionados.",
-                "info": "Mostrando _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay categorías disponibles",
-                "infoFiltered": "(Filtrados _MAX_ del total de categorías)",
-                "loadingRecords": "En curso...",
-                "infoPostFix": "",
-                "emptyTable": "No se han encontrado categorías con los filtros seleccionados.",
-                "paginate": {
-                    "first": "Primero",
-                    "previous": "Anterior",
-                    "next": "Siguiente",
-                    "last": "Último"
-                }
-            },
-            "columns": [{
-                data: 'nombre',
-                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"cat\", "+oData.id+")'> <i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
-                }
-            }]
-        });
-
-
-
-        $("#tablaAutores").DataTable({
-            "serverSide": false,
-            "lengthChange": false,
-            "info": false,
-            "searching": false,
-            "pageLength": 10,
-            "pagingType": "simple",
-            "ajax": "/api/autores",
-            "language": {
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "lengthMenu": "Mostrar _MENU_ registros por página.",
-                "zeroRecords": "No se han encontrado autores con los filtros seleccionados.",
-                "info": "Mostrando _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay autores disponibles",
-                "infoFiltered": "(Filtrados _MAX_ del total de autores)",
-                "loadingRecords": "En curso...",
-                "infoPostFix": "",
-                "emptyTable": "No se han encontrado autores con los filtros seleccionados.",
-                "paginate": {
-                    "first": "Primero",
-                    "previous": "Anterior",
-                    "next": "Siguiente",
-                    "last": "Último"
-                }
-            },
-            "columns": [{
-                data: 'nombre',
-                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"aut\", "+oData.id+")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
-                }
-            }]
-        });
-
-        $("#tablaDescriptores").DataTable({
-            "serverSide": false,
-            "lengthChange": false,
-            "info": false,
-            "searching": false,
-            "pageLength": 10,
-            "pagingType": "simple",
-            "ajax": "/api/descriptores",
-            "language": {
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "lengthMenu": "Mostrar _MENU_ registros por página.",
-                "zeroRecords": "No se han encontrado descriptores con los filtros seleccionados.",
-                "info": "Mostrando _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay autores disponibles",
-                "infoFiltered": "(Filtrados _MAX_ del total de autores)",
-                "loadingRecords": "En curso...",
-                "infoPostFix": "",
-                "emptyTable": "No se han encontrado descriptores con los filtros seleccionados.",
-                "paginate": {
-                    "first": "Primero",
-                    "previous": "Anterior",
-                    "next": "Siguiente",
-                    "last": "Último"
-                }
-            },
-            "columns": [{
-                data: 'nombre',
-                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"desc\", "+oData.id+")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
-                }
-            }]
-        });
-
-        $("#tablaAnnos").DataTable({
-            "serverSide": false,
-            "lengthChange": false,
-            "info": false,
-            "searching": false,
-            "pageLength": 10,
-            "pagingType": "simple",
-            "ajax": "/api/annos",
-            "language": {
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "lengthMenu": "Mostrar _MENU_ registros por página.",
-                "zeroRecords": "No existen autores.",
-                "info": "Mostrando _PAGE_ de _PAGES_",
-                "infoEmpty": "No se han encontrado años con los filtros seleccionados.",
-                "infoFiltered": "(Filtrados _MAX_ del total de autores)",
-                "loadingRecords": "En curso...",
-                "infoPostFix": "",
-                "emptyTable": "No se han encontrado años con los filtros seleccionados.",
-                "paginate": {
-                    "first": "Primero",
-                    "previous": "Anterior",
-                    "next": "Siguiente",
-                    "last": "Último"
-                }
-            },
-            "columns": [{
-                data: 'nombre',
-                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"anno\", "+oData.id+")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
-                }
-            }]
-        });
     }
 
     );
@@ -499,6 +271,15 @@ $(function () {
  *        - desc: descriptor
  */
 function actualizarListado(tipo, valor) {
+
+    $("#autoresMenu").show();
+    $("#descriptoresMenu").show();
+    $("#annosMenu").show();
+    $("#categoriasMenu").show();
+    $("#divPublicaciones").show();
+    $("#divUtilidades").show();
+
+    var textoBusqueda = $("#textoBusqueda");
 
     var autoresSeleccionados = $("#autoresSeleccionados").val();
     var annosSeleccionados = $("#annosSeleccionados").val();
@@ -575,8 +356,10 @@ function actualizarListado(tipo, valor) {
 
 
     var tablaCategorias = $("#tablaCategorias");
-    tablaCategorias.DataTable().destroy();
-    tablaCategorias.empty();
+    if ( $.fn.DataTable.isDataTable('#tablaCategorias') ) {
+        tablaCategorias.DataTable().destroy();
+        tablaCategorias.empty();
+    }
     tablaCategorias.DataTable({
         "serverSide": false,
         "lengthChange": false,
@@ -584,7 +367,17 @@ function actualizarListado(tipo, valor) {
         "searching": false,
         "pageLength": 10,
         "pagingType": "simple",
-        "ajax": "/api/categorias",
+        "ajax": {
+            "url": "/api/categorias",
+            "type": "GET",
+            "data": {
+                "autores": autoresSeleccionados,
+                "descriptores": descriptoresSeleccionados,
+                "categorias": categoriasSeleccionadas,
+                "annos": annosSeleccionados,
+                "busqueda": textoBusqueda.val()
+            }
+        },
         "language": {
             "processing": "Procesando...",
             "search": "Buscar:",
@@ -619,8 +412,10 @@ function actualizarListado(tipo, valor) {
 
 
     var tablaAutores = $("#tablaAutores");
-    tablaAutores.DataTable().destroy();
-    tablaAutores.empty();
+    if ( $.fn.DataTable.isDataTable('#tablaAutores') ) {
+        tablaAutores.DataTable().destroy();
+        tablaAutores.empty();
+    }
     tablaAutores.DataTable({
         "serverSide": false,
         "lengthChange": false,
@@ -635,7 +430,8 @@ function actualizarListado(tipo, valor) {
                 "autores": autoresSeleccionados,
                 "descriptores": descriptoresSeleccionados,
                 "categorias": categoriasSeleccionadas,
-                "annos": annosSeleccionados
+                "annos": annosSeleccionados,
+                "busqueda": textoBusqueda.val()
             }
         },
         "language": {
@@ -671,8 +467,10 @@ function actualizarListado(tipo, valor) {
     });
 
     var tablaDescriptores = $("#tablaDescriptores");
-    tablaDescriptores.DataTable().destroy();
-    tablaDescriptores.empty();
+    if ( $.fn.DataTable.isDataTable('#tablaDescriptores') ) {
+        tablaDescriptores.DataTable().destroy();
+        tablaDescriptores.empty();
+    }
     tablaDescriptores.DataTable({
         "serverSide": false,
         "lengthChange": false,
@@ -687,7 +485,8 @@ function actualizarListado(tipo, valor) {
                 "autores": autoresSeleccionados,
                 "descriptores": descriptoresSeleccionados,
                 "categorias": categoriasSeleccionadas,
-                "annos": annosSeleccionados
+                "annos": annosSeleccionados,
+                "busqueda": textoBusqueda.val()
             }
         },
         "language": {
@@ -723,8 +522,10 @@ function actualizarListado(tipo, valor) {
 
 
     var tablaAnnos = $("#tablaAnnos");
-    tablaAnnos.DataTable().destroy();
-    tablaAnnos.empty();
+    if ( $.fn.DataTable.isDataTable('#tablaAnnos') ) {
+        tablaAnnos.DataTable().destroy();
+        tablaAnnos.empty();
+    }
     tablaAnnos.DataTable({
         "serverSide": false,
         "lengthChange": false,
@@ -739,7 +540,8 @@ function actualizarListado(tipo, valor) {
                 "autores": autoresSeleccionados,
                 "descriptores": descriptoresSeleccionados,
                 "categorias": categoriasSeleccionadas,
-                "annos": annosSeleccionados
+                "annos": annosSeleccionados,
+                "busqueda": textoBusqueda.val()
             }
         },
         "language": {
@@ -775,8 +577,10 @@ function actualizarListado(tipo, valor) {
     });
 
     var tablaPublicaciones = $("#tablaPublicaciones");
-    tablaPublicaciones.DataTable().destroy();
-    tablaPublicaciones.empty();
+    if ( $.fn.DataTable.isDataTable('#tablaPublicaciones') ) {
+        tablaPublicaciones.DataTable().destroy();
+        tablaPublicaciones.empty();
+    }
     tablaPublicaciones
         .DataTable(
             {
@@ -789,7 +593,8 @@ function actualizarListado(tipo, valor) {
                         "autores": autoresSeleccionados,
                         "descriptores": descriptoresSeleccionados,
                         "categorias": categoriasSeleccionadas,
-                        "annos": annosSeleccionados
+                        "annos": annosSeleccionados,
+                        "busqueda": textoBusqueda.val()
                     }
                 },
                 "lengthChange": true,
@@ -811,40 +616,32 @@ function actualizarListado(tipo, valor) {
                         "last": "Último"
                     }
                 },
-                "columns": [
-                    {
-                        title: 'Título',
-                        data: 'tx_titulo',
-                        name: 'tx_titulo',
-                        sWidth: '50%'
-                    },
-                    {
-                        title: 'ISBN/ISSN',
-                        data: 'tx_isbn',
-                        name: 'tx_isbn',
-                        sWidth: '10%'
-                    },
-                    {
-                        title: 'Año',
-                        data: 'nu_anno',
-                        name: 'nu_anno',
-                        sWidth: '5%'
-                    },
-                    {
-                        title: 'Publicación',
-                        data: 'tx_publicacion',
-                        name: 'tx_publicacion',
-                        sWidth: '35%'
-                    },
-                    {
-                        title: 'Ver detalle',
-                        data: 'x_idpublicacion',
-                        sWidth: '10%',
-                        mRender: function (data, type, full) {
-                            return "<a href='detallePublicacion' id='"
-                                + data
-                                + "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
+                "columns": [{
+                    title: 'Publicación',
+                    data: 'tx_titulo',
+                    data: 'tx_isbn',
+                    data: 'nu_anno',
+                    data: 'tx_publicacion',
+                    data: 'x_idpublicacion',
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                        var bufferSalida="";
+                        if ( oData.tx_titulo != null ) {
+                            bufferSalida += "<strong style ='color: #ba0600; font-family: 'Josefin Sans', sans-serif;'> <i class='fa fa-angle-right'></i> " + oData.tx_titulo + "</strong>";
                         }
+                        if ( oData.tx_isbn != null ) {
+                            bufferSalida += "<strong style ='font-family: 'Josefin Sans', sans-serif;'> ISBN/ISSN: </strong>"+ oData.tx_isbn;
+                        }
+                        if ( oData.nu_anno != null ) {
+                            bufferSalida += "<strong style ='font-family: 'Josefin Sans', sans-serif;'> AÑO: </strong>" + oData.nu_anno;
+                        }
+                        if ( oData.tx_publicacion != null ) {
+                            bufferSalida += "<strong style ='font-family: 'Josefin Sans', sans-serif;'> PUBLICACIÓN: </strong>" + oData.tx_publicacion ;
+                        }
+                        // Ver detalle
+                        bufferSalida += " <a href='detallePublicacion' id='"+oData.x_idpublicacion+ "' class='detallePublicacion'  data-toggle='modal' data-target='#verDetalle' title='Ver detalle' alt='Ver detalle'><i class='fa fa-book'></i></a>";
+
+                        $(nTd).html(bufferSalida );
+                    }
 
                     }]
             });

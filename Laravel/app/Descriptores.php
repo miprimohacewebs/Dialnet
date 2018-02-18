@@ -82,13 +82,13 @@ class descriptores extends Model
 
     }
 
-    public static function obtenerDescriptoresDatatable($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores)
+    public static function obtenerDescriptoresDatatable($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores, $busqueda)
     {
         $reemplazo1='';
-        $reemplazo2='';
+        $reemplazo2='where p.tx_titulo like \'%'.$busqueda.'%\'';
         $query = 'SELECT count(dgd.desc_x_iddescriptor) numPublicaciones, dgd.desc_x_iddescriptor id, d.tx_descriptor nombre FROM descriptores_grupoDescriptor dgd LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor where dgd.x_idGrupoDescriptor in (select p.dgd_idGrupoDescriptor from publicaciones p LEFT JOIN autor_grupoautor a ON p.aga_x_idgrupoautor = a.ga_x_idgrupoautor LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor LEFT JOIN categoria_grupoCategoria C2 ON p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria &insert2) &insert GROUP BY dgd.desc_x_iddescriptor ORDER BY d.tx_descriptor';
         if ($valoresAnio!==null){
-            $reemplazo2 = 'where p.nu_anno in ('.$valoresAnio.')';
+            $reemplazo2 = $reemplazo2.' and p.nu_anno in ('.$valoresAnio.')';
         }
 
         if ($valoresAutores!==null){

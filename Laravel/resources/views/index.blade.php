@@ -11,7 +11,7 @@
         <div class="container-fluid">
         {{-- @if (Auth::check()) --}}
         <!-- Page Heading -->
-            <div class="row">
+            <div id="divUtilidades" class="row">
                 <div class="col-md-1 text-center">
                     <a href="#" id="limpiar" onclick="resetearPantalla();"> <span class="fa-stack fa-2x"> <i
                                     class="fa fa-eraser"
@@ -47,19 +47,19 @@
                 <div class="col-md-6">
                     <!-- Buscar -->
                     <div class="form-group">
-                        <input type="text" class="form-control" id="txtBuscar" placeholder="Buscar">
+                        <input type="text" id="textoBusqueda" class="form-control" id="txtBuscar" placeholder="Buscar">
 
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div class="form-group">
 
-                        <button type="button" class="btn btn-primary mb-2">Buscar</button>
+                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null)">Buscar</button>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 text-center">
+                <div id="divPublicaciones" class="col-md-12 text-center">
                     <table id="tablaPublicaciones" class="table table-hover table-condensed">
                     </table>
                 </div>

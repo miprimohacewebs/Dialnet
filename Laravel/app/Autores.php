@@ -94,13 +94,13 @@ class autores extends Model
             );
     }
 
-    public static function obtenerAutoresDatatable($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores)
+    public static function obtenerAutoresDatatable($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores, $busqueda)
     {
         $reemplazo1='';
-        $reemplazo2='';
+        $reemplazo2='where p.tx_titulo like \'%'.$busqueda.'%\'';
         $query = 'SELECT count(a.aut_x_idautor) numPublicaciones, concat(concat(a2.tx_autorApellidos,\', \'), a2.tx_autor) nombre, a.aut_x_idautor id FROM autor_grupoautor a LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor WHERE a.ga_x_idgrupoautor IN (SELECT p.aga_x_idgrupoautor FROM publicaciones p LEFT JOIN categoria_grupoCategoria C2 on p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria LEFT JOIN descriptores_grupoDescriptor dgd ON p.dgd_idGrupoDescriptor = dgd.x_idGrupoDescriptor LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor &insert2) &insert GROUP BY a.aut_x_idautor ORDER BY concat(concat(a2.tx_autorApellidos,\', \'), a2.tx_autor)';
         if ($valoresAnio!==null){
-            $reemplazo2 = 'where p.nu_anno in ('.$valoresAnio.')';
+            $reemplazo2 = $reemplazo2.' and p.nu_anno in ('.$valoresAnio.')';
         }
 
         if ($valoresAutores!==null){
@@ -108,19 +108,12 @@ class autores extends Model
         }
 
         if ($valoresCategorias!==null){
-            if ($reemplazo2===''){
-                $reemplazo2 = 'where C2.cat_x_idCategoria in ('.$valoresCategorias.')';
-            }else{
-                $reemplazo2 = $reemplazo2.' and C2.cat_x_idCategoria in ('.$valoresCategorias.')';
-            }
+            $reemplazo2 = $reemplazo2.' and C2.cat_x_idCategoria in ('.$valoresCategorias.')';
         }
 
         if ($valoresDescriptores!==null){
-            if ($reemplazo2===''){
-                $reemplazo2 = 'where dgd.desc_x_iddescriptor in ('.$valoresDescriptores.')';
-            }else {
-                $reemplazo2 = $reemplazo2 . ' and dgd.desc_x_iddescriptor in (' . $valoresDescriptores . ')';
-            }
+            $reemplazo2 = $reemplazo2 . ' and dgd.desc_x_iddescriptor in (' . $valoresDescriptores . ')';
+
         }
 
         $query = str_replace('&insert2', $reemplazo2, $query);
