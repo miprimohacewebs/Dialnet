@@ -172,17 +172,12 @@ class PublicacionesController extends Controller
     public function create(Request $request)
     {
         $autoresSeleccionados1 = null;
-        $editoresSeleccionados1 = null;
         $categoriasSeleccionadas1 = null;
         $etiquetasSeleccionadas1 = null;
         $categorias1 = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores1 = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
-        $editores1 = Editores::orderBy('tx_editor')->get(['x_ideditor','tx_editor']);
         if (! empty ($request->session()->get('autoresSeleccionados2'))) {
             $autoresSeleccionados1 = collect($request->session()->get('autoresSeleccionados2'));
-        }
-        if (! empty ($request->session()->get('editoresSeleccionados2'))) {
-            $editoresSeleccionados1 = collect($request->session()->get('editoresSeleccionados2'));
         }
         if (! empty ($request->session()->get('categoriasSeleccionadas2'))) {
             $categoriasSeleccionadas1 = collect($request->session()->get('categoriasSeleccionadas2'));
@@ -190,8 +185,8 @@ class PublicacionesController extends Controller
         if (! empty ($request->session()->get('etiquetasSeleccionadas2'))) {
             $etiquetasSeleccionadas1 = collect($request->session()->get('etiquetasSeleccionadas2'));
         }
-        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'editores' => $editores1, 'autoresSeleccionados' => $autoresSeleccionados1,
-            'editoresSeleccionados' => $editoresSeleccionados1, 'categoriasSeleccionadas' => $categoriasSeleccionadas1, 'etiquetasSeleccionadas' => $etiquetasSeleccionadas1);
+        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'autoresSeleccionados' => $autoresSeleccionados1, 
+		'categoriasSeleccionadas' => $categoriasSeleccionadas1, 'etiquetasSeleccionadas' => $etiquetasSeleccionadas1);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -225,15 +220,14 @@ class PublicacionesController extends Controller
             ]);
             if ($validator->fails()){
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
-                $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
                 $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
                 $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
-                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2,
+                $vuelta = array('autoresSeleccionados2'=>$autores2, 
                     'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionadas2'=>$etiquetas2);
                 if ($request->imagenPublicacion!=null) {
                     $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
                 }
-                return redirect()->to('publicacionesadmin')
+				return redirect()->to('publicacionesadmin')
                     ->withErrors($validator)
                     ->withInput()
                     ->with($vuelta);
@@ -241,8 +235,6 @@ class PublicacionesController extends Controller
 
 
             $idGrupoAutor = autorGrupoAutor::agruparAutores($request->seleccionadosAutores);
-
-            $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
 
             $idGrupoCategoria = categoriaGrupoCategoria::AgruparCategorias($request->seleccionadosCategorias);
 
@@ -260,20 +252,19 @@ class PublicacionesController extends Controller
                 'pais'=>$request->pais, 'idioma'=>$request->idioma, 'editorial'=>$request->editorial,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
                 'enlacedoi'=>$request->enlacedoi, 'doi'=>$request->doi,
-                'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
+                'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> null,
                 'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
             Publicaciones::guardarPublicacion($publicacion);
 
             $request->session()->flash('alert-success', 'Se ha creado la publicación');
             return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha creado la publicación');
         }catch (Exception $e){
-            Log::error($e);
+			Log::error($e);
             $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
-            $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
             $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
             $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
-            $vuelta = array('alert-error'=>'Ha ocurrido un error al crear la publicación', 'autoresSeleccionados2'=>$autores2,
-                'editoresSeleccionados2'=>$editores2, 'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionasas2'=>$etiquetas2);
+            $vuelta = array('alert-error'=>'Ha ocurrido un error al crear la publicación', 'autoresSeleccionados2'=>$autores2, 
+			'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionasas2'=>$etiquetas2);
             if ($request->imagenPublicacion!=null) {
                 $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
             }
@@ -342,10 +333,6 @@ class PublicacionesController extends Controller
         if ($publicacion['aga_x_idgrupoautor']!=null) {
             $autoresSeleccionados = autorGrupoAutor::obtenerAutoresPublicacion($publicacion['aga_x_idgrupoautor']);
         }
-        $editoresSeleccionados=null;
-        if ($publicacion['ge_x_idgrupoeditor']!=null) {
-            $editoresSeleccionados = editorGrupoEditor::obtenerEditoresPublicacion($publicacion['ge_x_idgrupoeditor']);
-        }
 
         $categoriasSeleccionadas=null;
         if ($publicacion['gcat_x_idgrupocategoria']!=null) {
@@ -358,7 +345,7 @@ class PublicacionesController extends Controller
         }
 
         $vuelta = array('publicacion' => $publicacionVuelta, 'categorias' => $categorias, 'autores' => $autores, 'editores' => $editores,
-            'autoresSeleccionados' => $autoresSeleccionados, 'editoresSeleccionados' => $editoresSeleccionados,
+            'autoresSeleccionados' => $autoresSeleccionados,
             'categoriasSeleccionadas' => $categoriasSeleccionadas, 'etiquetasSeleccionadas' => $etiquetasSeleccionadas);
         return view('administracion/publicaciones', $vuelta);
     }
@@ -393,11 +380,10 @@ class PublicacionesController extends Controller
             ]);
             if ($validator->fails()){
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
-                $editores2 = Editores::obtenerListaeditoresSeleccionados($request->seleccionadosEditores);
                 $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
                 $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
 
-                $vuelta = array('autoresSeleccionados2'=>$autores2, 'editoresSeleccionados2'=>$editores2,
+                $vuelta = array('autoresSeleccionados2'=>$autores2,
                     'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionadas2'=>$etiquetas2);
 
                 if ($request->imagenPublicacion!=null) {
@@ -411,8 +397,6 @@ class PublicacionesController extends Controller
             }
 
             $idGrupoAutor = autorGrupoAutor::agruparAutores($request->seleccionadosAutores);
-
-            $idGrupoEditor = editorGrupoEditor::AgruparEditores($request->seleccionadosEditores);
 
             $idGrupoCategoria = categoriaGrupoCategoria::AgruparCategorias($request->seleccionadosCategorias);
 
@@ -435,16 +419,12 @@ class PublicacionesController extends Controller
                 'idCategoria'=>$idGrupoCategoria, 'isbn'=>$request->isbn, 'anno'=>$request->anno,
                 'pais'=>$request->pais, 'idioma'=>$request->idioma, 'editorial'=>$request->editorial,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
-                'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> $idGrupoEditor,
+                'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> null,
                 'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
             Publicaciones::actualizarPublicacion($publicacion);
 
             if ($request->idGrupoAutores!=null) {
                 autorGrupoAutor::destroy($request->idGrupoAutores);
-            }
-
-            if ($request->idGrupoEditores!=null) {
-                editorGrupoEditor::destroy($request->idGrupoEditores);
             }
 
             if ($request->idGrupoCategorias!=null) {
@@ -492,10 +472,6 @@ class PublicacionesController extends Controller
 
             if ($publicacion['aga_x_idgrupoautor']!=null) {
                 autorGrupoAutor::destroy($publicacion['aga_x_idgrupoautor']);
-            }
-
-            if ($publicacion['ge_x_idgrupoeditor']!=null) {
-                editorGrupoEditor::destroy($publicacion['ge_x_idgrupoeditor']);
             }
 
             if ($publicacion['gcat_x_idgrupocategoria']!=null) {

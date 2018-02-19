@@ -67,27 +67,49 @@ class categorias extends Model
 
     public static function obtenerCategoriasDatatable($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores, $busqueda)
     {
-        $reemplazo1='';
-        $reemplazo2='where p.tx_titulo like \'%'.$busqueda.'%\'';
-        $query = 'SELECT count(C2.cat_x_idCategoria) numPublicaciones, C2.cat_x_idCategoria id, c.tx_categoria nombre FROM categoria_grupoCategoria C2 LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria where C2.gt_x_idGrupoCategoria in (select p.gcat_x_idgrupocategoria from publicaciones p LEFT JOIN autor_grupoautor a ON p.aga_x_idgrupoautor = a.ga_x_idgrupoautor LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor LEFT JOIN descriptores_grupoDescriptor dgd on p.dgd_idGrupoDescriptor = dgd.x_idGrupoDescriptor LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor &insert2) &insert GROUP BY C2.cat_x_idCategoria ORDER BY c.tx_categoria';
+        $reemplazo='where p.tx_titulo like \'%'.$busqueda.'%\'';
+        $query = 'SELECT count(C2.cat_x_idCategoria) numPublicaciones, C2.cat_x_idCategoria id, c.tx_categoria nombre FROM categoria_grupoCategoria C2 LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria where C2.gt_x_idGrupoCategoria in (select p.gcat_x_idgrupocategoria from publicaciones p LEFT JOIN autor_grupoautor a ON p.aga_x_idgrupoautor = a.ga_x_idgrupoautor LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor LEFT JOIN descriptores_grupoDescriptor dgd on p.dgd_idGrupoDescriptor = dgd.x_idGrupoDescriptor LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor LEFT JOIN categoria_grupoCategoria C2 ON p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria &insert) GROUP BY C2.cat_x_idCategoria ORDER BY c.tx_categoria';
         if ($valoresAnio!==null){
-            $reemplazo2 = $reemplazo2.' and p.nu_anno in ('.$valoresAnio.')';
+            $anios = explode(',',$valoresAnio);
+			$reemplazo = $reemplazo.' and (';
+			foreach ($anios as $anio){
+				$reemplazo = $reemplazo.'p.nu_anno = '.$anio;
+				$reemplazo = $reemplazo.' or ';
+			}
+			$reemplazo = substr($reemplazo, 0, -4).')'; 
         }
 
         if ($valoresAutores!==null){
-            $reemplazo2 = $reemplazo2.' and a.aut_x_idautor in ('.$valoresAutores.')';
+            $autores = explode(',',$valoresAutores);
+			$reemplazo = $reemplazo.' and (';
+			foreach ($autores as $autor){
+				$reemplazo = $reemplazo.'a.aut_x_idautor = '.$autor;
+				$reemplazo = $reemplazo.' or ';
+			}
+			$reemplazo = substr($reemplazo, 0, -4).')'; 
         }
 
         if ($valoresCategorias!==null){
-            $reemplazo1 = ' and C2.cat_x_idCategoria in ('.$valoresCategorias.')';
+            $categorias = explode(',',$valoresCategorias);
+			$reemplazo = $reemplazo.' and (';
+			foreach ($categorias as $categoria){
+				$reemplazo = $reemplazo.'C2.cat_x_idCategoria = '.$categoria;
+				$reemplazo = $reemplazo.' or ';
+			}
+			$reemplazo = substr($reemplazo, 0, -4).')'; 
         }
 
         if ($valoresDescriptores!==null){
-            $reemplazo2 = $reemplazo2 . ' and dgd.desc_x_iddescriptor in (' . $valoresDescriptores . ')';
+            $descriptores = explode(',',$valoresDescriptores);
+			$reemplazo = $reemplazo.' and (';
+			foreach ($descriptores as $descriptor){
+				$reemplazo = $reemplazo.'dgd.desc_x_iddescriptor = '.$descriptor;
+				$reemplazo = $reemplazo.' or ';
+			}
+			$reemplazo = substr($reemplazo, 0, -4).')'; 
+			
         }
-
-        $query = str_replace('&insert2', $reemplazo2, $query);
-        $query = str_replace('&insert', $reemplazo1, $query);
+        $query = str_replace('&insert', $reemplazo, $query);
 
         return collect(DB::select (DB::raw($query)));
     }

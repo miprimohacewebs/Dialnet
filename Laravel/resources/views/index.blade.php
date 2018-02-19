@@ -44,7 +44,7 @@
             </div>
             <div style="width: 100%; height: 40px;"></div>
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-2">
                 </div>
                 <div class="col-md-6">
                     <!-- Buscar -->
@@ -58,6 +58,8 @@
 
                         <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null)">Buscar</button>
                     </div>
+                </div>
+				<div class="col-md-3">
                 </div>
             </div>
             <div class="row">

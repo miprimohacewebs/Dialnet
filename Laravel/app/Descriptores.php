@@ -84,35 +84,49 @@ class descriptores extends Model
 
     public static function obtenerDescriptoresDatatable($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores, $busqueda)
     {
-        $reemplazo1='';
-        $reemplazo2='where p.tx_titulo like \'%'.$busqueda.'%\'';
-        $query = 'SELECT count(dgd.desc_x_iddescriptor) numPublicaciones, dgd.desc_x_iddescriptor id, d.tx_descriptor nombre FROM descriptores_grupoDescriptor dgd LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor where dgd.x_idGrupoDescriptor in (select p.dgd_idGrupoDescriptor from publicaciones p LEFT JOIN autor_grupoautor a ON p.aga_x_idgrupoautor = a.ga_x_idgrupoautor LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor LEFT JOIN categoria_grupoCategoria C2 ON p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria &insert2) &insert GROUP BY dgd.desc_x_iddescriptor ORDER BY d.tx_descriptor';
+        $reemplazo='where p.tx_titulo like \'%'.$busqueda.'%\'';
+        $query = 'SELECT count(dgd.desc_x_iddescriptor) numPublicaciones, dgd.desc_x_iddescriptor id, d.tx_descriptor nombre FROM descriptores_grupoDescriptor dgd LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor where dgd.x_idGrupoDescriptor in (select p.dgd_idGrupoDescriptor from publicaciones p LEFT JOIN autor_grupoautor a ON p.aga_x_idgrupoautor = a.ga_x_idgrupoautor LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor LEFT JOIN categoria_grupoCategoria C2 ON p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria LEFT JOIN descriptores_grupoDescriptor dgd ON p.dgd_idGrupoDescriptor = dgd.x_idGrupoDescriptor LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor &insert) GROUP BY dgd.desc_x_iddescriptor ORDER BY d.tx_descriptor';
         if ($valoresAnio!==null){
-            $reemplazo2 = $reemplazo2.' and p.nu_anno in ('.$valoresAnio.')';
+            $anios = explode(',',$valoresAnio);
+			$reemplazo = $reemplazo.' and (';
+			foreach ($anios as $anio){
+				$reemplazo = $reemplazo.'p.nu_anno = '.$anio;
+				$reemplazo = $reemplazo.' or ';
+			}
+			$reemplazo = substr($reemplazo, 0, -4).')'; 
         }
 
         if ($valoresAutores!==null){
-            if ($reemplazo2===''){
-                $reemplazo2 = 'where a.aut_x_idautor in ('.$valoresAutores.')';
-            }else{
-                $reemplazo2 = $reemplazo2.' and a.aut_x_idautor in ('.$valoresAutores.')';
-            }
+            $autores = explode(',',$valoresAutores);
+			$reemplazo = $reemplazo.' and (';
+			foreach ($autores as $autor){
+				$reemplazo = $reemplazo.'a.aut_x_idautor = '.$autor;
+				$reemplazo = $reemplazo.' or ';
+			}
+			$reemplazo = substr($reemplazo, 0, -4).')'; 
         }
 
         if ($valoresCategorias!==null){
-            if ($reemplazo2===''){
-                $reemplazo2 = 'where C2.cat_x_idCategoria in ('.$valoresCategorias.')';
-            }else{
-                $reemplazo2 = $reemplazo2.' and C2.cat_x_idCategoria in ('.$valoresCategorias.')';
-            }
+            $categorias = explode(',',$valoresCategorias);
+			$reemplazo = $reemplazo.' and (';
+			foreach ($categorias as $categoria){
+				$reemplazo = $reemplazo.'C2.cat_x_idCategoria = '.$categoria;
+				$reemplazo = $reemplazo.' or ';
+			}
+			$reemplazo = substr($reemplazo, 0, -4).')'; 
         }
 
         if ($valoresDescriptores!==null){
-            $reemplazo1 = ' and dgd.desc_x_iddescriptor in ('.$valoresDescriptores.')';
+            $descriptores = explode(',',$valoresDescriptores);
+			$reemplazo = $reemplazo.' and (';
+			foreach ($descriptores as $descriptor){
+				$reemplazo = $reemplazo.'dgd.desc_x_iddescriptor = '.$descriptor;
+				$reemplazo = $reemplazo.' or ';
+			}
+			$reemplazo = substr($reemplazo, 0, -4).')'; 
+			
         }
-
-        $query = str_replace('&insert2', $reemplazo2, $query);
-        $query = str_replace('&insert', $reemplazo1, $query);
+        $query = str_replace('&insert', $reemplazo, $query);
 
         return collect(DB::select (DB::raw($query)));
     }

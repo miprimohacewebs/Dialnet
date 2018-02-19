@@ -154,8 +154,9 @@ $(function () {
                          if(data.publicacion[0].tx_enlacedoi){
                          html += "<div class='row'>";
                          html += "<div class='col-md-3'><strong>Enlace DOI:</strong></div>";
-                         html += "<div class='col-md-9'>";
+                         html += "<div class='col-md-9'><a href='"+data.publicacion[0].tx_enlacedoi+"' target='_blank'>";
                          html += data.publicacion[0].tx_enlacedoi;
+						 html += "</a>"
                          html += "</div>";
                          html += "</div>";
                          }
@@ -681,5 +682,10 @@ function resetearPantalla() {
     $("#categoriasMenu").hide();
     $("#divPublicaciones").hide();
     $("#divUtilidades").hide();
+	
+	$("#autoresSeleccionados").val('');
+    $("#annosSeleccionados").val('');
+    $("#categoriasSeleccionadas").val('');
+    $("#descriptoresSeleccionados").val('');
 
 }
