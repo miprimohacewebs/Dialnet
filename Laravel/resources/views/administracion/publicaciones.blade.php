@@ -225,7 +225,7 @@
                                                             name="seleccionadosAutores[]">
                                                         @if( !empty($autoresSeleccionados))
                                                             @foreach($autoresSeleccionados as $autorSeleccionado)
-                                                                <option value="{{$autorSeleccionado->idAutor}}">{{$autorSeleccionado->tx_autorApellidos}}
+                                                                <option value="{{$autorSeleccionado->idAutor}}">{{$autorSeleccionado->tx_autorapellidos}}
                                                                     , {{$autorSeleccionado->tx_autor}}</option>
                                                             @endforeach
                                                         @endif

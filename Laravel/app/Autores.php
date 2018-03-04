@@ -63,7 +63,7 @@ class autores extends Model
      */
     public static function obtenerlistaAutoresSeleccionados($autores){
         if ($autores!=null) {
-            return DB::table('autores')->select('idAutor','tx_autor', 'tx_autorApellidos')->whereIn('idAutor', $autores)->orderBy('tx_autorApellidos')->get();
+            return DB::table('autores')->select('idAutor','tx_autor', 'tx_autorapellidos')->whereIn('idAutor', $autores)->orderBy('tx_autorapellidos')->get();
         }
         return null;
     }

@@ -66,7 +66,7 @@ $(function() {
             {
                 "processing" : true,
                 "serverSide" : true,
-                "ajax" : "api/autoresAdmin",
+                "ajax" : "/api/autoresAdmin",
                 "lengthChange" : false,
                 "language": {
                     "processing": "Procesando autores...",
@@ -121,7 +121,7 @@ $(function() {
             {
                 "processing" : true,
                 "serverSide" : true,
-                "ajax" : "api/categoriasAdmin",
+                "ajax" : "/api/categoriasAdmin",
                 "lengthChange" : false,
                 "language": {
                     "processing": "Procesando categorias...",
