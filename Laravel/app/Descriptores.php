@@ -74,9 +74,11 @@ class descriptores extends Model
     public static function obtenerDescriptoresSeleccionados ($descriptores){
 
         $descriptoresVuelta = Array();
-        foreach ($descriptores as $descriptor) {
-            $descriptoresVuelta[]=['tx_descriptor'=>$descriptor];
-        }
+        if ($descriptores!==null){
+			foreach ($descriptores as $descriptor) {
+				$descriptoresVuelta[]=['tx_descriptor'=>$descriptor];
+			}
+		}
         //dd(DB::table('descriptores')->select('tx_descriptor')->get(), $descriptoresVuelta);
         return $descriptoresVuelta;
 
