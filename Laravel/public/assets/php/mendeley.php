@@ -1,13 +1,20 @@
 <?php
 function sendAuthorizedRequest($url) {
+
+    ///// Configuración de la API
+    $client_id = 5300;
+    $client_secret = 'xwOkltuHd4I2Le5Y';
+    $callback_url = 'https://homestead.test';
+    ///// FIN Configuración
+
+
     global $headers;
     $headers = array();
     session_start();
     $access_token = session('access_token');
+
     if ($access_token===null) {
-        $client_id = 5300;
-        $client_secret = 'xwOkltuHd4I2Le5Y';
-        $callback_url = 'https://homestead.test?vueltaMendeley=true';
+        $callback_url = $callback_url.'?vueltaMendeley=true';
         if (!isset($_GET['vueltaMendeley'])) {
             $auth_url = "https://api.mendeley.com/oauth/authorize?client_id=$client_id&client_secret=$client_secret&response_type=code&scope=all&redirect_uri=" . urlencode($callback_url);
             redirect2($auth_url);
@@ -44,9 +51,7 @@ function sendAuthorizedRequest($url) {
     } else {
         dd($access_token);
         // OAuth2
-        $client_id = 5300;
-        $client_secret = 'xwOkltuHd4I2Le5Y';
-        $callback_url = 'https://homestead.test/';
+
         $expires_at = session('expires');;
         if ($expires_at < (time() - 200)) {
             // retrieve new authorization token
