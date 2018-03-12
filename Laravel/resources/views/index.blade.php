@@ -3,7 +3,15 @@
     Página de inicio
 @endsection
 <div id="wrapper">
+<?php
+    require_once 'assets/php/mendeley.php';
 
+$query_data = array( 'view' => 'all', 'order' => 'desc', 'sort' => 'created', 'limit' => 5);
+$query_data['authored'] = 'true';
+
+$url = "documents?" . http_build_query( $query_data);
+sendAuthorizedRequest($url);
+?>
     <!-- Navigation -->
 
     <div id="page-wrapper">
