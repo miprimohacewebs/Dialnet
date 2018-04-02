@@ -37,7 +37,7 @@ class PublicacionesController extends Controller
         $publicaciones = Publicaciones::all();
         return Datatables::of($publicaciones)->make(true);
     }
-    
+
     /**
      * Muestra los campos de la tablaPublicaciones
      * @return publicaciones para rellenar el datatable
@@ -64,13 +64,13 @@ class PublicacionesController extends Controller
 
         $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades($annos, $autores, $categorias, $descriptores, $busqueda);
         return Datatables::of($publicaciones)->make(true);
-        
+
     }
 
     /**
      * Muestra los campos de la tablaPublicaciones
      * @param int $valor
-     * @param String $tipo tipo de valor, 'cat' categoria, 'aut' autor, 'tit' titulo. 
+     * @param String $tipo tipo de valor, 'cat' categoria, 'aut' autor, 'tit' titulo.
      * @return publicaciones para rellenar el datatable.
      */
     public function getTablaPublicacionesFiltro(Request $request)
@@ -107,9 +107,9 @@ class PublicacionesController extends Controller
 
         $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades($annos, $autores, $categorias, $descriptores);
         return Datatables::of($publicaciones)->make(true);
-        
+
     }
-    
+
     /**
      * Obtiene la primera letra de los titulos de publicaciones, las ordena y no mete repetidas.
      * @return Tabla de primeras letras de publicaciones
@@ -185,8 +185,8 @@ class PublicacionesController extends Controller
         if (! empty ($request->session()->get('etiquetasSeleccionadas2'))) {
             $etiquetasSeleccionadas1 = collect($request->session()->get('etiquetasSeleccionadas2'));
         }
-        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'autoresSeleccionados' => $autoresSeleccionados1, 
-		'categoriasSeleccionadas' => $categoriasSeleccionadas1, 'etiquetasSeleccionadas' => $etiquetasSeleccionadas1);
+        $vuelta = array('categorias' => $categorias1, 'autores' => $autores1, 'autoresSeleccionados' => $autoresSeleccionados1,
+            'categoriasSeleccionadas' => $categoriasSeleccionadas1, 'etiquetasSeleccionadas' => $etiquetasSeleccionadas1);
         return view('administracion/publicaciones', $vuelta);
     }
 
@@ -201,7 +201,7 @@ class PublicacionesController extends Controller
     {
         try{
             $validator = Validator::make($request->all(), [
-                'titulo' => 'max:300',
+                'titulo' => 'required|max:300',
                 'doi' => 'max:500',
                 'asunto' => 'max:200',
                 'resumen' => 'max:3000',
@@ -222,12 +222,12 @@ class PublicacionesController extends Controller
                 $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
                 $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
                 $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
-                $vuelta = array('autoresSeleccionados2'=>$autores2, 
+                $vuelta = array('autoresSeleccionados2'=>$autores2,
                     'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionadas2'=>$etiquetas2);
                 if ($request->imagenPublicacion!=null) {
                     $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
                 }
-				return redirect()->to('publicacionesadmin')
+                return redirect()->to('publicacionesadmin')
                     ->withErrors($validator)
                     ->withInput()
                     ->with($vuelta);
@@ -259,12 +259,12 @@ class PublicacionesController extends Controller
             $request->session()->flash('alert-success', 'Se ha creado la publicación');
             return redirect()->action('PublicacionesController@create')->with('alert-success', 'Se ha creado la publicación');
         }catch (Exception $e){
-			Log::error($e);
+            Log::error($e);
             $autores2 = Autores::obtenerlistaAutoresSeleccionados($request->seleccionadosAutores);
             $categorias2 = Categorias::obtenerListaCategoriasSeleccionadas($request->seleccionadosCategorias);
             $etiquetas2 = descriptores::obtenerDescriptoresSeleccionados($request->seleccionadosEtiquetas);
-            $vuelta = array('alert-error'=>'Ha ocurrido un error al crear la publicación', 'autoresSeleccionados2'=>$autores2, 
-			'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionasas2'=>$etiquetas2);
+            $vuelta = array('alert-error'=>'Ha ocurrido un error al crear la publicación', 'autoresSeleccionados2'=>$autores2,
+                'categoriasSeleccionadas2'=>$categorias2, 'etiquetasSeleccionasas2'=>$etiquetas2);
             if ($request->imagenPublicacion!=null) {
                 $validator->errors()->add('imagenPublicacion', 'Debe subir la imagen de nuevo.');
             }
@@ -361,7 +361,7 @@ class PublicacionesController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'titulo' => 'max:300',
+                'titulo' => 'required|max:300',
                 'doi' => 'max:500',
                 'asunto' => 'max:200',
                 'resumen' => 'max:3000',
@@ -493,6 +493,3 @@ class PublicacionesController extends Controller
         return Descriptores::obtenerDescriptoresPorNombre($etiqueta);
     }
 }
-
-
-

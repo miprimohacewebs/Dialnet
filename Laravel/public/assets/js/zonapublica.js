@@ -13,7 +13,7 @@ var RUTA_IMAGENES = 'assets/images/imagesPublicaciones/';
 $(function () {
 
 
-         jQuery.fn.DataTable.ext.type.search.string = function ( data ) {
+        jQuery.fn.DataTable.ext.type.search.string = function ( data ) {
             return ! data ?
                 '' :
                 typeof data === 'string' ?
@@ -77,7 +77,7 @@ $(function () {
                             html += "</div>";
                         }
                         // Año
-                        if (data.publicacion[0].nu_ano) {
+                        if (data.publicacion[0].nu_ano && data.publicacion[0].nu_ano !=="0") {
                             html += "<div class='row'>";
                             html += "<div class='col-md-3'><strong>Año:</strong></div>";
                             html += "<div class='col-md-9'>";
@@ -88,7 +88,7 @@ $(function () {
                         // Páginas
                         if (data.publicacion[0].tx_paginas) {
                             html += "<div class='row'>";
-                            html += "<div class='col-md-3'><strong>Núm. páginas:</strong></div>";
+                            html += "<div class='col-md-3'><strong>Páginas:</strong></div>";
                             html += "<div class='col-md-9'>";
                             html += data.publicacion[0].tx_paginas;
                             html += "</div>";
@@ -122,6 +122,7 @@ $(function () {
                             html += "</div>";
                         }
                         // Descriptores
+                        /*
                         if (data.publicacion[0].tx_descriptores) {
                             html += "<div class='row'>";
                             html += "<div class='col-md-3'><strong>Descriptores:</strong></div>";
@@ -130,6 +131,7 @@ $(function () {
                             html += "</div>";
                             html += "</div>";
                         }
+                        */
                         // Imagen
                         /*
                          if(data.publicacion[0].tx_imagen){
@@ -143,23 +145,23 @@ $(function () {
                          */
                         // DOI
                         if(data.publicacion[0].tx_doi){
-                         html += "<div class='row'>";
-                         html += "<div class='col-md-3'><strong>DOI:</strong></div>";
-                         html += "<div class='col-md-9'>";
-                         html += data.publicacion[0].tx_doi;
-                         html += "</div>";
-                         html += "</div>";
-                         }
-                          // Genero
-                         if(data.publicacion[0].tx_enlacedoi){
-                         html += "<div class='row'>";
-                         html += "<div class='col-md-3'><strong>Enlace DOI:</strong></div>";
-                         html += "<div class='col-md-9'><a href='"+data.publicacion[0].tx_enlacedoi+"' target='_blank'>";
-                         html += data.publicacion[0].tx_enlacedoi;
-						 html += "</a>"
-                         html += "</div>";
-                         html += "</div>";
-                         }
+                            html += "<div class='row'>";
+                            html += "<div class='col-md-3'><strong>DOI:</strong></div>";
+                            html += "<div class='col-md-9'>";
+                            html += data.publicacion[0].tx_doi;
+                            html += "</div>";
+                            html += "</div>";
+                        }
+                        // Enlace al texto DOI
+                        if(data.publicacion[0].tx_enlacedoi){
+                            html += "<div class='row'>";
+                            html += "<div class='col-md-3'><strong>Enlace al texto:</strong></div>";
+                            html += "<div class='col-md-9' style='text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'><a href='"+data.publicacion[0].tx_enlacedoi+"' target='_blank'>";
+                            html += data.publicacion[0].tx_enlacedoi;
+                            html += "</a>"
+                            html += "</div>";
+                            html += "</div>";
+                        }
 
                         // Asunto
                         /*
@@ -260,7 +262,7 @@ $(function () {
 
     }
 
-    );
+);
 
 /**
  *
@@ -599,6 +601,7 @@ function actualizarListado(tipo, valor) {
                         "busqueda": textoBusqueda.val()
                     }
                 },
+                "pageLength": 20,
                 "lengthChange": true,
                 "language": {
                     "processing": "Procesando publicaciones...",
@@ -645,7 +648,7 @@ function actualizarListado(tipo, valor) {
                         $(nTd).html(bufferSalida );
                     }
 
-                    }]
+                }]
             });
 }
 
@@ -682,8 +685,8 @@ function resetearPantalla() {
     $("#categoriasMenu").hide();
     $("#divPublicaciones").hide();
     $("#divUtilidades").hide();
-	
-	$("#autoresSeleccionados").val('');
+
+    $("#autoresSeleccionados").val('');
     $("#annosSeleccionados").val('');
     $("#categoriasSeleccionadas").val('');
     $("#descriptoresSeleccionados").val('');

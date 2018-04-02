@@ -97,7 +97,7 @@
                                             <div class="col-lg-6">
                                                 {{ csrf_field() }}
                                                 <div class="form-group">
-                                                    <label for="titulo">Título</label>
+                                                    <label for="titulo" title="Campo Obligatorio">Título  <span style="color:red">*</span></label>
                                                     <input class="form-control" id="titulo" name="titulo"
                                                            value="{{ old('titulo',isset($publicacion) ? $publicacion['titulo'] : null)}}">
                                                     <p class="help-block">Introduzca el título de la publicación</p>
