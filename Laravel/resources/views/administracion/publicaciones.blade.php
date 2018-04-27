@@ -133,7 +133,7 @@
                                                     <!-- <p class="help-block">Texto de ayuda.</p> -->
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="enlacedoi">Enlace DOI</label>
+                                                    <label for="enlacedoi">Enlace al texto</label>
                                                     <input class="form-control" id="enlacedoi" name="enlacedoi"
                                                            value="{{ old('enlacedoi',isset($publicacion) ? $publicacion['enlacedoi'] : null)}}">
                                                     <!-- <p class="help-block">Texto de ayuda.</p> -->
@@ -162,7 +162,7 @@
                                                     <!-- <p class="help-block">Texto de ayuda.</p> -->
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="pais">País</label>
+                                                    <label for="pais">Lugar de edición</label>
                                                     <input class="form-control" id="pais" name="pais"
                                                            value="{{ old('pais',isset($publicacion) ? $publicacion['pais'] : null)}}">
                                                     <!-- <p class="help-block">Texto de ayuda.</p> -->
