@@ -4,12 +4,14 @@
 @endsection
 <div id="wrapper">
 <?php
+/*
     require_once 'assets/php/mendeley.php';
 
 $query_data = array( 'profile_id' => 'e14b27b3-42ad-3416-ae74-2f3b9e07c3ec','title' => 'titulo de prueba', 'type' => 'generic');
 
 $url = "documents?" . http_build_query( $query_data);
 sendAuthorizedRequest($url);
+*/
 ?>
     <!-- Navigation -->
 
@@ -54,7 +56,7 @@ sendAuthorizedRequest($url);
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-6">
-                    <!-- Buscar -->
+                    <!-- Buscar publicaciones -->
                     <div class="form-group">
                         <input type="text" id="textoBusqueda" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListado(null, null)}">
 
@@ -63,7 +65,26 @@ sendAuthorizedRequest($url);
                 <div class="col-md-1">
                     <div class="form-group">
 
-                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null)">Buscar</button>
+                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null)">Buscar por publicación</button>
+                    </div>
+                </div>
+				<div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-6">
+                    <!-- Buscar autores -->
+                    <div class="form-group">
+                        <input type="text" id="textoBusquedaAutores" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListadoAutores(null, null)}">
+
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+
+                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListadoAutores(null, null)">Buscar por autor</button>
                     </div>
                 </div>
 				<div class="col-md-3">
