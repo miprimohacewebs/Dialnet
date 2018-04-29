@@ -144,9 +144,13 @@ class Publicaciones extends Model
      * @param $tipo
      * @return \Illuminate\Support\Collection
      */
-    public static function obtenerPublicacionesMultiplesPosibilidades($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores, $busqueda){
+    public static function obtenerPublicacionesMultiplesPosibilidades($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores, $busqueda, $tipoBusqueda){
 
-        $reemplazo='where p.tx_titulo like \'%'.$busqueda.'%\'';
+        if ($tipoBusqueda==='0'){
+            $reemplazo='where p.tx_titulo like \'%'.$busqueda.'%\'';
+        }elseif ($tipoBusqueda==='1'){
+            $reemplazo='where concat(concat(a2.tx_autor,\' \'),a2.tx_autorapellidos) like \'%'.$busqueda.'%\'';
+        }
         $query = 'SELECT p.* FROM publicaciones p WHERE p.x_idpublicacion IN (SELECT p.x_idpublicacion FROM publicaciones p LEFT JOIN categoria_grupoCategoria C2 on p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria LEFT JOIN descriptores_grupoDescriptor dgd ON p.dgd_idGrupoDescriptor = dgd.x_idGrupoDescriptor LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor LEFT JOIN autor_grupoautor a on p.aga_x_idgrupoautor = a.ga_x_idgrupoautor LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor &insert) ORDER BY p.x_idpublicacion';
 		if ($valoresAnio!==null){
             $anios = explode(',',$valoresAnio);
@@ -215,9 +219,13 @@ class Publicaciones extends Model
         return DB::table('publicaciones')->count();
     }
 
-    public static function obtenerAnnosDatatable ($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores, $busqueda){
+    public static function obtenerAnnosDatatable ($valoresAnio, $valoresAutores, $valoresCategorias, $valoresDescriptores, $busqueda, $tipoBusqueda){
 
-        $reemplazo='where p.tx_titulo like \'%'.$busqueda.'%\'';
+        if ($tipoBusqueda==='0'){
+            $reemplazo='where p.tx_titulo like \'%'.$busqueda.'%\'';
+        }elseif ($tipoBusqueda==='1'){
+            $reemplazo='where concat(concat(a2.tx_autor,\' \'),a2.tx_autorapellidos) like \'%'.$busqueda.'%\'';
+        }
         $query = 'SELECT count(p.nu_anno) numPublicaciones, p.nu_anno nombre, p.nu_anno id FROM publicaciones p WHERE p.x_idpublicacion IN (SELECT p.x_idpublicacion FROM publicaciones p LEFT JOIN categoria_grupoCategoria C2 on p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria LEFT JOIN descriptores_grupoDescriptor dgd ON p.dgd_idGrupoDescriptor = dgd.x_idGrupoDescriptor LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor LEFT JOIN autor_grupoautor a on p.aga_x_idgrupoautor = a.ga_x_idgrupoautor LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor &insert) GROUP BY p.nu_anno ORDER BY p.nu_anno';
        if ($valoresAnio!==null){
             $anios = explode(',',$valoresAnio);

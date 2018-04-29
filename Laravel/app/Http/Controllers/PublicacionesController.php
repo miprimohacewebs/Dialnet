@@ -49,6 +49,7 @@ class PublicacionesController extends Controller
         $categorias = $request->get('categorias');
         $descriptores = $request->get('descriptores');
         $busqueda = $request->get('busqueda');
+        $tipoBusqueda = $request->get('tipoBusqueda');
         if ($annos===''){
             $annos=null;
         }
@@ -62,7 +63,7 @@ class PublicacionesController extends Controller
             $descriptores=null;
         }
 
-        $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades($annos, $autores, $categorias, $descriptores, $busqueda);
+        $publicaciones = Publicaciones::obtenerPublicacionesMultiplesPosibilidades($annos, $autores, $categorias, $descriptores, $busqueda, $tipoBusqueda);
         return Datatables::of($publicaciones)->make(true);
 
     }
@@ -126,6 +127,7 @@ class PublicacionesController extends Controller
         $categorias = $request->get('categorias');
         $descriptores = $request->get('descriptores');
         $busqueda = $request->get('busqueda');
+        $tipoBusqueda = $request->get('tipoBusqueda');
         if ($annos===''){
             $annos=null;
         }
@@ -138,7 +140,7 @@ class PublicacionesController extends Controller
         if ($descriptores===''){
             $descriptores=null;
         }
-        $descriptores = Descriptores::obtenerDescriptoresDatatable($annos, $autores, $categorias, $descriptores, $busqueda);
+        $descriptores = Descriptores::obtenerDescriptoresDatatable($annos, $autores, $categorias, $descriptores, $busqueda, $tipoBusqueda);
         return Datatables::of($descriptores)->make(true);
     }
 
@@ -148,6 +150,7 @@ class PublicacionesController extends Controller
         $categorias = $request->get('categorias');
         $descriptores = $request->get('descriptores');
         $busqueda = $request->get('busqueda');
+        $tipoBusqueda = $request->get('tipoBusqueda');
         if ($annos===''){
             $annos=null;
         }
@@ -161,7 +164,7 @@ class PublicacionesController extends Controller
             $descriptores=null;
         }
 
-        $annos = Publicaciones::obtenerAnnosDatatable($annos, $autores, $categorias, $descriptores, $busqueda);
+        $annos = Publicaciones::obtenerAnnosDatatable($annos, $autores, $categorias, $descriptores, $busqueda, $tipoBusqueda);
         return Datatables::of($annos)->make(true);
     }
     /**

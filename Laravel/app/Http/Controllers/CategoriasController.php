@@ -127,6 +127,7 @@ class CategoriasController extends Controller
         $categorias = $request->get('categorias');
         $descriptores = $request->get('descriptores');
         $busqueda = $request->get('busqueda');
+        $tipoBusqueda = $request->get('tipoBusqueda');
         if ($annos===''){
             $annos=null;
         }
@@ -139,7 +140,7 @@ class CategoriasController extends Controller
         if ($descriptores===''){
             $descriptores=null;
         }
-        $categorias = Categorias::obtenerCategoriasDatatable($annos, $autores, $categorias, $descriptores, $busqueda);
+        $categorias = Categorias::obtenerCategoriasDatatable($annos, $autores, $categorias, $descriptores, $busqueda, $tipoBusqueda);
         return Datatables::of($categorias)->make(true);
     }
 }

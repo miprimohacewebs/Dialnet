@@ -58,14 +58,14 @@ sendAuthorizedRequest($url);
                 <div class="col-md-6">
                     <!-- Buscar publicaciones -->
                     <div class="form-group">
-                        <input type="text" id="textoBusqueda" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListado(null, null)}">
+                        <input type="text" id="textoBusqueda" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListado(null, null,0)}">
 
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div class="form-group">
 
-                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null)">Buscar por publicación</button>
+                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null,0)">Buscar por publicación</button>
                     </div>
                 </div>
 				<div class="col-md-3">
@@ -77,14 +77,14 @@ sendAuthorizedRequest($url);
                 <div class="col-md-6">
                     <!-- Buscar autores -->
                     <div class="form-group">
-                        <input type="text" id="textoBusquedaAutores" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListadoAutores(null, null)}">
+                        <input type="text" id="textoBusquedaAutores" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListado(null, null, 1)}">
 
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div class="form-group">
 
-                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListadoAutores(null, null)">Buscar por autor</button>
+                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null,1)">Buscar por autor</button>
                     </div>
                 </div>
 				<div class="col-md-3">

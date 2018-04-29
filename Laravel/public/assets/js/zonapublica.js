@@ -273,7 +273,7 @@ $(function () {
  *        - aut: autor.
  *        - desc: descriptor
  */
-function actualizarListado(tipo, valor) {
+function actualizarListado(tipo, valor, tipoBusqueda) {
 
     $("#autoresMenu").show();
     $("#descriptoresMenu").show();
@@ -281,8 +281,12 @@ function actualizarListado(tipo, valor) {
     $("#categoriasMenu").show();
     $("#divPublicaciones").show();
     $("#divUtilidades").show();
-
-    var textoBusqueda = $("#textoBusqueda");
+    var textoBusqueda='';
+    if (tipoBusqueda===0) {
+        textoBusqueda = $("#textoBusqueda");
+    }else if (tipoBusqueda===1){
+        textoBusqueda = $("#textoBusquedaAutores");
+    }
 
     var autoresSeleccionados = $("#autoresSeleccionados").val();
     var annosSeleccionados = $("#annosSeleccionados").val();
@@ -378,7 +382,8 @@ function actualizarListado(tipo, valor) {
                 "descriptores": descriptoresSeleccionados,
                 "categorias": categoriasSeleccionadas,
                 "annos": annosSeleccionados,
-                "busqueda": textoBusqueda.val()
+                "busqueda": textoBusqueda.val(),
+                "tipoBusqueda": tipoBusqueda
             }
         },
         "language": {
@@ -434,7 +439,8 @@ function actualizarListado(tipo, valor) {
                 "descriptores": descriptoresSeleccionados,
                 "categorias": categoriasSeleccionadas,
                 "annos": annosSeleccionados,
-                "busqueda": textoBusqueda.val()
+                "busqueda": textoBusqueda.val(),
+                "tipoBusqueda": tipoBusqueda
             }
         },
         "language": {
@@ -489,7 +495,8 @@ function actualizarListado(tipo, valor) {
                 "descriptores": descriptoresSeleccionados,
                 "categorias": categoriasSeleccionadas,
                 "annos": annosSeleccionados,
-                "busqueda": textoBusqueda.val()
+                "busqueda": textoBusqueda.val(),
+                "tipoBusqueda": tipoBusqueda
             }
         },
         "language": {
@@ -544,7 +551,8 @@ function actualizarListado(tipo, valor) {
                 "descriptores": descriptoresSeleccionados,
                 "categorias": categoriasSeleccionadas,
                 "annos": annosSeleccionados,
-                "busqueda": textoBusqueda.val()
+                "busqueda": textoBusqueda.val(),
+                "tipoBusqueda": tipoBusqueda
             }
         },
         "language": {
@@ -598,7 +606,8 @@ function actualizarListado(tipo, valor) {
                         "descriptores": descriptoresSeleccionados,
                         "categorias": categoriasSeleccionadas,
                         "annos": annosSeleccionados,
-                        "busqueda": textoBusqueda.val()
+                        "busqueda": textoBusqueda.val(),
+                        "tipoBusqueda": tipoBusqueda
                     }
                 },
                 "pageLength": 20,
