@@ -3,14 +3,6 @@
     Página de inicio
 @endsection
 <div id="wrapper">
-<?php
-    require_once 'assets/php/mendeley.php';
-
-$query_data = array( 'profile_id' => 'e14b27b3-42ad-3416-ae74-2f3b9e07c3ec','title' => 'titulo de prueba', 'type' => 'generic');
-
-$url = "documents?" . http_build_query( $query_data);
-sendAuthorizedRequest($url);
-?>
     <!-- Navigation -->
 
     <div id="page-wrapper">

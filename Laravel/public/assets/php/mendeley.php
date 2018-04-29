@@ -94,11 +94,11 @@ function sendAuthorizedRequest($url) {
         curl_setopt($curl, CURLOPT_HEADER, true);
 
         // send request
-
         $resp = curl_exec($curl);
         if ($resp === false) {
             return null;
         }
+        dd($resp);
         $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         $header = substr($resp, 0, $header_size);
         $body = substr($resp, $header_size);
@@ -126,7 +126,7 @@ function sendAuthorizedRequest($url) {
             }
         }
     }
-
+    dd($body);
     $result = json_decode($body);
     if (!empty($result)){
         if (!is_null($result->error)) {
@@ -134,6 +134,8 @@ function sendAuthorizedRequest($url) {
             $error_message = $result->error;
         }
     }
+
+    dd($result);
     return $result;
 }
 
