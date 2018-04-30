@@ -405,10 +405,12 @@
                         <!-- Tabla edición/eliminar publicaciones-->
                         <div style="height: 50px; width: 100%"></div>
                         <div class="row">
-                            <div class="col-md-12">
+                        <div class="col-md-1"></div>
+                            <div class="col-md-10">
                                 <table id="tablaEdicionPublicaciones" class="table table-hover table-condensed">
                                 </table>
                             </div>
+                            <div class="col-md-1"></div>
                         </div>
                         <div style="height: 50px; width: 100%"></div>
                         <!-- Botón volver -->
