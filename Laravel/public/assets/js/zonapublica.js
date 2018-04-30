@@ -687,6 +687,7 @@ function resetearPantalla() {
     tablaCategorias.empty();
 
     $("#textoBusqueda").val('');
+    $("#textoBusquedaAutores").val('');
 
     $("#autoresMenu").hide();
     $("#descriptoresMenu").hide();
