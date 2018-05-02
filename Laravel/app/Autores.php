@@ -100,6 +100,10 @@ class autores extends Model
             $reemplazo='where p.tx_titulo like \'%'.$busqueda.'%\'';
         }elseif ($tipoBusqueda==='1'){
             $reemplazo='where concat(concat(a2.tx_autor,\' \'),a2.tx_autorapellidos) like \'%'.$busqueda.'%\'';
+        }elseif ($tipoBusqueda==='2'){
+            $reemplazo='where d.tx_descriptor like \'%'.$busqueda.'%\'';
+        }elseif ($tipoBusqueda==='3'){
+            $reemplazo='where p.nu_anno like \'%'.$busqueda.'%\'';
         }
         $query = 'SELECT count(a.aut_x_idautor) numPublicaciones, concat(concat(a2.tx_autorApellidos,\', \'), a2.tx_autor) nombre, a.aut_x_idautor id FROM autor_grupoautor a LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor WHERE a.ga_x_idgrupoautor IN (SELECT p.aga_x_idgrupoautor FROM publicaciones p LEFT JOIN categoria_grupoCategoria C2 on p.gcat_x_idgrupocategoria = C2.gt_x_idGrupoCategoria LEFT JOIN categorias c ON C2.cat_x_idCategoria = c.x_idcategoria LEFT JOIN descriptores_grupoDescriptor dgd ON p.dgd_idGrupoDescriptor = dgd.x_idGrupoDescriptor LEFT JOIN descriptores d ON dgd.desc_x_iddescriptor = d.x_iddescriptor LEFT JOIN autor_grupoautor a ON p.aga_x_idgrupoautor = a.ga_x_idgrupoautor LEFT JOIN autores a2 ON a.aut_x_idautor = a2.idAutor &insert) GROUP BY a.aut_x_idautor ORDER BY concat(concat(a2.tx_autorApellidos,\', \'), a2.tx_autor)';
         

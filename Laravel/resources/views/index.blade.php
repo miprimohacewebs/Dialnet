@@ -53,9 +53,7 @@ sendAuthorizedRequest($url);
             </div>
             <div style="width: 100%; height: 40px;"></div>
             <div class="row">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <!-- Buscar publicaciones -->
                     <div class="form-group">
                         <input type="text" id="textoBusqueda" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListado(null, null,0)}">
@@ -68,13 +66,9 @@ sendAuthorizedRequest($url);
                         <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null,0)">Buscar por publicación</button>
                     </div>
                 </div>
-				<div class="col-md-3">
+                <div class="col-md-1">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <!-- Buscar autores -->
                     <div class="form-group">
                         <input type="text" id="textoBusquedaAutores" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListado(null, null, 1)}">
@@ -87,7 +81,35 @@ sendAuthorizedRequest($url);
                         <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null,1)">Buscar por autor</button>
                     </div>
                 </div>
-				<div class="col-md-3">
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Buscar Etiquetas -->
+                    <div class="form-group">
+                        <input type="text" id="textoBusquedaEtiquetas" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListado(null, null,2)}">
+
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+
+                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null,2)">Buscar por etiquetas</button>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-4">
+                    <!-- Buscar años -->
+                    <div class="form-group">
+                        <input type="text" id="textoBusquedaAnos" class="form-control" placeholder="Buscar" onkeypress="if(event.which === 13 || event.keyCode === 13){actualizarListado(null, null, 3)}">
+
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+
+                        <button type="button" class="btn btn-primary mb-2" onclick="actualizarListado(null, null,3)">Buscar por años</button>
+                    </div>
                 </div>
             </div>
             <div class="row">

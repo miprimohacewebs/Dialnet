@@ -290,6 +290,10 @@ function actualizarListado(tipo, valor, tipoBusqueda) {
         textoBusqueda = $("#textoBusqueda");
     } else if (tipoBusqueda === 1) {
         textoBusqueda = $("#textoBusquedaAutores");
+    } else if (tipoBusqueda === 2){
+        textoBusqueda = $("#textoBusquedaEtiquetas");
+    } else if (tipoBusqueda === 3){
+        textoBusqueda = $("#textoBusquedaAnos");
     }
 
     var autoresSeleccionados = $("#autoresSeleccionados").val();
@@ -692,6 +696,8 @@ function resetearPantalla() {
 
     $("#textoBusqueda").val('');
     $("#textoBusquedaAutores").val('');
+    $("#textoBusquedaEtiquetas").val('');
+    $("#textoBusquedaAnos").val('');
 
     $("#autoresMenu").hide();
     $("#descriptoresMenu").hide();
