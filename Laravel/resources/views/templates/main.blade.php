@@ -19,7 +19,10 @@
 <!-- Datatables -->
 <link rel="stylesheet"
 	href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"
-	media="all" type="text/css" />
+	media="all" type="text/css" >
+
+    <link href="{{ URL::asset('assets/css/jquery-ui.css') }}"
+          rel="stylesheet" media="all" type="text/css">
 
 <!-- Custom CSS -->
 <link href="{{ URL::asset('assets/css/sb-admin.css') }}"
@@ -27,6 +30,7 @@
 <!-- Morris Charts CSS -->
 <link href="{{ URL::asset('assets/css/plugins/morris.css') }}"
 	rel="stylesheet" media="all" type="text/css">
+
 
 <!-- Custom Fonts -->
 <link
@@ -84,6 +88,9 @@
 
 	<!-- Datatables -->
 	<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
+	<script src="{{ URL::asset('assets/js/jquery-ui.js') }}"></script>
+
 	<script src="{{ URL::asset('assets/js/zonapublica.js') }}"></script>
 	<!-- Morris Charts JavaScript -->
 <!-- 	<script -->

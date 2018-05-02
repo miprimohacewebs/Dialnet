@@ -221,6 +221,7 @@ $(function() {
     });
 });
 $( "#tags" ).autocomplete({
+    minLength: 3,
     source: function (request, response) {
         $.ajax({
             cache: false,

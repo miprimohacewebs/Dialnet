@@ -96,14 +96,6 @@ Route::group(['middleware' => ['autenticado']], function () {
     Route::post('administrador/modificarEditor/{id}','EditoresController@update');
 
     Route::get('eliminarEditor/{id}','EditoresController@destroy');
-
-
-
-    /**
-     * Rutas descriptores
-     */
-
-    Route::get('api/obtenerDescriptores/{etiqueta}', 'PublicacionesController@obtenerDescriptores');
 });
 
 /**
@@ -145,6 +137,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('contacto',
         ['as' => 'contacto_store', 'uses' => 'ContactoController@store']);
     */
+
+    /**
+     * Rutas autocomplete
+     */
+
+    Route::get('api/obtenerDescriptores/{etiqueta}', 'PublicacionesController@obtenerDescriptores');
+
+    Route::get('api/obtenerAutores/{etiqueta}', 'AutoresController@obtenerAutores');
 
     Route::get('emails.contacto', function () {
         return View::make('contacto');

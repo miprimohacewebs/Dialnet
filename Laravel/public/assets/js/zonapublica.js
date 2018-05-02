@@ -264,9 +264,40 @@ $(function () {
     // Deseleccionado - fa-square-o
     // Seleccionado - fa-check-square-o
 
+
+
 }
 
 );
+
+$( "#textoBusquedaEtiquetas" ).autocomplete({
+    minLength: 3,
+    source: function (request, response) {
+        $.ajax({
+            cache: false,
+            type: 'GET',
+            url: '/api/obtenerDescriptores/' + request.term,
+            success: function (data) {
+                response( data );
+            }
+        });
+    }
+});
+
+
+$( "#textoBusquedaAutores" ).autocomplete({
+    minLength: 3,
+    source: function (request, response) {
+        $.ajax({
+            cache: false,
+            type: 'GET',
+            url: '/api/obtenerAutores/' + request.term,
+            success: function (data) {
+                response( data );
+            }
+        });
+    }
+});
 
 /**
  *

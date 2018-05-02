@@ -33,7 +33,7 @@
     	<table id="tablaDescriptores" class="table table-hover table-condensed">
     		<thead style="display:none;">
     			<tr>
-    				<th>Descriptores</th>
+    				<th>Etiquetas</th>
     			</tr>
     		</thead>
     		

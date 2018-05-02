@@ -153,4 +153,8 @@ class AutoresController extends Controller
         return Datatables::of($autores)->make(true);
     }
 
+    public function obtenerAutores($etiqueta){
+        return Autores::obtenerAutoresPorNombre($etiqueta);
+    }
+
 }

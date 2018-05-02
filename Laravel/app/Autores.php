@@ -151,4 +151,11 @@ class autores extends Model
 
         return collect(DB::select (DB::raw($query)));
     }
+
+    public static function obtenerAutoresPorNombre($autor){
+        if ($autor!=null) {
+            return DB::table('autores')->selectRaw('concat(concat(LOWER(tx_autorapellidos),\', \'),LOWER(tx_autor)) as tx_autor')->whereRaw("concat(concat(LOWER(tx_autorapellidos),', '),LOWER(tx_autor)) like '$autor%'")->orderBy('tx_autorapellidos')->pluck('tx_autor');
+        }
+        return null;
+    }
 }
