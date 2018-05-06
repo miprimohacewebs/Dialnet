@@ -158,16 +158,25 @@ $(function () {
                         html += "</div>";
                         html += "</div>";
                     }
-                    // Edición
+                    // Editor/Revista
                     if (data.publicacion[0].tx_editorial) {
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'><strong>Editorial:</strong></div>";
+                        html += "<div class='col-md-3'><strong>Editor/Revista:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].tx_editorial;
                         html += "</div>";
                         html += "</div>";
                     }
-
+    
+                     if(data.publicacion[0].tx_asunto){
+                     html += "<div class='row'>";
+                     html += "<div class='col-md-3'><strong>Edición/Volumen:</strong></div>";
+                     html += "<div class='col-md-9'>";
+                     html += data.publicacion[0].tx_asunto;
+                     html += "</div>";
+                     html += "</div>";
+                     }
+                    
 
 
 
@@ -184,17 +193,7 @@ $(function () {
                      */
 
 
-                    // Asunto
-                    /*
-                     if(data.publicacion[0].tx_asunto){
-                     html += "<div class='row'>";
-                     html += "<div class='col-md-3'><strong>Asunto:</strong></div>";
-                     html += "<div class='col-md-9'>";
-                     html += data.publicacion[0].tx_asunto;
-                     html += "</div>";
-                     html += "</div>";
-                     }
-                     */
+                 
                    
                     // País
                     if (data.publicacion[0].tx_pais) {
@@ -542,13 +541,13 @@ function actualizarListado(tipo, valor, tipoBusqueda) {
             "processing": "Procesando...",
             "search": "Buscar:",
             "lengthMenu": "Mostrar _MENU_ registros por página.",
-            "zeroRecords": "No se han encontrado descriptores con los filtros seleccionados.",
+            "zeroRecords": "No se han encontrado etiquetas con los filtros seleccionados.",
             "info": "Mostrando _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay autores disponibles",
-            "infoFiltered": "(Filtrados _MAX_ del total de autores)",
+            "infoEmpty": "No hay etiquetas disponibles",
+            "infoFiltered": "(Filtrados _MAX_ del total de etiquetas)",
             "loadingRecords": "En curso...",
             "infoPostFix": "",
-            "emptyTable": "No se han encontrado descriptores con los filtros seleccionados.",
+            "emptyTable": "No se han encontrado etiquetas con los filtros seleccionados.",
             "paginate": {
                 "first": "Primero",
                 "previous": "Anterior",

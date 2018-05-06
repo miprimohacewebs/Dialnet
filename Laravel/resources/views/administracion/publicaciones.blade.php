@@ -174,9 +174,16 @@
                                                     <!-- <p class="help-block">Texto de ayuda.</p> -->
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="editorial">Editorial</label>
+                                                    <label for="editorial">Editor/Revista</label>
                                                     <input class="form-control" id="editorial" name="editorial"
                                                            value="{{ old('editorial',isset($publicacion) ? $publicacion['editorial'] : null)}}">
+                                                    <!-- <p class="help-block">Texto de ayuda.</p> -->
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="asunto">Edición/Volumen</label>
+                                                    <input class="form-control" id="asunto" name="asunto"
+                                                           value="{{ old('asunto',isset($asunto) ? $publicacion['asunto'] : null)}}">
                                                     <!-- <p class="help-block">Texto de ayuda.</p> -->
                                                 </div>
                                                 <div class="form-group">
