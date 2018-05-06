@@ -243,7 +243,7 @@ $(function () {
                     // Editores
                     if (data.publicacion[0].descriptores) {
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'><strong>Descriptores:</strong></div>";
+                        html += "<div class='col-md-3'><strong>Etiquetas:</strong></div>";
                         html += "<div class='col-md-9'>";
                         html += data.publicacion[0].descriptores;
                         html += "</div>";
