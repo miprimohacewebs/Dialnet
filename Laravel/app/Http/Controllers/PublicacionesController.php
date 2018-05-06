@@ -216,7 +216,7 @@ class PublicacionesController extends Controller
                 'pais' => 'max:50',
                 'idioma' => 'max:50',
                 'editorial' => 'max:50',
-                'fechaPublicacion' => 'bail|date_format:d/m/Y|before:today',
+                'fechaPublicacion' => 'max:200',
                 'paginas' => 'max:16',
                 'numPaginas' => 'bail|integer|max:99999999',
 
@@ -376,7 +376,7 @@ class PublicacionesController extends Controller
                 'pais' => 'max:50',
                 'idioma' => 'max:50',
                 'editorial' => 'max:50',
-                'fechaPublicacion' => 'bail|date_format:d/m/Y|before:today',
+                'fechaPublicacion' => 'max:200',
                 'paginas' => 'max:16',
                 'numPaginas' => 'bail|integer|max:99999999',
 
