@@ -680,3 +680,9 @@ body::-webkit-scrollbar-thumb {
   background-color: #ba0600;
   outline: 1px solid #ba0600;
 }
+
+.ui-menu .ui-menu-item a{
+  background: #ffffff;
+  height:10px;
+  font-size:8px;
+}
