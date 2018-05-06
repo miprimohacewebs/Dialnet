@@ -241,11 +241,11 @@ $(function () {
                         html += "</div>";
                     }
                     // Editores
-                    if (data.publicacion[0].editores) {
+                    if (data.publicacion[0].descriptores) {
                         html += "<div class='row'>";
-                        html += "<div class='col-md-3'><strong>Editores/as:</strong></div>";
+                        html += "<div class='col-md-3'><strong>Descriptores:</strong></div>";
                         html += "<div class='col-md-9'>";
-                        html += data.publicacion[0].editores;
+                        html += data.publicacion[0].descriptores;
                         html += "</div>";
                         html += "</div>";
                     }
