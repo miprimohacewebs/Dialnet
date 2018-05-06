@@ -219,6 +219,7 @@ class PublicacionesController extends Controller
                 'fechaPublicacion' => 'max:200',
                 'paginas' => 'max:16',
                 'numPaginas' => 'bail|integer|max:99999999',
+                'congreso' => 'max:200',
 
             ]);
             if ($validator->fails()){
@@ -256,7 +257,7 @@ class PublicacionesController extends Controller
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
                 'enlacedoi'=>$request->enlacedoi, 'doi'=>$request->doi,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> null,
-                'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
+                'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen, 'congreso'=>$request->congreso];
             Publicaciones::guardarPublicacion($publicacion);
 
             $request->session()->flash('alert-success', 'Se ha creado la publicación');
@@ -327,7 +328,7 @@ class PublicacionesController extends Controller
             'pais'=>$publicacion['tx_pais'], 'idioma'=>$publicacion['tx_idioma'], 'editorial'=>$publicacion['tx_editorial'],
             'fechaPublicacion'=>$publicacion['fh_fechapublicacion'], 'paginas'=>$publicacion['tx_paginas'],
             'numPaginas'=>$publicacion['nu_numPaginas'], 'idAutor'=>$publicacion['aga_x_idgrupoautor'], 'idEditor'=> $publicacion['ge_x_idgrupoeditor'],
-            'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion'], 'idDescriptor'=>$publicacion['dgd_idGrupoDescriptor']];
+            'imagenPublicacionAnt'=>$imagen, 'idPublicacion'=>$publicacion['x_idpublicacion'], 'idDescriptor'=>$publicacion['dgd_idGrupoDescriptor'], 'congreso'=> $publicacion['tx_congreso']];
 
         $categorias = Categorias::orderBy('tx_categoria')->get(['x_idcategoria', 'tx_categoria']);
         $autores = Autores::orderBy('tx_autorapellidos')->orderBy('tx_autor')->get(['idautor', 'tx_autor', 'tx_autorapellidos']);
@@ -379,6 +380,7 @@ class PublicacionesController extends Controller
                 'fechaPublicacion' => 'max:200',
                 'paginas' => 'max:16',
                 'numPaginas' => 'bail|integer|max:99999999',
+                'congreso' => 'max:200',
 
             ]);
             if ($validator->fails()){
@@ -423,7 +425,7 @@ class PublicacionesController extends Controller
                 'pais'=>$request->pais, 'idioma'=>$request->idioma, 'editorial'=>$request->editorial,
                 'fechaPublicacion'=>$request->fechaPublicacion, 'paginas'=>$request->paginas,
                 'numPaginas'=>$request->numPaginas, 'idAutor'=>$idGrupoAutor, 'idEditor'=> null,
-                'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen];
+                'idDescriptor'=>$idGrupoEtiqueta, 'imagen'=>$nombreImagen, 'congreso'=>$request->congreso];
             Publicaciones::actualizarPublicacion($publicacion);
 
             if ($request->idGrupoAutores!=null) {

@@ -168,15 +168,24 @@ $(function () {
                         html += "</div>";
                     }
     
-                     if(data.publicacion[0].tx_asunto){
-                     html += "<div class='row'>";
-                     html += "<div class='col-md-3'><strong>Edición/Volumen:</strong></div>";
-                     html += "<div class='col-md-9'>";
-                     html += data.publicacion[0].tx_asunto;
-                     html += "</div>";
-                     html += "</div>";
-                     }
-                    
+                    if(data.publicacion[0].tx_asunto){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Edición/Volumen:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].tx_asunto;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+
+                    if(data.publicacion[0].tx_congreso){
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-3'><strong>Congreso:</strong></div>";
+                        html += "<div class='col-md-9'>";
+                        html += data.publicacion[0].tx_congreso;
+                        html += "</div>";
+                        html += "</div>";
+                    }
+
 
 
 

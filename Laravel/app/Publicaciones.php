@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\DB;
  * @property string $fh_fechapublicacion
  * @property string $tx_pais
  * @property string $tx_idioma
+ * @property string $tx_congreso
  * @property integer $nu_numPaginas
  * @property AutorGrupoautor $autorGrupoautor
  * @property categoriaGrupoCategoria $categoriaGrupoCategoria
@@ -42,7 +43,7 @@ class Publicaciones extends Model
     /**
      * @var array
      */
-    protected $fillable = ['aga_x_idgrupoautor', 'gcat_x_idgrupocategoria', 'ge_x_idgrupoeditor', 'dgd_idGrupoDescriptor', 'tx_titulo', 'tx_isbn', 'nu_anno', 'tx_paginas', 'tx_editorial', 'tx_publicacion', 'tx_resumen', 'tx_descriptores', 'tx_imagen', 'tx_doi', 'tx_enlacedoi', 'tx_asunto', 'fh_fechapublicacion', 'tx_pais', 'tx_idioma', 'nu_numPaginas'];
+    protected $fillable = ['aga_x_idgrupoautor', 'gcat_x_idgrupocategoria', 'ge_x_idgrupoeditor', 'dgd_idGrupoDescriptor', 'tx_titulo', 'tx_isbn', 'nu_anno', 'tx_paginas', 'tx_editorial', 'tx_publicacion', 'tx_resumen', 'tx_descriptores', 'tx_imagen', 'tx_doi', 'tx_enlacedoi', 'tx_asunto', 'fh_fechapublicacion', 'tx_pais', 'tx_idioma', 'nu_numPaginas', 'tx_congreso'];
     
     /**
      * Método para emparejar autor con grupoAutor
@@ -208,7 +209,7 @@ class Publicaciones extends Model
     public static function obtenerInformacionDetalle($idPublicacion){
         $detallePublicacion = DB::table('v_publicaciones')->select('tx_titulo', 'tx_isbn', 'nu_anno','tx_paginas','tx_editorial','tx_publicacion',
             'tx_resumen','tx_descriptores','tx_imagen','tx_doi','tx_enlacedoi','tx_asunto','fh_fechapublicacion', 'tx_pais','tx_idioma',
-            'nu_numPaginas','tx_categoria','autores','editores','descriptores')
+            'nu_numPaginas','tx_categoria','autores','editores','descriptores','tx_congreso')
             ->where('x_idpublicacion','=',$idPublicacion)
             ->get();
         return collect($detallePublicacion);
@@ -289,7 +290,7 @@ class Publicaciones extends Model
                 'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['publicacion'],
                 'tx_editorial'=>$publicacion['editorial'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$publicacion['fechaPublicacion'],
                 'tx_enlacedoi'=>$publicacion['enlacedoi'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'], 'tx_imagen'=>$publicacion['imagen'],
-                'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor'],'dgd_idGrupoDescriptor'=>$publicacion['idDescriptor']
+                'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor'],'dgd_idGrupoDescriptor'=>$publicacion['idDescriptor'],'tx_congreso'=>$publicacion['congreso']
             ]
         );
 
@@ -304,7 +305,7 @@ class Publicaciones extends Model
                 'tx_resumen'=>$publicacion['resumen'], 'tx_pais'=>$publicacion['pais'], 'tx_idioma'=>$publicacion['idioma'], 'tx_publicacion'=>$publicacion['publicacion'],
                 'tx_editorial'=>$publicacion['editorial'], 'tx_descriptores'=>$publicacion['descriptores'], 'fh_fechapublicacion'=>$publicacion['fechaPublicacion'],
                 'tx_enlacedoi'=>$publicacion['enlacedoi'], 'tx_paginas'=>$publicacion['paginas'], 'nu_numPaginas'=>$publicacion['numPaginas'], 'tx_imagen'=>$publicacion['imagen'],
-                'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor'],'dgd_idGrupoDescriptor'=>$publicacion['idDescriptor']
+                'aga_x_idgrupoautor'=>$publicacion['idAutor'],'ge_x_idgrupoeditor'=>$publicacion['idEditor'],'dgd_idGrupoDescriptor'=>$publicacion['idDescriptor'],'tx_congreso'=>$publicacion['congreso']
             ]
         );
     }

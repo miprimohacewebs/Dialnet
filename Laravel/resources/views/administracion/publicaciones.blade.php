@@ -138,6 +138,12 @@
                                                            value="{{ old('enlacedoi',isset($publicacion) ? $publicacion['enlacedoi'] : null)}}">
                                                     <!-- <p class="help-block">Texto de ayuda.</p> -->
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="congreso">Congreso</label>
+                                                    <input class="form-control" id="congreso" name="congreso"
+                                                           value="{{ old('congreso',isset($publicacion) ? $publicacion['congreso'] : null)}}">
+
+                                                </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 {{--<div class="form-group">
