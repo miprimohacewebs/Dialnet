@@ -456,9 +456,9 @@ function actualizarListado(tipo, valor, tipoBusqueda) {
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                 var categorias = $("#categoriasSeleccionadas").val().split(',');
                 if (categorias.indexOf(String(oData.id)) >= 0) {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"cat\", " + oData.id + ")'> <i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"cat\", " + oData.id + "," + tipoBusqueda + ")'> <i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 } else {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"cat\", " + oData.id + ")'> <i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"cat\", " + oData.id + "," + tipoBusqueda + ")'> <i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
 
             }
@@ -513,9 +513,9 @@ function actualizarListado(tipo, valor, tipoBusqueda) {
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                 var autores = $("#autoresSeleccionados").val().split(',');
                 if (autores.indexOf(String(oData.id)) >= 0) {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"aut\", " + oData.id + ")'><i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"aut\", " + oData.id + "," + tipoBusqueda + ")'><i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 } else {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"aut\", " + oData.id + ")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"aut\", " + oData.id + "," + tipoBusqueda + ")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
 
             }
@@ -569,9 +569,9 @@ function actualizarListado(tipo, valor, tipoBusqueda) {
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                 var descriptores = $("#descriptoresSeleccionados").val().split(',');
                 if (descriptores.indexOf(String(oData.id)) >= 0) {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"desc\", " + oData.id + ")'><i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"desc\", " + oData.id + "," + tipoBusqueda + ")'><i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 } else {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"desc\", " + oData.id + ")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"desc\", " + oData.id + "," + tipoBusqueda + ")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
             }
         }]
@@ -625,9 +625,9 @@ function actualizarListado(tipo, valor, tipoBusqueda) {
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                 var annos = $("#annosSeleccionados").val().split(',');
                 if (annos.indexOf(String(oData.id)) >= 0) {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"anno\", " + oData.id + ")'><i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"anno\", " + oData.id + "," + tipoBusqueda + ")'><i class='fa fa-check-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 } else {
-                    $(nTd).html("<a href='#' onclick='actualizarListado(\"anno\", " + oData.id + ")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
+                    $(nTd).html("<a href='#' onclick='actualizarListado(\"anno\", " + oData.id + "," + tipoBusqueda + ")'><i class='fa fa-square-o'></i> " + oData.nombre + "&nbsp;&nbsp;&nbsp;&nbsp;(" + oData.numPublicaciones + ")</a>");
                 }
 
             }

@@ -29,11 +29,11 @@
 	</div>
 	
 	<div id="descriptoresMenu" class="nav navbar-nav side-nav" style="height:150px; top:500px;">
-    	<h4>Descriptores</h4>
+    	<h4>Etiquetas</h4>
     	<table id="tablaDescriptores" class="table table-hover table-condensed">
     		<thead style="display:none;">
     			<tr>
-    				<th>Etiquetas</th>
+    				<th>Etiqueta</th>
     			</tr>
     		</thead>
     		
@@ -45,7 +45,7 @@
 		<table id="tablaAnnos" class="table table-hover table-condensed">
 			<thead style="display:none;">
 			<tr>
-				<th>Años</th>
+				<th>Año</th>
 			</tr>
 			</thead>
 

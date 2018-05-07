@@ -9,7 +9,7 @@
 <meta name="author" content="www.miprimohacewebs.com">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Dialnet - @yield('title')</title>
+<title>Cibermov - @yield('title')</title>
 
 <!-- CSS -->
 <!-- Bootstrap Core CSS -->
