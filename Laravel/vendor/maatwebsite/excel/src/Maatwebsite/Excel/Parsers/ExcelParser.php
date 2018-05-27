@@ -95,7 +95,7 @@ class ExcelParser {
         $this->reader = $reader;
         $this->excel = $reader->excel;
 
-        $this->defaultStartRow = $this->currentRow = config('excel.import.startRow', 1);
+        $this->defaultStartRow = $this->currentRow = $reader->getHeaderRow();
 
         // Reset
         $this->reset();
@@ -237,6 +237,10 @@ class ExcelParser {
 
             case 'hashed':
                 return $this->getHashedIndex($value);
+                break;
+
+            case 'hashed_with_lower':
+                return $this->getHashedIndex(strtolower(trim($value)));
                 break;
 
             case 'trans':
@@ -576,8 +580,15 @@ class ExcelParser {
         // If has a date
         if ( $cellContent = $this->cell->getCalculatedValue() )
         {
-            // Convert excel time to php date object
-            $date = PHPExcel_Shared_Date::ExcelToPHPObject($this->cell->getCalculatedValue())->format('Y-m-d H:i:s');
+            try
+            {
+                // Convert excel time to php date object
+                $date = PHPExcel_Shared_Date::ExcelToPHPObject($this->cell->getCalculatedValue())->format('Y-m-d H:i:s');
+            }
+            catch( \ErrorException $ex )
+            {
+                return null ;
+            }
 
             // Parse with carbon
             $date = Carbon::parse($date);
