@@ -23,3 +23,6 @@ Laravel/Homestead.json
 
 .idea/
 /.settings/
+/Laravel/.env
+Laravel/public/storage
+Laravel/resources/views/emails/
